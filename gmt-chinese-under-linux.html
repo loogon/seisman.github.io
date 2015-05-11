@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="讨论了如何让GMT支持中文。
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT技巧, 中文, GMT4, GMT5, GMT, " />
+
+<meta property="og:title" content="Linux下的GMT中文支持 "/>
+<meta property="og:url" content="http://seisman.info/gmt-chinese-under-linux.html" />
+<meta property="og:description" content="讨论了如何让GMT支持中文。" />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-13T16:23:00+08:00" />
+<meta property="" content="2014-10-14T00:00:00+08:00" />
+<meta name="twitter:title" content="Linux下的GMT中文支持 ">
+<meta name="twitter:description" content="讨论了如何让GMT支持中文。">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>Linux下的GMT中文支持  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/gmt-chinese-under-linux.html"> Linux下的GMT中文支持  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id11">准备工作</a><ul>
+<li><a class="reference internal" href="#gs" id="id12">安装gs</a></li>
+<li><a class="reference internal" href="#gmt" id="id13">安装GMT</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2" id="id14">使gs支持中文</a><ul>
+<li><a class="reference internal" href="#cidfmap" id="id15">cidfmap</a></li>
+<li><a class="reference internal" href="#cmap" id="id16">CMap</a></li>
+<li><a class="reference internal" href="#id3" id="id17">测试gs对中文字体的支持</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4" id="id18">使GMT支持中文</a><ul>
+<li><a class="reference internal" href="#id5" id="id19">修改配置文件</a></li>
+<li><a class="reference internal" href="#id6" id="id20">查看GMT当前支持的字体</a></li>
+<li><a class="reference internal" href="#id7" id="id21">GMT中文测试</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id22">可移植性的一些测试</a></li>
+<li><a class="reference internal" href="#id9" id="id23">参考资料</a></li>
+<li><a class="reference internal" href="#id10" id="id24">更新历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>原生GMT是不支持中文的，想要让GMT支持中文，需要进行一番配置。想要理解整个问题，需要对PostScript、CID字体有更深刻的理解，这未免有些过于复杂。所以这篇博文只介绍一些基本的原理，不一定准确但是却够用。</p>
+<p>修改配置这个事情本身不难，麻烦的是不同的发行版对ghostscript的打包方式不同，不同的ghostscript版本之间也会有一些差异。这里列出我在使用的系统信息，对于其他发行版以及gs版本，也有一些参考意义。</p>
+<ul class="simple">
+<li>操作系统：CentOS 7.0</li>
+<li>ghostscript：9.07</li>
+<li><span class="caps">GMT</span>：4.5.12或5.1.1（以4.5.12为例）</li>
+</ul>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id11">准备工作</a></h2>
+<div class="section" id="gs">
+<h3><a class="toc-backref" href="#id12">安装gs</a></h3>
+<p>对于大多数发行版而言，gs都是默认安装的。相关的文件位于<tt class="docutils literal">/usr/share/ghostscript</tt>目录下。除此之外，还需要安装简体中文配置文件。</p>
+<p>不同的发行版中，中文配置文件所在的包是不同的：</p>
+<p>CentOS 7:</p>
+<pre class="literal-block">
+$ sudo yum install ghostscript-chinese-zh_CN
+</pre>
+<p>CentOS 6:</p>
+<pre class="literal-block">
+$ sudo yum install cjkuni-fonts-ghostscript
+</pre>
+<p>Ubuntu 14.04:</p>
+<pre class="literal-block">
+$ sudo apt-get install poppler-data
+</pre>
+<p>Ubuntu 12.04:</p>
+<pre class="literal-block">
+$ sudo apt-get install gs-cjk-resource
+</pre>
+<p>安装完相应的包之后，中文配置文件所在的目录也不同，下面统称为<tt class="docutils literal">conf.d</tt> 目录：</p>
+<ul class="simple">
+<li>CentOS 6、7：<tt class="docutils literal">/usr/share/ghostscript/conf.d</tt></li>
+<li>Ubuntu 12.04、14.04： <tt class="docutils literal"><span class="pre">/etc/ghostscript/cidfmap.d/90gs-cjk-resource-gb1.conf</span></tt></li>
+</ul>
+</div>
+<div class="section" id="gmt">
+<h3><a class="toc-backref" href="#id13">安装GMT</a></h3>
+<p>这步就不用再多说了。安装后的GMT位于<tt class="docutils literal"><span class="pre">/opt/<span class="caps">GMT</span>-4.5.12</span></tt>，其中与字体有关的文件为<tt class="docutils literal"><span class="pre">/opt/<span class="caps">GMT</span>-4.5.12/share/pslib/PS_font_info.d</span></tt>。</p>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id14">使gs支持中文</a></h2>
+<p>下文的说明中，所有路径以CentOS发行版为准。</p>
+<div class="section" id="cidfmap">
+<h3><a class="toc-backref" href="#id15">cidfmap</a></h3>
+<p>进入<tt class="docutils literal">conf.d</tt>目录下，有文件<tt class="docutils literal">cidfmap.zh_CN</tt>（该目录下还有<tt class="docutils literal">CIDFnmap.zh_CN</tt>和<tt class="docutils literal">FAPIcidfmap.zh_CN</tt>，不管） ，其内容为:</p>
+<pre class="literal-block">
+/BousungEG-Light-GB &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/GBZenKai-Medium    &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/MSungGBK-Light     /BousungEG-Light-GB ;
+/Adobe-GB1      /BousungEG-Light-GB ;
+</pre>
+<p>其中的细节可能看不懂，但是可以大概总（xia）结（cai）如下：</p>
+<ul class="simple">
+<li>第一行定义了字体名为<tt class="docutils literal"><span class="pre">/BousungEG-Light-<span class="caps">GB</span></span></tt>，对应的字体文件为<tt class="docutils literal"><span class="pre">/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc</span></tt>，也就是文泉驿正黑；</li>
+<li>第二行定义了字体名为<tt class="docutils literal"><span class="pre">/GBZenKai-Medium</span></tt>，对应的字体文件也是文泉驿正黑；</li>
+<li>第三行和第四行分别定义了字体名<tt class="docutils literal"><span class="pre">/MSungGBK-Light</span></tt>和<tt class="docutils literal"><span class="pre">/Adobe-<span class="caps">GB1</span></span></tt>，这两种都对应于<tt class="docutils literal"><span class="pre">/BousungEG-Light-<span class="caps">GB</span></span></tt>，相当于给字体定义了别名。</li>
+</ul>
+<p>关于这个文件需要说的几点是：</p>
+<ul class="simple">
+<li>字体名是任意的，比如可以把字体名取为<tt class="docutils literal">/<span class="caps">ABC</span></tt>；</li>
+<li>字体文件似乎只能是<tt class="docutils literal">ttc</tt>或<tt class="docutils literal">ttf</tt>格式的，当然修改参数也有可能可以使用其他格式的字体；</li>
+<li>由于Linux下中文字体并不统一，所以要注意检查配置文件中的字体文件路径是否正确；</li>
+</ul>
+</div>
+<div class="section" id="cmap">
+<h3><a class="toc-backref" href="#id16">CMap</a></h3>
+<p>CMap位于<tt class="docutils literal">/usr/share/ghostscript/9.07/Resource/CMap</tt>目录下，可以看到其中有很多文件，CMap文件的具体含义不知。暂且留在这里。只需要知道有<tt class="docutils literal"><span class="pre">UniGB-<span class="caps">UTF8</span>-H</span></tt>和<tt class="docutils literal"><span class="pre"><span class="caps">GB</span>-<span class="caps">EUC</span>-H</span></tt>这两个CMap即可。</p>
+</div>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id17">测试gs对中文字体的支持</a></h3>
+<p>Linux的中文字体比较少，可能很多人都会将Windows下的中文字体复制到Linux下使用。假设已经将Windows下的中文字体复制到<tt class="docutils literal">/usr/share/fonts/winfonts/</tt>目录下，对gs的配置文件<tt class="docutils literal">cidfmap.zh_CN</tt>做一些修改，使gs在Linux下可以使用Windows中文字体:</p>
+<pre class="literal-block">
+% cidfmap.zh_CN的原内容保持不变
+/BousungEG-Light-GB &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/GBZenKai-Medium    &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/MSungGBK-Light     /BousungEG-Light-GB ;
+/Adobe-GB1      /BousungEG-Light-GB ;
+
+% 新增Windows字体的支持
+/STSong-Light &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/winfonts/simsun.ttc) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/STFangsong-Light &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/winfonts/simfang.ttf) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/STHeiti-Regular &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/winfonts/simhei.ttf) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+/STKaiti-Regular &lt;&lt; /FileType /TrueType /Path (/usr/share/fonts/winfonts/simkai.ttf) /SubfontId 0 /CSI [(GB1) 4] &gt;&gt; ;
+</pre>
+<p>用<strong>编辑器</strong>新建一个PS文件（是的，PS文件其中就是纯文本，可以直接用编辑器编辑!），名为<tt class="docutils literal">gs_test.ps</tt>，其内容为:</p>
+<pre class="literal-block">
+%! PS-Adobe-3. 0
+/STSong-Light--UniGB-UTF8-H findfont 20 scalefont setfont
+150 400 moveto
+(Song Typeface 宋体) show
+
+/STFangsong-Light--UniGB-UTF8-H findfont 20 scalefont setfont
+150 375 moveto
+(Fangsong Typeface 仿宋体) show
+
+/STHeiti-Regular--UniGB-UTF8-H findfont 20 scalefont setfont
+150 350 moveto
+(Hei Typeface 黑体) show
+
+/STKaiti-Regular--UniGB-UTF8-H findfont 20 scalefont setfont
+150 325 moveto
+(Kai Typeface 楷体) show
+
+showpage
+%%Trailer
+%%EOF
+</pre>
+<p>用gs查看该PS文件，若正确显示中文如下图，则表明gs的中文配置没有问题。</p>
+<div class="figure">
+<img alt="gs-chinese" src="/images/2013081301.jpg" style="width: 500px;"/>
+</div>
+<p>需要说明如下几点：</p>
+<ul class="simple">
+<li>这里仅仅以Windows字体为例，对于其他中文甚至日韩字体来说，方法类似；</li>
+<li>PS文件中的中文字体为<tt class="docutils literal"><span class="pre">CIDFont--CMap</span></tt>，这里CMap选择的是<tt class="docutils literal"><span class="pre">UniGB-<span class="caps">UTF8</span>-H</span></tt>，在Windows下似乎应该选择<tt class="docutils literal"><span class="pre"><span class="caps">GB</span>-<span class="caps">EUC</span>-H</span></tt>，尚不清楚原理；</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id18">使GMT支持中文</a></h2>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id19">修改配置文件</a></h3>
+<p>打开GMT中文配置文件<tt class="docutils literal"><span class="pre">/opt/<span class="caps">GMT</span>-4.5.12/share/pslib/PS_font_info.d</span></tt>，在文件最后加入如下语句（以Windows字体为例）:</p>
+<pre class="literal-block">
+STSong-Light--UniGB-UTF8-H  0.700    1
+STFangsong-Light--UniGB-UTF8-H  0.700    1
+STHeiti-Regular--UniGB-UTF8-H   0.700   1
+STKaiti-Regular--UniGB-UTF8-H   0.700   1
+</pre>
+<p>第一列为字体名，第二列为字母A的高度，第三列与编码有关。</p>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id20">查看GMT当前支持的字体</a></h3>
+<p>用<tt class="docutils literal">pstext <span class="pre">-L</span></tt>命令查看GMT当前的字体配置：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>pstext -L
+Font <span class="c">#  Font Name</span>
+------------------------------------
+<span class="m">0</span>   Helvetica
+<span class="m">1</span>   Helvetica-Bold
+...    ......
+<span class="m">32</span>  Palatino-BoldItalic
+<span class="m">33</span>  ZapfChancery-MediumItalic
+<span class="m">34</span>  ZapfDingbats
+<span class="m">35</span> STSong-Light--UniGB-UTF8-H
+<span class="m">36</span> STFangsong-Light--UniGB-UTF8-H
+<span class="m">37</span> STHeiti-Regular--UniGB-UTF8-H
+<span class="m">38</span> STKaiti-Regular--UniGB-UTF8-H
+</pre></div>
+</td></tr></table><p>其中0-34为GMT/gs默认支持的西文字体，35至38为新添加的中文字体。</p>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id21">GMT中文测试</a></h3>
+<p>GMT4测试脚本：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+gmtset HEADER_FONT 35
+
+pstext -R0/7/0/7 -JX6i/6i -B1/1:.<span class="s2">"GMT中文支持"</span>: -P &gt; cn.ps <span class="s">&lt;&lt;EOF</span>
+<span class="s">1.5 5 35 0 35 LM GMT宋体</span>
+<span class="s">1.5 4 35 0 36 LM GMT仿宋</span>
+<span class="s">1.5 3 35 0 37 LM GMT黑体</span>
+<span class="s">1.5 2 35 0 38 LM GMT楷体</span>
+<span class="s">EOF</span>
+
+rm .gmt*
+</pre></div>
+</td></tr></table><p>成图效果如下</p>
+<div class="figure">
+<img alt="gmt4-chinese" src="/images/2013081302.jpg" style="width: 400px;"/>
+</div>
+<p>GMT5测试脚本：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+gmt gmtset FONT_TITLE 40p,35,black
+
+gmt pstext -R0/7/0/7 -JX6i/6i -Bafg -B+t<span class="s2">"GMT中文支持"</span> -F+a+c+f -P &gt; gmt5_cn.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">3.5 5 0 LM 45p,35,red   GMT宋体</span>
+<span class="s">3.5 4 0 LM 45p,36,blue  GMT仿宋</span>
+<span class="s">3.5 3 0 LM 45p,37,black GMT黑体</span>
+<span class="s">3.5 2 0 LM 45p,38,green GMT楷体</span>
+<span class="s">EOF</span>
+
+rm gmt.*
+</pre></div>
+</td></tr></table><p>成图效果如下</p>
+<div class="figure">
+<img alt="gmt5-chinese" src="/images/2013081303.jpg" style="width: 400px;"/>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id22">可移植性的一些测试</a></h2>
+<ul class="simple">
+<li>本机：用vi打开PS文件，中文正常显示；</li>
+<li>本机：gs查看正常；</li>
+<li>本机：ps2raster转换为PDF，用evince、zathura查看正常；</li>
+<li>本机：ps2pdf转换为PDF，用evince、zathura查看正常；</li>
+</ul>
+<p>由于目前无其他机器可用，因而暂时不测试可移植性。</p>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id23">参考资料</a></h2>
+<ol class="arabic simple">
+<li>GMT软件显示汉字的技术原理与实现<em>，赵桂儒，《测绘通报》</em></li>
+<li>ghostscript中文打印经验：<a class="reference external" href="http://guoyoooping.blog.163.com/blog/static/13570518320101291442176">http://guoyoooping.blog.163.com/blog/static/13570518320101291442176</a></li>
+<li>GMT中文支持 <a class="reference external" href="http://xxqhome.blog.163.com/blog/static/1967330202011112810120598/">http://xxqhome.blog.163.com/blog/static/1967330202011112810120598/</a></li>
+<li><span class="caps">GMT</span> chinese support <a class="reference external" href="http://hi.baidu.com/guyueshuiming/item/0052df53852ee4494fff20c3">http://hi.baidu.com/guyueshuiming/item/0052df53852ee4494fff20c3</a></li>
+</ol>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id24">更新历史</a></h2>
+<ul class="simple">
+<li>2013-05-15：修正了中文测试脚本的一个bug。</li>
+<li>2013-05-16：系统默认未安装ghostscript的中文字体包，conf.d文件夹为空，通过安装相应中文包解决该问题。</li>
+<li>2013-08-17：添加了字体以及ghostscript可能需要的几个安装包的信息；以及在新增字体后要重建字体缓存。</li>
+<li>2014-10-14：重写整个文档，使其更具有普遍性；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/gmt-chinese-under-linux.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/gmt-chinese-under-linux.html';
+    var disqus_url = 'http://seisman.info/gmt-chinese-under-linux.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
+<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
+<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+<li><a href="http://seisman.info/profile-from-3d-data.html" title="从3D数据中截取剖面">从3D数据中截取剖面</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/use-psmeca-to-plot-mechanisms.html" title="Previous: GMT之psmeca绘制震源机制解">GMT之psmeca绘制震源机制解</a></li>
+                <li class="next-article"><a href="http://seisman.info/sac-save-image.html" title="Next: SAC保存图像小结">SAC保存图像小结</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-13T16:23:00+08:00">2013-08-13</time>
+
+<h4>Last Updated</h4>
+<time datetime="2014-10-14T00:00:00+08:00">2014-10-14</time>
+
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>36</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#zhong-wen-ref">中文
+                    <span>6</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/gmt-chinese-under-linux.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-13_gmt-chinese-under-linux.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

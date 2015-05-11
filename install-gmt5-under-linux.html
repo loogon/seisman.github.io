@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="本文介绍如何在Linux下编译安装GMT5。对于想要自己编译安装GMT5的读者而言，我默认读者下载并想要安装的是最新的GMT5版本，因而本文会随着GMT5新版本的发布而不断更新。 若新版本的安装方式与旧版本的安装方式有区别，则本文只介绍新版本的安装方式（也许会提几句与旧版本的区别）。执意要安装旧版本GMT5的读者，需要自己解决所遇到的问题。 下载 GMT 5.1.2 需要下载三个文件： GMT源码： http://gmt.soest.hawaii.edu/files/download?name=gmt-5.1.2-src.tar.gz 全球海岸线数据GSHHG： http://gmt.soest.hawaii.edu/files/download?name=gshhg-gmt-2.3.4.tar.gz 全球数字图表DCW： http://gmt.soest.hawaii.edu/files ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="编译, GMT5, 安装, GMT, " />
+
+<meta property="og:title" content="GMT 5.1.2在Linux下的安装 "/>
+<meta property="og:url" content="http://seisman.info/install-gmt5-under-linux.html" />
+<meta property="og:description" content="本文介绍如何在Linux下编译安装GMT5。对于想要自己编译安装GMT5的读者而言，我默认读者下载并想要安装的是最新的GMT5版本，因而本文会随着GMT5新版本的发布而不断更新。 若新版本的安装方式与旧版本的安装方式有区别，则本文只介绍新版本的安装方式（也许会提几句与旧版本的区别）。执意要安装旧版本GMT5的读者，需要自己解决所遇到的问题。 下载 GMT 5.1.2 需要下载三个文件： GMT源码： http://gmt.soest.hawaii.edu/files/download?name=gmt-5.1.2-src.tar.gz 全球海岸线数据GSHHG： http://gmt.soest.hawaii.edu/files/download?name=gshhg-gmt-2.3.4.tar.gz 全球数字图表DCW： http://gmt.soest.hawaii.edu/files ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-11-06T00:53:00+08:00" />
+<meta property="" content="2015-05-05T00:00:00+08:00" />
+<meta name="twitter:title" content="GMT 5.1.2在Linux下的安装 ">
+<meta name="twitter:description" content="本文介绍如何在Linux下编译安装GMT5。对于想要自己编译安装GMT5的读者而言，我默认读者下载并想要安装的是最新的GMT5版本，因而本文会随着GMT5新版本的发布而不断更新。 若新版本的安装方式与旧版本的安装方式有区别，则本文只介绍新版本的安装方式（也许会提几句与旧版本的区别）。执意要安装旧版本GMT5的读者，需要自己解决所遇到的问题。 下载 GMT 5.1.2 需要下载三个文件： GMT源码： http://gmt.soest.hawaii.edu/files/download?name=gmt-5.1.2-src.tar.gz 全球海岸线数据GSHHG： http://gmt.soest.hawaii.edu/files/download?name=gshhg-gmt-2.3.4.tar.gz 全球数字图表DCW： http://gmt.soest.hawaii.edu/files ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT 5.1.2在Linux下的安装  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/install-gmt5-under-linux.html"> <span class="caps">GMT</span>&nbsp;5.1.2在Linux下的安装  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id10">下载</a></li>
+<li><a class="reference internal" href="#id2" id="id11">解决依赖关系</a><ul>
+<li><a class="reference internal" href="#id3" id="id12">基础依赖包</a></li>
+<li><a class="reference internal" href="#id4" id="id13">软件依赖包</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gmt" id="id14">安装GMT</a></li>
+<li><a class="reference internal" href="#id5" id="id15">自行编译文档</a></li>
+<li><a class="reference internal" href="#id6" id="id16">修改环境变量</a></li>
+<li><a class="reference internal" href="#id7" id="id17">安装测试</a></li>
+<li><a class="reference internal" href="#id8" id="id18">参考来源</a></li>
+<li><a class="reference internal" href="#id9" id="id19">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>本文介绍如何在Linux下编译安装GMT5。对于想要自己编译安装GMT5的读者而言，我默认读者下载并想要安装的是最新的GMT5版本，因而本文会随着GMT5新版本的发布而不断更新。</p>
+<p>若新版本的安装方式与旧版本的安装方式有区别，则本文只介绍新版本的安装方式（也许会提几句与旧版本的区别）。执意要安装旧版本GMT5的读者，需要自己解决所遇到的问题。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id10">下载</a></h2>
+<p><span class="caps">GMT</span> 5.1.2 需要下载三个文件：</p>
+<ol class="arabic simple">
+<li>GMT源码： <a class="reference external" href="http://gmt.soest.hawaii.edu/files/download?name=gmt-5.1.2-src.tar.gz">http://gmt.soest.hawaii.edu/files/download?name=gmt-5.1.2-src.tar.gz</a></li>
+<li>全球海岸线数据GSHHG： <a class="reference external" href="http://gmt.soest.hawaii.edu/files/download?name=gshhg-gmt-2.3.4.tar.gz">http://gmt.soest.hawaii.edu/files/download?name=gshhg-gmt-2.3.4.tar.gz</a></li>
+<li>全球数字图表DCW： <a class="reference external" href="http://gmt.soest.hawaii.edu/files/download?name=dcw-gmt-1.1.1.tar.gz">http://gmt.soest.hawaii.edu/files/download?name=dcw-gmt-1.1.1.tar.gz</a></li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">解决依赖关系</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id12">基础依赖包</a></h3>
+<p>GMT编译过程需要C编译器，以及一些系统级别的库文件。</p>
+<p>对于Ubuntu/Debian:</p>
+<pre class="literal-block">
+sudo apt-get install g++ libxt-dev libxaw7-dev libxmu-dev libSM-dev
+</pre>
+<p>对于CentOS/<span class="caps">RHEL</span>/Fedora:</p>
+<pre class="literal-block">
+sudo yum install gcc-c++ libXt-devel libXaw-devel libXmu-devel libSM-devel
+</pre>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id13">软件依赖包</a></h3>
+<p>GMT5的依赖包，相对来说要复杂很多。</p>
+<p>必须的包包括：</p>
+<ul class="simple">
+<li>看ps文件需要<tt class="docutils literal">ghostscript</tt>；</li>
+<li>编译需要<tt class="docutils literal">cmake</tt>（&gt;=2.8.5）；</li>
+<li>网格文件需要<tt class="docutils literal">netCDF</tt>（&gt;=4.0,且需要支持netCDF-4/<span class="caps">HDF5</span>）。</li>
+</ul>
+<p>其他可有可无的依赖包括：</p>
+<ul class="simple">
+<li>Perl兼容正则表达式库<a class="reference external" href="http://www.pcre.org/"><span class="caps">PCRE</span></a>；</li>
+<li>地理空间数据抽象库<a class="reference external" href="http://www.gdal.org/"><span class="caps">GDAL</span></a>；</li>
+<li>Fourier变换库<a class="reference external" href="http://www.fftw.org/"><span class="caps">FFTW</span></a> ；</li>
+<li>如果想要自行编译文档的话还需要<a class="reference external" href="http://sphinx-doc.org/">Sphinx</a>。</li>
+</ul>
+<p>对于Ubuntu/Debian:</p>
+<pre class="literal-block">
+sudo apt-get install ghostscript build-essential cmake libnetcdf-dev libgdal1-dev
+</pre>
+<p>对于RHEL/CentOS/Fedora:</p>
+<pre class="literal-block">
+# 安装必须依赖包
+sudo yum install ghostscript cmake netcdf netcdf-devel gdal gdal-devel
+# 安装非必须依赖包
+sudo yum install pcre-devel fftw-devel sphinx
+</pre>
+<p>一些需要注意的地方:</p>
+<ol class="arabic simple">
+<li>CentOS <strong>6.5</strong>官方源中cmake的版本为2.6.4，版本过低，无法满足要求；</li>
+<li>CentOS <strong>6.6</strong>的官方源中cmake的版本升级至2.8.12，可以满足要求；</li>
+<li>若已安装cmake，可以通过<tt class="docutils literal">cmake <span class="pre">--version</span></tt>检查cmake版本；</li>
+<li>使用CentOS 6.5的用户可以<tt class="docutils literal">yum update</tt>升级至6.6，即可使用较高版本的cmake；</li>
+<li>若不愿意升级整个系统，则需要先安装EPEL源，再安装EPEL源中的<tt class="docutils literal">cmake28</tt>，并且在接下来的编译过程中要将<tt class="docutils literal">cmake</tt>命令改成<tt class="docutils literal">cmake28</tt>；</li>
+<li>CentOS 7官方源中cmake版本为2.8.11，可以直接安装使用；</li>
+<li>CentOS官方源中不带有netCDF，需要先安装EPEL源。需要安装的包包括<tt class="docutils literal">netcdf</tt>, <tt class="docutils literal"><span class="pre">netcdf-devel</span></tt>，其他包（尤其是hdf5包）会根据依赖关系自动安装。</li>
+<li>GDAL包是非必须的，但是在数据格式转换时非常有用，建议安装。同样，CentOS需要先安装EPEL源；</li>
+<li>PCRE以及FFTW等其他非必须包，如有需要，可以自行搜索安装；</li>
+<li>其他发行版很久不用了，不清楚细节，读者可以在使用过程中补充。</li>
+</ol>
+</div>
+</div>
+<div class="section" id="gmt">
+<h2><a class="toc-backref" href="#id14">安装GMT</a></h2>
+<p>解决了依赖关系之后，就可以安装了。这里假定刚才下载的三个压缩文件都位于目录<tt class="docutils literal">/home/seisman/Desktop/gmt</tt>中：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">pwd</span>
+/home/seisman/Desktop/gmt
+<span class="nv">$ </span>ls
+dcw-gmt-1.1.1.tar.gz gmt-5.1.2-src.tar.gz gshhg-gmt-2.3.4.tar.gz
+<span class="nv">$ </span>tar -zxvf gmt-5.1.2-src.tar.gz
+<span class="nv">$ </span>tar -zxvf dcw-gmt-1.1.1.tar.gz
+<span class="nv">$ </span>tar -zxvf gshhg-gmt-2.3.4.tar.gz
+<span class="nv">$ </span><span class="nb">cd </span>gmt-5.1.2
+<span class="nv">$ </span>cp cmake/ConfigUserTemplate.cmake cmake/ConfigUser.cmake
+<span class="nv">$ </span>vi cmake/ConfigUser.cmake <span class="c"># 修改Config文件</span>
+</pre></div>
+</td></tr></table><p>修改<tt class="docutils literal">ConfigUser.cmake</tt>以对安装的细节进行自定义。一个基本的示例如下，找到相关行，并去掉该行最前面的“#”，再根据自身情况修改:</p>
+<pre class="literal-block">
+set (CMAKE_INSTALL_PREFIX "/opt/GMT-5.1.1")
+set (GMT_INSTALL_MODULE_LINKS FALSE)
+set (GSHHG_ROOT "/home/seisman/Desktop/gmt/gshhg-gmt-2.3.4")
+set (COPY_GSHHG TRUE)
+set (DCW_ROOT "/home/seisman/Desktop/gmt/dcw-gmt-1.1.1")
+set (COPY_DCW TRUE)
+</pre>
+<ul class="simple">
+<li><tt class="docutils literal">CMAKE_INSTALL_PREFIX</tt>设置GMT的安装路径；</li>
+<li>设置<tt class="docutils literal">GMT_INSTALL_MODULE_LINKS</tt>为FALSE，这样调用GMT模块时必须使用<tt class="docutils literal">gmt modulename options</tt>的形式，也是GMT5推荐的使用方法；若该值为TRUE，则会在GMT的bin目录下建立多个指向<tt class="docutils literal">gmt</tt>的形如<tt class="docutils literal">pscoast</tt>的软链接；</li>
+<li><tt class="docutils literal">GSHHG_ROOT</tt>为GSHHG数据的位置，需要对下载下来的压缩文件进行解压，并给出文件夹的<strong>绝对路径</strong>；<tt class="docutils literal">COPY_GSHHG</tt>为TRUE会将GSHHG数据复制到<tt class="docutils literal"><span class="caps">GMT</span>/share/coast</tt>下；</li>
+<li><tt class="docutils literal">DCW_ROOT</tt>设置DCW数据的位置，需给出DCW数据所在文件夹的绝对路径，<tt class="docutils literal">COPY_DCW</tt>将数据复制到<tt class="docutils literal"><span class="caps">GMT</span>/share/dcw</tt>下；</li>
+<li>cmake似乎不能识别<tt class="docutils literal">~</tt>，因而上面提到的所有路径中都不能用<tt class="docutils literal">~</tt>代替<tt class="docutils literal">/home/xxx</tt>；</li>
+</ul>
+<p><span class="caps">PS</span>: 若系统中存在多个GMT的版本，按照上面的做法会存在多个GSHHG和DCW数据的副本。可以将这些数据放置在系统中固定的位置（比如我把这些数据都放在<tt class="docutils literal">/home/seisman/Datas</tt>目录下），然后有两种处理方式：其一，设置COPY_GSHHG为FALSE，则安装时不会将GSHHG数据复制到GMT目录下，而GMT命令运行时会到GSHHG_ROOT指定的目录中寻找数据；其二，使用默认的GSHHG_ROOT以及COPY_GSHHG，在安装完成之后，到GMT/share目录下设置一个target为<tt class="docutils literal"><span class="pre">/home/seisman/Datas/gshhg-gmt-2.3.4</span></tt>，link name为coast的软链接即可。对于DCW数据，同理。</p>
+<p><span class="caps">PS2</span>：上面的PS要是没看懂的话就直接忽略吧。</p>
+<p>修改完毕后，进行编译:</p>
+<pre class="literal-block">
+$ mkdir build
+$ cd build/
+$ cmake ..
+</pre>
+<p><tt class="docutils literal">cmake ..</tt>会检查GMT对软件的依赖关系，我的检查结果如下:</p>
+<pre class="literal-block">
+*  Options:
+*  Found GSHHG database       : /home/seisman/Desktop/gmt/gshhg-gmt-2.3.4 (2.3.4)
+*  Found DCW-GMT database     : /home/seisman/Desktop/gmt/dcw-gmt-1.1.1
+*  NetCDF library             : /usr/lib64/libnetcdf.so
+*  NetCDF include dir         : /usr/include
+*  GDAL library               : /usr/lib64/libgdal.so
+*  GDAL include dir           : /usr/include/gdal
+*  FFTW library               : /usr/lib64/libfftw3f.so
+*  FFTW include dir           : /usr/include
+*  Accelerate Framework       :
+*  Regex support              : PCRE (/usr/lib64/libpcre.so)
+*  ZLIB library               : /usr/lib64/libz.so
+*  ZLIB include dir           : /usr/include
+*  License restriction        : no
+*  Triangulation method       : Shewchuk
+*  Build mode                 : shared
+*  Build GMT core             : always [libgmt.so]
+*  Build PSL library          : always [libpsl.so]
+*  Build GMT supplements      : yes [supplements.so]
+*  Build proto supplements    : none
+*
+*  Locations:
+*  Installing GMT in          : /opt/GMT-5.1.2
+*  GMT_DATADIR                : /opt/GMT-5.1.2/share
+*  GMT_DOCDIR                 : /opt/GMT-5.1.2/share/doc
+*  GMT_MANDIR                 : /opt/GMT-5.1.2/share/man
+-- Configuring done
+-- Generating done
+</pre>
+<p>检查完毕，开始编译和安装:</p>
+<pre class="literal-block">
+$ make
+$ sudo make install
+</pre>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id15">自行编译文档</a></h2>
+<p>如果系统中安装了sphinx和LaTeX，则可以自行编译文档。一般情况下，不建议自行编译文档，官方提供的文档已经足够:</p>
+<pre class="literal-block">
+$ make docs_man
+$ make docs_html
+$ make docs_pdf
+$ sudo make install
+</pre>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id16">修改环境变量</a></h2>
+<p>修改环境变量并使其生效</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'export GMT5HOME=/opt/GMT-5.1.2'</span> &gt;&gt; ~/.bashrc
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'export PATH=${GMT5HOME}/bin:$PATH'</span> &gt;&gt; ~/.bashrc
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${GMT5HOME}/lib64'</span> &gt;&gt; ~/.bashrc
+<span class="nv">$ </span><span class="nb">exec</span> <span class="nv">$SHELL</span> -l
+</pre></div>
+</td></tr></table><p>说明</p>
+<ul class="simple">
+<li>第一个命令向<tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>中添加环境变量<tt class="docutils literal"><span class="caps">GMT5HOME</span></tt>；</li>
+<li>第二个命令修改<tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>，将GMT5的bin目录加入到<tt class="docutils literal"><span class="caps">PATH</span></tt>中；</li>
+<li>第三个命令将GMT5的lib目录加入到动态链接库路径中，若为32位系统，则为<tt class="docutils literal">lib</tt>；64位系统则为<tt class="docutils literal">lib64</tt>；</li>
+<li>第四个命令是重新载入bash，相当于<tt class="docutils literal">source <span class="pre">~/.bashrc</span></tt>。</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id17">安装测试</a></h2>
+<p>在终端键入<tt class="docutils literal">gmt</tt>，若出现如下输出，则安装成功:</p>
+<pre class="literal-block">
+$ gmt
+
+GMT - The Generic Mapping Tools, Version 5.1.2 (r14256) [64-bit]
+(c) 1991-2015 Paul Wessel, Walter H. F. Smith, R. Scharroo, J. Luis, and F. Wobbe
+
+Supported in part by the US National Science Foundation (http://www.nsf.gov/)
+and volunteers from around the world (see http://gmt.soest.hawaii.edu/).
+
+This program comes with NO WARRANTY, to the extent permitted by law.
+You may redistribute copies of this program under the terms of the
+GNU Lesser General Public License (http://www.gnu.org/licenses/lgpl.html).
+For more information about these matters, see the file named LICENSE.TXT.
+
+usage: gmt [options]
+       gmt &lt;module name&gt; [&lt;module options&gt;]
+
+options:
+  --help            List and description of GMT modules.
+  --version         Print version and exit.
+  --show-datadir    Show data directory and exit.
+  --show-bindir     Show directory of executables and exit.
+
+if &lt;module options&gt; is '=' we call exit (0) if module exist and non-zero otherwise.
+</pre>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id18">参考来源</a></h2>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://gmtrac.soest.hawaii.edu/projects/gmt/wiki/BuildingGMT">http://gmtrac.soest.hawaii.edu/projects/gmt/wiki/BuildingGMT</a></li>
+<li><a class="reference external" href="http://seisman.info/install-gmt4-under-linux.html"><span class="caps">GMT4</span>.5.13在Linux下的安装</a></li>
+</ol>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id19">修订历史</a></h2>
+<ul class="simple">
+<li>2013-11-06：初稿；</li>
+<li>2014-02-22：cmake版本需要2.8以上；</li>
+<li>2014-03-02：更新至GMT 5.1.1；</li>
+<li>2014-09-14：更新GSHHG至2.3.2；</li>
+<li>2014-09-26：Ubuntu下<tt class="docutils literal"><span class="pre">libxaw-dev</span></tt>应为<tt class="docutils literal"><span class="pre">libxaw7-dev</span></tt>；</li>
+<li>2014-11-04：修改环境变量<tt class="docutils literal">LD_LIBRARY_PATH</tt>；</li>
+<li>2014-11-29：CentOS 6.6中的cmake版本为2.8.12；</li>
+<li>2015-02-01：更新GSHHG至2.3.4；</li>
+<li>2015-03-14：路径中不能用波浪号代替家目录；</li>
+<li>2015-05-05：更新至GMT 5.1.2；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/install-gmt5-under-linux.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/install-gmt5-under-linux.html';
+    var disqus_url = 'http://seisman.info/install-gmt5-under-linux.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
+<li><a href="http://seisman.info/install-gmt4-under-linux.html" title="GMT 4.5.13在Linux下的安装">GMT 4.5.13在Linux下的安装</a></li>
+<li><a href="http://seisman.info/difference-between-gmt-5-and-4.html" title="GMT5相对GMT4的一些变化">GMT5相对GMT4的一些变化</a></li>
+<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
+<li><a href="http://seisman.info/install-gmt5-under-windows.html" title="GMT 5.1.1在Windows下的安装">GMT 5.1.1在Windows下的安装</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/introduction-to-easybmp.html" title="Previous: EasyBMP：BMP图像处理函数库">EasyBMP：BMP图像处理函数库</a></li>
+                <li class="next-article"><a href="http://seisman.info/install-gmt4-under-linux.html" title="Next: GMT 4.5.13在Linux下的安装">GMT 4.5.13在Linux下的安装</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-11-06T00:53:00+08:00">2013-11-06</time>
+
+<h4>Last Updated</h4>
+<time datetime="2015-05-05T00:00:00+08:00">2015-05-05</time>
+
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#an-zhuang-ref">安装
+                    <span>9</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#bian-yi-ref">编译
+                    <span>8</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>36</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/install-gmt5-under-linux.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-11-06_install-gmt5-under-linux.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

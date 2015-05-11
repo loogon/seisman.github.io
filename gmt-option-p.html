@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="一张标准A4纸的大小为210*297 mm，我们说其宽度是210 mm，高度为297 mm。 模式介绍 一般定义A4纸的左下角那一点为坐标原点，从左向右为x轴增加方向，从下往上为y轴增加方向。如下面的左图所示。这个时候称为Portrait模式。Portrait译为“肖像”，显然一个人的高度要比宽度大很多。 如果将坐标系原点从纸张的左下角平移（translate）至右下角，然后将坐标系逆时针旋转90度，得到下面的右图。这个时候x轴是从下往上为增加方向，看起来不太舒服。如果将右图的纸张顺时针旋转90度，这个时候纸张的宽度为297 mm，高度为210 mm。这种模式称为Landscape模式，因为风景（Landscape）一般都是绵延的山水画，宽度比高度要大多了。 GMT默认使用的是Landscape模式，可以通过-P选项强制使用Portrait模式。那么究竟该选哪种模式呢？一般情况下，用GMT绘制的地图都是方方正正的，两种模式基本没有区别；在一些特殊的情况下，比如用pssac绘制地震波形剖面，X轴为时间，Y轴列出了多个地震波形，这个时候Y轴就需要更长一些，以免多个波形重合在一起。 一些测试 解释完GMT的两种模式之后，还要再看看如何正确的使用-P选项。 测试脚本如下: 1 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT选项, GMT技巧, GMT, " />
+
+<meta property="og:title" content="GMT进阶之-P选项 "/>
+<meta property="og:url" content="http://seisman.info/gmt-option-p.html" />
+<meta property="og:description" content="一张标准A4纸的大小为210*297 mm，我们说其宽度是210 mm，高度为297 mm。 模式介绍 一般定义A4纸的左下角那一点为坐标原点，从左向右为x轴增加方向，从下往上为y轴增加方向。如下面的左图所示。这个时候称为Portrait模式。Portrait译为“肖像”，显然一个人的高度要比宽度大很多。 如果将坐标系原点从纸张的左下角平移（translate）至右下角，然后将坐标系逆时针旋转90度，得到下面的右图。这个时候x轴是从下往上为增加方向，看起来不太舒服。如果将右图的纸张顺时针旋转90度，这个时候纸张的宽度为297 mm，高度为210 mm。这种模式称为Landscape模式，因为风景（Landscape）一般都是绵延的山水画，宽度比高度要大多了。 GMT默认使用的是Landscape模式，可以通过-P选项强制使用Portrait模式。那么究竟该选哪种模式呢？一般情况下，用GMT绘制的地图都是方方正正的，两种模式基本没有区别；在一些特殊的情况下，比如用pssac绘制地震波形剖面，X轴为时间，Y轴列出了多个地震波形，这个时候Y轴就需要更长一些，以免多个波形重合在一起。 一些测试 解释完GMT的两种模式之后，还要再看看如何正确的使用-P选项。 测试脚本如下: 1 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-24T14:08:00+08:00" />
+<meta name="twitter:title" content="GMT进阶之-P选项 ">
+<meta name="twitter:description" content="一张标准A4纸的大小为210*297 mm，我们说其宽度是210 mm，高度为297 mm。 模式介绍 一般定义A4纸的左下角那一点为坐标原点，从左向右为x轴增加方向，从下往上为y轴增加方向。如下面的左图所示。这个时候称为Portrait模式。Portrait译为“肖像”，显然一个人的高度要比宽度大很多。 如果将坐标系原点从纸张的左下角平移（translate）至右下角，然后将坐标系逆时针旋转90度，得到下面的右图。这个时候x轴是从下往上为增加方向，看起来不太舒服。如果将右图的纸张顺时针旋转90度，这个时候纸张的宽度为297 mm，高度为210 mm。这种模式称为Landscape模式，因为风景（Landscape）一般都是绵延的山水画，宽度比高度要大多了。 GMT默认使用的是Landscape模式，可以通过-P选项强制使用Portrait模式。那么究竟该选哪种模式呢？一般情况下，用GMT绘制的地图都是方方正正的，两种模式基本没有区别；在一些特殊的情况下，比如用pssac绘制地震波形剖面，X轴为时间，Y轴列出了多个地震波形，这个时候Y轴就需要更长一些，以免多个波形重合在一起。 一些测试 解释完GMT的两种模式之后，还要再看看如何正确的使用-P选项。 测试脚本如下: 1 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT进阶之-P选项  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/gmt-option-p.html"> GMT进阶之-P选项  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id7">模式介绍</a></li>
+<li><a class="reference internal" href="#id2" id="id8">一些测试</a></li>
+<li><a class="reference internal" href="#id3" id="id9">小结</a></li>
+<li><a class="reference internal" href="#id4" id="id10">20131024更新</a></li>
+<li><a class="reference internal" href="#id5" id="id11">吐槽</a></li>
+<li><a class="reference internal" href="#id6" id="id12">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>一张标准A4纸的大小为210*297 mm，我们说其宽度是210 mm，高度为297 mm。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id7">模式介绍</a></h2>
+<p>一般定义A4纸的左下角那一点为坐标原点，从左向右为x轴增加方向，从下往上为y轴增加方向。如下面的左图所示。这个时候称为Portrait模式。Portrait译为“肖像”，显然一个人的高度要比宽度大很多。</p>
+<p>如果将坐标系原点从纸张的左下角平移（translate）至右下角，然后将坐标系逆时针旋转90度，得到下面的右图。这个时候x轴是从下往上为增加方向，看起来不太舒服。如果将右图的纸张顺时针旋转90度，这个时候纸张的宽度为297 mm，高度为210 mm。这种模式称为Landscape模式，因为风景（Landscape）一般都是绵延的山水画，宽度比高度要大多了。</p>
+<div class="figure align-center">
+<img alt="mode" src="/images/2013082401.jpg" style="width: 600px;"/>
+</div>
+<p>GMT默认使用的是Landscape模式，可以通过-P选项强制使用Portrait模式。那么究竟该选哪种模式呢？一般情况下，用GMT绘制的地图都是方方正正的，两种模式基本没有区别；在一些特殊的情况下，比如用pssac绘制地震波形剖面，X轴为时间，Y轴列出了多个地震波形，这个时候Y轴就需要更长一些，以免多个波形重合在一起。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id8">一些测试</a></h2>
+<p>解释完GMT的两种模式之后，还要再看看如何正确的使用-P选项。</p>
+<p>测试脚本如下:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+psxy -JX1i/2i -R0/5/0/10 -B1/1 -K -T &gt; 01.ps
+psxy -JX2i/1i -R0/10/0/5 -B1/1 -O -X2i -T &gt;&gt; 01.ps
+
+psxy -JX1i/2i -R0/5/0/10 -B1/1 -K -P -T &gt; 02.ps
+psxy -JX2i/1i -R0/10/0/5 -B1/1 -O -P -X2i -T &gt;&gt; 02.ps
+</pre></div>
+</td></tr></table><p>这个例子绘制了两张图，第一张图的两个psxy命令没有使用-P选项，第二张图的两个psxy命令都使用了-P选项。用evince查看一下这两个文件，可以发现01.ps为landscape模式，02.ps为portrait模式，这个是预料之中的事情。gs默认所有ps文件都是portrait模式，所以查看landscape模式的ps文件会比较别扭。</p>
+<p>比较两个ps文件的源码可以发现，两个文件唯一的差别在于文件开头处的一些代码片段：</p>
+<pre class="literal-block">
+%%BeginPageSetup
+595 0 T 90 R
+0.24 0.24 scale
+%%EndPageSetup
+</pre>
+<p>上面的代码片段是Landscape模式下的，Portrait模式下缺少了<tt class="docutils literal">595 0 T 90 R</tt>这一行。这是唯一的区别！！！这意味着-P选项不直接影响单个命令产生的代码片段，而是对整个页面的设置起作用。</p>
+<p>下面这个例子可能更有意思一些：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+psxy -JX1i/2i -R0/5/0/10 -B1/1 -K -P -T &gt; 03.ps
+psxy -JX2i/1i -R0/10/0/5 -B1/1 -O -X2i -T &gt;&gt; 03.ps
+
+psxy -JX1i/2i -R0/5/0/10 -B1/1 -K -T &gt; 04.ps
+psxy -JX2i/1i -R0/10/0/5 -B1/1 -O -X2i -P -T &gt;&gt; 04.ps
+</pre></div>
+</td></tr></table><p>这两个例子中分别只有一个命令有-P选项。用evince查看一下，03.ps为Portrait模式，与02.ps完全相同；04.ps为Landscape模式，与01.ps完全相同。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id9">小结</a></h2>
+<p>在<a class="reference external" href="http://seisman.info/gmt-option-ko.html">GMT进阶之深入理解-K和-O选项</a>中已经说到，PS文件的源码包含了头段、正文和尾巴，每个命令产生的代码组成了正文。如果一个命令是产生一个ps文件的第一个命令，则有没有-P选项决定了整个ps文件的模式，后面其他的命令无论有-P或者没有-P都没有任何影响，不可能通过-P选项使得图中一部分呈landscape模式，一部分呈portrait模式。总之，如果需要使用-P选项，只要在第一个绘图命令里使用就可以了，后面的-P完全没有效果。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id10">20131024更新</a></h2>
+<p>关于-P选项，存在一个很大的误解，多数人认为如果一张图想要使用Portrait模式，则所有的命令都需要加上-P选项。上面的结果表明实际上根本不是这样。一个比较合理的做法是，如果需要portrait模式，则在脚本开始处使用<tt class="docutils literal">gmtset PAGE_ORIENTATION  portrait</tt>，最后删除.gmt*即可。这样就真的可以把-P选项给彻底扔了。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id11">吐槽</a></h2>
+<p>GMT为什么不设计成下面这样：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="nv">PS</span><span class="o">=</span><span class="s2">"test.ps"</span>
+
+GMT_init -P -F<span class="nv">$PS</span><span class="p">;</span>
+
+<span class="c"># begin plot command</span>
+psxy .....
+pscoast .....
+<span class="c"># end plot command</span>
+
+GMT_end；
+</pre></div>
+</td></tr></table><p>GMT_init和GMT_end是两个单独的命令，其中GMT_init负责初始化GMT，主要是写入PS文件需要的头段信息，-P选项指定PS文件为Portrait模式，-F$PS指定PS文件名；GMT_end负责写入尾巴。这样设计的话中间的所有绘图命令都不再需要-K、-O选项，-P选项也可以废除了。GMT会在当前目录写入临时文件保留前面命令中-J和-R的信息，保留PS文件名应该也不是件难事。GMT的世界一下子就被简化了。</p>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id12">修订历史</a></h2>
+<ul class="simple">
+<li>2013-08-24：初稿；</li>
+<li>2013-10-24：增加“小结”；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/gmt-option-p.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/gmt-option-p.html';
+    var disqus_url = 'http://seisman.info/gmt-option-p.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
+<li><a href="http://seisman.info/abused-b-option.html" title="GMT进阶之被滥用的-B选项">GMT进阶之被滥用的-B选项</a></li>
+<li><a href="http://seisman.info/gmt-option-b-colon.html" title="GMT进阶之-B选项中的冒号">GMT进阶之-B选项中的冒号</a></li>
+<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
+<li><a href="http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html" title="GMT技巧之地理坐标与笛卡尔坐标混合体">GMT技巧之地理坐标与笛卡尔坐标混合体</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/abused-b-option.html" title="Previous: GMT进阶之被滥用的-B选项">GMT进阶之被滥用的-B选项</a></li>
+                <li class="next-article"><a href="http://seisman.info/gmt-basemap-type.html" title="Next: GMT之底图边框类型">GMT之底图边框类型</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-24T14:08:00+08:00">2013-08-24</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtxuan-xiang-ref">GMT选项
+                    <span>8</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/gmt-option-p.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-24_gmt-option-p.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

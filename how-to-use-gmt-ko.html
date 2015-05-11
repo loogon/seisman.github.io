@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="介绍GMT中如何正确使用-K和-O选项。
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT4, GMT5, GMT选项, GMT技巧, GMT, " />
+
+<meta property="og:title" content="GMT使用-K和-O的技巧 "/>
+<meta property="og:url" content="http://seisman.info/how-to-use-gmt-ko.html" />
+<meta property="og:description" content="介绍GMT中如何正确使用-K和-O选项。" />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-07-07T11:30:00+08:00" />
+<meta name="twitter:title" content="GMT使用-K和-O的技巧 ">
+<meta name="twitter:description" content="介绍GMT中如何正确使用-K和-O选项。">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT使用-K和-O的技巧  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/how-to-use-gmt-ko.html"> GMT使用-K和-O的技巧  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id7">用法回顾</a></li>
+<li><a class="reference internal" href="#id2" id="id8">经典错误</a></li>
+<li><a class="reference internal" href="#id3" id="id9">完全避免犯错的技巧</a><ul>
+<li><a class="reference internal" href="#gmt4-bash" id="id10"><span class="caps">GMT4</span> Bash脚本</a></li>
+<li><a class="reference internal" href="#gmt5-bash" id="id11"><span class="caps">GMT5</span> Bash脚本</a></li>
+<li><a class="reference internal" href="#id4" id="id12">一点点解释</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5" id="id13">备注</a></li>
+<li><a class="reference internal" href="#id6" id="id14">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p><tt class="docutils literal"><span class="pre">-K</span></tt>和<tt class="docutils literal"><span class="pre">-O</span></tt>是GMT的17个标准选项中最常用但最容易出错的两个。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id7">用法回顾</a></h2>
+<ul class="simple">
+<li>如果一张图只需要一个命令就可以画出来，则不需要<tt class="docutils literal"><span class="pre">-K</span></tt>和<tt class="docutils literal"><span class="pre">-O</span></tt>选项；</li>
+<li>如果一张图由两个命令绘制出来，第一个命令需要使用<tt class="docutils literal"><span class="pre">-K</span></tt>，第二个命令需要使用<tt class="docutils literal"><span class="pre">-O</span></tt>；</li>
+<li>如果一张图由多个命令组成，第一个命令使用<tt class="docutils literal"><span class="pre">-K</span></tt>，中间命令使用<tt class="docutils literal"><span class="pre">-K</span></tt>和<tt class="docutils literal"><span class="pre">-O</span></tt>，最后一个命令使用<tt class="docutils literal"><span class="pre">-O</span></tt>；</li>
+<li>第一个命令使用重定向符号<tt class="docutils literal">&gt;</tt>创建新文件并写入PS命令；</li>
+<li>余下所有命令绘图命令使用重定向符号<tt class="docutils literal">&gt;&gt;</tt>向PS文件中追加新的PS命令；</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id8">经典错误</a></h2>
+<p>根据上面所说的用法去写绘图脚本，经常会出现各种错误，列出常见的错误如下：</p>
+<ul class="simple">
+<li>已经写好的一个绘图脚本，想要在往图里加点东西。在脚本的最后加了个命令，使用了<tt class="docutils literal"><span class="pre">-O</span></tt>，但是却忘了把原来最后一个命令的<tt class="docutils literal"><span class="pre">-O</span></tt>改成<tt class="docutils literal"><span class="pre">-K</span> <span class="pre">-O</span></tt>。这样最后一个命令应该没有效果，或者gs直接报错。</li>
+<li>第一个命令绘制海岸线，第二个命令绘制地形，导致地形把海岸线覆盖了，想要交换两个命令的顺序，结果忘记将第一个命令的<tt class="docutils literal"><span class="pre">-K</span></tt>改成<tt class="docutils literal"><span class="pre">-O</span></tt>，忘记将第二个命令的<tt class="docutils literal"><span class="pre">-O</span></tt>改成<tt class="docutils literal"><span class="pre">-K</span></tt>。这样应该完全没结果吧。</li>
+<li>想要在第一个命令前再加一个绘图命令，也记得把原来第一个命令的<tt class="docutils literal"><span class="pre">-K</span></tt>改成<tt class="docutils literal"><span class="pre">-K</span> <span class="pre">-O</span></tt>，但是忘记把<tt class="docutils literal">&gt;</tt>改成<tt class="docutils literal">&gt;&gt;</tt>。</li>
+</ul>
+<p>新手常犯的错误太多，一时想不起了。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id9">完全避免犯错的技巧</a></h2>
+<p>下面的技巧可以几乎完全避免使用<tt class="docutils literal"><span class="pre">-K</span></tt>、<tt class="docutils literal"><span class="pre">-O</span></tt>以及<tt class="docutils literal">重定向符号</tt>过程中可能出现的错误（前提是要理解这个简单的技巧为什么可以帮助你避免犯错）。下面分别给出GMT4和GMT5下bash脚本中使用<tt class="docutils literal"><span class="pre">-K</span></tt>、<tt class="docutils literal"><span class="pre">-O</span></tt>的技巧。</p>
+<p>在理解了如下脚本后，很容易将其修改到bat、Perl、Python中。</p>
+<div class="section" id="gmt4-bash">
+<h3><a class="toc-backref" href="#id10"><span class="caps">GMT4</span> Bash脚本</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c">#</span>
+<span class="c"># GMT template</span>
+<span class="c">#</span>
+<span class="nv">PS</span><span class="o">=</span>example.ps
+<span class="nv">J</span><span class="o">=</span>X6i
+<span class="nv">R</span><span class="o">=</span>0/1/0/1
+
+<span class="c"># Begin GMT Plot</span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -K &gt; <span class="nv">$PS</span>
+
+<span class="c"># now begin your real plot commands</span>
+<span class="c"># every command should be with "-K" "-O" and "&gt;&gt;"</span>
+
+<span class="c"># End GMT Plot</span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -O &gt;&gt; <span class="nv">$PS</span>
+
+<span class="c"># Plot finished. Now you can convert PS to other format</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="gmt5-bash">
+<h3><a class="toc-backref" href="#id11"><span class="caps">GMT5</span> Bash脚本</a></h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+<span class="c">#</span>
+<span class="c"># GMT template</span>
+<span class="c">#</span>
+<span class="nv">PS</span><span class="o">=</span>example.ps
+<span class="nv">J</span><span class="o">=</span>X6i
+<span class="nv">R</span><span class="o">=</span>0/1/0/1
+
+<span class="c"># Begin GMT Plot</span>
+gmt psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -K &gt; <span class="nv">$PS</span>
+
+<span class="c"># now begin your real plot commands</span>
+<span class="c"># every command should be with "-K" "-O" and "&gt;&gt;"</span>
+
+<span class="c"># End GMT Plot</span>
+gmt psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -O &gt;&gt; <span class="nv">$PS</span>
+
+<span class="c"># Plot finished. Now you can convert PS to other format</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id12">一点点解释</a></h3>
+<p><tt class="docutils literal"><span class="pre">-T</span></tt>选项忽略所有输入，即输入为空，相当于<tt class="docutils literal">/dev/null</tt>。因而这两个<tt class="docutils literal">psxy</tt>命令实际上不会写入任何图像相关的代码到PS文件中。第一个<tt class="docutils literal">psxy</tt>命令生成了PS头部信息，最后的<tt class="docutils literal">psxy</tt>命令生成了尾巴。</p>
+<p>可以在这两个<tt class="docutils literal">psxy</tt>命令中间添加任意数目真正用于绘图的命令。这些（零个、一个或者多个）命令既不需要头段也不需要尾巴，因而所有的中间绘图命令都需要<tt class="docutils literal"><span class="pre">-K</span></tt>、<tt class="docutils literal"><span class="pre">-O</span></tt>选项，并使用重定向<tt class="docutils literal">&gt;&gt;</tt>。</p>
+<p>这样带来的好处在于，中间所有命令具有统一的风格，都使用<tt class="docutils literal"><span class="pre">-K</span> <span class="pre">-O</span> &gt;&gt;</tt>。因而可以任意增加、删除命令或调整任意命令的相对顺序。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id13">备注</a></h2>
+<ul class="simple">
+<li>印象中这个技巧在官方文档的脚本中出现过，但是没有将其作为一种技巧来说，所以貌似未得到推广；</li>
+<li>每个GMT命令默认都会输出头段和尾巴，这样的设计合理吗？为什么不是绘图命令完全抛弃头段和尾巴，由两个单独的命令向PS文件中写头段和尾巴？这样的设计也许不太符合GMT命令的整体风格；</li>
+<li>究竟有没有效果？用过之后才有评价的资格。</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id14">修订历史</a></h2>
+<ul class="simple">
+<li>2013-07-07：初稿；</li>
+<li>2013-08-24：修订了bash脚本中的一个笔误；</li>
+<li>2013-11-06：修订脚本，使用<tt class="docutils literal"><span class="pre">-T</span></tt>选项，不再使用<tt class="docutils literal">/dev/null</tt>；</li>
+<li>2014-07-06：删除了Perl版脚本，增加了GMT5版本的脚本；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/how-to-use-gmt-ko.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/how-to-use-gmt-ko.html';
+    var disqus_url = 'http://seisman.info/how-to-use-gmt-ko.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmt-option-j-and-r.html" title="GMT进阶之理解-J和-R的共生关系">GMT进阶之理解-J和-R的共生关系</a></li>
+<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
+<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
+<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
+<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/sac-manual.html" title="Previous: SAC参考手册中文版">SAC参考手册中文版</a></li>
+                <li class="next-article"><a href="http://seisman.info/install-sac-from-binary-package.html" title="Next: SAC二进制版的安装">SAC二进制版的安装</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-07-07T11:30:00+08:00">2013-07-07</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>36</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtxuan-xiang-ref">GMT选项
+                    <span>8</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/how-to-use-gmt-ko.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-07-07_how-to-use-gmt-ko.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

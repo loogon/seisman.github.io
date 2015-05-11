@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="前文介绍了channel table文件的格式以及每一列的含义，其中7-13列记录了channel的仪器信息。由于Hi-net并没有像IRIS那样提供RESP或SAC_PZ文件，因而需要用户根据7-13列的信息手动推导仪器响应。 警告 本文是在Hi-net官方网站内容、Hi-net官方回复邮件内容以及个人对于仪器响应的理解的基础上完成的。 本人无法保证本文的内容是完全正确的，望读者带着批判的眼光阅读本文！ 若因阅读本文内容而造成数据处理的任何偏差以及由此带来的任何后果，由用户自己承担。 回顾 先回顾一下7-13列的含义： [7]：Quantization bit rate of A/D conversion [8]：Sensor sensitivity (in V/unit_of_input) [9]：Unit of input [10]：Nature period of the sensor [11]：Damping constant of the sensor [12]：Amplification factor applied to sensor ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Hinet, 仪器响应, 地震学基础, " />
+
+<meta property="og:title" content="Hi-net的仪器响应 "/>
+<meta property="og:url" content="http://seisman.info/hinet-instrumental-response.html" />
+<meta property="og:description" content="前文介绍了channel table文件的格式以及每一列的含义，其中7-13列记录了channel的仪器信息。由于Hi-net并没有像IRIS那样提供RESP或SAC_PZ文件，因而需要用户根据7-13列的信息手动推导仪器响应。 警告 本文是在Hi-net官方网站内容、Hi-net官方回复邮件内容以及个人对于仪器响应的理解的基础上完成的。 本人无法保证本文的内容是完全正确的，望读者带着批判的眼光阅读本文！ 若因阅读本文内容而造成数据处理的任何偏差以及由此带来的任何后果，由用户自己承担。 回顾 先回顾一下7-13列的含义： [7]：Quantization bit rate of A/D conversion [8]：Sensor sensitivity (in V/unit_of_input) [9]：Unit of input [10]：Nature period of the sensor [11]：Damping constant of the sensor [12]：Amplification factor applied to sensor ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2014-09-06T00:00:00+08:00" />
+<meta name="twitter:title" content="Hi-net的仪器响应 ">
+<meta name="twitter:description" content="前文介绍了channel table文件的格式以及每一列的含义，其中7-13列记录了channel的仪器信息。由于Hi-net并没有像IRIS那样提供RESP或SAC_PZ文件，因而需要用户根据7-13列的信息手动推导仪器响应。 警告 本文是在Hi-net官方网站内容、Hi-net官方回复邮件内容以及个人对于仪器响应的理解的基础上完成的。 本人无法保证本文的内容是完全正确的，望读者带着批判的眼光阅读本文！ 若因阅读本文内容而造成数据处理的任何偏差以及由此带来的任何后果，由用户自己承担。 回顾 先回顾一下7-13列的含义： [7]：Quantization bit rate of A/D conversion [8]：Sensor sensitivity (in V/unit_of_input) [9]：Unit of input [10]：Nature period of the sensor [11]：Damping constant of the sensor [12]：Amplification factor applied to sensor ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>Hi-net的仪器响应  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/hinet-instrumental-response.html"> Hi-net的仪器响应  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id13">警告</a></li>
+<li><a class="reference internal" href="#id2" id="id14">回顾</a></li>
+<li><a class="reference internal" href="#id3" id="id15">流程</a><ul>
+<li><a class="reference internal" href="#id5" id="id16">输入</a></li>
+<li><a class="reference internal" href="#id6" id="id17">输入增强</a></li>
+<li><a class="reference internal" href="#analog-stage" id="id18">Analog Stage</a></li>
+<li><a class="reference internal" href="#analog-digital-conversion" id="id19">Analog-Digital Conversion</a></li>
+<li><a class="reference internal" href="#digital-stage" id="id20">Digital Stage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10" id="id21">总结</a></li>
+<li><a class="reference internal" href="#id11" id="id22">附录</a><ul>
+<li><a class="reference internal" href="#id12" id="id23">官方回复邮件</a></li>
+</ul>
+</li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>前文介绍了channel table文件的格式以及每一列的含义，其中7-13列记录了channel的仪器信息。由于Hi-net并没有像IRIS那样提供RESP或SAC_PZ文件，因而需要用户根据7-13列的信息手动推导仪器响应。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id13">警告</a></h2>
+<p>本文是在Hi-net官方网站内容、Hi-net官方回复邮件内容以及个人对于仪器响应的理解的基础上完成的。</p>
+<p>本人无法保证本文的内容是完全正确的，望读者带着批判的眼光阅读本文！</p>
+<p>若因阅读本文内容而造成数据处理的任何偏差以及由此带来的任何后果，由用户自己承担。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id14">回顾</a></h2>
+<p>先回顾一下7-13列的含义：</p>
+<ul class="simple">
+<li>[7]：Quantization bit rate of A/D conversion</li>
+<li>[8]：Sensor sensitivity (in V/unit_of_input)</li>
+<li>[9]：Unit of input</li>
+<li>[10]：Nature period of the sensor</li>
+<li>[11]：Damping constant of the sensor</li>
+<li>[12]：Amplification factor applied to sensor output prior to A/D conversion (in dB)</li>
+<li>[13]：<span class="caps">LSB</span> value of A/D conversion</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id15">流程</a></h2>
+<p>根据<a class="reference external" href="http://seisman.info/physical-details-of-instrumental-response.html">《仪器响应的物理细节》</a>一文的分析，将7-13列按照仪器响应的过程再细分一下：</p>
+<ul class="simple">
+<li>输入：波场振幅（[9]）</li>
+<li>输入增强：对输入波场进行放大（[12]）</li>
+<li>Analog Stage：将连续的波场振幅转换为连续电压信号（[10]、[11]、[8]）</li>
+<li>Analog-Digital Conversion：将连续电压信号转换为离散电压信号（[7]、[13]）</li>
+<li>Digital Stage：对离散数据进行处理</li>
+</ul>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id16">输入</a></h3>
+<p>[9]给出了输入波场振幅<span class="math">\(A_0\)</span>的单位，一般来说，其值为<tt class="docutils literal">m/s</tt>，即Hi-net是速度地震仪。</p>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id17">输入增强</a></h3>
+<p>这一步对输入的波场振幅进行放大，[12]给出了放大系数<span class="math">\(L_{dB}\)</span>，单位为dB。</p>
+<p>根据维基百科中对<a class="reference external" href="http://en.wikipedia.org/wiki/Decibel#Field_quantities">场量分贝</a>的定义可知：</p>
+<div class="math">
+\begin{equation*}
+L_{dB} = 20 \log_{10}\left(\frac{A_1}{A_0}\right)
+\end{equation*}
+</div>
+<p>因而，本步骤的输出波场振幅<span class="math">\(A_1\)</span>为</p>
+<div class="math">
+\begin{equation*}
+A_1 = A_0 10^{\frac{L_{dB}}{20}}
+\end{equation*}
+</div>
+</div>
+<div class="section" id="analog-stage">
+<h3><a class="toc-backref" href="#id18">Analog Stage</a></h3>
+<p>在Hi-net的官方回复邮件中提到，Hi-net统一使用的是”moving coil velocity type seismometer“，此种地震仪的transfer函数在Laplace域表示为：</p>
+<div class="math">
+\begin{equation*}
+G \frac{s^2}{s^2+2 h \omega s + \omega^2}
+\end{equation*}
+</div>
+<p>其中</p>
+<ul class="simple">
+<li><span class="math">\(G\)</span>：Sensor sensitivity，即<span class="math">\(G\)</span>= [8]</li>
+<li><span class="math">\(h\)</span>：damping constant， 即<span class="math">\(h\)</span>= [11]</li>
+<li><span class="math">\(\omega\)</span>： natural angular frequency，即<span class="math">\(\omega=\frac{2\pi}{[10]}\)</span></li>
+</ul>
+<p>从channel table即可计算出这三个量，代入transfer函数，根据<a class="reference external" href="http://seisman.info/deep-analysis-of-response.html">仪器响应实例分析</a>中的类似步骤，即可计算出零点和极点，以及归一化因子<span class="math">\(A_0\)</span>。</p>
+<p><span class="caps">PS</span>：对于速度场而言，可以推导得到<span class="math">\(A_0 = 2*[11]\)</span></p>
+</div>
+<div class="section" id="analog-digital-conversion">
+<h3><a class="toc-backref" href="#id19">Analog-Digital Conversion</a></h3>
+<p>首先需要理解两个概念，bit rate和LSB value。</p>
+<p>模数转换器（<span class="caps">ADC</span>）的作用是将连续的模拟信号（电压，单位V）转换为离散的数字信号（单位为counts）。如果一个ADC的bit rate为8，则该ADC可以将模拟信号编码为<span class="math">\(2^8=256\)</span>个不同的离散值，从0至255或从-128到127。</p>
+<p>若该ADC的电压测量范围为<span class="math">\(\pm 20 V\)</span>，则该ADC可以将40V的电压测量范围转换为256种离散值，因而该ADC的电压分辨率为40/256 V/counts。这一电压分辨率也称为最低有效位（<span class="caps">LSB</span>）电压，即“使得输出离散信号产生一个变化所需的最小输入电压的差值”。</p>
+<p>bit rate与LSB value之间的关系如下：</p>
+<div class="math">
+\begin{equation*}
+\frac{V_{high}-V_{low}}{2^{bitrate}}
+\end{equation*}
+</div>
+<p>其中<span class="math">\(V_{high}\)</span>和<span class="math">\(V_{low}\)</span>分别为ADC的测量电压上下限。</p>
+<p><span class="caps">LSB</span> value的倒数<span class="math">\(\frac{1}{[13]}\)</span>，其单位为<span class="math">\(counts/V\)</span>，即单位电压所对应的离散值得变化量，也就是这一阶段的增益<span class="math">\(S_d=\frac{1}{[13]}\)</span>。</p>
+</div>
+<div class="section" id="digital-stage">
+<h3><a class="toc-backref" href="#id20">Digital Stage</a></h3>
+<p>这一阶段，对离散信号进行处理，需要考虑这个过程中的增益。</p>
+<p>在Hi-net官方的<a class="reference external" href="http://www.hinet.bosai.go.jp/REGS/seed/?LANG=en">Response of Observation Equipment</a>说明中，给出了三种仪器响应RESP文件，并指出</p>
+<blockquote>
+In all response files for Hi-net data, sensor sensitivity is set to the case of 200 V/(cm/s).
+Actual sensitivity of each channel is shown at the 8th column of the channel table file.
+This means that the values at 37th line from the top and 4th line from the bottom
+should be modified from the response file in this web page, considering this point.</blockquote>
+<p>即<a class="reference external" href="http://www.hinet.bosai.go.jp/REGS/seed/?LANG=en">Response of Observation Equipment</a>中给出的三种仪器响应RESP文件，仅仅只是示例，每个RESP文件的前37行和后4行（<span class="caps">PS</span>：此处行号并不包括注释行）必须根据channel table中的值进行修改，而其余行则不需要修改。看看RESP文件的内容可知，不需要修改的行恰好对应Digital Stage（stage number为3或4），这暗示着<strong>Hi-net的所有channel的Digital Stage部分是完全相同的</strong>。</p>
+<p>从RESP文件中可以看出，stage 3和stage 4虽然看上去很复杂，但实际上其振幅增益<span class="math">\(S_d=1.0\)</span>。换句话说，也就是不必过多考虑这一阶段。</p>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id21">总结</a></h2>
+<ul class="simple">
+<li>检查[9]确认输入波场为速度场</li>
+<li>由[12]计算波场放大系数</li>
+<li>由[10]、[11]构造增益为1的transfer函数，计算其零点和极点，并计算transfer函数在自然频率处的振幅，以得到归一化因子<span class="math">\(A_0\)</span></li>
+<li>[8]为增益，可直接使用</li>
+<li>对[13]列取倒数得到增益（[7]没有用）</li>
+</ul>
+<p>由此，可根据channel table完整构建每个channel的仪器响应文件，RESP格式或SAC_PZ格式均可，一般用SAC_PZ格式即可。</p>
+</div>
+<div class="section" id="id11">
+<h2><a class="toc-backref" href="#id22">附录</a></h2>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id23">官方回复邮件</a></h3>
+<p>Question1: Apr 24, 2014 09:32 (<span class="caps">UT</span>) +0900(<span class="caps">JST</span>)</p>
+<pre class="literal-block">
+Hi,
+
+I am using Hi-net data and am confused with the instrumental response
+even after I have looked through all pages of Hi-net website.
+
+In the page of 'For Registered Users' -&gt; 'Response of Observation Equipment',
+only three RESP files are given. It seems that I have to rewrite a new RESP
+or SAC_PZ file for each channel.
+
+So I have to confirm that I understand details of response, which are very
+important for correct data processing.
+
+1. Do all channels have the same zeroes and poles?
+2. At line 19, do all channels have the same A0 Normalization factor (0.999953)?
+3. In the FAQ Q08, one equation is given to convert the A/D value from an WIN32
+   file to the corresponding physical quantity. It is
+
+        v = I * [13] / ( [8] * 10 ^ ( [12] / 20 ) )
+
+   If I want to generate a SAC PZ file, the CONSTANT will be
+
+    CONSTANT = [8]*10^([12]/20) / [13] * A0 ?
+
+I am looking forward to your reply.
+
+Best Regards.
+</pre>
+<p>Answer1:  May 07, 2014 08:30 (<span class="caps">UT</span>) +0900(<span class="caps">JST</span>)</p>
+<pre class="literal-block">
+Thank you for accessing our website.
+This is the NIED Hi-net/F-net/V-net administrator.
+
+In the "Response of Observation Equipment" page, sample RESP files are
+provided and you need to modify them according to your purposes, as you
+wrote. The explanation in this page assumes that the parameters of the
+seismometer other than the gain factor do not change. Strictly speaking,
+the zeros, the poles, and the A0 normalization factor can change
+depending on the parameters of the seismometer. The moving coil velocity
+type seismometer is used in Hi-net and its transfer function in the
+Laplace domain is given as:
+
+    Gs^2/(s^2 + 2hws + w^2)
+
+where G, h and w are the gain factor, the damping constant, and the
+natural angular frequency, respectively. Roots of the numerator and the
+denominator correspond to the zeros and the poles, respectively, and the
+A0 normalization factor is the inverse of the absolute value of the
+above equation except G at the normalization frequency. Detailed
+explanation about this type of seismometer is available in many
+literature, such as,
+
+Scherbaum, F., Of Poles and Zeros: Fundamentals of Digital Seismology,
+Kluwer Academic Publishers, 1996.
+#see chapter 4
+
+The gain factor, the damping constant, and the natural period are
+provided in the channels table file as explained in the Q&amp;A08.
+Note that the gain factor is measured at its natural frequency.
+http://www.hinet.bosai.go.jp/faq/?LANG=en#Q08
+
+Please read the SEED manual about further details and SAC manual about
+SAC PZ file.
+
+- SEED: http://www.fdsn.org/publications.htm
+- SAC: http://www.iris.edu/files/sac-manual/
+
+Sincerely,
+</pre>
+</div>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/hinet-instrumental-response.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/hinet-instrumental-response.html';
+    var disqus_url = 'http://seisman.info/hinet-instrumental-response.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/physical-details-of-instrumental-response.html" title="仪器响应的物理细节">仪器响应的物理细节</a></li>
+<li><a href="http://seisman.info/difference-between-resp-and-pz-while-deconvolution.html" title="用RESP和PZ去除仪器响应的差别">用RESP和PZ去除仪器响应的差别</a></li>
+<li><a href="http://seisman.info/traps-using-hinet-data.html" title="细数使用Hi-net数据遇到的坑">细数使用Hi-net数据遇到的坑</a></li>
+<li><a href="http://seisman.info/hinet-channel-table.html" title="Hi-net Channel Table文件">Hi-net Channel Table文件</a></li>
+<li><a href="http://seisman.info/hinet-convert-channel-table-to-sac-pz-file.html" title="Hi-net生成仪器响应SAC PZ文件">Hi-net生成仪器响应SAC PZ文件</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/hinet-channel-table.html" title="Previous: Hi-net Channel Table文件">Hi-net Channel Table文件</a></li>
+                <li class="next-article"><a href="http://seisman.info/hinet-win32tools.html" title="Next: Hi-net win32tools">Hi-net win32tools</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-09-06T00:00:00+08:00">2014-09-06</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ji-chu-ref">地震学基础</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#hinet-ref">Hinet
+                    <span>15</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#yi-qi-xiang-ying-ref">仪器响应
+                    <span>12</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/hinet-instrumental-response.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisBasic/2014-09-06_hinet-instrumental-response.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type= "text/javascript">
+    MathJax.Hub.Config({
+        config: ["MMLorHTML.js"],
+        jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+            equationNumbers: { autoNumber: "AMS" }
+        },
+        extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+        tex2jax: { 
+            //inlineMath: [ [\'$\',\'$\'] ],
+            //displayMath: [ [\'$$\',\'$$\'] ],
+            inlineMath: [ ["\\(", "\\)"] ],
+            displayMath: [ ],
+            processClass: "math",
+            processEscapes: true
+        },
+        "HTML-CSS": {
+            styles: { ".MathJax .mo, .MathJax .mi": {color: "black ! important"}}
+        }
+       });
+</script>    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="一些废话 2010年开始正式接触Linux，入门发行版是Ubuntu 10.10，后来过渡到Ubunu 11.04，这其中也尝试了很多其他主流的发行版。进入实验室之后，开始用CentOS 5，然后是CentOS 6，现在进化到CentOS 7。 使用了四年的Linux，前三年都是在瞎折腾，浪费了不少时间，也得到了不少经验与教训。现在可能是真的老了，已经不愿意折腾了，只希望配置好一个系统之后，就一直使用下去。 为什么要写/读这一篇 使用Linux尤其是CentOS会遇到一些坑，或是一些有洁癖的人不能忍的事情： 官方源中的软件包版本太老，在功能上无法满足需求； 多个源的软件包存在版本冲突； 手动编译软件，默认会将不同文件放置在/usr/local下不同的子目录下，使得软件的更新和删除变得麻烦。 等等… 在经历了几次重装CentOS之后，特总结出如下几条软件安装的方法与原则，以尽可能保证当前系统的稳定、整洁，尽可能降低系统洁癖引起的重装冲动。 以下所说，仅限于CentOS7，对其他发行版，或许有借鉴意义。 官方源 CentOS自带的四个官方源中，默认打开的有base ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="CentOS, Linux, " />
+
+<meta property="og:title" content="CentOS 7下的软件安装方法及策略 "/>
+<meta property="og:url" content="http://seisman.info/how-to-install-softwares-under-centos-7.html" />
+<meta property="og:description" content="一些废话 2010年开始正式接触Linux，入门发行版是Ubuntu 10.10，后来过渡到Ubunu 11.04，这其中也尝试了很多其他主流的发行版。进入实验室之后，开始用CentOS 5，然后是CentOS 6，现在进化到CentOS 7。 使用了四年的Linux，前三年都是在瞎折腾，浪费了不少时间，也得到了不少经验与教训。现在可能是真的老了，已经不愿意折腾了，只希望配置好一个系统之后，就一直使用下去。 为什么要写/读这一篇 使用Linux尤其是CentOS会遇到一些坑，或是一些有洁癖的人不能忍的事情： 官方源中的软件包版本太老，在功能上无法满足需求； 多个源的软件包存在版本冲突； 手动编译软件，默认会将不同文件放置在/usr/local下不同的子目录下，使得软件的更新和删除变得麻烦。 等等… 在经历了几次重装CentOS之后，特总结出如下几条软件安装的方法与原则，以尽可能保证当前系统的稳定、整洁，尽可能降低系统洁癖引起的重装冲动。 以下所说，仅限于CentOS7，对其他发行版，或许有借鉴意义。 官方源 CentOS自带的四个官方源中，默认打开的有base ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2014-11-23T00:00:00+08:00" />
+<meta property="" content="2014-12-01T00:00:00+08:00" />
+<meta name="twitter:title" content="CentOS 7下的软件安装方法及策略 ">
+<meta name="twitter:description" content="一些废话 2010年开始正式接触Linux，入门发行版是Ubuntu 10.10，后来过渡到Ubunu 11.04，这其中也尝试了很多其他主流的发行版。进入实验室之后，开始用CentOS 5，然后是CentOS 6，现在进化到CentOS 7。 使用了四年的Linux，前三年都是在瞎折腾，浪费了不少时间，也得到了不少经验与教训。现在可能是真的老了，已经不愿意折腾了，只希望配置好一个系统之后，就一直使用下去。 为什么要写/读这一篇 使用Linux尤其是CentOS会遇到一些坑，或是一些有洁癖的人不能忍的事情： 官方源中的软件包版本太老，在功能上无法满足需求； 多个源的软件包存在版本冲突； 手动编译软件，默认会将不同文件放置在/usr/local下不同的子目录下，使得软件的更新和删除变得麻烦。 等等… 在经历了几次重装CentOS之后，特总结出如下几条软件安装的方法与原则，以尽可能保证当前系统的稳定、整洁，尽可能降低系统洁癖引起的重装冲动。 以下所说，仅限于CentOS7，对其他发行版，或许有借鉴意义。 官方源 CentOS自带的四个官方源中，默认打开的有base ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>CentOS 7下的软件安装方法及策略  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/how-to-install-softwares-under-centos-7.html"> CentOS&nbsp;7下的软件安装方法及策略  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id15">一些废话</a></li>
+<li><a class="reference internal" href="#id2" id="id16">为什么要写/读这一篇</a></li>
+<li><a class="reference internal" href="#id3" id="id17">官方源</a></li>
+<li><a class="reference internal" href="#id4" id="id18">第三方源</a></li>
+<li><a class="reference internal" href="#rpm" id="id19">官方rpm包</a></li>
+<li><a class="reference internal" href="#id5" id="id20">解压即用</a></li>
+<li><a class="reference internal" href="#id6" id="id21">第三方rpm包</a></li>
+<li><a class="reference internal" href="#id7" id="id22">第三方包管理器</a><ul>
+<li><a class="reference internal" href="#linuxbrew" id="id23">Linuxbrew</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id24">编译源码</a></li>
+<li><a class="reference internal" href="#id9" id="id25">编译代码</a></li>
+<li><a class="reference internal" href="#id10" id="id26">自成系统的软件</a></li>
+<li><a class="reference internal" href="#id11" id="id27">例外</a><ul>
+<li><a class="reference internal" href="#id12" id="id28">第三方源</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13" id="id29">总结</a></li>
+<li><a class="reference internal" href="#id14" id="id30">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id15">一些废话</a></h2>
+<p>2010年开始正式接触Linux，入门发行版是Ubuntu 10.10，后来过渡到Ubunu 11.04，这其中也尝试了很多其他主流的发行版。进入实验室之后，开始用CentOS 5，然后是CentOS 6，现在进化到CentOS 7。</p>
+<p>使用了四年的Linux，前三年都是在瞎折腾，浪费了不少时间，也得到了不少经验与教训。现在可能是真的老了，已经不愿意折腾了，只希望配置好一个系统之后，就一直使用下去。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id16">为什么要写/读这一篇</a></h2>
+<p>使用Linux尤其是CentOS会遇到一些坑，或是一些有洁癖的人不能忍的事情：</p>
+<ol class="arabic simple">
+<li>官方源中的软件包版本太老，在功能上无法满足需求；</li>
+<li>多个源的软件包存在版本冲突；</li>
+<li>手动编译软件，默认会将不同文件放置在<tt class="docutils literal">/usr/local</tt>下不同的子目录下，使得软件的更新和删除变得麻烦。</li>
+<li>等等…</li>
+</ol>
+<p>在经历了几次重装CentOS之后，特总结出如下几条软件安装的方法与原则，以尽可能保证当前系统的稳定、整洁，尽可能降低系统洁癖引起的重装冲动。</p>
+<p>以下所说，仅限于CentOS7，对其他发行版，或许有借鉴意义。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id17">官方源</a></h2>
+<p>CentOS自带的四个官方源中，默认打开的有base、updates、extras，这三个源中包含了约9000个软件包，是最稳定、也是最值得信赖的源。</p>
+<p>因而若一个软件包在官方源内，则应通过官方源安装:</p>
+<pre class="literal-block">
+sudo yum install PackageName
+</pre>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id18">第三方源</a></h2>
+<p>官方源虽然包含了很多软件包，但无法满足日常需求。幸好有第三方源，可以作为官方源的补充。</p>
+<p>在使用第三方源的过程中，最怕遇到这两个问题：</p>
+<ol class="arabic simple">
+<li>第三方源和官方源中有相同的包，导致官方源的包被第三方源替代；</li>
+<li>多个第三方源中存在同一个软件包，且版本不一致，存在冲突；</li>
+</ol>
+<p>这两个问题经常是致命的，出现各种预料不到的后果，因而选择第三方源要遵循如下原则：</p>
+<ol class="arabic simple">
+<li>只选择可靠的第三方源，要确保第三方源不会替换官方源中的包；</li>
+<li>使用尽量少的第三方源，以保证第三方源之间不会冲突；</li>
+</ol>
+<p>就CentOS而言，根据以上的原则，使用如下第三方源：</p>
+<ol class="arabic simple">
+<li>大型第三方源，已确认不会替换官方源的包，且相互之间无冲突<ol class="arabic">
+<li><span class="caps">EPEL</span>：包含6500多个软件，科研必备</li>
+<li>ELRepo：包含几十个各种硬件的驱动程序</li>
+</ol>
+</li>
+<li>有些小型第三方源，仅包含了几个软件，确认与官方源和EPEL源不会冲突，也可以添加<ol class="arabic">
+<li>Google Chrome：包含了Google Chrome，不会与官方源和EPEL源冲突；</li>
+<li>Adobe：仅包含flash插件，已确认不会冲突；</li>
+<li>dropbox：仅包含dropbox一个软件，已确认不会冲突；</li>
+</ol>
+</li>
+</ol>
+<p>因而，若一个软件包位于EPEL、ELRepo中，或一些小型的第三方源中，则添加该第三方源，并用<tt class="docutils literal">yum</tt>命令安装:</p>
+<pre class="literal-block">
+sudo yum install PackageName
+</pre>
+</div>
+<div class="section" id="rpm">
+<h2><a class="toc-backref" href="#id19">官方rpm包</a></h2>
+<p>大部分非开源的软件，在CentOS官方源或EPEL中是没有的。有些软件的官方网站会提供官方rpm包。此时可以从官方网站下载与当前系统对应的rpm包，直接用如下命令安装:</p>
+<pre class="literal-block">
+sudo rpm -i PackageName.rpm
+</pre>
+<p>比如，<span class="caps">WPS</span> for Linux就是其中一个。在安装的过程中rpm命令会自动检查依赖关系，若该软件所依赖的包在官方源和EPEL源中可以找到，则自动安装。</p>
+<p>直接安装rpm包的做法相当省事，但该软件不能由yum更新，稍稍麻烦一点。有些软件，比如前面提到的Google、Dropbox和Adobe其实也可以通过这种方法安装，在安装的同时会给系统添加源，对于这类软件依然可以很方便的更新与删除。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id20">解压即用</a></h2>
+<p>有些软件，官方提供了压缩包，解压之后即可直接运行其中的二进制文件，比如很多Java写的软件。这类软件没有给源代码，而是给了可以在当前平台下直接执行的二进制文件。大多数非开源的商业软件都采取这种办法。</p>
+<ol class="arabic simple">
+<li>比如sublime_text、pycharm、mendeley、TauP、sac等，直接解压，然后将解压后的文件夹复制到<tt class="docutils literal">/opt</tt>目录下，然后将该软件的bin目录加入到PATH中即可。</li>
+<li>比如Mathematics、Matlab、intel studio，软件包中提供安装脚本，执行该脚本即可安装；</li>
+</ol>
+<p>Linux下的习惯是，商业软件或第三方软件都安装到<tt class="docutils literal">/opt</tt>目录下，这也是大多数商业软件包的默认安装路径，尽量遵循该习惯。</p>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id21">第三方rpm包</a></h2>
+<p>有些软件，CentOS源和EPEL源中找不到，官方又没有提供rpm包，但是其他第三方源提供了rpm包。分情况讨论：</p>
+<ul class="simple">
+<li>若该第三方源只包含了很少量的包，且确定这些包与官方源以及其他已使用的第三方源不冲突，则可以添加该第三方源。</li>
+<li>若该第三方源包含了很多软件，很可能与官方源或EPEL源有冲突，则不添加该源<ul>
+<li>若该软件包没有复杂的依赖关系，则直接安装该源中的rpm包；</li>
+<li>若该软件包依赖于该第三方源中的其他包，则放弃，寻找其他方法；</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id22">第三方包管理器</a></h2>
+<p>不同的发行版使用不同的软件包管理器，CentOS使用yum，Ubuntu使用apt-get。近些年又出现了一些与发行版无关的第三方包管理器，比如Linuxbrew、Gentoo Prefix、pkgsrc。</p>
+<div class="section" id="linuxbrew">
+<h3><a class="toc-backref" href="#id23">Linuxbrew</a></h3>
+<p>Linuxbrew是由OS X平台下非常流行的Homebrew移植到Linux下的。Linuxbrew可以作为系统自带的包管理器的一个补充。其特色在于：</p>
+<ul class="simple">
+<li>所有软件都安装在<tt class="docutils literal"><span class="pre">${<span class="caps">HOME</span>}/.linuxbrew</span></tt>目录下；</li>
+<li>软件的版本相对很新；</li>
+<li>install、uninstall、info、list、update、upgrade等功能</li>
+<li>若库中没有需要的软件包，可以很简单地自己创建formulae</li>
+</ul>
+<p>试用了一下，一个比较坑的地方是，linuxbrew会自己内部解决依赖问题。比如，我试着通过linuxbrew安装terminator，然后发现terminator依赖于python，尽管系统已经安装了python，linuxbrew还是会安装一份python，又由于python依赖于更多的东西，导致又安装了更多软件包在home下。而且，linuxbrew是从源码编译软件的，所以相对来说速度较慢。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id24">编译源码</a></h2>
+<p>大部分软件用前面的几种方法应该都能安装上了。如果没安装上，那就得问问自己，真的需要安装这个软件么。如果不是非常必要的话就不要安装啦。如果是必须的软件，那就必须要手动编译了。</p>
+<p>常见的源码编译，一般也就是如下几步。当然，具体情况具体对待:</p>
+<pre class="literal-block">
+tar -xvf xxxx.tgz
+./configure --prefix=/opt/xxxx
+make
+sudo make install
+</pre>
+<p>一般来说，这类软件的默认安装目录都是<tt class="docutils literal">/usr/local</tt>，最终文件会被分别放在<tt class="docutils literal">/usr/local</tt>的bin、lib、share、man目录下。</p>
+<p>我个人非常不喜欢这种方式，因为作为一个通过源码编译的软件来说，意味着编译者要完全负起管理该软件的义务，这样的放置方式会来更新或卸载软件带来很多麻烦。所以我总是会在configure的时候加上prefix手动指定安装路径。要卸载该软件就直接删除/opt下对应的目录，要更新的话，也可以先删除，再重新编译一遍。这样做稍微麻烦的一点是，需要手动将该软件的bin目录加入到PATH中，还有可能需要修改LD_LIBRARY_PATH。但是一般来说，需要编译源码的软件很少，所以不会造成太大的麻烦。</p>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id25">编译代码</a></h2>
+<p>好吧，其实我不知道该怎么起标题了。。</p>
+<p>前一节“编译源码”主要针对的是一些大型软件包，这一节“编译代码”指的是对一些专业性很强的小代码包的处理方式。比如有些软件包编译之后实际需要的只是一个二进制文件，这个时候就没有必要安装到<tt class="docutils literal">/opt</tt>了，合适的方式是在自己的HOME下建立bin目录，并将其路径加入到<tt class="docutils literal">.bashrc</tt> 中，然后将编译生成的二进制文件复制到该目录下即可:</p>
+<pre class="literal-block">
+mkdir ${HOME}/bin
+echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
+</pre>
+<p>比如我的<tt class="docutils literal"><span class="pre">${<span class="caps">HOME</span>}/bin</span></tt>目录下有如下文件：</p>
+<ul class="simple">
+<li><tt class="docutils literal">distaz</tt>：给出地球上两点经纬度，计算震中距和方位角</li>
+<li><tt class="docutils literal">pssac</tt>：在GMT中绘制SAC文件</li>
+<li><tt class="docutils literal">rdseed</tt>：SEED格式转SAC格式</li>
+<li><tt class="docutils literal">win2sac_32</tt>、<tt class="docutils literal">catwin32</tt>：Hi-net网站提供的用于处理Hi-net数据的程序</li>
+<li><tt class="docutils literal">st</tt>：sublime_text被安装到<tt class="docutils literal">/opt</tt>目录下，在此建立一个软链接，方便在命令行调用sublime text</li>
+<li><tt class="docutils literal">wlt.pl</tt>：校内用于登陆网络通的脚本，在命令行修改网络端口，好happy</li>
+<li><tt class="docutils literal">fk</tt>、<tt class="docutils literal">fk.pl</tt>、<tt class="docutils literal">syn</tt>、<tt class="docutils literal">trav</tt>：Prof. Lupei Zhu的用于计算合成地震图的程序，源代码有不少，实际需要用的也就这三个可执行文件和一个perl脚本。</li>
+<li><tt class="docutils literal">matlab</tt>：指向matlab的一个软连接；</li>
+</ul>
+<p>不要随便什么二进制文件都往bin里放，这里只应放一些常用的命令或很通用的工具。</p>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id26">自成系统的软件</a></h2>
+<p>有一类软件，其拥有众多模块或包，为了管理这众多的模块，就需要拥有一个自己的模块/包管理器。这其中以TeX、Perl和Python为代表。对于这一类软件，其众多的模块是最大的优势，也是最值得利用的资源，因而我通常会选择手动安装它们，原因如下：</p>
+<ul class="simple">
+<li>系统的源中不可能包含该软件的所有模块；</li>
+<li>系统的源中该软件的模块的更新要远远滞后于最新版本；</li>
+</ul>
+<p>当然，即便是使用系统自带的版本，也依然可以用该软件自带的包管理器来安装模块。但将导致：</p>
+<ul class="simple">
+<li>部分模块用系统的yum管理，部分模块用软件自带的包管理器管理；</li>
+<li>yum安装的模块一般版本较老，软件的包管理器要安装的大多是最新版本；</li>
+</ul>
+<p>这一方面会导致模块管理的混乱，另一方面用软件自带的包管理其安装模块时，可能会依赖于其他模块的最新版本，若该模块是通过系统yum安装的较旧的版本，则可能导致模块的安装失败。</p>
+<p>因而，对于这类软件，一般单独安装，并用各自的包管理器管理模块：</p>
+<ul class="simple">
+<li>TeXLive：通过TeXLive iso镜像文件安装，使用其自带的tlmgr管理包</li>
+<li>Perl：通过plenv安装最新版本的Perl，使用plenv自带的cpanm安装模块</li>
+<li>Python：通过pyenv安装最新版本的Python，使用Python自带的pip安装模块</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h2><a class="toc-backref" href="#id27">例外</a></h2>
+<p>有规则总有例外。</p>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id28">第三方源</a></h3>
+<p>mosquito-myrepo是一个私人维护的源，其中包含了中文输入法、<span class="caps">QQ</span>、飞信、为知笔记、有道词典、百度云以及若干音频、视频播放器。我对这个源的态度是又爱又恨，其提供了很多中国人需要的软件，但因为其依赖于除EPEL外的其他第三方软件源，进而可能导致包冲突。所以对该源的使用，要保持谨慎。</p>
+</div>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id29">总结</a></h2>
+<p>简单总结一下:</p>
+<ol class="arabic simple">
+<li>为系统添加EPEL源、ELRepo源和个别其他小型第三方源</li>
+<li>能够从源中安装的就从源中安装</li>
+<li>不能从源中安装的尽量找rpm包安装</li>
+<li>找不到rpm包的就试试linuxbrew</li>
+<li>能不手动编译的就不要手动编译</li>
+</ol>
+</div>
+<div class="section" id="id14">
+<h2><a class="toc-backref" href="#id30">修订历史</a></h2>
+<ol class="arabic simple">
+<li>2014-11-23：初稿；</li>
+<li>2014-12-01：第三方源中加入ELRepo源；</li>
+</ol>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/how-to-install-softwares-under-centos-7.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/how-to-install-softwares-under-centos-7.html';
+    var disqus_url = 'http://seisman.info/how-to-install-softwares-under-centos-7.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/conflict-between-epel-and-rpmforge.html" title="使用EPEL和RPMforge源安装netcdf时的冲突">使用EPEL和RPMforge源安装netcdf时的冲突</a></li>
+<li><a href="http://seisman.info/install-yong-chinese-input-method-under-centos-7.html" title="CentOS 7.0下安装小小输入法">CentOS 7.0下安装小小输入法</a></li>
+<li><a href="http://seisman.info/install-nvidia-drivers-under-linux.html" title="Linux下安装NVIDIA显卡驱动">Linux下安装NVIDIA显卡驱动</a></li>
+<li><a href="http://seisman.info/fcitx-for-centos-7.html" title="CentOS 7安装fcitx中文输入法">CentOS 7安装fcitx中文输入法</a></li>
+<li><a href="http://seisman.info/wps-office-for-centos7.html" title="CentOS 7下安装WPS Office">CentOS 7下安装WPS Office</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/historical-versions-of-posts.html" title="Previous: 阅读博文的历史版本">阅读博文的历史版本</a></li>
+                <li class="next-article"><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="Next: GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-11-23T00:00:00+08:00">2014-11-23</time>
+
+<h4>Last Updated</h4>
+<time datetime="2014-12-01T00:00:00+08:00">2014-12-01</time>
+
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#linux-ref">Linux</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#centos-ref">CentOS
+                    <span>8</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/how-to-install-softwares-under-centos-7.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/Linux/2014-11-23_how-to-install-softwares-under-centos-7.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

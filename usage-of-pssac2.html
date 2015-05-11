@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="pssac2的用法。
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="pssac2, 地震学软件, " />
+
+<meta property="og:title" content="pssac2之用法 "/>
+<meta property="og:url" content="http://seisman.info/usage-of-pssac2.html" />
+<meta property="og:description" content="pssac2的用法。" />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-09T00:05:00+08:00" />
+<meta name="twitter:title" content="pssac2之用法 ">
+<meta name="twitter:description" content="pssac2的用法。">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>pssac2之用法  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/usage-of-pssac2.html"> pssac2之用法  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <pre class="literal-block">
+pssac2: Plot seismograms
+Usage: pssac2 &lt;infiles&gt; -C&lt;cut0/cut1&gt; -J&lt;params&gt; -R&lt;w/e/s/n&gt;
+      [-B&lt;tickinfo&gt;] [-E(k|d|a|n|b)(t(0-9,-5(b),-3(o),-2(a))|vel)] [-K] [-V]
+      [-Msize/alpha] [-Gr/g/b/c/t1/t2] [-O] [-P] [-Sshift] [-U[&lt;label&gt;]]
+      [-W&lt;pen&gt;] [-#&lt;ncopies&gt;] [-X&lt;x_shift&gt;] [-Y&lt;y_shift&gt;] [-r]
+
+      sacfiles may be given on either the command line or
+      if none are given they will be expected using standard in (stdin)
+      Using stdin indicate (sacfile,x,y,pen)
+          if x and y are given, it will override the position
+               taken from the sacfile
+          if pen is given the pen on the command line will be overridden
+
+      All options are in the same meaning as standard GMT EXCEPT:
+      -C &lt;cut_begin/cut_end&gt;
+              windowing data
+              -Ct[0-9]/t[0-9] will use the t[0-9] header values
+              or -Ct[0-9]/cut_end or -Ccut_begin/t[0-9]
+      -E option determines
+        (1) profile type:
+      a: azimuth profile
+      b: back-azimuth profile
+      d: distance profile with x in degrees
+      k: distance profile with x in kilometers
+      n: traces are numbered from 1 to N in y-axis
+        (2) time alignment:
+      tn: align up with time mark tn in SAC head
+            n= -5(b), -3(o), -2(a), 0-9 (t0-t9)
+      vel: use reduced velocity
+              Examples: -Ek8.0 -Eat-2 -Ed4.4 -Ent-3
+      -M vertical scaling in sacfile_unit/MEASURE_UNIT = size&lt;required&gt;
+          size: each trace will normalized to size (in MEASURE_UNIT)
+              scale =  (1/size) * [data(max) - data(min)]
+          size/alpha: plot absolute amplitude multiplied by (1/size)*r^alpha
+              where r is the distance range in km across surface
+              specifying alpha = 0.0 will give absolute amplitudes
+              scale = (1/size) * r^alpha
+          size/s: plot absolute amplitude multiplied by (1/size)*sqrt(sin(gcarc))
+              where gcarc is the distance in degrees.
+              scale = (1/size) * sqrt(sin(gcarc))
+      -Gr/g/b/zero_line/t0/t1 positive phase painting
+              paints the positive portion of the trace in color r/g/b
+              from the zero_line to the top and between times t0 and t1
+      -gr/g/b/zero_line/t0/t1 negative phase painting
+              paints the negative portion of the trace in color r/g/b
+              from the zero_line to the bottom and between times t0 and t1
+      -N turn clipping off, data will be plotted outside the bounds
+              clipping is on by default in X/Y plots and maps
+      -S &lt;seconds&gt; shift the trace by seconds
+              u: if next character after S is a u
+                 then shift using the user variable
+                 i.e. -Su9 will use 'user9' for shifting
+                 positive shifts move the plot backwards in time
+      -L &lt;seconds per MEASURE_UNIT&gt; while poltting on maps &lt;required for maps&gt;
+              If your seismograms look choppy and pixelated
+              Check the value of DOTS_PR_INCH in gmtdefaults
+              and increase the value using gmtset
+      -l &lt;x/y/length/bar_length/font_size&gt;
+              plot a timescale in seconds per MEASURE_UNIT at (x,y)
+              Only works while plotting on maps
+      -D &lt;dx/dy&gt; shifts position of seismogram in MEASURE_UNIT
+              Only works while plotting on maps
+      -W &lt;pen&gt; the pen may be specified on the command line
+              or it may be specified with individual files using stdin
+      -n Distances and Great Circle Arcs may be negative, don't complain
+      -r remove the mean value
+      -s byte swap the data before plotting
+      -v plot the traces vertically
+      -V Verbose (use more for more information)
+</pre>
+<ul class="simple">
+<li>在sac文件方面与pssac相同，可以直接在命令行中指定或者在标准输入通过给出<tt class="docutils literal">sacfile [x [y <span class="pre">[pen]]]</span></tt>来指定。若给出了x、y，则x、y会覆盖sacfile文件指定的位置；若给定pen，则命令行中-W指定的pen选项会被覆盖。</li>
+<li><tt class="docutils literal"><span class="pre">-C&lt;cut_begin/cut_end&gt;</span></tt>截取部分数据用于绘图，与pssac相似；特殊之处在于cut_begin和cut_end在这里可以使用头段变量T0-T9，这样相对更灵活一些。</li>
+<li>-E选项与pssac相同，貌似-E和-M选项在pssac2中是必须的。</li>
+<li>-M选项和pssac相似，说明方面要详细很多，多了一个-Msize/s选项，这里的yscale=(1/size)*sqrt(sin(gcarc))，其实gcarc是震中距，大概也相当于几何扩散的振幅校正，原理不知。从代码中看还有一个-Msize/b选项，是根据J-B表进行振幅校正。</li>
+<li>-Gr/g/b/zero_line/t0/t1将t0到t1时间段内振幅大于zero_line的部分根据rgb涂色。</li>
+<li>-gr/g/b/zero_line/t0/t1将t0到t1时间段内振幅小于zero_line的部分根据rgb涂色。</li>
+<li>-N当地震图振幅过大时，则将超过部分切除</li>
+<li>-S时间平移，-Su9表示按照头段变量user9进行平移</li>
+<li>-L在地图上绘制地震图时，指定每个MEASURE_UNIT代表的地震图秒数，MEASURE_UNIT可能是cm也可能是inch；如果波形看起来很“像素化”，那就要检查一下GMT参数中的DOTS_PR_INCH，可以适当地增大这个值。</li>
+<li><tt class="docutils literal"><span class="pre">-l&lt;x/y/length/bar_length/font_size&gt;</span></tt>在位置x、y处绘制一个timescale，即MEASURE_UNIT所代表的时间秒数，仅对地图有用。</li>
+<li>-D&lt;dx/dy&gt;对trace做整体偏移</li>
+<li>-W画笔属性</li>
+<li>-n&nbsp;表示震中距是负的（为什么要设计这个？）</li>
+<li>-r去均值</li>
+<li>-s对数据进行byte swap，参见big endian 和 little&nbsp;endian</li>
+<li>-v垂直绘制trace</li>
+<li>-V&nbsp;GMT的verbose模式</li>
+</ul>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/usage-of-pssac2.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/usage-of-pssac2.html';
+    var disqus_url = 'http://seisman.info/usage-of-pssac2.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/install-pssac2.html" title="pssac2的安装">pssac2的安装</a></li>
+<li><a href="http://seisman.info/plot-traces-on-maps-with-pssac.html" title="pssac2之在地图上绘制地震图">pssac2之在地图上绘制地震图</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/install-pssac2.html" title="Previous: pssac2的安装">pssac2的安装</a></li>
+                <li class="next-article"><a href="http://seisman.info/plot-traces-on-maps-with-pssac.html" title="Next: pssac2之在地图上绘制地震图">pssac2之在地图上绘制地震图</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-09T00:05:00+08:00">2013-08-09</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ruan-jian-ref">地震学软件</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#pssac2-ref">pssac2
+                    <span>3</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/usage-of-pssac2.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2013-08-09_usage-of-pssac2.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

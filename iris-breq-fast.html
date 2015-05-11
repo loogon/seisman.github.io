@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="IRIS提供了很多申请地震数据的软件或方法，比如Wilber III、SOD、JWeed等等。 BREQ_FAST是众多方法中的一个，喜欢它的人爱得死去活来，不喜欢它的人对它不屑一顾。其实每种方法都有自己的优点和缺点，每种方法都有自己擅长和不擅长的领域。 简介 BREQ_FAST是Batch REQuests FAST的简称。简单来说，就是通过发送一封邮件到指定的邮箱来申请数据，邮件的内容要按照规定的格式来写。这种数据申请的方法不同于常见的交互式方法，因而特别适合写脚本自动生成邮件内容、自动发送邮件、自动下载数据。 优点 简单易用，写一次脚本基本就一劳永逸了 速度快，不受网速限制 从申请到下载可以完全脚本化，适合数据批量申请 缺点 需要自己准备事件信息（即地震目录）以及台站列表； 非交互式，不像其他方法那样可以在线获得事件信息，根据事件选择符合一定条件的台站； 邮件内容格式 BREQ_FAST只对邮件内容有严格要求，不要求邮件主题。 .NAME .INST .MAIL .EMAIL .PHONE .FAX .MEDIA: .ALTERNATE MEDIA: .ALTERNATE MEDIA: .LABEL ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="breq_fast, IRIS, 数据申请, 地震学软件, " />
+
+<meta property="og:title" content="IRIS数据申请之BREQ_FAST "/>
+<meta property="og:url" content="http://seisman.info/iris-breq-fast.html" />
+<meta property="og:description" content="IRIS提供了很多申请地震数据的软件或方法，比如Wilber III、SOD、JWeed等等。 BREQ_FAST是众多方法中的一个，喜欢它的人爱得死去活来，不喜欢它的人对它不屑一顾。其实每种方法都有自己的优点和缺点，每种方法都有自己擅长和不擅长的领域。 简介 BREQ_FAST是Batch REQuests FAST的简称。简单来说，就是通过发送一封邮件到指定的邮箱来申请数据，邮件的内容要按照规定的格式来写。这种数据申请的方法不同于常见的交互式方法，因而特别适合写脚本自动生成邮件内容、自动发送邮件、自动下载数据。 优点 简单易用，写一次脚本基本就一劳永逸了 速度快，不受网速限制 从申请到下载可以完全脚本化，适合数据批量申请 缺点 需要自己准备事件信息（即地震目录）以及台站列表； 非交互式，不像其他方法那样可以在线获得事件信息，根据事件选择符合一定条件的台站； 邮件内容格式 BREQ_FAST只对邮件内容有严格要求，不要求邮件主题。 .NAME .INST .MAIL .EMAIL .PHONE .FAX .MEDIA: .ALTERNATE MEDIA: .ALTERNATE MEDIA: .LABEL ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-07-23T01:40:00+08:00" />
+<meta name="twitter:title" content="IRIS数据申请之BREQ_FAST ">
+<meta name="twitter:description" content="IRIS提供了很多申请地震数据的软件或方法，比如Wilber III、SOD、JWeed等等。 BREQ_FAST是众多方法中的一个，喜欢它的人爱得死去活来，不喜欢它的人对它不屑一顾。其实每种方法都有自己的优点和缺点，每种方法都有自己擅长和不擅长的领域。 简介 BREQ_FAST是Batch REQuests FAST的简称。简单来说，就是通过发送一封邮件到指定的邮箱来申请数据，邮件的内容要按照规定的格式来写。这种数据申请的方法不同于常见的交互式方法，因而特别适合写脚本自动生成邮件内容、自动发送邮件、自动下载数据。 优点 简单易用，写一次脚本基本就一劳永逸了 速度快，不受网速限制 从申请到下载可以完全脚本化，适合数据批量申请 缺点 需要自己准备事件信息（即地震目录）以及台站列表； 非交互式，不像其他方法那样可以在线获得事件信息，根据事件选择符合一定条件的台站； 邮件内容格式 BREQ_FAST只对邮件内容有严格要求，不要求邮件主题。 .NAME .INST .MAIL .EMAIL .PHONE .FAX .MEDIA: .ALTERNATE MEDIA: .ALTERNATE MEDIA: .LABEL ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>IRIS数据申请之BREQ_FAST  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/iris-breq-fast.html"> IRIS数据申请之BREQ_FAST  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id10">简介</a></li>
+<li><a class="reference internal" href="#id2" id="id11">优点</a></li>
+<li><a class="reference internal" href="#id3" id="id12">缺点</a></li>
+<li><a class="reference internal" href="#id4" id="id13">邮件内容格式</a></li>
+<li><a class="reference internal" href="#request-line" id="id14">Request Line格式</a></li>
+<li><a class="reference internal" href="#id5" id="id15">通配符</a></li>
+<li><a class="reference internal" href="#id6" id="id16">例子</a></li>
+<li><a class="reference internal" href="#id7" id="id17">发送邮件到这里</a></li>
+<li><a class="reference internal" href="#id8" id="id18">申请回应</a></li>
+<li><a class="reference internal" href="#bug" id="id19">Bug和限制</a></li>
+<li><a class="reference internal" href="#id9" id="id20">参考</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>IRIS提供了很多申请地震数据的软件或方法，比如Wilber <span class="caps">III</span>、<span class="caps">SOD</span>、JWeed等等。</p>
+<p>BREQ_FAST是众多方法中的一个，喜欢它的人爱得死去活来，不喜欢它的人对它不屑一顾。其实每种方法都有自己的优点和缺点，每种方法都有自己擅长和不擅长的领域。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id10">简介</a></h2>
+<p>BREQ_FAST是Batch REQuests FAST的简称。简单来说，就是通过发送一封邮件到指定的邮箱来申请数据，邮件的内容要按照规定的格式来写。这种数据申请的方法不同于常见的交互式方法，因而特别适合写脚本自动生成邮件内容、自动发送邮件、自动下载数据。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">优点</a></h2>
+<ul class="simple">
+<li>简单易用，写一次脚本基本就一劳永逸了</li>
+<li>速度快，不受网速限制</li>
+<li>从申请到下载可以完全脚本化，适合数据批量申请</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id12">缺点</a></h2>
+<ul class="simple">
+<li>需要自己准备事件信息（即地震目录）以及台站列表；</li>
+<li>非交互式，不像其他方法那样可以在线获得事件信息，根据事件选择符合一定条件的台站；</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id13">邮件内容格式</a></h2>
+<p>BREQ_FAST只对邮件内容有严格要求，不要求邮件主题。</p>
+<pre class="literal-block">
+.NAME
+.INST
+.MAIL
+.EMAIL
+.PHONE
+.FAX
+.MEDIA:
+.ALTERNATE MEDIA:
+.ALTERNATE MEDIA:
+.LABEL
+.SOURCE     ---
+.HYPO         | optional
+.MAGNITUDE  ---
+.QUALITY
+.END
+ request line-1
+ request line-2
+ ...
+ ...
+ ...
+ request line-n
+</pre>
+<p>要保证所有以“.”开头的标记行左对齐！！！</p>
+<ul class="simple">
+<li>.Name：用户姓名，IRIS会根据此标记在ftp上建立相关文件夹；</li>
+<li>.<span class="caps">INST</span>：单位或者机构信息（应该没啥用）；</li>
+<li>.<span class="caps">MAIL</span>：邮寄地址；（不会寄东西的）</li>
+<li>.<span class="caps">EMAIL</span>：邮箱。IRIS会向这个邮箱发送有关数据状态的邮件，可以与发送该邮件的邮箱地址不同；</li>
+<li>.<span class="caps">PHONE</span>：电话；（没用）</li>
+<li>.<span class="caps">FAX</span>：传真；（没用）</li>
+<li>.<span class="caps">MEDIA</span>：数据获取介质。有如下几种方式可以选择（按照倾向性排序），现在常用的方式是FTP，要求指定第一、第二、第三介质；<ul>
+<li>Electronic (<span class="caps">FTP</span>)</li>
+<li><span class="caps">EXABYTE</span> – 2 gigabyte</li>
+<li><span class="caps">EXABYTE</span> – 5 gigabyte</li>
+<li><span class="caps">DAT</span> (digital audio tape)</li>
+<li><span class="caps">DLT</span></li>
+<li><span class="caps">DVD</span>-R</li>
+</ul>
+</li>
+<li>.<span class="caps">LABEL</span>：申请的SEED数据将会以该LABEL命名，SEED文件内部也会包含这个LABEL的信息，应该选择合适的LABEL以保证文件名的唯一性和可区分性；（以发震时刻命名是个不错的选择）</li>
+<li>.<span class="caps">SOURCE</span>、.HYPO和.MAGNITUDE是可选的，其指定了震源的一些信息，这些信息最终会被写入SEED文件中；若未指定这三个标记，SEED解压出的SAC文件时没有震源信息的；若指定了这三个标记，解压出来的SAC文件时有震源信息的（只是猜测，没试过）。这几行写起来有些复杂，不要也罢，震源信息可以后期再写入。这三个标记的详细信息可以参考最后给出的链接。</li>
+<li>.<span class="caps">QUALITY</span>：数据质量；一般默认B；<ul>
+<li>B：最好的数据（首选Q，没有Q则选择D，没有D则选择R）</li>
+<li>E：所有数据（Q <span class="amp">&amp;</span> D <span class="amp">&amp;</span> R）</li>
+<li>Q：标记了QC的数据（即进行了质量控制）</li>
+<li>D：中等质量数据；</li>
+<li>R：最原始数据；</li>
+</ul>
+</li>
+<li>request line是真正的数据申请信息，前面的那些都只是辅助信息；</li>
+</ul>
+</div>
+<div class="section" id="request-line">
+<h2><a class="toc-backref" href="#id14">Request Line格式</a></h2>
+<pre class="literal-block">
+STA NN YYYY MM DD HH MM SS.TTTT YYYY MM DD HH MM SS.TTTT #_CH CH1 CH2 CHn LI
+</pre>
+<ul class="simple">
+<li><span class="caps">STA</span>：台站名</li>
+<li><span class="caps">NN</span>：台网或虚拟台网名</li>
+<li><span class="caps">YYYY</span>、<span class="caps">MM</span>、<span class="caps">DD</span>、<span class="caps">HH</span>、<span class="caps">MM</span>：年份（四位）、月、日、时、分</li>
+<li><span class="caps">SS</span>.<span class="caps">TTTT</span>：秒；小数点后为毫秒，可以省略；</li>
+<li>日期和时间出现了两次，分别代表要申请的数据的开始时间和结束时间；</li>
+<li>#_CH：接下来出现的通道标识的数目；</li>
+<li>CHn：通道标识符，可以包含通配符；</li>
+<li><span class="caps">LI</span>：位置号，可选</li>
+</ul>
+<p>每行最多包含100个字符。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id15">通配符</a></h2>
+<p>通道标识符支持通配符，目前仅支持通配符"?"，代表任意单个字符，比如"<span class="caps">BH</span>?"代表所有宽频带（Broadband）高增益（High gain）的通道，可能包含BHE、<span class="caps">BHN</span>、<span class="caps">BHZ</span>、<span class="caps">BH1</span>、BH2等等；通道列表可以包含多个字段，比如 <tt class="docutils literal">3 <span class="caps">LHZ</span> <span class="caps">BH</span>? <span class="pre">S??</span></tt>。</p>
+<p>一般通道名长度为三个字符，第一个字符为Band Code，第二个字符为Source Code，第三个字符为Orientation Code。</p>
+<p>台网和台站也可使用通配符，但是不建议台网和台站同时使用通配符；单个"?"可以匹配该台网的所有台站。</p>
+<p>如果不指定位置号，则获取该台站的全部location的数据。</p>
+<p>对于每个台站可以分别指定数据窗范围，因而可以根据到时信息确定需要的数据窗，最大程度减少数据量。不过长一点也无所谓。</p>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id16">例子</a></h2>
+<p>给出了SOURCE、<span class="caps">HYPO</span>、MAGNITUDE的例子，request line给出了尽可能多的写法：</p>
+<pre class="literal-block">
+.NAME Joe Seismologist
+.INST Podunk University
+.MAIL 101 Fast Lane, Middletown, KS  89432
+.EMAIL joe@podunk.edu
+.PHONE 555 555-1212
+.FAX   555 555-1213
+.MEDIA FTP
+.ALTERNATE MEDIA 1/2" tape - 6250
+.ALTERNATE MEDIA EXABYTE
+.LABEL Joe's FIRST Request
+.SOURCE =NEIC PDE=Jan 1990 PDE=National Earthquake Information Center - USGS DOI=
+.HYPO =1999 01 02 20 21 32.62= 13.408= 144.439=135.0=18=216=Mariana Islands=
+.MAGNITUDE =5.7=mb=
+.QUALITY B
+.END
+GRFO IU 1999 01 02 00 18 10.4 1999 01 02 00 20 10.4  1 SHZ
+ANTO IU 1999 01 02 02 10 36.6 1999 01 02 02 12 36.6  1 SH?
+AFI  IU 1999 01 02 02 10 37.1 1999 01 02 02 12 37.1  1 BH? 00
+SEE  CD 1999 01 02 14 45 08.9 1999 01 02 14 47 08.9  1 SHZ
+CASY IU 1999 01 04 02 42 13.4 1999 01 04 02 44 13.4  1 BHZ 10
+NNA  II 1999 01 04 02 41 57.5 1999 01 04 02 43 57.5  1 BHZ
+PFO  TS 1999 01 04 02 41 57.5 1999 01 04 02 43 57.5  1 BHZ
+PFO  II 1999 01 04 02 41 57.5 1999 01 04 02 43 57.5  1 BHZ
+KMI  CD 1999 01 04 02 41 57.5 1999 01 04 02 43 57.5  1 BHZ
+SSE  CD 1999 01 04 02 18 25.4 1999 01 04 02 20 25.4  2 B?? SHZ
+PAS  TS 1999  1  4  2 10 49   1999  1  4  2 12 49    3 BH? SHZ L??
+</pre>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id17">发送邮件到这里</a></h2>
+<p>根据上面的规则生成了邮件内容，直接将内容作为邮件正文（不是附件）发送到指定邮箱，不同的邮箱功能不同；</p>
+<ul class="simple">
+<li><a class="reference external" href="mailto:breq_fast@iris.washington.edu">breq_fast@iris.washington.edu</a>：申请完整的SEED文件，最常用的方式；</li>
+<li><a class="reference external" href="mailto:DATALESS@iris.washington.edu"><span class="caps">DATALESS</span>@iris.washington.edu</a>：无数据的SEED文件，包含仪器响应、仪器坐标等台站信息，一般与miniSEED数据联合使用；</li>
+<li><a class="reference external" href="mailto:miniseed@iris.washington.edu">miniseed@iris.washington.edu</a>：miniSEED数据，只有数据没有台站信息；</li>
+<li><a class="reference external" href="mailto:sync@iris.washington.edu">sync@iris.washington.edu</a>：合成数据</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id18">申请回应</a></h2>
+<p>IRIS在收到申请邮件后会检查格式，通过邮件方式通知发件人邮件内容是否正确、是否被接收；待数据准备完毕后，发送邮件，给出FTP地址供用户下载。</p>
+</div>
+<div class="section" id="bug">
+<h2><a class="toc-backref" href="#id19">Bug和限制</a></h2>
+<ul class="simple">
+<li>无法识别超过正常范围的时间，比如分钟数大于59，这要求用户自己认真处理时间问题；</li>
+<li>每行必须左对齐；</li>
+<li>通配符只支持"?"</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id20">参考</a></h2>
+<ul class="simple">
+<li>BREQ_FAST Manaul：<a class="reference external" href="http://www.iris.edu/dms/nodes/dmc/manuals/breq_fast/">http://www.iris.edu/dms/nodes/dmc/manuals/breq_fast/</a></li>
+<li>SEED通道命名规则：<a class="reference external" href="http://www.iris.edu/manuals/SEED_appA.htm">http://www.iris.edu/manuals/SEED_appA.htm</a></li>
+<li>Location ID命名规则：<a class="reference external" href="http://www.iris.edu/dms/newsletter/vol1/no1/specification-of-seismograms-the-location-identifier/">http://www.iris.edu/dms/newsletter/vol1/no1/specification-of-seismograms-the-location-identifier/</a></li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/iris-breq-fast.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/iris-breq-fast.html';
+    var disqus_url = 'http://seisman.info/iris-breq-fast.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/breqfast-script.html" title="BREQ_FAST脚本实现">BREQ_FAST脚本实现</a></li>
+<li><a href="http://seisman.info/iris-data-request.html" title="地震数据申请">地震数据申请</a></li>
+<li><a href="http://seisman.info/download-data-from-iris-ftp.html" title="IRIS FTP数据下载的几个方法">IRIS FTP数据下载的几个方法</a></li>
+<li><a href="http://seisman.info/perl-script-for-downloading-iris-ftp-data.html" title="IRIS FTP数据下载脚本">IRIS FTP数据下载脚本</a></li>
+<li><a href="http://seisman.info/send-email-in-python.html" title="Python发送邮件到BREA_FAST">Python发送邮件到BREA_FAST</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/jplotresp.html" title="Previous: JPlotResp：绘制地震仪器响应">JPlotResp：绘制地震仪器响应</a></li>
+                <li class="next-article"><a href="http://seisman.info/breqfast-script.html" title="Next: BREQ_FAST脚本实现">BREQ_FAST脚本实现</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-07-23T01:40:00+08:00">2013-07-23</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ruan-jian-ref">地震学软件</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#breq_fast-ref">breq_fast
+                    <span>6</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#iris-ref">IRIS
+                    <span>8</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#shu-ju-shen-qing-ref">数据申请
+                    <span>3</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/iris-breq-fast.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2013-07-23_iris-breq-fast.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="GMT的默认参数文件为.gmtdefaults4，其系统默认值位于文件$GMTHOME/share/conf/gmtdefaults_SI中。GMT查找参数文件的顺序是 ./gmtdefaults4 &gt; ~/.gmt/.gmtdefaults4 &gt; ~/.gmtdefaults4 GMT手册中给出了修改GMT参数的几种方法，具体总结起来如下： 在单个命令行上使用“+filename”这样的语法来指定要使用的参数文件，该法仅对当前命令有效。 将要使用的参数文件.gmtdefaults4拷贝到当前路径，执行相关绘图命令，然后删除该参数文件，这要求写脚本时要特别小心。 通过gmtset命令显式修改参数，具体参见gmtset的manual 在命令行上直接显式修改单个参数，仅对当前命令有效 使用GMT的isolation模式，将所有的参数文件存储到临时目录中 可以将上面的5种方法分成三类： 法1和法4为一类，都是在当前命令上加参数修改，效果仅限于当前命令，不同之处仅在于一个指定文件一个指定参数 法2和法5都是使用临时参数文件，不同之处在于法2需要将参数文件拷贝到当前目录，法5则在指定的临时目录中直接读取参数文件 法3很特别，其修改了当前路径下的参数文件（或者新建），这会带来一个潜在的问题：假若在一个脚本中，你首先执行了一堆命令，这个时候使用GMT默认的参数文件，然后使用gmtset修改了参数，再继续执行另外几个命令，当整个脚本执行结束之后，当前路径下的.gmtdefaults是已经被修改后的参数文件了 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT4, GMT技巧, GMT, " />
+
+<meta property="og:title" content="GMT修改默认参数 "/>
+<meta property="og:url" content="http://seisman.info/modify-default-parameters.html" />
+<meta property="og:description" content="GMT的默认参数文件为.gmtdefaults4，其系统默认值位于文件$GMTHOME/share/conf/gmtdefaults_SI中。GMT查找参数文件的顺序是 ./gmtdefaults4 &gt; ~/.gmt/.gmtdefaults4 &gt; ~/.gmtdefaults4 GMT手册中给出了修改GMT参数的几种方法，具体总结起来如下： 在单个命令行上使用“+filename”这样的语法来指定要使用的参数文件，该法仅对当前命令有效。 将要使用的参数文件.gmtdefaults4拷贝到当前路径，执行相关绘图命令，然后删除该参数文件，这要求写脚本时要特别小心。 通过gmtset命令显式修改参数，具体参见gmtset的manual 在命令行上直接显式修改单个参数，仅对当前命令有效 使用GMT的isolation模式，将所有的参数文件存储到临时目录中 可以将上面的5种方法分成三类： 法1和法4为一类，都是在当前命令上加参数修改，效果仅限于当前命令，不同之处仅在于一个指定文件一个指定参数 法2和法5都是使用临时参数文件，不同之处在于法2需要将参数文件拷贝到当前目录，法5则在指定的临时目录中直接读取参数文件 法3很特别，其修改了当前路径下的参数文件（或者新建），这会带来一个潜在的问题：假若在一个脚本中，你首先执行了一堆命令，这个时候使用GMT默认的参数文件，然后使用gmtset修改了参数，再继续执行另外几个命令，当整个脚本执行结束之后，当前路径下的.gmtdefaults是已经被修改后的参数文件了 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-04T15:00:00+08:00" />
+<meta name="twitter:title" content="GMT修改默认参数 ">
+<meta name="twitter:description" content="GMT的默认参数文件为.gmtdefaults4，其系统默认值位于文件$GMTHOME/share/conf/gmtdefaults_SI中。GMT查找参数文件的顺序是 ./gmtdefaults4 &gt; ~/.gmt/.gmtdefaults4 &gt; ~/.gmtdefaults4 GMT手册中给出了修改GMT参数的几种方法，具体总结起来如下： 在单个命令行上使用“+filename”这样的语法来指定要使用的参数文件，该法仅对当前命令有效。 将要使用的参数文件.gmtdefaults4拷贝到当前路径，执行相关绘图命令，然后删除该参数文件，这要求写脚本时要特别小心。 通过gmtset命令显式修改参数，具体参见gmtset的manual 在命令行上直接显式修改单个参数，仅对当前命令有效 使用GMT的isolation模式，将所有的参数文件存储到临时目录中 可以将上面的5种方法分成三类： 法1和法4为一类，都是在当前命令上加参数修改，效果仅限于当前命令，不同之处仅在于一个指定文件一个指定参数 法2和法5都是使用临时参数文件，不同之处在于法2需要将参数文件拷贝到当前目录，法5则在指定的临时目录中直接读取参数文件 法3很特别，其修改了当前路径下的参数文件（或者新建），这会带来一个潜在的问题：假若在一个脚本中，你首先执行了一堆命令，这个时候使用GMT默认的参数文件，然后使用gmtset修改了参数，再继续执行另外几个命令，当整个脚本执行结束之后，当前路径下的.gmtdefaults是已经被修改后的参数文件了 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT修改默认参数  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/modify-default-parameters.html"> GMT修改默认参数  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <p>GMT的默认参数文件为<tt class="docutils literal">.gmtdefaults4</tt>，其系统默认值位于文件<tt class="docutils literal">$<span class="caps">GMTHOME</span>/share/conf/gmtdefaults_SI</tt>中。GMT查找参数文件的顺序是</p>
+<pre class="literal-block">
+./gmtdefaults4 &gt; ~/.gmt/.gmtdefaults4 &gt; ~/.gmtdefaults4
+</pre>
+<p>GMT手册中给出了修改GMT参数的几种方法，具体总结起来如下：</p>
+<ol class="arabic simple">
+<li>在单个命令行上使用“+filename”这样的语法来指定要使用的参数文件，该法仅对当前命令有效。</li>
+<li>将要使用的参数文件.gmtdefaults4拷贝到当前路径，执行相关绘图命令，然后删除该参数文件，这要求写脚本时要特别小心。</li>
+<li>通过gmtset命令显式修改参数，具体参见gmtset的manual</li>
+<li>在命令行上直接显式修改单个参数，仅对当前命令有效</li>
+<li>使用GMT的isolation模式，将所有的参数文件存储到临时目录中</li>
+</ol>
+<p>可以将上面的5种方法分成三类：</p>
+<ul class="simple">
+<li>法1和法4为一类，都是在当前命令上加参数修改，效果仅限于当前命令，不同之处仅在于一个指定文件一个指定参数</li>
+<li>法2和法5都是使用临时参数文件，不同之处在于法2需要将参数文件拷贝到当前目录，法5则在指定的临时目录中直接读取参数文件</li>
+<li>法3很特别，其修改了当前路径下的参数文件（或者新建），这会带来一个潜在的问题：假若在一个脚本中，你首先执行了一堆命令，这个时候使用GMT默认的参数文件，然后使用gmtset修改了参数，再继续执行另外几个命令，当整个脚本执行结束之后，当前路径下的.gmtdefaults是已经被修改后的参数文件了，因而当你再次执行这个脚本的时候，前面执行的一堆命令将会读取当前路径下的参数文件（即读取已经被修改的那个，而实际上它们需要的是GMT系统参数文件）。当你没有意识到这个问题的时候，你可能会莫名其妙的得到奇怪的结果。所以一个比较好的做法是在脚本结束时删除当前路径下的参数文件。</li>
+</ul>
+<p>个人感觉，GMT参数设计的不够合理。isolation模式不错，但是总觉得用起来不是那么方便，gmtset这里也容易产生问题。比较合理的解决办法是用gmtset，然后在脚本结束的时候删除当前路径下的参数文件。</p>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/modify-default-parameters.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/modify-default-parameters.html';
+    var disqus_url = 'http://seisman.info/modify-default-parameters.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
+<li><a href="http://seisman.info/waveform-comparison-plot.html" title="绘制波形对比图">绘制波形对比图</a></li>
+<li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
+<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
+<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/units-of-gmt.html" title="Previous: GMT单位制">GMT单位制</a></li>
+                <li class="next-article"><a href="http://seisman.info/install-pssac.html" title="Next: pssac之安装">pssac之安装</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-04T15:00:00+08:00">2013-08-04</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/modify-default-parameters.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-04_modify-default-parameters.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

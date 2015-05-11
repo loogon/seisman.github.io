@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="GMT的官方文档里称“-B选项大概是GMT里最复杂的选项了，但多数情况下我们只需要使用其最最简单的语法”。这篇博文的目的不是介绍-B选项复杂的语法，而是说说在GMT中使用-B选项的一个误区。 -J、-R、-B作为GMT最常用的三个选项，初学者印象深刻，不知不觉留下了“每个绘图命令都必须给出这三个选项”的印象。在前文《GMT进阶之理解-J和-R的共生关系》中已经说到，-J和-R是一对好基友，几乎总是同时出现，并解释了一下二者关系那么好的原因（觉得没解释清，有些东西只可意会啊～）。 -B选项的身份比较尴尬。在命令中可以使用-B来控制图形的边框，而当不使用-B选项时则不会绘制边框。所以，-B选项不是绘图命令所必须的。 本文到这里基本就该结束了。没有兴趣看示例的可以直接跳到最后的总结。 下面开始给一堆例子来说明这个问题。 第0个例子 这个例子来自于前面的博文《GMT使用-K和-O的技巧》，两个psxy命令中间可以加上需要的各种命令，这里只是为了说明问题，所以就尽量简单。 1 2 3 4 5 6 7 8 9#!/bin/bash J=X6i R=0/10 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT选项, GMT技巧, GMT4, GMT, " />
+
+<meta property="og:title" content="GMT进阶之被滥用的-B选项 "/>
+<meta property="og:url" content="http://seisman.info/abused-b-option.html" />
+<meta property="og:description" content="GMT的官方文档里称“-B选项大概是GMT里最复杂的选项了，但多数情况下我们只需要使用其最最简单的语法”。这篇博文的目的不是介绍-B选项复杂的语法，而是说说在GMT中使用-B选项的一个误区。 -J、-R、-B作为GMT最常用的三个选项，初学者印象深刻，不知不觉留下了“每个绘图命令都必须给出这三个选项”的印象。在前文《GMT进阶之理解-J和-R的共生关系》中已经说到，-J和-R是一对好基友，几乎总是同时出现，并解释了一下二者关系那么好的原因（觉得没解释清，有些东西只可意会啊～）。 -B选项的身份比较尴尬。在命令中可以使用-B来控制图形的边框，而当不使用-B选项时则不会绘制边框。所以，-B选项不是绘图命令所必须的。 本文到这里基本就该结束了。没有兴趣看示例的可以直接跳到最后的总结。 下面开始给一堆例子来说明这个问题。 第0个例子 这个例子来自于前面的博文《GMT使用-K和-O的技巧》，两个psxy命令中间可以加上需要的各种命令，这里只是为了说明问题，所以就尽量简单。 1 2 3 4 5 6 7 8 9#!/bin/bash J=X6i R=0/10 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-23T23:15:00+08:00" />
+<meta name="twitter:title" content="GMT进阶之被滥用的-B选项 ">
+<meta name="twitter:description" content="GMT的官方文档里称“-B选项大概是GMT里最复杂的选项了，但多数情况下我们只需要使用其最最简单的语法”。这篇博文的目的不是介绍-B选项复杂的语法，而是说说在GMT中使用-B选项的一个误区。 -J、-R、-B作为GMT最常用的三个选项，初学者印象深刻，不知不觉留下了“每个绘图命令都必须给出这三个选项”的印象。在前文《GMT进阶之理解-J和-R的共生关系》中已经说到，-J和-R是一对好基友，几乎总是同时出现，并解释了一下二者关系那么好的原因（觉得没解释清，有些东西只可意会啊～）。 -B选项的身份比较尴尬。在命令中可以使用-B来控制图形的边框，而当不使用-B选项时则不会绘制边框。所以，-B选项不是绘图命令所必须的。 本文到这里基本就该结束了。没有兴趣看示例的可以直接跳到最后的总结。 下面开始给一堆例子来说明这个问题。 第0个例子 这个例子来自于前面的博文《GMT使用-K和-O的技巧》，两个psxy命令中间可以加上需要的各种命令，这里只是为了说明问题，所以就尽量简单。 1 2 3 4 5 6 7 8 9#!/bin/bash J=X6i R=0/10 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT进阶之被滥用的-B选项  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/abused-b-option.html"> GMT进阶之被滥用的-B选项  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id9">第0个例子</a></li>
+<li><a class="reference internal" href="#id2" id="id10">第1个例子</a></li>
+<li><a class="reference internal" href="#id3" id="id11">第2个例子</a></li>
+<li><a class="reference internal" href="#id4" id="id12">第3个例子</a></li>
+<li><a class="reference internal" href="#id5" id="id13">总结</a><ul>
+<li><a class="reference internal" href="#b" id="id14">活用-B选项</a></li>
+<li><a class="reference internal" href="#id7" id="id15">滥用-B选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id16">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>GMT的官方文档里称“-B选项大概是GMT里最复杂的选项了，但多数情况下我们只需要使用其最最简单的语法”。这篇博文的目的不是介绍-B选项复杂的语法，而是说说在GMT中使用-B选项的一个误区。</p>
+<p>-J、-R、-B作为GMT最常用的三个选项，初学者印象深刻，不知不觉留下了“每个绘图命令都必须给出这三个选项”的印象。在前文《<a class="reference external" href="http://seisman.info/gmt-option-j-and-r.html">GMT进阶之理解-J和-R的共生关系</a>》中已经说到，-J和-R是一对好基友，几乎总是同时出现，并解释了一下二者关系那么好的原因（觉得没解释清，有些东西只可意会啊～）。</p>
+<p>-B选项的身份比较尴尬。在命令中可以使用-B来控制图形的边框，而当不使用-B选项时则不会绘制边框。所以，<strong>-B选项不是绘图命令所必须的</strong>。</p>
+<p>本文到这里基本就该结束了。没有兴趣看示例的可以直接跳到最后的总结。</p>
+<p>下面开始给一堆例子来说明这个问题。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id9">第0个例子</a></h2>
+<p>这个例子来自于前面的博文《<a class="reference external" href="http://seisman.info/how-to-use-gmt-ko.html">GMT使用-K和-O的技巧</a>》，两个psxy命令中间可以加上需要的各种命令，这里只是为了说明问题，所以就尽量简单。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nv">J</span><span class="o">=</span>X6i
+<span class="nv">R</span><span class="o">=</span>0/10/0/10
+<span class="nv">B</span><span class="o">=</span>1/1
+<span class="nv">PS</span><span class="o">=</span>TestB0.ps
+
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -K &gt; <span class="nv">$PS</span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -O &gt;&gt; <span class="nv">$PS</span>
+</pre></div>
+</td></tr></table><p>这两条命令是用于开关GMT的，没有-B选项，其虽然生成了一些PS代码，但是实际却不显示任何内容。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id10">第1个例子</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nv">J</span><span class="o">=</span>X6i
+<span class="nv">R</span><span class="o">=</span>0/10/0/10
+<span class="nv">B</span><span class="o">=</span>1/1<span class="s2">"</span>
+<span class="s2">PS=TestB1.ps</span>
+
+<span class="s2">psxy -J</span><span class="nv">$J</span><span class="s2"> -R</span><span class="nv">$R</span><span class="s2"> -B</span><span class="nv">$B</span><span class="s2"> -T -K &gt; </span><span class="nv">$PS</span><span class="s2"></span>
+<span class="s2">psxy -J</span><span class="nv">$J</span><span class="s2"> -R</span><span class="nv">$R</span><span class="s2"> -T -O &gt;&gt; </span><span class="nv">$PS</span><span class="s2"></span>
+</pre></div>
+</td></tr></table><p>这个例子给第一个psxy命令加上了-B选项，当然也改了一下名字。看一下TestB1.ps会发现，<strong>-B的作用是给图形绘制边框</strong>，这是唯一的区别。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id11">第2个例子</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nv">J</span><span class="o">=</span>X6i
+<span class="nv">R</span><span class="o">=</span>0/10/0/10
+<span class="nv">B</span><span class="o">=</span>1/1
+<span class="nv">PS</span><span class="o">=</span>TestB2.ps
+
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -B<span class="nv">$B</span> -T -K &gt; <span class="nv">$PS</span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -B<span class="nv">$B</span> -T -O &gt;&gt; <span class="nv">$PS</span>
+</pre></div>
+</td></tr></table><p>这个例子给第二个psxy命令也加上了-B选项。查看TestB2.ps会发现，这张图与TestB1.ps是一样的。这有两种可能：</p>
+<ol class="arabic simple">
+<li>第二个命令中的-B选项没有发挥作用；</li>
+<li>两个命令的-B选项都绘制了边框，由于两个边框相互重合，所以看上去没有区别。</li>
+</ol>
+<p>想要验证究竟哪种假设是对的也很简单，用diff命令比较一下两个文件的差异就可以了。通过比较可以发现，此例生成的PS文件相对于上例生成的PS文件，多了很长的一段PS代码，因而可知，两个边框重合了，看上去没有区别。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id12">第3个例子</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="nv">J</span><span class="o">=</span>X6i
+<span class="nv">R</span><span class="o">=</span>0/10/0/10
+<span class="nv">B</span><span class="o">=</span>1/1
+<span class="nv">PS</span><span class="o">=</span>TestB3.ps
+
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -B<span class="nv">$B</span> -T -K &gt; <span class="nv">$PS</span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -B<span class="nv">$B</span> -X1i -T -O &gt;&gt; <span class="nv">$PS</span>
+</pre></div>
+</td></tr></table><p>这个例子在前一个例子的基础上加了个-X选项，将第二个psxy绘制的边框做了个偏移，可以看到ps文件中出现了两个边框，这个例子进一步证明了两个-B选项都是有绘制边框的。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id13">总结</a></h2>
+<p>GMT的每个绘图命令都会生成一堆PS代码，这些PS代码表示了整张图的一个图层，众多的绘图命令将多个图层叠加在一起，形成了一个复杂的GMT图形。</p>
+<ul class="simple">
+<li>在不使用-X和-Y的情况下，这些绘图命令共享同一个图形边框，所以只需要<strong>第一个</strong>或<strong>其中任意一个</strong>命令有-B选项就可以了，其他命令的-B选项是多余的，甚至会有负效果的。</li>
+<li>若使用了-X和-Y，即一张图中包含多个子图，每个子图有自己的边框，此时每个<strong>子图的第一个命令</strong>都需要-B选项，其他命令都不需要。</li>
+</ul>
+<p>正确的理解-B选项的用途是很有用的，下面列出一些滥用或活用-B选项的例子：</p>
+<div class="section" id="b">
+<h3><a class="toc-backref" href="#id14">活用-B选项</a></h3>
+<ol class="arabic simple">
+<li><a class="reference external" href="http://seisman.info/waveform-comparison-plot.html">绘制波形对比图</a></li>
+</ol>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id15">滥用-B选项</a></h3>
+<ol class="arabic">
+<li><p class="first">重复使用-B选项，导致PS文件占据更多硬盘空间</p>
+<p>上面的四个示例，生成的PS文件的大小分别为:</p>
+<pre class="literal-block">
+TestB0.ps   16146
+TestB1.ps   38562
+TestB2.ps   60978
+TestB3.ps   60993
+</pre>
+<p>当脚本中存在循环，并多次重复使用-B时，浪费的硬盘空间会更多，不过现在硬盘都很大，也不在乎这点空间</p>
+</li>
+<li><p class="first">重复使用-B选项，导致绘制出的图边框发虚，即看上去精度很低</p>
+<p><a class="reference external" href="http://seisman.info/blurry-frame-in-GMT.rst.html">GMT边框发虚的原因及解决办法</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id16">修订历史</a></h2>
+<ul class="simple">
+<li>2013-08-22：初稿；</li>
+<li>2013-09-15：增加了“活用-B选项的一个例子”；</li>
+<li>2014-12-09：增加了“GMT边框发虚”的链接；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/abused-b-option.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/abused-b-option.html';
+    var disqus_url = 'http://seisman.info/abused-b-option.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
+<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
+<li><a href="http://seisman.info/waveform-comparison-plot.html" title="绘制波形对比图">绘制波形对比图</a></li>
+<li><a href="http://seisman.info/gmt-option-b-colon.html" title="GMT进阶之-B选项中的冒号">GMT进阶之-B选项中的冒号</a></li>
+<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/gmt-minmax.html" title="Previous: GMT之利用minmax寻找数据极值">GMT之利用minmax寻找数据极值</a></li>
+                <li class="next-article"><a href="http://seisman.info/gmt-option-p.html" title="Next: GMT进阶之-P选项">GMT进阶之-P选项</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-23T23:15:00+08:00">2013-08-23</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtxuan-xiang-ref">GMT选项
+                    <span>8</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/abused-b-option.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-23_abused-b-option.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做&#34;GMT进阶&#34;，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT4, GMT5, GMT选项, GMT, " />
+
+<meta property="og:title" content="GMT进阶之理解-J和-R的共生关系 "/>
+<meta property="og:url" content="http://seisman.info/gmt-option-j-and-r.html" />
+<meta property="og:description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做&#34;GMT进阶&#34;，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-07-15T01:35:00+08:00" />
+<meta name="twitter:title" content="GMT进阶之理解-J和-R的共生关系 ">
+<meta name="twitter:description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做&#34;GMT进阶&#34;，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT进阶之理解-J和-R的共生关系  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/gmt-option-j-and-r.html"> GMT进阶之理解-J和-R的共生关系  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id3">地图投影</a></li>
+<li><a class="reference internal" href="#r" id="id4">-R选项</a></li>
+<li><a class="reference internal" href="#j" id="id5">-J选项</a></li>
+<li><a class="reference internal" href="#jr" id="id6">J和R结合</a></li>
+<li><a class="reference internal" href="#id2" id="id7">理解这个有什么意义？</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。</p>
+<p>既然博文名字叫做"GMT进阶"，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id3">地图投影</a></h2>
+<p>根据维基百科中<a class="reference internal" href="#id1">地图投影</a>的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标<span class="math">\((\varphi,\lambda)\)</span>与平面直角坐标<span class="math">\((x,y)\)</span>建立起函数关系。</p>
+<div class="figure">
+<img alt="函数关系" src="/images/2013071501.jpg" style="width: 100px;"/>
+</div>
+</div>
+<div class="section" id="r">
+<h2><a class="toc-backref" href="#id4">-R选项</a></h2>
+<p>-R选项很简单，给出要绘制的地图的范围。<tt class="docutils literal"><span class="pre">-Rxmin/xmax/ymin/ymax</span></tt>。</p>
+</div>
+<div class="section" id="j">
+<h2><a class="toc-backref" href="#id5">-J选项</a></h2>
+<p>-J选项指定投影方式以及地图的尺寸。</p>
+</div>
+<div class="section" id="jr">
+<h2><a class="toc-backref" href="#id6">J和R结合</a></h2>
+<p>下面以最简单的笛卡尔坐标系（-<span class="caps">JX</span>）为例，谈一谈J和R为什么必须同时指定。</p>
+<p>GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10/0/5，那么这个时候(2,2)这个点在什么地方呢？这就需要-J给出的尺寸信息了。假定-JX10c图形的水平方向长度为10cm，那么易知x方向的1个单位在纸上代表的实际距离为1cm。假定以纸张的左下角作为原点（实际上有X_ORIGIN和Y_ORIGIN两个参数控制，这里简化一下），那么很容易知道x方向上，0位于纸张的最左下角，10位于原点右方10cm的地方。如果y方向的尺寸安装比例算，应该是5cm，那么可以知道y的5位于原点上方5cm的地方。当然也可以强制指定y方向的尺寸为10cm，那么y的5则位于原点上方10cm的地方了。这样，就在笛卡尔坐标系中绘制了一个矩形，也就是我们感兴趣的区域。由此，纸张上任意一个点（包括矩形内和矩形外的所有点，甚至包括纸张外的所有点）都对应了一个坐标，同理任意一个坐标都对应了纸张上（或者纸张外）的一个位置。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id7">理解这个有什么意义？</a></h2>
+<ul class="simple">
+<li>纯粹个人兴趣，瞎折腾；</li>
+<li>想要在某个地方用pstext加个文字，不再盲目地调节xy位置，一眼就可以计算出那个地方的坐标；</li>
+<li>在一张纸上画多张图的时候，整个参考系是随之移动的，即坐标原点的移动，因而在计算某点坐标时确定原点很重要；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/gmt-option-j-and-r.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/gmt-option-j-and-r.html';
+    var disqus_url = 'http://seisman.info/gmt-option-j-and-r.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmt-option-ko.html" title="GMT进阶之深入理解-K和-O选项">GMT进阶之深入理解-K和-O选项</a></li>
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
+<li><a href="http://seisman.info/difference-between-gmt-5-and-4.html" title="GMT5相对GMT4的一些变化">GMT5相对GMT4的一些变化</a></li>
+<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/development-of-sac.html" title="Previous: 从SAC 101.6的一个bug谈起">从SAC 101.6的一个bug谈起</a></li>
+                <li class="next-article"><a href="http://seisman.info/from-moment-tensor-to-double-couple.html" title="Next: 由矩张量计算双力偶断层参数">由矩张量计算双力偶断层参数</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-07-15T01:35:00+08:00">2013-07-15</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>36</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtxuan-xiang-ref">GMT选项
+                    <span>8</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/gmt-option-j-and-r.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-07-15_gmt-option-j-and-r.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type= "text/javascript">
+    MathJax.Hub.Config({
+        config: ["MMLorHTML.js"],
+        jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+            equationNumbers: { autoNumber: "AMS" }
+        },
+        extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+        tex2jax: { 
+            //inlineMath: [ [\'$\',\'$\'] ],
+            //displayMath: [ [\'$$\',\'$$\'] ],
+            inlineMath: [ ["\\(", "\\)"] ],
+            displayMath: [ ],
+            processClass: "math",
+            processEscapes: true
+        },
+        "HTML-CSS": {
+            styles: { ".MathJax .mo, .MathJax .mi": {color: "black ! important"}}
+        }
+       });
+</script>    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

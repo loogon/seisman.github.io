@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="pscoast是GMT最常用也是最核心的命令。这篇博文将一步步地指引着用户写出需要的命令。 确定地图基本信息 地图的基本信息包括三个，投影方式（-J）、区域范围（-R）以及地图边框的注释（-B）。 这三个都是GMT的标准选项，不多说。 数据选择 -Dresolution[+] pscoast可以绘制海岸线、国界以及河流。既然要画，就一定需要数据。 默认情况下，这些数据位于${GMTHOME}/share/coast下，包括： binned_border_x.nc：国界、省界数据； binned_GSHHS_x.nc：海岸线数据； binned_river_x.nc：河流、湖泊； 每个数据都有5个版本，代表不同的精度，从高到低依次为full、high、intermediate、low、crude。 resolution可以取为f ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT命令, GMT4, GMT, " />
+
+<meta property="og:title" content="GMT命令之用pscoast绘图海岸线 "/>
+<meta property="og:url" content="http://seisman.info/gmt-pscoast.html" />
+<meta property="og:description" content="pscoast是GMT最常用也是最核心的命令。这篇博文将一步步地指引着用户写出需要的命令。 确定地图基本信息 地图的基本信息包括三个，投影方式（-J）、区域范围（-R）以及地图边框的注释（-B）。 这三个都是GMT的标准选项，不多说。 数据选择 -Dresolution[+] pscoast可以绘制海岸线、国界以及河流。既然要画，就一定需要数据。 默认情况下，这些数据位于${GMTHOME}/share/coast下，包括： binned_border_x.nc：国界、省界数据； binned_GSHHS_x.nc：海岸线数据； binned_river_x.nc：河流、湖泊； 每个数据都有5个版本，代表不同的精度，从高到低依次为full、high、intermediate、low、crude。 resolution可以取为f ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-10-28T00:48:00+08:00" />
+<meta name="twitter:title" content="GMT命令之用pscoast绘图海岸线 ">
+<meta name="twitter:description" content="pscoast是GMT最常用也是最核心的命令。这篇博文将一步步地指引着用户写出需要的命令。 确定地图基本信息 地图的基本信息包括三个，投影方式（-J）、区域范围（-R）以及地图边框的注释（-B）。 这三个都是GMT的标准选项，不多说。 数据选择 -Dresolution[+] pscoast可以绘制海岸线、国界以及河流。既然要画，就一定需要数据。 默认情况下，这些数据位于${GMTHOME}/share/coast下，包括： binned_border_x.nc：国界、省界数据； binned_GSHHS_x.nc：海岸线数据； binned_river_x.nc：河流、湖泊； 每个数据都有5个版本，代表不同的精度，从高到低依次为full、high、intermediate、low、crude。 resolution可以取为f ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT命令之用pscoast绘图海岸线  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/gmt-pscoast.html"> GMT命令之用pscoast绘图海岸线  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id14">确定地图基本信息</a></li>
+<li><a class="reference internal" href="#id2" id="id15">数据选择</a></li>
+<li><a class="reference internal" href="#id3" id="id16">究竟要画什么？</a><ul>
+<li><a class="reference internal" href="#shorelines-w" id="id17">绘制shorelines -W</a><ul>
+<li><a class="reference internal" href="#lakeshore-a" id="id18">lakeshore的一些细节 -A</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#n" id="id19">绘制政治边界 -N</a></li>
+<li><a class="reference internal" href="#i" id="id20">绘制河流 -I</a></li>
+<li><a class="reference internal" href="#g" id="id21">给陆地涂色 -G</a></li>
+<li><a class="reference internal" href="#s" id="id22">给海洋涂色 -S</a></li>
+<li><a class="reference internal" href="#c" id="id23">给湖泊涂色 -C</a></li>
+<li><a class="reference internal" href="#id4" id="id24">小结</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id5" id="id25">还可以画什么？</a><ul>
+<li><a class="reference internal" href="#l" id="id26">绘制比例尺 -L</a></li>
+<li><a class="reference internal" href="#t" id="id27">绘制指向标 -T</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6" id="id28">其他一些选项</a><ul>
+<li><a class="reference internal" href="#e" id="id29">-E</a></li>
+<li><a class="reference internal" href="#jz-z" id="id30">-Jz和-Z</a></li>
+<li><a class="reference internal" href="#id7" id="id31">再其他一些选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id32">特殊用法</a><ul>
+<li><a class="reference internal" href="#id9" id="id33">数据提取</a></li>
+<li><a class="reference internal" href="#clip" id="id34">Clip模式</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10" id="id35">例子</a><ul>
+<li><a class="reference internal" href="#id11" id="id36">全球图</a></li>
+<li><a class="reference internal" href="#id12" id="id37">小区域图</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13" id="id38">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>pscoast是GMT最常用也是最核心的命令。这篇博文将一步步地指引着用户写出需要的命令。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id14">确定地图基本信息</a></h2>
+<p>地图的基本信息包括三个，投影方式（-J）、区域范围（-R）以及地图边框的注释（-B）。</p>
+<p>这三个都是GMT的标准选项，不多说。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id15">数据选择</a></h2>
+<pre class="literal-block">
+-Dresolution[+]
+</pre>
+<p>pscoast可以绘制海岸线、国界以及河流。既然要画，就一定需要数据。</p>
+<p>默认情况下，这些数据位于<tt class="docutils literal"><span class="pre">${<span class="caps">GMTHOME</span>}/share/coast</span></tt>下，包括：</p>
+<ul class="simple">
+<li>binned_border_x.nc：国界、省界数据；</li>
+<li>binned_GSHHS_x.nc：海岸线数据；</li>
+<li>binned_river_x.nc：河流、湖泊；</li>
+</ul>
+<p>每个数据都有5个版本，代表不同的精度，从高到低依次为<strong>f</strong>ull、<strong>h</strong>igh、<strong>i</strong>ntermediate、<strong>l</strong>ow、<strong>c</strong>rude。</p>
+<p>resolution可以取为f、h、i、l、c。在不使用-D选项的情况下，GMT默认的数据精度为低精度（l）。在精度后加上一个“+”使得命令在找不到当前指定的精度数据时，自动寻找更低精度的数据。</p>
+<p>以当前计算机的性能来说，即便是全球区域使用full精度的数据画图也基本不会消耗几秒钟。因而推荐使用<tt class="docutils literal"><span class="pre">-Df</span></tt>。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id16">究竟要画什么？</a></h2>
+<p>数据包含了海岸线、国界以及河流湖泊的信息。选好数据精度之后，还有告诉GMT究竟要画哪些部分？下面的六个选项，分别根据数据绘制不同的部分，6个选项至少要选择一个，该命令才会执行。</p>
+<p>所有的海岸线数据以及其他，从本质上来说就是多边形。对于一个多边形来说，可以只绘制其所有的边，也可以只给多边形涂色，当然也可以既画边也涂色。</p>
+<p>先说说画边的3个选项：</p>
+<div class="section" id="shorelines-w">
+<h3><a class="toc-backref" href="#id17">绘制shorelines -W</a></h3>
+<pre class="literal-block">
+-W[level/]pen
+</pre>
+<p>先说说shore这个单词吧。shore指水与陆地交界的“岸”(如：海岸、湖岸、河岸等)，是一个较为笼统的说法。</p>
+<p>GMT将shoreline分成四个等级（level取1-4）：</p>
+<ol class="arabic simple">
+<li>coastline：真正意义上的海岸线；</li>
+<li>lakeshore：湖泊与陆地的岸线；</li>
+<li>island-in-lake shore：首先要有陆地，陆地中有个湖，湖里有个岛。即岛的岸线；</li>
+<li>lake-in-island-in-lake shore：首先有陆地，陆地中有个湖，湖中有个岛，岛里又有个湖。这里指的是湖的岸线；</li>
+</ol>
+<p>不使用-W选项，则不绘制任何shore。如果使用-W，给定画笔属性pen，但是不给出level，则绘制四个level的shore。可以用-Wlevel/pen的方式指定要绘制哪一类shore，并指定pen，且在同一个命令中可以多次使用-W，以指定不同level的shore的画笔属性。</p>
+<p><strong>注意：</strong>-W选项中level是可选的，而pen是必须的！因而若使用“-W2“，2将被解释为所有level的pen属性，而不是level 2。</p>
+<div class="section" id="lakeshore-a">
+<h4><a class="toc-backref" href="#id18">lakeshore的一些细节 -A</a></h4>
+<pre class="literal-block">
+-Amin_area[/min_level/max_level][+r|l][ppercent]
+</pre>
+<p>面积小于min_area或者level不在[min_level,max_level]的shore不会不绘制。min_level和max_level限制哪些level的shore会被绘制，与-W的功能有部分重复。min_area限制了要绘制的多边形的最小面积，这样做使得小面积的湖泊不会干扰整个地图的美观。</p>
+<p>对于level 2，即湖岸线，这里的湖包括了常规的湖以及很宽的河流。加上“+r”则只绘制河流湖，加上“+l”则只绘制常规湖。（试验没成功，出现段错误。。。）</p>
+<p>一个多边形，降低精度后，边数减少，面积变化，当面积变化过大时再绘制这个多边形就不合适了，可以加上<strong>p</strong>percent以去除那些面积与全精度面积之比小于percent的多边形。</p>
+</div>
+</div>
+<div class="section" id="n">
+<h3><a class="toc-backref" href="#id19">绘制政治边界 -N</a></h3>
+<pre class="literal-block">
+-Nborder[/pen]
+</pre>
+<p>注意这里border是必须值，pen是可选值。pen的默认值为width = 0.25p, color = black, texture = solid。</p>
+<p>border指定不同的边界类型，可以取值如下：</p>
+<ul class="simple">
+<li>1：国界；</li>
+<li>2：州界；（目前只有美国、加拿大、澳大利亚以及南美各国的数据）</li>
+<li>3：Marine boundaries（没看懂到底是什么边界）</li>
+<li>a：1-3的全部边界；</li>
+</ul>
+<p>可以多次使用-N选项，以绘制多种政治边界。</p>
+</div>
+<div class="section" id="i">
+<h3><a class="toc-backref" href="#id20">绘制河流 -I</a></h3>
+<pre class="literal-block">
+-Iriver[/pen]
+</pre>
+<p>pen的默认值为width = 0.25p, color = black, texture = solid。</p>
+<p>river可以分为如下几类：</p>
+<ul class="simple">
+<li>1 = Permanent major rivers</li>
+<li>2 = Additional major rivers</li>
+<li>3 = Additional rivers</li>
+<li>4 = Minor rivers</li>
+<li>5 = Intermittent rivers - major</li>
+<li>6 = Intermittent rivers - additional</li>
+<li>7 = Intermittent rivers - minor</li>
+<li>8 = Major canals</li>
+<li>9 = Minor canals</li>
+<li>10 = Irrigation canals</li>
+<li>a = All rivers and canals (1-10)</li>
+<li>r = All permanent rivers (1-4)</li>
+<li>i = All intermittent rivers (5-7)</li>
+<li>c = All canals (8-10)</li>
+</ul>
+<p>不清楚这些英语单词的具体区别。一般-Ia或者-Ir就好。</p>
+</div>
+<div class="section" id="g">
+<h3><a class="toc-backref" href="#id21">给陆地涂色 -G</a></h3>
+<p>指定所有的dry区域的涂色。可以使用灰度、彩色或者图案。</p>
+</div>
+<div class="section" id="s">
+<h3><a class="toc-backref" href="#id22">给海洋涂色 -S</a></h3>
+<p>指定所有的wet区域的涂色。可以使用灰度、彩色或者图案。</p>
+</div>
+<div class="section" id="c">
+<h3><a class="toc-backref" href="#id23">给湖泊涂色 -C</a></h3>
+<pre class="literal-block">
+-C[l|r/]fill
+</pre>
+<p>默认情况下，湖泊被当成wet区域，其直接使用-S指定的颜色。这里可以单独指定湖泊的颜色。如果想要对常规湖泊和河流湖分别涂色，则需指定l或r。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id24">小结</a></h3>
+<p>六个选项，至少需要指定其中一个，也可以指定多个或全部选项。当指定-G而不指定-S时，海洋区域为透明色，即不会覆盖原先已绘的图案；同理，当指定-S而不指定-G时，陆地区域为透明色。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id25">还可以画什么？</a></h2>
+<div class="section" id="l">
+<h3><a class="toc-backref" href="#id26">绘制比例尺 -L</a></h3>
+<pre class="literal-block">
+-L[f][x]lon0/lat0[/slon]/slat/length[m|n|k][+llabel][+jjust][+ppen][+ffill][+u] ]
+</pre>
+<p>可以使用psscale命令绘制比例尺，但是对于这种简单的比例尺，pscoast自己就可以搞定。</p>
+<ul class="simple">
+<li>lon0/lat0指定了比例尺中心的经纬度位置。如果使用-Lx，则lon0/lat0被解释为相对原点的x、y距离。</li>
+<li>不同的经纬度，其比例尺不同，因而需要指定是要哪个地方的比例尺，slat指定纬度，对于倾斜投影也可以指定slon。</li>
+<li>length为比例尺的长度，单位为km，也可以使用英里（m）或海里（n）。默认比例尺为plain样式，可以使用-Lf得到fancy样式的比例尺。</li>
+<li>对于fancy样式的比例尺，加上“+l”将在比例尺上方加上当前比例尺的单位（km），也可以加上“+llabel”自定义label，该label的具体属性由<tt class="docutils literal">LABEL_FONT</tt>、<tt class="docutils literal">LABEL_FONT_SIZE</tt>和<tt class="docutils literal">LABEL_OFFSET</tt>控制。label的位置可以使用“+jjust”进行调节，其中just可以取b（bottom）、t（top）、l（left）和r（right）。</li>
+<li>对于fancy样式的比例尺，加上“+u”可以在比例尺上所有注释处加上单位。</li>
+<li>+p和+f可以给比例尺的背景处加上边框并涂色。</li>
+</ul>
+</div>
+<div class="section" id="t">
+<h3><a class="toc-backref" href="#id27">绘制指向标 -T</a></h3>
+<pre class="literal-block">
+-T[f|m][x]lon0/lat0/size[/info][:w,e,s,n:][+gint[/mint]]
+</pre>
+<ul class="simple">
+<li>lon0/lat0指定了比例尺中心的经纬度位置。如果使用-Tx，则lon0/lat0被解释为相对原点的x、y距离。</li>
+<li>size为指向标的直径；</li>
+<li>可以使用-Tf指定为fancy样式；对于fancy样式，info可以取1、2、3，具体效果看图。</li>
+<li>也可以使用-Tm指定为罗盘样式，此时info的格式dec/dlabel，dec为磁偏角，dlabel为罗盘指针的label（可以使用“-”使用默认label）。</li>
+<li>:w,e,s,n:指定了各个方向的名字，可以用任意字符串指定方向名，若n=*，则在北方向标签处绘制一个星。</li>
+<li>gints/mints设置了地理方向和地磁方向的注释以及两个tick间隔，默认值为10/5/1和30/5/1。</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id28">其他一些选项</a></h2>
+<div class="section" id="e">
+<h3><a class="toc-backref" href="#id29">-E</a></h3>
+<p>设置视角的方位和高度。得到伪3D的效果。</p>
+</div>
+<div class="section" id="jz-z">
+<h3><a class="toc-backref" href="#id30">-Jz和-Z</a></h3>
+<p>仅对3D绘图有效，没试出来具体的效果。</p>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id31">再其他一些选项</a></h3>
+<p>还有一些GMT常见的选项，比如-K、-O、-P、-U、-V、-X、-Y、-c，不多说。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id32">特殊用法</a></h2>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id33">数据提取</a></h3>
+<p>如果使用了-m选项，pscoast则不绘图，而将数据写入到标准输出中，因而可以很容易地从GMT中提取出我们需要的海岸线、边界等数据。使用该选项必须指定-J和-R，对于-W、-I和-N，可以需指定其中的至少一个。输出的文本文件为GMT多段数据，但是具体每段数据对应哪一个边界，还得再细细分析。</p>
+</div>
+<div class="section" id="clip">
+<h3><a class="toc-backref" href="#id34">Clip模式</a></h3>
+<p>GMT有个命令叫做psclip，其读取一个xy文件，得到一个闭合的多边形，然后clip该区域。接下来所有的绘图命令（无论是线段还是颜色或者文字），只有在该区域才会被绘制，不再该区域则不会被绘制。</p>
+<p>pscoast可是使用-Gc剪切出陆地区域，接下来的绘图命令中只有位于陆地区域的部分才会被绘制。</p>
+<p>也可以使用-Sc剪切出海洋区域，接下来的绘图命令中只有位于海洋区域的部分才会被绘制。（一个可能的例子：已有etopo数据，包含了全球地形和海水深度数据，若研究区域在海洋，只想绘制海水深度，而不想将陆地的地形也绘制出来，则可以使用-Sc将海洋区域clip出来，然后再使用grdimage绘图）。</p>
+<p>在clip结束之后，都需要再次调用pscoast，并加上-Q选项。</p>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id35">例子</a></h2>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id36">全球图</a></h3>
+<pre class="literal-block">
+pscoast -JM25c -R0/360/-65/65 -B60/30 -W1/1p -N1/red -N2 -A500 -Gyellow -Slightblue -Cblue &gt; map.ps
+</pre>
+<p>该图绘制了：</p>
+<ul class="simple">
+<li>海岸线，笔宽1p；</li>
+<li>国界线，笔宽默认0.25p，颜色红色；</li>
+<li>州界线，默认画笔属性；</li>
+<li>陆地填充黄色；</li>
+<li>海洋浅蓝色；</li>
+<li>内陆湖泊蓝色；</li>
+</ul>
+<div class="figure">
+<img alt="Figure" src="/images/2013102801.jpg" style="width: 600px;"/>
+</div>
+</div>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id37">小区域图</a></h3>
+<pre class="literal-block">
+pscoast -JM12c -R250/300/30/60 -B5/5 -W1/1p -I1 -A0 -Gyellow -Slightblue -Cblue -Lf-70/33/33/1000+u &gt; a.ps
+</pre>
+<p>左右两图分别的位于区别是-A0和-A1000，右图显得更干净一些。图中顺便展示了比例尺的写法。</p>
+<div class="figure align-center">
+<img alt="fig" src="/images/2013102802.jpg" style="width: 600px;"/>
+</div>
+</div>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id38">修订历史</a></h2>
+<ul class="simple">
+<li>2013-10-28：初稿；</li>
+<li>2014-12-25：图例中label由LABEL_*控制；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/gmt-pscoast.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/gmt-pscoast.html';
+    var disqus_url = 'http://seisman.info/gmt-pscoast.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmtdefaults4.html" title="GMT之gmtdefaults">GMT之gmtdefaults</a></li>
+<li><a href="http://seisman.info/gmtset-gmtget.html" title="GMT之gmtset与gmtget">GMT之gmtset与gmtget</a></li>
+<li><a href="http://seisman.info/gmt-minmax.html" title="GMT之利用minmax寻找数据极值">GMT之利用minmax寻找数据极值</a></li>
+<li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
+<li><a href="http://seisman.info/gmt-xyz2grd.html" title="GMT命令之xyz2grd生成网格数据">GMT命令之xyz2grd生成网格数据</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/gmt-pslegend.html" title="Previous: GMT命令之用pslegend绘制图例">GMT命令之用pslegend绘制图例</a></li>
+                <li class="next-article"><a href="http://seisman.info/gmt-pscoast-clip-example.html" title="Next: GMT进阶之pscoast的clip功能的例子">GMT进阶之pscoast的clip功能的例子</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-10-28T00:48:00+08:00">2013-10-28</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtming-ling-ref">GMT命令
+                    <span>12</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/gmt-pscoast.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-10-28_gmt-pscoast.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

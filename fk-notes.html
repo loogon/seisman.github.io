@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="简介 fk是Prof. Lupei Zhu写的一个用于计算水平分层模型下的理论格林函数并合成理论地震图的代码包。代码是开源的，可以直接编译使用。 代码中包含了如下几个重要的命令/脚本： fk：用于计算格林函数的主程序； st_fk：用于计算静态格林函数的主程序； trav：用于计算P、S初至到时的辅助程序； sachd：用于修改SAC头段的辅助程序； fk.pl：对fk、st_fk、trav和sachd的封装，一般情况下直接使用fk.pl脚本即可； syn：用于将格林函数合成为理论地震图三分量的程序； 因而，实际操作的时候，只需要调用fk.pl生成格林函数，再调用syn将格林函数合成为三分量地震图即可。 相关文献 Haskell (1964), BSSA Wang and Herrmann ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="理论地震图, 地震学软件, " />
+
+<meta property="og:title" content="fk用法笔记 "/>
+<meta property="og:url" content="http://seisman.info/fk-notes.html" />
+<meta property="og:description" content="简介 fk是Prof. Lupei Zhu写的一个用于计算水平分层模型下的理论格林函数并合成理论地震图的代码包。代码是开源的，可以直接编译使用。 代码中包含了如下几个重要的命令/脚本： fk：用于计算格林函数的主程序； st_fk：用于计算静态格林函数的主程序； trav：用于计算P、S初至到时的辅助程序； sachd：用于修改SAC头段的辅助程序； fk.pl：对fk、st_fk、trav和sachd的封装，一般情况下直接使用fk.pl脚本即可； syn：用于将格林函数合成为理论地震图三分量的程序； 因而，实际操作的时候，只需要调用fk.pl生成格林函数，再调用syn将格林函数合成为三分量地震图即可。 相关文献 Haskell (1964), BSSA Wang and Herrmann ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2015-02-28T00:00:00+08:00" />
+<meta name="twitter:title" content="fk用法笔记 ">
+<meta name="twitter:description" content="简介 fk是Prof. Lupei Zhu写的一个用于计算水平分层模型下的理论格林函数并合成理论地震图的代码包。代码是开源的，可以直接编译使用。 代码中包含了如下几个重要的命令/脚本： fk：用于计算格林函数的主程序； st_fk：用于计算静态格林函数的主程序； trav：用于计算P、S初至到时的辅助程序； sachd：用于修改SAC头段的辅助程序； fk.pl：对fk、st_fk、trav和sachd的封装，一般情况下直接使用fk.pl脚本即可； syn：用于将格林函数合成为理论地震图三分量的程序； 因而，实际操作的时候，只需要调用fk.pl生成格林函数，再调用syn将格林函数合成为三分量地震图即可。 相关文献 Haskell (1964), BSSA Wang and Herrmann ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>fk用法笔记  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/fk-notes.html"> fk用法笔记  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id33">简介</a></li>
+<li><a class="reference internal" href="#id2" id="id34">相关文献</a></li>
+<li><a class="reference internal" href="#id3" id="id35">基础原理</a></li>
+<li><a class="reference internal" href="#id4" id="id36">使用说明</a><ul>
+<li><a class="reference internal" href="#id5" id="id37">速度模型</a><ul>
+<li><a class="reference internal" href="#id6" id="id38">格式</a></li>
+<li><a class="reference internal" href="#kf" id="id39">关于k和f</a></li>
+<li><a class="reference internal" href="#id7" id="id40">备注</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id41">震源</a><ul>
+<li><a class="reference internal" href="#id9" id="id42">震源深度</a></li>
+<li><a class="reference internal" href="#id10" id="id43">震源类型</a></li>
+<li><a class="reference internal" href="#id11" id="id44">震源时间函数</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12" id="id45">台站</a><ul>
+<li><a class="reference internal" href="#id13" id="id46">台站深度</a></li>
+<li><a class="reference internal" href="#id14" id="id47">台站震中距</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15" id="id48">时间序列</a><ul>
+<li><a class="reference internal" href="#id16" id="id49">采样间隔</a></li>
+<li><a class="reference internal" href="#id17" id="id50">数据点数</a></li>
+<li><a class="reference internal" href="#smooth" id="id51">smooth因子</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id18" id="id52">频率</a><ul>
+<li><a class="reference internal" href="#id19" id="id53">最高频率</a></li>
+<li><a class="reference internal" href="#id20" id="id54">频率间隔</a></li>
+<li><a class="reference internal" href="#id21" id="id55">高通滤波</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#k" id="id56">k积分</a><ul>
+<li><a class="reference internal" href="#id22" id="id57">k是什么</a></li>
+<li><a class="reference internal" href="#id23" id="id58">下限和上限</a></li>
+<li><a class="reference internal" href="#id24" id="id59">上行和下行</a></li>
+<li><a class="reference internal" href="#dk" id="id60">dk</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id25" id="id61">振幅压制</a></li>
+<li><a class="reference internal" href="#debug" id="id62"><span class="caps">DEBUG</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id26" id="id63">其他说明</a></li>
+<li><a class="reference internal" href="#id27" id="id64">格林函数</a><ul>
+<li><a class="reference internal" href="#id28" id="id65">爆炸源</a></li>
+<li><a class="reference internal" href="#id29" id="id66">单力源</a></li>
+<li><a class="reference internal" href="#id30" id="id67">双力偶</a></li>
+<li><a class="reference internal" href="#id31" id="id68">说明</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id32" id="id69">疑问</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id33">简介</a></h2>
+<p>fk是Prof. Lupei Zhu写的一个用于计算<strong>水平分层模型</strong>下的理论格林函数并合成理论地震图的代码包。代码是开源的，可以直接编译使用。</p>
+<p>代码中包含了如下几个重要的命令/脚本：</p>
+<ul class="simple">
+<li><tt class="docutils literal">fk</tt>：用于计算格林函数的主程序；</li>
+<li><tt class="docutils literal">st_fk</tt>：用于计算静态格林函数的主程序；</li>
+<li><tt class="docutils literal">trav</tt>：用于计算P、S初至到时的辅助程序；</li>
+<li><tt class="docutils literal">sachd</tt>：用于修改SAC头段的辅助程序；</li>
+<li><tt class="docutils literal">fk.pl</tt>：对<tt class="docutils literal">fk</tt>、<tt class="docutils literal">st_fk</tt>、<tt class="docutils literal">trav</tt>和<tt class="docutils literal">sachd</tt>的封装，一般情况下直接使用<tt class="docutils literal">fk.pl</tt>脚本即可；</li>
+<li><tt class="docutils literal">syn</tt>：用于将格林函数合成为理论地震图三分量的程序；</li>
+</ul>
+<p>因而，实际操作的时候，只需要调用<tt class="docutils literal">fk.pl</tt>生成格林函数，再调用<tt class="docutils literal">syn</tt>将格林函数合成为三分量地震图即可。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id34">相关文献</a></h2>
+<ol class="arabic simple">
+<li>Haskell (1964), <span class="caps">BSSA</span></li>
+<li>Wang and Herrmann (1980), <span class="caps">BSSA</span></li>
+<li>Takeuchi and Saito (1972), Methods in Computational Physics</li>
+<li>Zhu and Rivera (2002), <span class="caps">GJI</span></li>
+</ol>
+<p>建议的阅读方式：</p>
+<ul class="simple">
+<li>若想了解<tt class="docutils literal">fk.pl</tt>中每个选项的含义，阅读Zhu and Rivera (2002)以及本文就差不多了；</li>
+<li>若想理解代码的实现细节，则需要在Zhu and Rivera (2002)的基础上，阅读其余三篇文章，至少要阅读Haskell (1964)。</li>
+</ul>
+<p>需要注意的一点是，这几篇文献虽然说的都是同一种方法，但在很多东西的定义上是有区别的，所以在推导代码中的公式时应以Zhu and Rivera (2002)为准。Zhu and Rivera (2002)区别于前面其他文献的地方主要在于，重新定义了与频率无关的传播矩阵，并将静态解与动态解统一到同一个公式中。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id35">基础原理</a></h2>
+<p>这里不涉及算法的细节，只介绍一些基础的东西。</p>
+<p>根据Zhu and Rivera (2002)，在定义了柱坐标系之后，位移可以表示为：</p>
+<div class="figure align-center">
+<img alt="displacement" src="/images/2015022801.png" style="width: 500px;"/>
+</div>
+<p>公式中涉及到了一个求和与两个积分：</p>
+<ul class="simple">
+<li>对频率的积分，本质上就是一个反傅里叶变换，技术上很成熟了，可以不管</li>
+<li>对m的求和，其实是对方位角模数的求和，理论上是要从零求和到无穷的。但是由于震源的简单性，只需要对几项做求和即可，具体的求和数目由震源类型决定：<ul>
+<li>爆炸源：m=0</li>
+<li>单力源：m=0, 1</li>
+<li>双力偶：m=0, 1, 2</li>
+</ul>
+</li>
+<li>对k的积分是一个难点，只能进行数值积分，由于积分核<span class="math">\(U_z R_m^k + U_r S_m^k + U_{\theta} T_m^k\)</span>比较复杂，在做数值积分的时候就需要更多的考虑。</li>
+</ul>
+<p>积分核<span class="math">\(U_z R_m^k + U_r S_m^k + U_{\theta} T_m^k\)</span>中R、S、T是柱坐标下的基矢量，由一堆Bessel函数组成，已知。该算法中的一大堆数学推导以及细节都是为了求出Uz、Ur和Ut。具体Uz、Ur和Ut怎么求，不是本文的重点，需要了解的只能自己推公式。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id36">使用说明</a></h2>
+<p>先把用法贴在这里作为参考:</p>
+<pre class="literal-block">
+fk.pl -Mmodel/depth[/f_or_k] [-D] [-Hf1/f2] [-Nnt/dt/smth/dk/taper]
+    [-Ppmin/pmax[/kmax]] [-Rrdep] [-SsrcType] [-Uupdn] [-Xcmd] distances
+</pre>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id37">速度模型</a></h3>
+<p><tt class="docutils literal"><span class="pre">-Mmodel/depth/k_or_f</span></tt>中的<tt class="docutils literal">model</tt>为模型文件名，<tt class="docutils literal">k</tt>和<tt class="docutils literal">f</tt>的作用在下面会解释。</p>
+<div class="section" id="id6">
+<h4><a class="toc-backref" href="#id38">格式</a></h4>
+<p>fk的输入速度模型是一维水平分层速度模型，其格式为:</p>
+<pre class="literal-block">
+thickness vs vp/vs [rho Qs Qp]
+</pre>
+<p>或:</p>
+<pre class="literal-block">
+thickness vs vp [rho Qs Qp]
+</pre>
+<p>其中</p>
+<ul class="simple">
+<li>列1：该层的厚度（km）</li>
+<li>列2：S波速度（km/s）</li>
+<li>列3：波速比或P波速度</li>
+<li>列4：密度（<span class="math">\(g/cm^3\)</span>）</li>
+<li>列5：S波的Q值</li>
+<li>列6：P波的Q值</li>
+</ul>
+<p>其中前三列是必须的，若未指定密度，则使用经验公式<tt class="docutils literal">rho=0.77+0.32*vp</tt>；若未指定Qs，则取Qs=500；若未指定Qp，则取Qp=2*Qs。</p>
+</div>
+<div class="section" id="kf">
+<h4><a class="toc-backref" href="#id39">关于k和f</a></h4>
+<ul class="simple">
+<li>若命令行中使用<tt class="docutils literal"><span class="pre">-Mmodel/depth</span></tt>，则表示输入模型为第二种格式；</li>
+<li>若命令行中使用<tt class="docutils literal"><span class="pre">-Mmodel/depth/k</span></tt>，则表示输入模型使用第一种格式，即第三列是波速比；</li>
+<li>若命令行中使用<tt class="docutils literal"><span class="pre">-Mmodel/depth/f</span></tt>，则表示需要对速度模型做展平变换，当震中距较大时需要这样做；</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h4><a class="toc-backref" href="#id40">备注</a></h4>
+<ul class="simple">
+<li><tt class="docutils literal">fk.pl</tt>的输入模型是先Vs再Vp，而<tt class="docutils literal">fk.pl</tt>在调用<tt class="docutils literal">fk</tt>时使用的模型是先Vp后Vs，注意不要搞混；</li>
+<li>若第一层的厚度为零，则该行指定了上半空间的参数；</li>
+<li>若第一层的厚度不为零，则上半空间为真空，该层给出了地表下方第一层的参数；</li>
+<li>最后一层会被自动当做下半无限半空间，并修改其厚度为0；</li>
+<li>对于液态层（如海水和外核）：<ul>
+<li>S波速度可以用零表示，程序中用自动用0.0001替换零值；</li>
+<li>Qs值不可以取为零，应取某小值；</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id41">震源</a></h3>
+<div class="section" id="id9">
+<h4><a class="toc-backref" href="#id42">震源深度</a></h4>
+<p>震源深度由<tt class="docutils literal"><span class="pre">-Mmodel/depth/[f_or_k]</span></tt>中的<tt class="docutils literal">depth</tt>指定。</p>
+<p>需要注意，震源深度不能位于速度模型的分界面上，即震源的深度必须位于模型某层的内部。</p>
+<p>大多数计算理论地震图的方法都会有这样的限制，因为在计算过程中会用到震源所在层的速度或密度，若震源位于速度模型的分界面上，则会出现参数的间断。</p>
+</div>
+<div class="section" id="id10">
+<h4><a class="toc-backref" href="#id43">震源类型</a></h4>
+<p>fk中用<tt class="docutils literal"><span class="pre">-SsrcType</span></tt>指定震源类型，其中<tt class="docutils literal">srcType</tt>可以取如下三个值：</p>
+<ul class="simple">
+<li>0：爆炸源；</li>
+<li>1：单力源；</li>
+<li>2：双力偶源；</li>
+</ul>
+</div>
+<div class="section" id="id11">
+<h4><a class="toc-backref" href="#id44">震源时间函数</a></h4>
+<p>Zhu and Rivera (2002)的附录B中给出了不同震源类型以及不同m值所对应的source term。这里的source term代表了震源引起的位移-应力不连续。</p>
+<p>source term是一个与频率无关的常数。由于脉冲函数的频率域表示就是一个常数，故而fk中在频率域加上的常数源，对应于时间域上的脉冲源。</p>
+<p>即，fk计算得到的是脉冲函数所产生的位移场，等效于阶跃函数所产生的速度场。</p>
+</div>
+</div>
+<div class="section" id="id12">
+<h3><a class="toc-backref" href="#id45">台站</a></h3>
+<div class="section" id="id13">
+<h4><a class="toc-backref" href="#id46">台站深度</a></h4>
+<p><tt class="docutils literal"><span class="pre">-Rrdep</span></tt>中<tt class="docutils literal">rdep</tt>用于设置receiver的深度，默认值为零，即台站位于地表。</p>
+<p>需要注意，fk中要求震源和台站不能位于同一深度。代码中，会计算震源和台站之间的深度差hs，并将其作为分母。但这一限制的本质原因尚不清楚。</p>
+</div>
+<div class="section" id="id14">
+<h4><a class="toc-backref" href="#id47">台站震中距</a></h4>
+<p><tt class="docutils literal">fk.pl</tt>命令行中可以指定多个震中距，震中距的默认单位为km。</p>
+<p>当震中距较大时，以km做单位很不方便，此时可以使用<tt class="docutils literal"><span class="pre">-D</span></tt>选项，表明震中距的单位为度。同时，由于震中距比较大，此时可能还需要对速度模型做展平变换。</p>
+</div>
+</div>
+<div class="section" id="id15">
+<h3><a class="toc-backref" href="#id48">时间序列</a></h3>
+<p>说说<tt class="docutils literal"><span class="pre">-Nnt/dt/smth/dk/taper</span></tt>中的nt、dt和smth。</p>
+<div class="section" id="id16">
+<h4><a class="toc-backref" href="#id49">采样间隔</a></h4>
+<p><tt class="docutils literal">dt</tt>即生成的格林函数的采样间隔。与此同时，<tt class="docutils literal">dt</tt>决定了fk要计算的最高频率，其公式为</p>
+<div class="math">
+\begin{equation*}
+f_{max} = \frac{1}{2 dt}
+\end{equation*}
+</div>
+<p>即fk生成的格林函数的最高频率是由<tt class="docutils literal">dt</tt>决定的Nyquist采样率。</p>
+<p>因而，一般来说，要首先根据自己的实际需求，确定所需要的最高频率，进而决定<tt class="docutils literal">dt</tt>。</p>
+</div>
+<div class="section" id="id17">
+<h4><a class="toc-backref" href="#id50">数据点数</a></h4>
+<p>nt即数据点数，nt的选择有一些需要注意的地方：</p>
+<ul class="simple">
+<li>nt必须为2的n次方，即可以取1、2、256、512、1024等，程序中限制了最大取值为8192；<ul>
+<li>nt=1，则调用<tt class="docutils literal">st_fk</tt>直接计算静态位移解；</li>
+<li>nt=2，则调用<tt class="docutils literal">fk</tt>计算零频位移，等效于静态位移解；</li>
+<li>nt必须为2的n次方是因为在FFT时数据点为2的n次方时有快速算法；</li>
+</ul>
+</li>
+<li><span class="math">\(T=nt*dt\)</span>确定了最终数据的总长度</li>
+</ul>
+</div>
+<div class="section" id="smooth">
+<h4><a class="toc-backref" href="#id51">smooth因子</a></h4>
+<p>由于dt决定了fk计算的最高频率，所以dt是不能随便取的。比如需要最高频率为2.5Hz，则dt应取0.2s，但是若希望最终生成的数据的采样间隔为0.05s，则需要<tt class="docutils literal">smth</tt>这个参数。</p>
+<p>在程序中，smth做了两件事情：</p>
+<ol class="arabic simple">
+<li>将dt除以smth；</li>
+<li>将总数据点数乘以smth；</li>
+</ol>
+<p>总的效果应该相当于对计算结果做了一个插值，这也可以通过SAC的插值命令来完成。在程序实现时，实际上就是在反傅里叶变换之前，给数据的高频部分补上更多的零值。</p>
+<p>同样由于快速傅里叶算法的限制，<tt class="docutils literal">smth</tt>也必须取2的n次方。</p>
+</div>
+</div>
+<div class="section" id="id18">
+<h3><a class="toc-backref" href="#id52">频率</a></h3>
+<div class="section" id="id19">
+<h4><a class="toc-backref" href="#id53">最高频率</a></h4>
+<p>前面已经说到，fk所计算的最高频率由<tt class="docutils literal">dt</tt>决定：</p>
+<div class="math">
+\begin{equation*}
+f_{max} = \frac{1}{2 dt}
+\end{equation*}
+</div>
+</div>
+<div class="section" id="id20">
+<h4><a class="toc-backref" href="#id54">频率间隔</a></h4>
+<p>频率域的采样间隔（分辨率）为<span class="math">\(df=\frac{1}{T}=\frac{1}{nt*dt}\)</span></p>
+</div>
+<div class="section" id="id21">
+<h4><a class="toc-backref" href="#id55">高通滤波</a></h4>
+<p>fk会从零频开始，以<tt class="docutils literal">df</tt>为频率间隔，一直到最高频率<tt class="docutils literal">fmax</tt>，计算每个离散频率处的值。</p>
+<p>比如，给定参数dt=0.1，npts=1024，则fk计算的最高频率为5 Hz，频率间隔df约等于0.01Hz。因而fk会计算0 Hz、0.01 Hz、0.02 Hz一直到5 Hz的值，共计循环512次。</p>
+<p>有些情况下，比较低频的信息是没有用的，所以可以不必计算，这样循环可以进一步减小，以加速计算。</p>
+<p><tt class="docutils literal"><span class="pre">-Hf1/f2</span></tt>中，<tt class="docutils literal">f1</tt>限定了循环过程中频率的下限，即对频率的循环会从<tt class="docutils literal">f1</tt>开始计算到<tt class="docutils literal">fmax</tt>而不是从零开始，这本质上是一个高通滤波器。</p>
+<p>这样一来，fk会计算频率在f1和fmax之间的值，对于小于f1以及大于fmax的频率段，其值直接设为零。这实际上是在频率域直接截断，似乎会出现一些问题，所以一般都会对频率的两端做尖灭处理，即f2和taper。程序会在f1和f2之间以及(1-taper)*fmax和fmax之间分别加上余弦窗。</p>
+<p>taper的默认值为0.3，所以当dt=0.1s时，fmax=5Hz，则在3.5Hz到5Hz之间会加上余弦窗，此时数据的频段上限是5Hz还是3.5Hz呢？这是个疑问。</p>
+</div>
+</div>
+<div class="section" id="k">
+<h3><a class="toc-backref" href="#id56">k积分</a></h3>
+<div class="section" id="id22">
+<h4><a class="toc-backref" href="#id57">k是什么</a></h4>
+<p>这里的k不是波数，而是水平波数：</p>
+<div class="math">
+\begin{equation*}
+k = k_x = \vec{k}\cdot \vec{x} = \frac{\omega}{v} \sin \theta = \omega p
+\end{equation*}
+</div>
+<p>其中，<span class="math">\(\theta\)</span>是射线与垂直方向的夹角，<span class="math">\(p=\frac{\sin \theta}{v}\)</span>是水平慢度，也就是射线参数。</p>
+</div>
+<div class="section" id="id23">
+<h4><a class="toc-backref" href="#id58">下限和上限</a></h4>
+<p><tt class="docutils literal"><span class="pre">-Ppmin/pmax[/kmax]</span></tt>可以限定k积分的上下限。其中<tt class="docutils literal">pmin</tt>确定了k积分的下限：</p>
+<div class="math">
+\begin{equation*}
+k_{min} = \omega pmin
+\end{equation*}
+</div>
+<p><tt class="docutils literal">pmax</tt>和<tt class="docutils literal">kmax</tt>决定了k积分的上限：</p>
+<div class="math">
+\begin{equation*}
+k_{max} = \sqrt{kmax^2+\omega pmax}
+\end{equation*}
+</div>
+<p>说明：</p>
+<ol class="arabic simple">
+<li>pmin和pmax的取值范围是0到1，代码中会将pmin和pmax都除以震源处的S波速度。</li>
+<li>程序中<tt class="docutils literal">kmax=kmax/hs</tt>，其中hs是震源与台站的深度差；由于积分核在零频处以exp(-k*hs)的速度随着k衰减，因而要求kmax&gt;10，以保证求和足够多。</li>
+<li>指定了pmin和pmax，就相当于指定了射线参数的范围，或射线出射角度的范围，似乎可以用于筛选中特定射线参数范围的射线；</li>
+<li>为什么pmin和pmax在程序中都要除以S波速度呢？这样当给定<span class="math">\(pmin=\sin 30=0.5\)</span>时，以30度角出射的S波会被计算，而以30度角出射的P波则不会被计算？这样对吗？</li>
+<li>pmin和pmax的取值为0到1，为什么不是-1到1？也许正负号是由<tt class="docutils literal">updn</tt>决定的。</li>
+</ol>
+</div>
+<div class="section" id="id24">
+<h4><a class="toc-backref" href="#id59">上行和下行</a></h4>
+<p><tt class="docutils literal"><span class="pre">-Uupdn</span></tt>选项可以指定是计算全波场还是只计算上行波或下行波。<tt class="docutils literal">updn</tt>可以取值如下：</p>
+<ul class="simple">
+<li>0：计算全波场；也是默认值；</li>
+<li>1：仅计算下传波场；</li>
+<li>-1：仅计算下传波场；</li>
+</ul>
+<p>该参数取不同的值，会影响到程序内部的一些公式。具体的原理可能需要推公式才能理解。</p>
+</div>
+<div class="section" id="dk">
+<h4><a class="toc-backref" href="#id60">dk</a></h4>
+<p>dk用于控制k积分的积分间隔。程序中<span class="math">\(dk=dk*<span class="caps">PI</span>/max(x,hs)\)</span>，其中hs为震源与台站的深度差，x为震中距，因而k积分间隔实际上是与要计算的最大震中距有关的。</p>
+<p>由于积分核中J(kx)在大震中距时按2pi/x的周期震荡，因而要求dk小于0.5，以保证每个周期内至少有四个采样点。官方建议取值为0.1到0.4。dk理论上越小越好，当然dk越小计算就会越慢。</p>
+</div>
+</div>
+<div class="section" id="id25">
+<h3><a class="toc-backref" href="#id61">振幅压制</a></h3>
+<p>这个参数在<tt class="docutils literal">fk.pl</tt>脚本内部可以修改，但是在命令行里没法修改。</p>
+<p>对于实序列<span class="math">\(f(t)\)</span>，其傅里叶变换为:</p>
+<div class="math">
+\begin{equation*}
+F(\omega) = \int f(t) e^{-i\omega t} dt
+\end{equation*}
+</div>
+<p>若将该实序列f(t)乘以<span class="math">\(e^{-\sigma t/T}\)</span>，即<span class="math">\(g(t)=f(t)e^{-\sigma t/T}\)</span>的傅里叶变换为：</p>
+<div class="math">
+\begin{equation*}
+G(\omega) = \int g(t) e^{-i\omega t} dt = \int f(t) e^{-\sigma t/T} e^{-i\omega t} dt
+          = \int f(t) e^{-i(\omega-i\sigma/T)} dt
+          = F(\omega-i\sigma/T)
+\end{equation*}
+</div>
+<p>因而，在频率域将<span class="math">\(\omega\)</span>减去<span class="math">\(i\sigma/T\)</span>，相当于对实序列乘以<span class="math">\(e^{-\sigma t/T}\)</span>。</p>
+<p>其中T为实序列的总时间长度，sigma称为压制因子，用于降低数据尾部的振幅值，而最终反傅里叶变换得到的实序列，会再次乘以<span class="math">\(e^{+\sigma t/T}\)</span>，以消除压制因子对振幅的影响。所以，理论上看，sigma没什么实际用途，这样处理的具体目的还不清楚，似乎是出于频率域的稳定性考虑的。</p>
+</div>
+<div class="section" id="debug">
+<h3><a class="toc-backref" href="#id62"><span class="caps">DEBUG</span></a></h3>
+<p>fk提供了<tt class="docutils literal"><span class="pre">-X</span></tt>选项用于debug，最常见的用法是<tt class="docutils literal"><span class="pre">-Xcat</span></tt>，此时fk.pl中<tt class="docutils literal">cmd</tt>被替换成<tt class="docutils literal">cat</tt>命令，即将所有的输入都传递给<tt class="docutils literal">cat</tt>命令，这样可以很清楚地知道要传递的数据是否正确，方便debug。</p>
+</div>
+</div>
+<div class="section" id="id26">
+<h2><a class="toc-backref" href="#id63">其他说明</a></h2>
+<ol class="arabic simple">
+<li>对于PREM模型，震源深度取15km，震中距为5度，做不做展平变换，震相的走时差大概在0.8s左右</li>
+<li>将PREM模型离散成每层20km或50km，计算出的结果差异不大</li>
+<li>若台站深度大于震源深度，则会对模型做翻转，程序中的部分参数乘以-1；</li>
+<li><tt class="docutils literal">fk.f</tt>中输入的src_layer表示震源位于第src_layer层的顶部，rcv_layer同理；而trav中src_layer表示震源位于第src_layer的底部；</li>
+</ol>
+</div>
+<div class="section" id="id27">
+<h2><a class="toc-backref" href="#id64">格林函数</a></h2>
+<p>fk将生成的格林函数以SAC格式写到磁盘中。</p>
+<div class="section" id="id28">
+<h3><a class="toc-backref" href="#id65">爆炸源</a></h3>
+<p>生成三个分量，命名为<tt class="docutils literal"><span class="pre">xxxx.[a-c]</span></tt>，分别是Z、R、T向的格林函数。其单位为<tt class="docutils literal"><span class="pre">10^-20</span> <span class="pre">cm/(dyne</span> cm)</tt>。</p>
+</div>
+<div class="section" id="id29">
+<h3><a class="toc-backref" href="#id66">单力源</a></h3>
+<p>生成六个分量，其中：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">xxxx.[0-2]</span></tt>：m=0对应的ZRT格林函数，等效于垂直单力产生的位移三分量；</li>
+<li><tt class="docutils literal"><span class="pre">xxxx.[3-6]</span></tt>：m=1对应的ZRT格林函数，等效于水平单力产生的位移三分量；</li>
+</ul>
+<p>格林函数的单位为<tt class="docutils literal"><span class="pre">10^-15</span> cm/dyne</tt>。</p>
+</div>
+<div class="section" id="id30">
+<h3><a class="toc-backref" href="#id67">双力偶</a></h3>
+<p>生成九个分量，其中</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">xxx.[0-2]</span></tt>：m=0阶源生成的ZRT格林函数，相当于45-down-dip(<span class="caps">DD</span>)双力偶源在45度方位角处产生的位移，并乘以（-2,-2,0）</li>
+<li><tt class="docutils literal"><span class="pre">xxx.[3-5]</span></tt>：m=1阶源生成的ZRT格林函数，相当于dip-slip(<span class="caps">DS</span>)双力偶源在45度方位角处产生的位移，并乘以<span class="math">\(-\sqrt 2\)</span></li>
+<li><tt class="docutils literal"><span class="pre">xxx.[6-8]</span></tt>：m=2阶源生成的ZRT格林函数，相当于strike-slip(<span class="caps">SS</span>)双力偶源在22.5度方位角处产生的位移，并乘以<span class="math">\(-\sqrt 2\)</span></li>
+</ul>
+<p>格林函数的单位为<tt class="docutils literal"><span class="pre">10^-20</span> <span class="pre">cm/(dyne</span> cm)</tt>。</p>
+</div>
+<div class="section" id="id31">
+<h3><a class="toc-backref" href="#id68">说明</a></h3>
+<p>在大多数教程以及文献中，任意一个双力偶源可以表示为三个基本断层的线性迭加。这三个基本断层分别为DD、DS和SS。有些计算格林函数的代码会计算出三种基本断层的位移解，然后根据文献中给出的辐射花样系数进行合成。而fk计算出的是m=0、1、2时的位移解，虽然这三者分别与DD、<span class="caps">DS</span>、SS在某个特定方位角的位移解有关系。因而在对fk生成的格林函数进行合成时，有专门的辐射花样系数，参见Zhu  and Rivera(2002)的附录B10-B12。</p>
+</div>
+</div>
+<div class="section" id="id32">
+<h2><a class="toc-backref" href="#id69">疑问</a></h2>
+<ol class="arabic simple">
+<li>在考虑衰减时，Aki and Richard(1980)的公式(5.88)中给出的公式中虚数前为负号，而fk代码中为正号。Why？</li>
+</ol>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/fk-notes.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/fk-notes.html';
+    var disqus_url = 'http://seisman.info/fk-notes.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/fk-installation.html" title="fk3.2编译">fk3.2编译</a></li>
+<li><a href="http://seisman.info/cps330-intro.html" title="CPS330 : Computer Programs in Seismology">CPS330 : Computer Programs in Seismology</a></li>
+<li><a href="http://seisman.info/cig-software-library.html" title="CIG软件列表">CIG软件列表</a></li>
+<li><a href="http://seisman.info/geo-software.html" title="地球物理相关软件">地球物理相关软件</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/slowness-and-ray-parameter.html" title="Previous: 慢度与射线参数">慢度与射线参数</a></li>
+                <li class="next-article"><a href="http://seisman.info/maintainers-for-sac-manual-wanted.html" title="Next: 征集《SAC参考手册》维护者">征集《SAC参考手册》维护者</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-02-28T00:00:00+08:00">2015-02-28</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ruan-jian-ref">地震学软件</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#li-lun-di-zhen-tu-ref">理论地震图
+                    <span>5</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/fk-notes.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2015-02-28_fk-notes.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type= "text/javascript">
+    MathJax.Hub.Config({
+        config: ["MMLorHTML.js"],
+        jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+            equationNumbers: { autoNumber: "AMS" }
+        },
+        extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+        tex2jax: { 
+            //inlineMath: [ [\'$\',\'$\'] ],
+            //displayMath: [ [\'$$\',\'$$\'] ],
+            inlineMath: [ ["\\(", "\\)"] ],
+            displayMath: [ ],
+            processClass: "math",
+            processEscapes: true
+        },
+        "HTML-CSS": {
+            styles: { ".MathJax .mo, .MathJax .mi": {color: "black ! important"}}
+        }
+       });
+</script>    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="在之前的博文《GMT技巧之图像合并》中说到了为什么需要图像合并以及图像合并的几种实现方法。 先说说前面的两个半方法的缺点： 解决办法1：为了将每个子图缩小到合适的尺寸，需要调节-J的尺寸以及其他很多细节参数（比如字体大小以及一些位置）。 解决办法2：通过修改纸张大小，然后将每个子图放在纸张合适的位置。这个方法的前提是每个子图的相对尺寸是合适的。 解决办法2升级版：同解决方法2，要求子图的相对大小合适。 先看看脚本fig1.sh： 1 2 3 4 5 6 7psxy -JX10c -R0/10/0/10 -B2/2 -Sc -K &gt; a.ps &lt;&lt; EOF 5 5 5 EOF pstext -J -R -O &gt;&gt; a.ps &lt;&lt; EOF 5 2 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT技巧, 图像, GMT, " />
+
+<meta property="og:title" content="GMT技巧之图像合并2 "/>
+<meta property="og:url" content="http://seisman.info/gmt-merge-images-again.html" />
+<meta property="og:description" content="在之前的博文《GMT技巧之图像合并》中说到了为什么需要图像合并以及图像合并的几种实现方法。 先说说前面的两个半方法的缺点： 解决办法1：为了将每个子图缩小到合适的尺寸，需要调节-J的尺寸以及其他很多细节参数（比如字体大小以及一些位置）。 解决办法2：通过修改纸张大小，然后将每个子图放在纸张合适的位置。这个方法的前提是每个子图的相对尺寸是合适的。 解决办法2升级版：同解决方法2，要求子图的相对大小合适。 先看看脚本fig1.sh： 1 2 3 4 5 6 7psxy -JX10c -R0/10/0/10 -B2/2 -Sc -K &gt; a.ps &lt;&lt; EOF 5 5 5 EOF pstext -J -R -O &gt;&gt; a.ps &lt;&lt; EOF 5 2 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-10-23T09:12:00+08:00" />
+<meta name="twitter:title" content="GMT技巧之图像合并2 ">
+<meta name="twitter:description" content="在之前的博文《GMT技巧之图像合并》中说到了为什么需要图像合并以及图像合并的几种实现方法。 先说说前面的两个半方法的缺点： 解决办法1：为了将每个子图缩小到合适的尺寸，需要调节-J的尺寸以及其他很多细节参数（比如字体大小以及一些位置）。 解决办法2：通过修改纸张大小，然后将每个子图放在纸张合适的位置。这个方法的前提是每个子图的相对尺寸是合适的。 解决办法2升级版：同解决方法2，要求子图的相对大小合适。 先看看脚本fig1.sh： 1 2 3 4 5 6 7psxy -JX10c -R0/10/0/10 -B2/2 -Sc -K &gt; a.ps &lt;&lt; EOF 5 5 5 EOF pstext -J -R -O &gt;&gt; a.ps &lt;&lt; EOF 5 2 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT技巧之图像合并2  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/gmt-merge-images-again.html"> GMT技巧之图像合并2  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <p>在之前的博文《<a class="reference external" href="http://seisman.info/gmt-merge-images.html">GMT技巧之图像合并</a>》中说到了为什么需要图像合并以及图像合并的几种实现方法。</p>
+<p>先说说前面的两个半方法的缺点：</p>
+<ul class="simple">
+<li>解决办法1：为了将每个子图缩小到合适的尺寸，需要调节-J的尺寸以及其他很多细节参数（比如字体大小以及一些位置）。</li>
+<li>解决办法2：通过修改纸张大小，然后将每个子图放在纸张合适的位置。这个方法的前提是每个子图的相对尺寸是合适的。</li>
+<li>解决办法2升级版：同解决方法2，要求子图的相对大小合适。</li>
+</ul>
+<p>先看看脚本fig1.sh：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre>psxy -JX10c -R0/10/0/10 -B2/2 -Sc -K &gt; a.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 5 5</span>
+<span class="s">EOF</span>
+pstext -J -R -O &gt;&gt; a.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 2 20 0 0 CM Outside</span>
+<span class="s">5 3 20 0 0 CM Inside</span>
+<span class="s">EOF</span>
+</pre></div>
+</td></tr></table><p>再看看脚本fig2.sh</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre>psxy -JX5c -R0/10/0/10 -B2/2 -St -K &gt; b.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 5 5</span>
+<span class="s">EOF</span>
+pstext -J -R -O &gt;&gt; b.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 2 20 0 0 CM Outside</span>
+<span class="s">5 3 20 0 0 CM Inside</span>
+<span class="s">EOF</span>
+</pre></div>
+</td></tr></table><p>两个代码都很简单，一个画圆一个画三角形，然后写了&quot;Outside&quot;和&quot;Inside&quot;两个字符串。注意两张图的尺寸是不同的（-JX10c和-JX5c）。</p>
+<p>现在要求把两张图合并到一张图中。</p>
+<p>根据原来博文的思想，先将上面两个脚本fig1.sh和fig2.sh合并成一个脚本fig3.sh，合并过程中需要注意修改PS文件名，注意-K、-O，注意&gt;和&gt;&gt;的区别，内容如下：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre>psxy -JX10c -R0/10/0/10 -B2/2 -Sc -K &gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 5 5</span>
+<span class="s">EOF</span>
+pstext -J -R -K -O &gt;&gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 2 20 0 0 CM Outside</span>
+<span class="s">5 3 20 0 0 CM Inside</span>
+<span class="s">EOF</span>
+
+psxy -JX5c -R0/10/0/10 -B2/2 -St -K -O -X12c &gt;&gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 5 5</span>
+<span class="s">EOF</span>
+pstext -J -R -O &gt;&gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 2 20 0 0 CM Outside</span>
+<span class="s">5 3 20 0 0 CM Inside</span>
+<span class="s">EOF</span>
+</pre></div>
+</td></tr></table><p>绘图结果如下：</p>
+<div class="figure">
+<img alt="fig" src="/images/2013102301.jpg" style="width: 600px;" />
+</div>
+<p>左图和右图大小不一样，这图交给老板，肯定要被老板训一顿了。</p>
+<p>试着将左边的图修改小一点，修改之后fig4.sh，内容如下：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre>psxy -JX5c -R0/10/0/10 -B2/2 -Sc -K &gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 5 5</span>
+<span class="s">EOF</span>
+pstext -J -R -K -O &gt;&gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 2 20 0 0 CM Outside</span>
+<span class="s">5 3 20 0 0 CM Inside</span>
+<span class="s">EOF</span>
+
+psxy -JX5c -R0/10/0/10 -B2/2 -St -K -O -X12c &gt;&gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 5 5</span>
+<span class="s">EOF</span>
+pstext -J -R -O &gt;&gt; c.ps <span class="s">&lt;&lt; EOF</span>
+<span class="s">5 2 20 0 0 CM Outside</span>
+<span class="s">5 3 20 0 0 CM Inside</span>
+<span class="s">EOF</span>
+</pre></div>
+</td></tr></table><p>绘图如下：</p>
+<div class="figure">
+<img alt="fig" src="/images/2013102302.jpg" style="width: 600px;" />
+</div>
+<p>这下左图和右图大小一致了，但是左图已经完全变形了，又是被老板训的节奏。</p>
+<p>根据解法1的思路，下面就是要重新调节左图的一些细节，这与重新画图基本没啥区别了。</p>
+<p>这个时候就想，GMT要是能够实现图形的整体缩放就好了。恰好psimage可以实现这个功能。</p>
+<p>这里直接利用最初的两个代码fig1.sh和fig2.sh:</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># 执行前两个脚本</span>
+sh fig1.sh
+sh fig2.sh
+
+<span class="c"># 将生成的a.ps和b.ps转换成EPS文件</span>
+ps2raster -A -P -Te a.ps
+ps2raster -A -P -Te b.ps
+
+<span class="c"># 利用psimage进行缩放</span>
+psimage a.eps -W5c -K &gt; fig.ps
+psimage b.eps -W5.3c -C6/0/BL -O &gt;&gt; fig.ps
+</pre></div>
+</td></tr></table><p>效果图：</p>
+<div class="figure">
+<img alt="fig" src="/images/2013102303.jpg" style="width: 600px;" />
+</div>
+<p>这个脚本在没有对原脚本进行修改的前提下，实现了图形的缩放，虽然最终效果上还是有些不足，主要表现在注释等字体的大小上。因而还需要进行一些微调。</p>
+<p><strong>备注</strong></p>
+<p>前段时间了解了一下TikZ的绘图功能，其自由的可缩放性让我觉得得心应手，当时就想，GMT为什么不支持缩放呢？</p>
+<p>其实是支持的，只是一直被我忽略了。GMT的.gmtdefaults4文件中有两个参数，GLOBAL_X_SCALE和GLOBAL_Y_SCALE，可以用来控制图形的缩放。但是这两个参数与-P选项类似，在执行第一个绘图命令时就将PS代码写入了PS文件中了。之后无论怎样修改这两个参数都是没有用的。即GLOBAL_X_SCALE和GLOBAL_Y_SCALE只能修改整个图形相对纸张的比例，而不能修改图形的某个部分相对于整个图形的比例。这应该算是GMT将不同功能分布在多个命令中的弊端之一吧。</p>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/gmt-merge-images-again.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/gmt-merge-images-again.html';
+    var disqus_url = 'http://seisman.info/gmt-merge-images-again.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmt-merge-images.html" title="GMT技巧之图像合并">GMT技巧之图像合并</a></li>
+<li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
+<li><a href="http://seisman.info/use-latex-in-gmt.html" title="GMT技巧之GMT与LaTeX的合作">GMT技巧之GMT与LaTeX的合作</a></li>
+<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/gmt-map-coloring.html" title="GMT技巧之利用DCW数据进行区域涂色">GMT技巧之利用DCW数据进行区域涂色</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/gmt-psimage.html" title="Previous: GMT命令之很有用但是却不常用的psimage">GMT命令之很有用但是却不常用的psimage</a></li>
+                <li class="next-article"><a href="http://seisman.info/use-latex-in-gmt.html" title="Next: GMT技巧之GMT与LaTeX的合作">GMT技巧之GMT与LaTeX的合作</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-10-23T09:12:00+08:00">2013-10-23</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#tu-xiang-ref">图像
+                    <span>13</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/gmt-merge-images-again.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-10-23_gmt-merge-images-again.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

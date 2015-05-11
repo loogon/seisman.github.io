@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="PKP是内核研究中常用的震相。PKP震相一般分为三个，PKPab、PKPbc和PKPdf。其中PKPab为穿过外核中上部的射线，PKPbc为穿过外核底部的射线，PKPdf为穿过内核的射线（即PKIKP）。（一个疑问：为什么没有E呢？） 成图过程： 首先利用taup_curve直接生成GMT脚本: taup_curve -ph PKP,PKIKP -mod prem -h 100 -gmt 在生成的GMT脚本上做稍许修改，结果如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="TauP, 走时, 震相, 地震学基础, " />
+
+<meta property="og:title" content="PKP震相走时曲线 "/>
+<meta property="og:url" content="http://seisman.info/pkp-travel-time-curve.html" />
+<meta property="og:description" content="PKP是内核研究中常用的震相。PKP震相一般分为三个，PKPab、PKPbc和PKPdf。其中PKPab为穿过外核中上部的射线，PKPbc为穿过外核底部的射线，PKPdf为穿过内核的射线（即PKIKP）。（一个疑问：为什么没有E呢？） 成图过程： 首先利用taup_curve直接生成GMT脚本: taup_curve -ph PKP,PKIKP -mod prem -h 100 -gmt 在生成的GMT脚本上做稍许修改，结果如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-11-01T00:37:00+08:00" />
+<meta name="twitter:title" content="PKP震相走时曲线 ">
+<meta name="twitter:description" content="PKP是内核研究中常用的震相。PKP震相一般分为三个，PKPab、PKPbc和PKPdf。其中PKPab为穿过外核中上部的射线，PKPbc为穿过外核底部的射线，PKPdf为穿过内核的射线（即PKIKP）。（一个疑问：为什么没有E呢？） 成图过程： 首先利用taup_curve直接生成GMT脚本: taup_curve -ph PKP,PKIKP -mod prem -h 100 -gmt 在生成的GMT脚本上做稍许修改，结果如下 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>PKP震相走时曲线  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/pkp-travel-time-curve.html"> PKP震相走时曲线  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <div class="figure align-center">
+<img alt="pkp" src="/images/2013110101.jpg" style="width: 700px;" />
+</div>
+<p>PKP是内核研究中常用的震相。PKP震相一般分为三个，PKPab、PKPbc和PKPdf。其中PKPab为穿过外核中上部的射线，PKPbc为穿过外核底部的射线，PKPdf为穿过内核的射线（即PKIKP）。（一个疑问：为什么没有E呢？）</p>
+<p><strong>成图过程：</strong></p>
+<p>首先利用taup_curve直接生成GMT脚本:</p>
+<pre class="literal-block">
+taup_curve -ph PKP,PKIKP -mod prem -h 100 -gmt
+</pre>
+<p>在生成的GMT脚本上做稍许修改，结果如下</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+gmtset CHAR_ENCODING ISOLatin1+
+gmtset HEADER_FONT_SIZE 30p
+
+pstext -JX6.0i -P -R110/180/1050.0/1350.0 -B10:<span class="s2">&quot;Distance(\232)&quot;</span>:/50:<span class="s2">&quot;Time(s)&quot;</span>:WSen:.<span class="s1">&#39;Travel time curve of PKP&#39;</span>: -K -Xc &gt; taup_curve.ps <span class="s">&lt;&lt;END</span>
+<span class="s">177.69 1303.39 15 0 0 LM A</span>
+<span class="s">144.83 1163.03 15 0 0 RB B</span>
+<span class="s">152.58 1182.97 15 0 0 LB C</span>
+<span class="s">116.02 1109.21 15 0 0 RB D</span>
+<span class="s">179.00 1195.17 15 0 0 RT F</span>
+<span class="s">END</span>
+
+psxy -JX -R -m -O &gt;&gt; taup_curve.ps <span class="s">&lt;&lt;END</span>
+<span class="s">&gt; PKP for a source depth of 100.0 kilometers in the prem model</span>
+<span class="s">177.69 1303.39</span>
+<span class="s">173.96 1286.87</span>
+<span class="s">172.49 1280.37</span>
+<span class="s">170.49 1271.52</span>
+<span class="s">168.78 1263.98</span>
+<span class="s">167.41 1257.94</span>
+<span class="s">165.25 1248.42</span>
+<span class="s">163.86 1242.35</span>
+<span class="s">162.67 1237.13</span>
+<span class="s">160.67 1228.44</span>
+<span class="s">159.04 1221.35</span>
+<span class="s">157.65 1215.35</span>
+<span class="s">156.17 1209.01</span>
+<span class="s">154.89 1203.59</span>
+<span class="s">152.79 1194.73</span>
+<span class="s">151.27 1188.38</span>
+<span class="s">150.59 1185.57</span>
+<span class="s">149.96 1183.01</span>
+<span class="s">148.86 1178.56</span>
+<span class="s">147.94 1174.87</span>
+<span class="s">146.89 1170.75</span>
+<span class="s">146.70 1170.00</span>
+<span class="s">145.77 1166.45</span>
+<span class="s">145.28 1164.66</span>
+<span class="s">144.90 1163.30</span>
+<span class="s">144.85 1163.10</span>
+<span class="s">144.83 1163.03</span>
+<span class="s">144.83 1163.06</span>
+<span class="s">145.04 1163.75</span>
+<span class="s">145.25 1164.43</span>
+<span class="s">145.66 1165.68</span>
+<span class="s">146.05 1166.85</span>
+<span class="s">146.26 1167.48</span>
+<span class="s">146.43 1167.98</span>
+<span class="s">146.77 1168.93</span>
+<span class="s">147.11 1169.89</span>
+<span class="s">147.75 1171.62</span>
+<span class="s">148.36 1173.23</span>
+<span class="s">149.04 1174.93</span>
+<span class="s">149.68 1176.51</span>
+<span class="s">149.79 1176.76</span>
+<span class="s">150.56 1178.56</span>
+<span class="s">151.31 1180.27</span>
+<span class="s">152.58 1182.97</span>
+<span class="s">&gt; PKIKP for a source depth of 100.0 kilometers in the prem model</span>
+<span class="s">116.02 1109.21</span>
+<span class="s">121.32 1119.47</span>
+<span class="s">123.31 1123.31</span>
+<span class="s">124.76 1126.09</span>
+<span class="s">125.93 1128.34</span>
+<span class="s">127.78 1131.90</span>
+<span class="s">129.25 1134.71</span>
+<span class="s">130.96 1137.97</span>
+<span class="s">132.35 1140.63</span>
+<span class="s">134.67 1145.00</span>
+<span class="s">136.46 1148.36</span>
+<span class="s">138.04 1151.31</span>
+<span class="s">139.38 1153.76</span>
+<span class="s">140.53 1155.87</span>
+<span class="s">141.55 1157.72</span>
+<span class="s">143.30 1160.83</span>
+<span class="s">144.77 1163.41</span>
+<span class="s">145.97 1165.47</span>
+<span class="s">147.02 1167.25</span>
+<span class="s">147.88 1168.68</span>
+<span class="s">148.68 1169.98</span>
+<span class="s">149.43 1171.20</span>
+<span class="s">150.14 1172.32</span>
+<span class="s">151.34 1174.19</span>
+<span class="s">152.43 1175.83</span>
+<span class="s">153.64 1177.59</span>
+<span class="s">154.10 1178.24</span>
+<span class="s">155.44 1180.09</span>
+<span class="s">156.67 1181.72</span>
+<span class="s">157.49 1182.77</span>
+<span class="s">159.02 1184.62</span>
+<span class="s">160.44 1186.24</span>
+<span class="s">160.60 1186.41</span>
+<span class="s">161.94 1187.83</span>
+<span class="s">163.21 1189.09</span>
+<span class="s">163.54 1189.40</span>
+<span class="s">164.04 1189.86</span>
+<span class="s">165.22 1190.90</span>
+<span class="s">166.38 1191.83</span>
+<span class="s">166.95 1192.27</span>
+<span class="s">167.49 1192.67</span>
+<span class="s">168.33 1193.25</span>
+<span class="s">169.16 1193.78</span>
+<span class="s">170.86 1194.76</span>
+<span class="s">171.72 1195.19</span>
+<span class="s">171.90 1195.28</span>
+<span class="s">173.07 1195.78</span>
+<span class="s">174.20 1196.20</span>
+<span class="s">174.61 1196.33</span>
+<span class="s">175.97 1196.70</span>
+<span class="s">177.30 1196.96</span>
+<span class="s">177.54 1196.99</span>
+<span class="s">178.77 1197.12</span>
+<span class="s">180.00 1197.17</span>
+<span class="s">END</span>
+rm .gmt*
+</pre></div>
+</td></tr></table>
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/pkp-travel-time-curve.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/pkp-travel-time-curve.html';
+    var disqus_url = 'http://seisman.info/pkp-travel-time-curve.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/taup-toolkit.html" title="走时计算软件TauP">走时计算软件TauP</a></li>
+<li><a href="http://seisman.info/notes-of-ppk.html" title="PPK标记震相到时的一些注意事项">PPK标记震相到时的一些注意事项</a></li>
+<li><a href="http://seisman.info/pkp-ray-path.html" title="PKP射线路径">PKP射线路径</a></li>
+<li><a href="http://seisman.info/travel-time-packages.html" title="走时计算软件包">走时计算软件包</a></li>
+<li><a href="http://seisman.info/mark-travel-time-using-taup.html" title="利用TauP为SAC文件标记理论到时">利用TauP为SAC文件标记理论到时</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/introduction-to-pdftk.html" title="Previous: PDF合并和分割工具—PDFtk">PDF合并和分割工具—PDFtk</a></li>
+                <li class="next-article"><a href="http://seisman.info/pkp-ray-path.html" title="Next: PKP射线路径">PKP射线路径</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-11-01T00:37:00+08:00">2013-11-01</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ji-chu-ref">地震学基础</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#taup-ref">TauP
+                    <span>7</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#zhen-xiang-ref">震相
+                    <span>4</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#zou-shi-ref">走时
+                    <span>8</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/pkp-travel-time-curve.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisBasic/2013-11-01_pkp-travel-time-curve.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

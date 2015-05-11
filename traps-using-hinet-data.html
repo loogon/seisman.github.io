@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="Hi-net是日本的一个高精度密集台网，整个日本境内大概有800个台站，台间距约为20km。Hi-net的数据质量很高，很适合做科学研究。 用了接近一年的Hi-net数据，遇到了不少坑，这里总（吐）结（槽）一下。 原网站是日文版，大概于2012年制作了英文测试版，两年多过去了，还是测试版，不知道是在测试服务器，还是英文化没有完成； 申请数据时遇到的坑 选择台站时会弹出窗口，需要浏览器支持Java插件方可使用； 没有批量下载的工具，必须鼠标点击选择机构、台网、数据起始时间（年、月、日、时、分）和数据长度； 单次申请，一个通道的数据长度不得长于60分钟；（其实这个还好，不算太坑） 数据文件后缀为cnt，每个文件包含了全部已选通道的一分钟的数据，这意味着如果一次申请所有通道的30分钟的数据，就需要下载30个文件； 当所有数据的总时间长度小于12000分钟时，Hi-net可以将多个分钟的数据文件打包压缩以方便下载。这大概相当于800个台站（2400个通道）5分钟的数据量。因此一般来说单次申请的数据长度不得超过5分钟。 一次申请结束之后需等待30秒到1分钟，等到此次申请处理完毕之后才可继续申请，否则会出现错误。 数据下载需要手动点击 数据处理遇到的坑 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="数据, Hinet, 台网, 申请, 仪器响应, 胡言乱语, " />
+
+<meta property="og:title" content="细数使用Hi-net数据遇到的坑 "/>
+<meta property="og:url" content="http://seisman.info/traps-using-hinet-data.html" />
+<meta property="og:description" content="Hi-net是日本的一个高精度密集台网，整个日本境内大概有800个台站，台间距约为20km。Hi-net的数据质量很高，很适合做科学研究。 用了接近一年的Hi-net数据，遇到了不少坑，这里总（吐）结（槽）一下。 原网站是日文版，大概于2012年制作了英文测试版，两年多过去了，还是测试版，不知道是在测试服务器，还是英文化没有完成； 申请数据时遇到的坑 选择台站时会弹出窗口，需要浏览器支持Java插件方可使用； 没有批量下载的工具，必须鼠标点击选择机构、台网、数据起始时间（年、月、日、时、分）和数据长度； 单次申请，一个通道的数据长度不得长于60分钟；（其实这个还好，不算太坑） 数据文件后缀为cnt，每个文件包含了全部已选通道的一分钟的数据，这意味着如果一次申请所有通道的30分钟的数据，就需要下载30个文件； 当所有数据的总时间长度小于12000分钟时，Hi-net可以将多个分钟的数据文件打包压缩以方便下载。这大概相当于800个台站（2400个通道）5分钟的数据量。因此一般来说单次申请的数据长度不得超过5分钟。 一次申请结束之后需等待30秒到1分钟，等到此次申请处理完毕之后才可继续申请，否则会出现错误。 数据下载需要手动点击 数据处理遇到的坑 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2014-04-27T13:55:00+08:00" />
+<meta name="twitter:title" content="细数使用Hi-net数据遇到的坑 ">
+<meta name="twitter:description" content="Hi-net是日本的一个高精度密集台网，整个日本境内大概有800个台站，台间距约为20km。Hi-net的数据质量很高，很适合做科学研究。 用了接近一年的Hi-net数据，遇到了不少坑，这里总（吐）结（槽）一下。 原网站是日文版，大概于2012年制作了英文测试版，两年多过去了，还是测试版，不知道是在测试服务器，还是英文化没有完成； 申请数据时遇到的坑 选择台站时会弹出窗口，需要浏览器支持Java插件方可使用； 没有批量下载的工具，必须鼠标点击选择机构、台网、数据起始时间（年、月、日、时、分）和数据长度； 单次申请，一个通道的数据长度不得长于60分钟；（其实这个还好，不算太坑） 数据文件后缀为cnt，每个文件包含了全部已选通道的一分钟的数据，这意味着如果一次申请所有通道的30分钟的数据，就需要下载30个文件； 当所有数据的总时间长度小于12000分钟时，Hi-net可以将多个分钟的数据文件打包压缩以方便下载。这大概相当于800个台站（2400个通道）5分钟的数据量。因此一般来说单次申请的数据长度不得超过5分钟。 一次申请结束之后需等待30秒到1分钟，等到此次申请处理完毕之后才可继续申请，否则会出现错误。 数据下载需要手动点击 数据处理遇到的坑 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>细数使用Hi-net数据遇到的坑  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/traps-using-hinet-data.html"> 细数使用Hi-net数据遇到的坑  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <p>Hi-net是日本的一个高精度密集台网，整个日本境内大概有800个台站，台间距约为20km。Hi-net的数据质量很高，很适合做科学研究。</p>
+<p>用了接近一年的Hi-net数据，遇到了不少坑，这里总（吐）结（槽）一下。</p>
+<ol class="arabic simple">
+<li>原网站是日文版，大概于2012年制作了英文测试版，两年多过去了，还是测试版，不知道是在测试服务器，还是英文化没有完成；</li>
+<li>申请数据时遇到的坑<ol class="arabic">
+<li>选择台站时会弹出窗口，需要浏览器支持Java插件方可使用；</li>
+<li>没有批量下载的工具，必须鼠标点击选择机构、台网、数据起始时间（年、月、日、时、分）和数据长度；</li>
+<li>单次申请，一个通道的数据长度不得长于60分钟；（其实这个还好，不算太坑）</li>
+<li>数据文件后缀为cnt，每个文件包含了全部已选通道的一分钟的数据，这意味着如果一次申请所有通道的30分钟的数据，就需要下载30个文件；</li>
+<li>当所有数据的总时间长度小于12000分钟时，Hi-net可以将多个分钟的数据文件打包压缩以方便下载。这大概相当于800个台站（2400个通道）5分钟的数据量。因此一般来说单次申请的数据长度不得超过5分钟。</li>
+<li>一次申请结束之后需等待30秒到1分钟，等到此次申请处理完毕之后才可继续申请，否则会出现错误。</li>
+<li>数据下载需要手动点击</li>
+</ol>
+</li>
+<li>数据处理遇到的坑<ol class="arabic">
+<li>数据不是常见格式，而是Hi-net自定义的win32格式，需要使用win32tools将其转换为SAC格式</li>
+<li>win32格式以及相关工具的说明文档是日文，且是euc-jp编码，花了我两个小时才找到方法转换成utf8编码，结果日文还是没看懂。</li>
+<li>将cnt转换为SAC格式时，需要使用其提供的channel table文件。channel table文件包含了台站的通道信息，而channel&nbsp;table内有很多列，没有明确解释每一列的具体含义。</li>
+<li>没有明确的仪器响应信息，似乎是要根据channel&nbsp;table以及其它信息为每个通道单独生成仪器响应文件，才可以去除仪器响应。</li>
+</ol>
+</li>
+</ol>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/traps-using-hinet-data.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/traps-using-hinet-data.html';
+    var disqus_url = 'http://seisman.info/traps-using-hinet-data.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/introduction-to-hinet.html" title="Hi-net简介">Hi-net简介</a></li>
+<li><a href="http://seisman.info/hinet-continuous-waveform-data.html" title="Hi-net连续波形数据">Hi-net连续波形数据</a></li>
+<li><a href="http://seisman.info/hinet-continuous-waveform-data-source-code.html" title="Hi-net连续数据申请的源码分析">Hi-net连续数据申请的源码分析</a></li>
+<li><a href="http://seisman.info/hinet-continuous-waveform-data-request-script.html" title="Hinet连续波形数据申请及下载的脚本实现">Hinet连续波形数据申请及下载的脚本实现</a></li>
+<li><a href="http://seisman.info/hinet-convert-win32-files-to-sac.html" title="Hi-net WIN32转SAC脚本">Hi-net WIN32转SAC脚本</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html" title="Previous: GMT技巧之地理坐标与笛卡尔坐标混合体">GMT技巧之地理坐标与笛卡尔坐标混合体</a></li>
+                <li class="next-article"><a href="http://seisman.info/radiation-pattern-and-beach-ball.html" title="Next: 辐射花样的计算与震源球的绘制">辐射花样的计算与震源球的绘制</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-04-27T13:55:00+08:00">2014-04-27</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#hu-yan-luan-yu-ref">胡言乱语</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#hinet-ref">Hinet
+                    <span>15</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#shen-qing-ref">申请
+                    <span>4</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
+                    <span>29</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#tai-wang-ref">台网
+                    <span>3</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#yi-qi-xiang-ying-ref">仪器响应
+                    <span>12</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/traps-using-hinet-data.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/FreeTalk/2014-04-27_traps-using-hinet-data.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="前言 GMT中存在很多默认参数，这些参数会影响最后的绘图效果。gmtdefaults命令可以给出系统默认的参数以及用户自己的当前参数。关于GMT如何修改参数，可以看另一篇博文。 命令及选项 gmtdefaults 4.5.9 [64-bit] - List GMT default parameters to stdout usage: gmtdefaults [-D[s|u] | -L] -D prints the default settings for the GMT system. Append s to see the SI version of defaults. Append u to see the US version of ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT命令, GMT4, GMT, " />
+
+<meta property="og:title" content="GMT之gmtdefaults "/>
+<meta property="og:url" content="http://seisman.info/gmtdefaults4.html" />
+<meta property="og:description" content="前言 GMT中存在很多默认参数，这些参数会影响最后的绘图效果。gmtdefaults命令可以给出系统默认的参数以及用户自己的当前参数。关于GMT如何修改参数，可以看另一篇博文。 命令及选项 gmtdefaults 4.5.9 [64-bit] - List GMT default parameters to stdout usage: gmtdefaults [-D[s|u] | -L] -D prints the default settings for the GMT system. Append s to see the SI version of defaults. Append u to see the US version of ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-15T17:14:00+08:00" />
+<meta name="twitter:title" content="GMT之gmtdefaults ">
+<meta name="twitter:description" content="前言 GMT中存在很多默认参数，这些参数会影响最后的绘图效果。gmtdefaults命令可以给出系统默认的参数以及用户自己的当前参数。关于GMT如何修改参数，可以看另一篇博文。 命令及选项 gmtdefaults 4.5.9 [64-bit] - List GMT default parameters to stdout usage: gmtdefaults [-D[s|u] | -L] -D prints the default settings for the GMT system. Append s to see the SI version of defaults. Append u to see the US version of ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT之gmtdefaults  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/gmtdefaults4.html"> GMT之gmtdefaults  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id4">前言</a></li>
+<li><a class="reference internal" href="#id2" id="id5">命令及选项</a></li>
+<li><a class="reference internal" href="#id3" id="id6">默认参数</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id4">前言</a></h2>
+<p>GMT中存在很多默认参数，这些参数会影响最后的绘图效果。gmtdefaults命令可以给出系统默认的参数以及用户自己的当前参数。关于GMT如何修改参数，可以看另一篇博文。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id5">命令及选项</a></h2>
+<pre class="literal-block">
+gmtdefaults 4.5.9 [64-bit] - List GMT default parameters to stdout
+
+usage: gmtdefaults [-D[s|u] | -L]
+
+-D prints the default settings for the GMT system.
+Append s to see the SI version of defaults.
+Append u to see the US version of defaults.
+-L prints the users current GMT default settings.
+</pre>
+<p>命令和选项很简单，-D和-L一个是打印系统参数，一个打印用户自定义参数。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id6">默认参数</a></h2>
+<p>绘图介质参数：</p>
+<ul class="simple">
+<li>PAGE_COLOR = white  #纸张的背景色，不能透明</li>
+<li>PAGE_ORIENTATION = landscape # portrait或landscape</li>
+<li>PAPER_MEDIA = a4 #纸张大小</li>
+</ul>
+<p>底图注释参数：</p>
+<ul class="simple">
+<li>ANNOT_MIN_ANGLE = 20 #在倾斜投影中，若地图边界与注释的基线夹角小于该值，则无注释。在一般投影中地图边界与注释基线垂直</li>
+<li>ANNOT_MIN_SPACING = 0  #相邻注释之间的最小距离</li>
+<li>ANNOT_FONT_PRIMARY = Helvetica  #主注释字体，系统自带35种</li>
+<li>ANNOT_FONT_SIZE_PRIMARY = 14p  #主注释文字大小</li>
+<li>ANNOT_OFFSET_PRIMARY = 0.2c  #主注释与刻度之间的距离</li>
+<li>ANNOT_FONT_SECONDARY = Helvetica #次注释字体</li>
+<li>ANNOT_FONT_SIZE_SECONDARY = 16p #次注释大小</li>
+<li>ANNOT_OFFSET_SECONDARY = 0.2c #次注释的底部与主注释顶部的距离</li>
+<li>DEGREE_SYMBOL = ring   #如何表示度这个符号</li>
+<li>HEADER_FONT = Helvetica # 标题字体</li>
+<li>HEADER_FONT_SIZE = 36p #标题大小</li>
+<li>HEADER_OFFSET = 0.5c #标题与上边界的距离</li>
+<li>LABEL_FONT = Helvetica  #</li>
+<li>LABEL_FONT_SIZE = 24p #</li>
+<li>LABEL_OFFSET = 0.3c #</li>
+<li>OBLIQUE_ANNOTATION = 1 #</li>
+<li>PLOT_CLOCK_FORMAT = hh:mm:ss #绘图时间格式</li>
+<li>PLOT_DATE_FORMAT = yyyy-mm-dd #绘图日期格式</li>
+<li>PLOT_DEGREE_FORMAT = ddd:mm:ss #绘图度格式</li>
+<li>Y_AXIS_TYPE = hor_text  # y轴注释水平还是垂直</li>
+</ul>
+<p>底图布局参数</p>
+<ul class="simple">
+<li>BASEMAP_AXES = <span class="caps">WESN</span>  #控制在哪条边上注释</li>
+<li>BASEMAP_FRAME_RGB = black  #底图frame颜色</li>
+<li><a class="reference external" href="http://seisman.info/gmt-basemap-type.html">BASEMAP_TYPE</a> = fancy  # inside会把注释和刻度放在图内部，graph用于线性投影，在坐标轴上加箭头，plain是最一般的类型,fancy是画地图常见的黑白相间的边框</li>
+<li>FRAME_PEN = 1.25p  # plain frame的宽度</li>
+<li>FRAME_WIDTH = 0.2c #fancy frame的宽度</li>
+<li>GRID_CROSS_SIZE_PRIMARY = 0c #主注释经纬度交线处十字叉的尺寸，0表示连续的网格线</li>
+<li>GRID_PEN_PRIMARY = 0.25p # 线的宽度</li>
+<li>GRID_CROSS_SIZE_SECONDARY = 0c  #</li>
+<li>GRID_PEN_SECONDARY = 0.5p #</li>
+<li>MAP_SCALE_HEIGHT = 0.2c  # 地图scale的高度</li>
+<li>POLAR_CAP = 85/90 #控制两极地区网格线</li>
+<li>TICK_LENGTH = 0.2c #tickmark的长度</li>
+<li>TICK_PEN = 0.5p  #tickmark的宽度</li>
+<li>X_AXIS_LENGTH = 25c</li>
+<li>Y_AXIS_LENGTH = 15c</li>
+<li>X_ORIGIN = 2.5c # 绘图相对于纸张左下角的X距离</li>
+<li>Y_ORIGIN = 2.5c #</li>
+<li>UNIX_TIME = <span class="caps">FALSE</span> #是否显示时间戳（-U）</li>
+<li>UNIX_TIME_POS = <span class="caps">BL</span>/-2c/-2c #时间戳位置</li>
+<li>UNIX_TIME_FORMAT = %Y %b %d %H:%M:%S #时间戳格式</li>
+</ul>
+<p>颜色参数</p>
+<ul class="simple">
+<li>COLOR_BACKGROUND = black   # z&lt;cpt文件最小值时的背景色</li>
+<li>COLOR_FOREGROUND = white  # z&gt;cpt文件最大值的前景色</li>
+<li>COLOR_NAN = 128      #图像中z=NaN部分的颜色</li>
+<li>COLOR_IMAGE = adobe   #控制PS渲染</li>
+<li>COLOR_MODEL = rgb     #默认cpt文件类型</li>
+<li>HSV_MIN_SATURATION = 1  #</li>
+<li>HSV_MAX_SATURATION = 0.1 #</li>
+<li>HSV_MIN_VALUE = 0.3 #</li>
+<li>HSV_MAX_VALUE = 1 #</li>
+</ul>
+<p>PostScript参数</p>
+<ul class="simple">
+<li>CHAR_ENCODING = ISOLatin1+   #字符编码，用于绘制特殊字符</li>
+<li>DOTS_PR_INCH = 300   #绘图精度，每英寸的像素数</li>
+<li>GLOBAL_X_SCALE = 1  # ？？</li>
+<li>GLOBAL_Y_SCALE = 1  # ？？</li>
+<li>N_COPIES = 1 #每张图的copy数</li>
+<li>PS_COLOR = rgb #</li>
+<li>PS_IMAGE_COMPRESS = lzw # 图像压缩算法</li>
+<li>PS_IMAGE_FORMAT = ascii #生成的图像是ASCII还是二进制</li>
+<li>PS_LINE_CAP = butt #控制线段的端点</li>
+<li>PS_LINE_JOIN = miter #</li>
+<li>PS_MITER_LIMIT = 35 #</li>
+<li>PS_VERBOSE = <span class="caps">FALSE</span> #是否在PS文件中写更多的注释</li>
+<li><span class="caps">TRANSPARENCY</span> = 0  #控制透明度，基本没用</li>
+</ul>
+<p>输入输出格式参数</p>
+<ul class="simple">
+<li>D_FORMAT = %.12lg  #双精度浮点型的输出格式</li>
+<li>FIELD_DELIMITER = tab #GMT输出的每列的的分割符</li>
+<li>GRIDFILE_FORMAT = nf  # 默认网格文件格式</li>
+<li>GRIDFILE_SHORTHAND = <span class="caps">FALSE</span> #是否检查网格文件后缀</li>
+<li>INPUT_CLOCK_FORMAT = hh:mm:ss # 输入的时间格式</li>
+<li>INPUT_DATE_FORMAT = yyyy-mm-dd #输入的日期格式</li>
+<li>IO_HEADER = <span class="caps">FALSE</span> #输入输出文件是否有头段</li>
+<li>N_HEADER_RECS = 1 # 如果有头段的话，默认为1个</li>
+<li>NAN_RECORDS = pass #遇到NaN该如何处理</li>
+<li>OUTPUT_CLOCK_FORMAT = hh:mm:ss #输出时间格式</li>
+<li>OUTPUT_DATE_FORMAT = yyyy-mm-dd #输出日期格式</li>
+<li>OUTPUT_DEGREE_FORMAT = D #输出度的格式</li>
+<li>XY_TOGGLE = <span class="caps">FALSE</span> #经纬度互换</li>
+</ul>
+<p>投影参数</p>
+<ul class="simple">
+<li><span class="caps">ELLIPSOID</span> = <span class="caps">WGS</span>-84  # 地球椭球模型</li>
+<li>MAP_SCALE_FACTOR = default #</li>
+<li>MEASURE_UNIT = cm  # 默认单位</li>
+</ul>
+<p>日期时间参数</p>
+<ul class="simple">
+<li>TIME_FORMAT_PRIMARY = full #</li>
+<li>TIME_FORMAT_SECONDARY = full #</li>
+<li>TIME_EPOCH = 2000-01-01T12:00:00 # 相对时间的参考点</li>
+<li>TIME_IS_INTERVAL = <span class="caps">OFF</span> #</li>
+<li>TIME_INTERVAL_FRACTION = 0.5 #</li>
+<li>TIME_LANGUAGE = us # 时间语言</li>
+<li>TIME_UNIT = d # 相对时间的单位</li>
+<li>TIME_WEEK_START = Sunday # 每周起始日</li>
+<li>Y2K_OFFSET_YEAR = 1950 #</li>
+</ul>
+<p>其他参数</p>
+<ul class="simple">
+<li><span class="caps">HISTORY</span> = <span class="caps">TRUE</span> # 是否记录历史命令中的参数</li>
+<li><span class="caps">INTERPOLANT</span> = akima # 一维插值算法</li>
+<li>LINE_STEP = 0.025c #绘制直线时取点的间隔</li>
+<li>VECTOR_SHAPE = 0 #矢量头部的形状。</li>
+<li><span class="caps">VERBOSE</span> = <span class="caps">FALSE</span> #</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/gmtdefaults4.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/gmtdefaults4.html';
+    var disqus_url = 'http://seisman.info/gmtdefaults4.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmtset-gmtget.html" title="GMT之gmtset与gmtget">GMT之gmtset与gmtget</a></li>
+<li><a href="http://seisman.info/gmt-minmax.html" title="GMT之利用minmax寻找数据极值">GMT之利用minmax寻找数据极值</a></li>
+<li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
+<li><a href="http://seisman.info/gmt-xyz2grd.html" title="GMT命令之xyz2grd生成网格数据">GMT命令之xyz2grd生成网格数据</a></li>
+<li><a href="http://seisman.info/gmt-pscoast.html" title="GMT命令之用pscoast绘图海岸线">GMT命令之用pscoast绘图海岸线</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/format-conversion-using-ps2raster.html" title="Previous: GMT之利用ps2raster实现图像格式转换">GMT之利用ps2raster实现图像格式转换</a></li>
+                <li class="next-article"><a href="http://seisman.info/gmtset-gmtget.html" title="Next: GMT之gmtset与gmtget">GMT之gmtset与gmtget</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-15T17:14:00+08:00">2013-08-15</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtming-ling-ref">GMT命令
+                    <span>12</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/gmtdefaults4.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-15_gmtdefaults4.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

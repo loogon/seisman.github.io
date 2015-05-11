@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="序言 SAC是进行地震数据预处理的好工具，但是无法实现所有的数据分析功能，这就需要能够在自己的程序中读写SAC文件。这篇博文介绍如何在C程序中读写SAC文件。 子函数库 SAC自带了读写函数库，并且提供了相关的示例程序，这些可以在《SAC参考手册》中的相关章节中找到。 SAC自带的读写子函数实际上并不好用，因而就有很多人自己重新实现了SAC读写函数库，其中之一就是Prof. Lupei Zhu所写的sacio.c。 Prof. Lupei Zhu的fk或者 gCAP中都包含了SAC读写函数库，sacio.c和sac.h。 子函数 sac.h中定义了名为SACHEAD的结构体，其包含了SAC格式的所有头段变量。 sacio.c中定义了如下子函数： read_sac：读取SAC二进制数据 read_sac2：读取含cut选项的二进制数据 read_sachead：仅读取SAC文件中的头段部分 write_sac：写SAC二进制数据 wrtsac2 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="C, SAC基础, SAC, " />
+
+<meta property="og:title" content="在C程序中读写SAC文件 "/>
+<meta property="og:url" content="http://seisman.info/read-and-write-sac-in-c-program.html" />
+<meta property="og:description" content="序言 SAC是进行地震数据预处理的好工具，但是无法实现所有的数据分析功能，这就需要能够在自己的程序中读写SAC文件。这篇博文介绍如何在C程序中读写SAC文件。 子函数库 SAC自带了读写函数库，并且提供了相关的示例程序，这些可以在《SAC参考手册》中的相关章节中找到。 SAC自带的读写子函数实际上并不好用，因而就有很多人自己重新实现了SAC读写函数库，其中之一就是Prof. Lupei Zhu所写的sacio.c。 Prof. Lupei Zhu的fk或者 gCAP中都包含了SAC读写函数库，sacio.c和sac.h。 子函数 sac.h中定义了名为SACHEAD的结构体，其包含了SAC格式的所有头段变量。 sacio.c中定义了如下子函数： read_sac：读取SAC二进制数据 read_sac2：读取含cut选项的二进制数据 read_sachead：仅读取SAC文件中的头段部分 write_sac：写SAC二进制数据 wrtsac2 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2014-05-11T18:00:00+08:00" />
+<meta name="twitter:title" content="在C程序中读写SAC文件 ">
+<meta name="twitter:description" content="序言 SAC是进行地震数据预处理的好工具，但是无法实现所有的数据分析功能，这就需要能够在自己的程序中读写SAC文件。这篇博文介绍如何在C程序中读写SAC文件。 子函数库 SAC自带了读写函数库，并且提供了相关的示例程序，这些可以在《SAC参考手册》中的相关章节中找到。 SAC自带的读写子函数实际上并不好用，因而就有很多人自己重新实现了SAC读写函数库，其中之一就是Prof. Lupei Zhu所写的sacio.c。 Prof. Lupei Zhu的fk或者 gCAP中都包含了SAC读写函数库，sacio.c和sac.h。 子函数 sac.h中定义了名为SACHEAD的结构体，其包含了SAC格式的所有头段变量。 sacio.c中定义了如下子函数： read_sac：读取SAC二进制数据 read_sac2：读取含cut选项的二进制数据 read_sachead：仅读取SAC文件中的头段部分 write_sac：写SAC二进制数据 wrtsac2 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>在C程序中读写SAC文件  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/read-and-write-sac-in-c-program.html"> 在C程序中读写SAC文件  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id11">序言</a></li>
+<li><a class="reference internal" href="#id2" id="id12">子函数库</a></li>
+<li><a class="reference internal" href="#id3" id="id13">子函数</a></li>
+<li><a class="reference internal" href="#id4" id="id14">示例</a><ul>
+<li><a class="reference internal" href="#id5" id="id15">读和写一个SAC文件</a></li>
+<li><a class="reference internal" href="#id6" id="id16">读取一个SAC文件的头段区</a></li>
+<li><a class="reference internal" href="#id7" id="id17">读取SAC文件中的一段数据</a></li>
+<li><a class="reference internal" href="#id8" id="id18">从零开始写一个SAC文件</a></li>
+<li><a class="reference internal" href="#xysac" id="id19">创建一个XY型SAC文件</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9" id="id20">编译方法</a></li>
+<li><a class="reference internal" href="#id10" id="id21">一些问题</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id11">序言</a></h2>
+<p>SAC是进行地震数据预处理的好工具，但是无法实现所有的数据分析功能，这就需要能够在自己的程序中读写SAC文件。这篇博文介绍如何在C程序中读写SAC文件。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id12">子函数库</a></h2>
+<p>SAC自带了读写函数库，并且提供了相关的示例程序，这些可以在<a class="reference external" href="http://seisman.info/sac-manual.html">《SAC参考手册》</a>中的相关章节中找到。</p>
+<p>SAC自带的读写子函数实际上并不好用，因而就有很多人自己重新实现了SAC读写函数库，其中之一就是Prof. Lupei Zhu所写的<tt class="docutils literal">sacio.c</tt>。</p>
+<p><a class="reference external" href="http://www.eas.slu.edu/People/LZhu/home.html">Prof. Lupei Zhu</a>的<tt class="docutils literal">fk</tt>或者 <tt class="docutils literal">gCAP</tt>中都包含了SAC读写函数库，<tt class="docutils literal">sacio.c</tt>和<tt class="docutils literal">sac.h</tt>。</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id13">子函数</a></h2>
+<p><tt class="docutils literal">sac.h</tt>中定义了名为<tt class="docutils literal"><span class="caps">SACHEAD</span></tt>的结构体，其包含了SAC格式的所有头段变量。</p>
+<p><tt class="docutils literal">sacio.c</tt>中定义了如下子函数：</p>
+<ul class="simple">
+<li>read_sac：读取SAC二进制数据</li>
+<li>read_sac2：读取含cut选项的二进制数据</li>
+<li>read_sachead：仅读取SAC文件中的头段部分</li>
+<li>write_sac：写SAC二进制数据</li>
+<li>wrtsac2：将两个1维数组写成XY形式的SAC数据</li>
+<li>sachdr：创建一个全新的SAC头段</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id14">示例</a></h2>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id15">读和写一个SAC文件</a></h3>
+<p>最常见的需求是读取一个SAC二进制文件，对数据进行处理，并将处理后的数据写回到原文件中。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include "sac.h"        </span><span class="c1">// 包含头文件sac.h</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">char</span>    <span class="n">file</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+    <span class="n">SACHEAD</span> <span class="n">hd</span><span class="p">;</span>
+    <span class="kt">float</span>   <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span>     <span class="n">i</span><span class="p">;</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"seis.SAC"</span><span class="p">);</span>
+
+    <span class="c1">// 读入数据</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">read_sac</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hd</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"npts=%d delta=%f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hd</span><span class="p">.</span><span class="n">npts</span><span class="p">,</span> <span class="n">hd</span><span class="p">.</span><span class="n">delta</span><span class="p">);</span>
+
+    <span class="c1">// 其它数据处理</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">hd</span><span class="p">.</span><span class="n">npts</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*=</span> <span class="mf">0.1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 将结果写回到原文件中</span>
+    <span class="n">write_sac</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">hd</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table><p>需要注意的几个事项包括：</p>
+<ul class="simple">
+<li>SAC文件的头段区保存到结构体<tt class="docutils literal"><span class="caps">SACHEAD</span> hd</tt>中。此处必须定义成结构体变量<tt class="docutils literal"><span class="caps">SACHEAD</span> hd</tt>，若定义成结构体指针<tt class="docutils literal"><span class="caps">SACHEAD</span> *hd</tt>，必须通过<tt class="docutils literal">malloc</tt>为头段区分配空间。</li>
+<li>SAC文件的数据保存到指针<tt class="docutils literal">float *data</tt>中，此处不需要对指针分配空间，<tt class="docutils literal">read_sac</tt>子函数会首先读取SAC文件的头段区，然后根据头段变量<tt class="docutils literal">npts</tt>的值分配合适的内存空间。</li>
+<li>对数据进行处理后，可以直接写回到原文件中，或写入到新文件中。</li>
+<li>指针<tt class="docutils literal">data</tt>在该程序中定义，并在子程序<tt class="docutils literal">read_sac</tt>中分配内存，最终需要在该程序中<tt class="docutils literal">free(data)</tt>将已分配的内存空间释放。在本例中内存是否释放并无太大影响，在有些情况下会出现“内存溢出”的问题。</li>
+<li>本示例中，为了保持代码的简洁性，没有对子函数的返回值进行判断。</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id16">读取一个SAC文件的头段区</a></h3>
+<p>有些时候只需要SAC文件的头段区的一些信息，此时若读取整个文件就有些浪费了。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include "sac.h"</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">char</span>    <span class="n">file</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+    <span class="n">SACHEAD</span> <span class="n">hd</span><span class="p">;</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"seis.SAC"</span><span class="p">);</span>
+
+    <span class="n">read_sachead</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hd</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">hd</span><span class="p">.</span><span class="n">npts</span><span class="o">&gt;=</span><span class="mi">500</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Too much data points!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id17">读取SAC文件中的一段数据</a></h3>
+<p>有些时候，数据可能有10000s，而我们只需要其中50s的数据。为了获得50s的数据而读取10000s的数据，实在太浪费。因而需要一个有效的手段对数据进行截取，即相当于SAC中的cut命令。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include "sac.h"</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">char</span>    <span class="n">fin</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+    <span class="kt">char</span>    <span class="n">fout</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+    <span class="n">SACHEAD</span> <span class="n">hd</span><span class="p">;</span>
+    <span class="kt">float</span>   <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+    <span class="kt">int</span>     <span class="n">tmark</span><span class="p">;</span>
+    <span class="kt">float</span>   <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">;</span>
+    <span class="kt">int</span>     <span class="n">i</span><span class="p">;</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="s">"seis.SAC"</span><span class="p">);</span>
+
+    <span class="n">tmark</span>   <span class="o">=</span>   <span class="o">-</span><span class="mi">2</span><span class="p">;</span>
+    <span class="n">t1</span>      <span class="o">=</span>   <span class="o">-</span><span class="mf">0.5</span><span class="p">;</span>
+    <span class="n">t2</span>      <span class="o">=</span>   <span class="mf">2.5</span><span class="p">;</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">read_sac2</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">hd</span><span class="p">,</span> <span class="n">tmark</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"npts=%d delta=%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">hd</span><span class="p">.</span><span class="n">npts</span><span class="p">,</span> <span class="n">hd</span><span class="p">.</span><span class="n">delta</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">hd</span><span class="p">.</span><span class="n">npts</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="s">"seis.SAC.cut"</span><span class="p">);</span>
+    <span class="n">write_sac</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="n">hd</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table><p>说明：</p>
+<ul>
+<li><p class="first">tmark、t1和t2确定了要读取的数据的时间窗。其中tmark可以取如下值</p>
+<ul class="simple">
+<li>tmark=-5：以b为时间标记</li>
+<li>tmark=-3：以o为时间标记</li>
+<li>tmark=-2：以a为时间标记</li>
+<li>tmark=0~9：以t0~t9中的某个为时间标记</li>
+</ul>
+<p>此例中，表示仅读取头段变量a前0.5秒到后2.5秒的数据。</p>
+</li>
+<li><p class="first">在<tt class="docutils literal">sacio.c</tt>的源代码中，理解<tt class="docutils literal">tref = *( (float *) hd + 10 + tmark);</tt>这一句很重要，在自己的程序中也会经常需要类似的代码。</p>
+</li>
+<li><p class="first">虽然只读取了文件中的部分数据，该子程序对于头段区的b、e、npts等做了相应修改，因而最终的头段区是完全正确的。</p>
+</li>
+<li><p class="first">因为只读取了文件中的部分数据，若将处理之后的数据写入原文件中，会导致原数据丢失，因而一般保持到新的文件中。</p>
+</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id18">从零开始写一个SAC文件</a></h3>
+<p>在做合成数据时，经常需要从无到有完全创建一个SAC文件。这相对于一般的“读-&gt;处理-&gt;写”而言要更复杂一些，因为必须首先构建一个基本的头段区。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include "sac.h"</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">char</span>    <span class="n">fout</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+    <span class="n">SACHEAD</span> <span class="n">hd</span><span class="p">;</span>
+    <span class="kt">float</span>   <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+
+    <span class="kt">float</span>   <span class="n">delta</span><span class="p">;</span>
+    <span class="kt">int</span>     <span class="n">npts</span><span class="p">;</span>
+    <span class="kt">float</span>   <span class="n">b</span><span class="p">;</span>
+
+    <span class="kt">int</span>     <span class="n">i</span><span class="p">;</span>
+
+    <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">;</span>       <span class="c1">// 采样周期</span>
+    <span class="n">npts</span>  <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>       <span class="c1">// 数据点数</span>
+    <span class="n">b</span>     <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>         <span class="c1">// 文件开始时间</span>
+    <span class="n">hd</span> <span class="o">=</span> <span class="n">sachdr</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>    <span class="c1">// 构建基本头段</span>
+    <span class="n">hd</span><span class="p">.</span><span class="n">dist</span>     <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>   <span class="c1">// 给其它头段变量赋值</span>
+    <span class="n">hd</span><span class="p">.</span><span class="n">cmpaz</span>    <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="n">hd</span><span class="p">.</span><span class="n">cmpinc</span>   <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="s">"seis.syn"</span><span class="p">);</span>
+    <span class="c1">// 生成合成数据</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">*</span><span class="n">npts</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">npts</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 写入到文件中</span>
+    <span class="n">write_sac</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="n">hd</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="xysac">
+<h3><a class="toc-backref" href="#id19">创建一个XY型SAC文件</a></h3>
+<p>XY型数据中包含了两个数据区，分别是自变量和因变量。这种类型的文件其实很少用到。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+<span class="cp">#include "sac.h"</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">char</span>    <span class="n">fout</span><span class="p">[</span><span class="mi">80</span><span class="p">];</span>
+    <span class="kt">float</span>   <span class="o">*</span><span class="n">xarray</span><span class="p">;</span>
+    <span class="kt">float</span>   <span class="o">*</span><span class="n">yarray</span><span class="p">;</span>
+
+    <span class="kt">int</span>     <span class="n">npts</span><span class="p">;</span>
+    <span class="kt">int</span>     <span class="n">i</span><span class="p">;</span>
+
+    <span class="n">npts</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="n">strcpy</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="s">"seis.syn"</span><span class="p">);</span>
+    <span class="c1">// 构建数据</span>
+    <span class="n">xarray</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">*</span><span class="n">npts</span><span class="p">);</span>
+    <span class="n">yarray</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="o">*</span><span class="n">npts</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">npts</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">xarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="mf">0.1</span><span class="p">;</span>
+        <span class="n">yarray</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">wrtsac2</span><span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">xarray</span><span class="p">,</span> <span class="n">yarray</span><span class="p">);</span>
+
+    <span class="n">free</span><span class="p">(</span><span class="n">xarray</span><span class="p">);</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">yarray</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id20">编译方法</a></h2>
+<pre class="literal-block">
+$ gcc prog.c  sacio.c -lm
+</pre>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id21">一些问题</a></h2>
+<p>下面列举中<tt class="docutils literal">sacio.c</tt>的一些问题：</p>
+<ol class="arabic simple">
+<li>无法正确处理字符型的头段变量。由于C语言中字符串是以<tt class="docutils literal">\0</tt>为结束符的，所以长度为8的字符型头段变量实际上需要额外的一个字节保存<tt class="docutils literal">\0</tt>，未考虑此问题会导致无法正确使用和修改字符型头段变量，且可能导致字符型头段变量中的信息丢失。</li>
+<li>写文件时未处理中断信号。在写文件的过程中，若出现中断信号，会导致文件损坏，若在写文件过程中遇到中断信号，应保证继续执行写操作或许会更好。</li>
+</ol>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/read-and-write-sac-in-c-program.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/read-and-write-sac-in-c-program.html';
+    var disqus_url = 'http://seisman.info/read-and-write-sac-in-c-program.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/calculate-dist-az-baz.html" title="震中距、方位角和反方位角的计算">震中距、方位角和反方位角的计算</a></li>
+<li><a href="http://seisman.info/intel-non-commercial-software.html" title="Intel 非商业开发工具安装记录">Intel 非商业开发工具安装记录</a></li>
+<li><a href="http://seisman.info/generate-xyz-file-for-gmt-grid.html" title="如何生成GMT网格数据(I)">如何生成GMT网格数据(I)</a></li>
+<li><a href="http://seisman.info/better-programming.html" title="编程修养PDF重制版">编程修养PDF重制版</a></li>
+<li><a href="http://seisman.info/reading-better-programming.html" title="读《编程修养》">读《编程修养》</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/radiation-pattern-and-beach-ball.html" title="Previous: 辐射花样的计算与震源球的绘制">辐射花样的计算与震源球的绘制</a></li>
+                <li class="next-article"><a href="http://seisman.info/read-and-write-sac-in-fortran-program.html" title="Next: 在Fortran程序中读写SAC文件">在Fortran程序中读写SAC文件</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-05-11T18:00:00+08:00">2014-05-11</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#sac-ref">SAC</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#c-ref">C
+                    <span>11</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#sacji-chu-ref">SAC基础
+                    <span>2</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/read-and-write-sac-in-c-program.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SAC/2014-05-11_read-and-write-sac-in-c-program.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

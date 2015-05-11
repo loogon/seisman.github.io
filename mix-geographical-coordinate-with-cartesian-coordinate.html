@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="提出问题 要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图： 解决问题 因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用JX投影来绘制整张图。最简单的例子如下: psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps 很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下: psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps 需要注意三点： -JX15cd/10c：X轴多了一个d ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT技巧, GMT4, GMT, " />
+
+<meta property="og:title" content="GMT技巧之地理坐标与笛卡尔坐标混合体 "/>
+<meta property="og:url" content="http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html" />
+<meta property="og:description" content="提出问题 要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图： 解决问题 因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用JX投影来绘制整张图。最简单的例子如下: psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps 很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下: psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps 需要注意三点： -JX15cd/10c：X轴多了一个d ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2014-04-26T09:00:00+08:00" />
+<meta property="" content="2014-11-24T00:00:00+08:00" />
+<meta name="twitter:title" content="GMT技巧之地理坐标与笛卡尔坐标混合体 ">
+<meta name="twitter:description" content="提出问题 要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图： 解决问题 因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用JX投影来绘制整张图。最简单的例子如下: psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps 很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下: psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps 需要注意三点： -JX15cd/10c：X轴多了一个d ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>GMT技巧之地理坐标与笛卡尔坐标混合体  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html"> GMT技巧之地理坐标与笛卡尔坐标混合体  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id10">提出问题</a></li>
+<li><a class="reference internal" href="#id2" id="id11">解决问题</a></li>
+<li><a class="reference internal" href="#id3" id="id12">其它解决方法</a><ul>
+<li><a class="reference internal" href="#id4" id="id13">分析问题</a></li>
+<li><a class="reference internal" href="#id5" id="id14">解决问题</a><ul>
+<li><a class="reference internal" href="#id6" id="id15">法1</a></li>
+<li><a class="reference internal" href="#id7" id="id16">法2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id17">其它的说明</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id9" id="id18">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id10">提出问题</a></h2>
+<p>要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图：</p>
+<div class="figure">
+<img alt="mix-geographical-coordinate-with-cartesian-coordinate" src="/images/2014042601.jpg" style="width: 700px;"/>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">解决问题</a></h2>
+<p>因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用<tt class="docutils literal"><span class="caps">JX</span></tt>投影来绘制整张图。最简单的例子如下:</p>
+<pre class="literal-block">
+psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps
+</pre>
+<div class="figure">
+<img alt="mix-geographical-coordinate-with-cartesian-coordinate" src="/images/2014042602.jpg" style="width: 700px;"/>
+</div>
+<p>很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下:</p>
+<pre class="literal-block">
+psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps
+</pre>
+<p>需要注意三点：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">-JX15cd/10c</span></tt>：X轴多了一个<tt class="docutils literal">d</tt>，表示X轴为地理坐标；Y轴没有<tt class="docutils literal">d</tt>，为正常的笛卡尔坐标；</li>
+<li><tt class="docutils literal"><span class="pre">--PLOT_DEGREE_FORMAT=+ddd:mmF</span></tt>：已经设定了X轴为地理坐标，通过<tt class="docutils literal"><span class="pre">--PLOT_DEGREE_FORMAT=+F</span></tt>进一步修改地理坐标在绘图时的显示方式。</li>
+<li>若要求Y轴向下递增，正确的做法是设置投影方式为<tt class="docutils literal"><span class="pre">-JX15cd/-10c</span></tt>。由于可能存在的Bug，这样做会导致X轴的Annotation的位置出现问题。</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id12">其它解决方法</a></h2>
+<p>上面给出的解决方案很简单，完全可以满足需求。</p>
+<p>最开始遇到这个问题的时候没有想到这种方法，所以把问题想复杂了。下面列出最初对于这个问题的分析以及两种稍复杂的解决方案。虽说下面的两种方案更复杂了，但其思路与想法还是很有意思的，或许在其它问题上可以借鉴，因而将其列出。</p>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id13">分析问题</a></h3>
+<ol class="arabic simple">
+<li>因为Y轴是线性坐标，所以必然只能选择线性投影，即<tt class="docutils literal"><span class="pre">-<span class="caps">JX</span></span></tt></li>
+<li>线性投影的情况下，图的主体很简单，关键在于X轴坐标的“度”符号以及后缀E上</li>
+<li>尝试将X轴和Y轴都当作线性坐标，然后对于X轴设置其<strong>单位</strong>为特殊的“度”符号。此法看似可行，但实际上GMT内部设置了单位与标注之间的距离，通过单位设置的“度”符号明显离标注的距离较远，不太美观。</li>
+<li>为了使X轴有一个“度”符号，X轴必须当作地理坐标处理；而Y轴的范围已经超过了地理坐标的范围，所以必须当作线性坐标处理；</li>
+<li>综上，必须使用两个命令来绘制边框，分别绘制地理坐标的X轴（-BxxxSN）和线性坐标的Y轴（-BxxxEW）；</li>
+<li>关于如何绘制地理坐标的X轴，有两种解决办法。</li>
+</ol>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id14">解决问题</a></h3>
+<div class="section" id="id6">
+<h4><a class="toc-backref" href="#id15">法1</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#/bin/bash</span>
+<span class="nv">Rx</span><span class="o">=</span>40/50    <span class="c"># X轴范围</span>
+<span class="nv">Ry</span><span class="o">=</span>0/600    <span class="c"># Y轴范围</span>
+<span class="nv">R</span><span class="o">=</span><span class="nv">$Rx</span>/<span class="nv">$Ry</span>
+<span class="nv">B</span><span class="o">=</span>2/100     <span class="c"># 间隔</span>
+<span class="nv">J</span><span class="o">=</span>X15c/10c
+<span class="nv">PS</span><span class="o">=</span>map.ps
+
+psxy -R<span class="nv">$R</span> -J<span class="nv">$J</span> -T -K &gt; <span class="nv">$PS</span>   <span class="c"># 写入PS文件头</span>
+
+psbasemap -R<span class="nv">$R</span> -J<span class="nv">$J</span> -B<span class="si">${</span><span class="nv">B</span><span class="si">}</span>SN -K -O --D_FORMAT<span class="o">=</span><span class="s1">'%g\260E'</span> &gt;&gt; <span class="nv">$PS</span>    <span class="c"># 绘制X轴</span>
+psbasemap -R<span class="nv">$R</span> -J<span class="nv">$J</span> -B<span class="si">${</span><span class="nv">B</span><span class="si">}</span>EW -K -O &gt;&gt; <span class="nv">$PS</span>     <span class="c"># 绘制Y轴</span>
+
+<span class="c"># 这里放置其它绘图命令，不再使用B选项</span>
+
+psxy -R<span class="nv">$R</span> -J<span class="nv">$J</span> -T -O &gt;&gt; <span class="nv">$PS</span>  <span class="c"># 写入PS文件尾</span>
+rm .gmt*
+</pre></div>
+</td></tr></table><p>这里绘制X轴时直接使用<tt class="docutils literal"><span class="pre">--D_FORMAT=%g\260E</span></tt>，使得在该命令中D_FORMAT的值为<tt class="docutils literal">%g\260E</tt>，即设置显示浮点数时在其后加上“度”符号以及后缀“E”。</p>
+<p>此法的优点在于简单，缺点在于后缀“E”是固定值，无法处理东西经同时存在的情况。</p>
+</div>
+<div class="section" id="id7">
+<h4><a class="toc-backref" href="#id16">法2</a></h4>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#/bin/bash</span>
+<span class="nv">Rx</span><span class="o">=</span>40/50    <span class="c"># X轴范围</span>
+<span class="nv">Ry</span><span class="o">=</span>0/600    <span class="c"># Y轴范围</span>
+<span class="nv">Rfake</span><span class="o">=</span>0/1   <span class="c"># 假轴范围</span>
+<span class="nv">R</span><span class="o">=</span><span class="nv">$Rx</span>/<span class="nv">$Ry</span>
+<span class="nv">B</span><span class="o">=</span>2/100     <span class="c"># 间隔</span>
+<span class="nv">J</span><span class="o">=</span>X20c/15c
+<span class="nv">PS</span><span class="o">=</span>map.ps
+
+psxy -R<span class="nv">$R</span> -J<span class="nv">$J</span> -T -K &gt; <span class="nv">$PS</span>   <span class="c"># 写入PS文件头</span>
+
+psbasemap -Rg<span class="nv">$Rx</span>/<span class="nv">$Rfake</span> -J<span class="nv">$J</span> -B<span class="si">${</span><span class="nv">B</span><span class="si">}</span>SN -K -O --BASEMAP_TYPE<span class="o">=</span>plain &gt;&gt; <span class="nv">$PS</span>    <span class="c"># 绘制X轴</span>
+psbasemap -R<span class="nv">$R</span> -J<span class="nv">$J</span> -B<span class="si">${</span><span class="nv">B</span><span class="si">}</span>EW -K -O &gt;&gt; <span class="nv">$PS</span>     <span class="c"># 绘制Y轴</span>
+
+<span class="c"># 这里放置其它绘图命令，不再使用B选项</span>
+
+psxy -R<span class="nv">$R</span> -J<span class="nv">$J</span> -T -O &gt;&gt; <span class="nv">$PS</span>  <span class="c"># 写入PS文件尾</span>
+rm .gmt*
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id17">其它的说明</a></h3>
+<ol class="arabic simple">
+<li>GMT的B选项提供了这样一个功能，可以使用形如<tt class="docutils literal"><span class="pre">-Bgxmin/xmax/ymin/ymax</span></tt>的语法，其中<tt class="docutils literal">g</tt>告诉命令即便使用<tt class="docutils literal"><span class="pre">-<span class="caps">JX</span></span></tt>投影，也认为其是地理坐标。由于是地理坐标，“度”符号以及后缀“E”就很容易出来了</li>
+<li>使用<tt class="docutils literal"><span class="pre">-Bgxmin/xmax/ymin/ymax</span></tt>存在两个问题<ol class="arabic">
+<li>虽然是线性投影，但是由于使用了地理坐标，GMT会默认将底图类型设置为fancy。这一点可以设置<tt class="docutils literal">BASEMAP_TYPE</tt>等于<tt class="docutils literal">plain</tt>来解决。</li>
+<li>Y轴被当作地理坐标，所以ymin和ymax的范围被限制在[-90,90]之内</li>
+</ol>
+</li>
+<li>在此例中在绘制X轴时引入了一个假的Y轴<tt class="docutils literal">0/1</tt>，以满足<tt class="docutils literal"><span class="pre">-Rgxmin/xmax/ymin/ymax</span></tt>形式中对ymin和ymax范围的限制。</li>
+</ol>
+<p>这样，X轴和Y轴就都设计好了，接下来要做的就只是保证其它命令都不使用B选项即可。</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id18">修订历史</a></h2>
+<ol class="arabic simple">
+<li>2014-04-26：初稿；</li>
+<li>2014-04-26：修改脚本，解决了对Y轴范围的限制；Thanks to Chen Zhaohui；</li>
+<li>2014-06-09：通过修改<tt class="docutils literal">D_FORMAT</tt>以解决地理坐标的度符号；该方法由刘珠妹提供；</li>
+<li>2014-07-09：找到了一种非常简单的方法来解决该问题；</li>
+<li>2014-11-24：修正了<tt class="docutils literal"><span class="pre">-PLOT_DEGREE_FORMAT</span></tt>中的小问题；</li>
+</ol>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html';
+    var disqus_url = 'http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
+<li><a href="http://seisman.info/waveform-comparison-plot.html" title="绘制波形对比图">绘制波形对比图</a></li>
+<li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
+<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
+<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/history-and-copyright-of-sac.html" title="Previous: SAC发展史及其版权">SAC发展史及其版权</a></li>
+                <li class="next-article"><a href="http://seisman.info/traps-using-hinet-data.html" title="Next: 细数使用Hi-net数据遇到的坑">细数使用Hi-net数据遇到的坑</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2014-04-26T09:00:00+08:00">2014-04-26</time>
+
+<h4>Last Updated</h4>
+<time datetime="2014-11-24T00:00:00+08:00">2014-11-24</time>
+
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/mix-geographical-coordinate-with-cartesian-coordinate.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2014-04-26_mix-geographical-coordinate-with-cartesian-coordinate.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

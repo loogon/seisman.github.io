@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="crust 1.0是一个常用的全球地壳模型，其从老版本的crust 5.1和crust 2.0升级得到。 基本信息 模型精度为1x1度；网格点定义在单元的中心，即纬度5-6度、经度150-151度的单元的值位于网格点(5.5,150.5)处； 模型中的海水深度和地形数据来自于NOAA的etopo1数据：etopo1是精度1弧分的全球起伏数据，crust 1.0从中提取了地形、海水深度和冰层厚度；对这些数据做处理得到1度精度的数据； 模型中包含了地壳的类型信息； 模型分为8层（也可以说是9层）；对于每个1x1度的单元，给出每层的Vp、Vs、\(\rho\)； 模型分层 模型分为8层，分别为 水层； 冰层； 上沉积层； 中沉积层； 下沉积层； 上地壳； 中地壳； 下地壳； 同时还给出了Moho之下地幔的参数，地幔的速度模型来自于LLNL-G3Dv3； 下载 官方网址 http://igppweb.ucsd ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="数据, 网格, 参考模型, GMT4, GMT5, 地球物理相关资源, " />
+
+<meta property="og:title" content="全球地壳模型crust 1.0 "/>
+<meta property="og:url" content="http://seisman.info/global-crustal-model-crust1.html" />
+<meta property="og:description" content="crust 1.0是一个常用的全球地壳模型，其从老版本的crust 5.1和crust 2.0升级得到。 基本信息 模型精度为1x1度；网格点定义在单元的中心，即纬度5-6度、经度150-151度的单元的值位于网格点(5.5,150.5)处； 模型中的海水深度和地形数据来自于NOAA的etopo1数据：etopo1是精度1弧分的全球起伏数据，crust 1.0从中提取了地形、海水深度和冰层厚度；对这些数据做处理得到1度精度的数据； 模型中包含了地壳的类型信息； 模型分为8层（也可以说是9层）；对于每个1x1度的单元，给出每层的Vp、Vs、\(\rho\)； 模型分层 模型分为8层，分别为 水层； 冰层； 上沉积层； 中沉积层； 下沉积层； 上地壳； 中地壳； 下地壳； 同时还给出了Moho之下地幔的参数，地幔的速度模型来自于LLNL-G3Dv3； 下载 官方网址 http://igppweb.ucsd ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-10-03T00:28:00+08:00" />
+<meta name="twitter:title" content="全球地壳模型crust 1.0 ">
+<meta name="twitter:description" content="crust 1.0是一个常用的全球地壳模型，其从老版本的crust 5.1和crust 2.0升级得到。 基本信息 模型精度为1x1度；网格点定义在单元的中心，即纬度5-6度、经度150-151度的单元的值位于网格点(5.5,150.5)处； 模型中的海水深度和地形数据来自于NOAA的etopo1数据：etopo1是精度1弧分的全球起伏数据，crust 1.0从中提取了地形、海水深度和冰层厚度；对这些数据做处理得到1度精度的数据； 模型中包含了地壳的类型信息； 模型分为8层（也可以说是9层）；对于每个1x1度的单元，给出每层的Vp、Vs、\(\rho\)； 模型分层 模型分为8层，分别为 水层； 冰层； 上沉积层； 中沉积层； 下沉积层； 上地壳； 中地壳； 下地壳； 同时还给出了Moho之下地幔的参数，地幔的速度模型来自于LLNL-G3Dv3； 下载 官方网址 http://igppweb.ucsd ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>全球地壳模型crust 1.0  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/global-crustal-model-crust1.html"> 全球地壳模型crust&nbsp;1.0  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id10">基本信息</a></li>
+<li><a class="reference internal" href="#id2" id="id11">模型分层</a></li>
+<li><a class="reference internal" href="#id3" id="id12">下载</a><ul>
+<li><a class="reference internal" href="#id4" id="id13">官方网址</a></li>
+<li><a class="reference internal" href="#id5" id="id14">本站下载</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6" id="id15">内容</a></li>
+<li><a class="reference internal" href="#id7" id="id16">如何使用</a><ul>
+<li><a class="reference internal" href="#getcn1point" id="id17">getCN1point</a></li>
+<li><a class="reference internal" href="#getcn1maps" id="id18">getCN1maps</a></li>
+<li><a class="reference internal" href="#getcn1xyz" id="id19">getCN1xyz</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id20">绘图示例</a></li>
+<li><a class="reference internal" href="#id9" id="id21">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p>crust 1.0是一个常用的全球地壳模型，其从老版本的crust 5.1和crust 2.0升级得到。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id10">基本信息</a></h2>
+<ul class="simple">
+<li>模型精度为1x1度；网格点定义在单元的中心，即纬度5-6度、经度150-151度的单元的值位于网格点(5.5,150.5)处；</li>
+<li>模型中的海水深度和地形数据来自于NOAA的etopo1数据：etopo1是精度1弧分的全球起伏数据，crust 1.0从中提取了地形、海水深度和冰层厚度；对这些数据做处理得到1度精度的数据；</li>
+<li>模型中包含了地壳的类型信息；</li>
+<li>模型分为8层（也可以说是9层）；对于每个1x1度的单元，给出每层的Vp、Vs、<span class="math">\(\rho\)</span>；</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id11">模型分层</a></h2>
+<p>模型分为8层，分别为</p>
+<ol class="arabic simple">
+<li>水层；</li>
+<li>冰层；</li>
+<li>上沉积层；</li>
+<li>中沉积层；</li>
+<li>下沉积层；</li>
+<li>上地壳；</li>
+<li>中地壳；</li>
+<li>下地壳；</li>
+</ol>
+<p>同时还给出了Moho之下地幔的参数，地幔的速度模型来自于LLNL-G3Dv3；</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id12">下载</a></h2>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id13">官方网址</a></h3>
+<p><a class="reference external" href="http://igppweb.ucsd.edu/~gabi/crust1.html">http://igppweb.ucsd.edu/~gabi/crust1.html</a></p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id14">本站下载</a></h3>
+<p>对官方版本（20130715）重新打包，修改如下：</p>
+<ul class="simple">
+<li>删除了官方包中的若干垃圾文件；</li>
+<li>加入了Makefile文件实现快速编译；</li>
+<li><a class="reference external" href="http://seisman.qiniudn.com/downloads/crust1.0.tar.gz">crust1.0.tar.gz</a></li>
+<li><a class="reference external" href="http://seisman.qiniudn.com/downloads/crust1.0-addon.tar.gz">crust1.0-addon.tar.gz</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id15">内容</a></h2>
+<p>内含说明文档readme一份；</p>
+<p>内含模型文件四个：</p>
+<ul class="simple">
+<li>crust1.bnds：各层上边界的深度；</li>
+<li>crust1.vp：各层P波速度；</li>
+<li>crust1.vs：各层S波速度；</li>
+<li>crust1.rho：各层密度；</li>
+</ul>
+<p>将全球划分1度x1度的单元，共计360*180个单元；该单元的值保存在单元的中心格点上。整个网格按照经度优先的准则保存，第一个点的坐标为(89.5N,179.5W)。</p>
+<p>文件中共360*180=64800行，每行9列，给出每层的值；</p>
+<p>内含Fortran代码三个，用于读取模型；</p>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id16">如何使用</a></h2>
+<div class="section" id="getcn1point">
+<h3><a class="toc-backref" href="#id17">getCN1point</a></h3>
+<p>获取任意一点的速度、密度剖面，具体用法如下例：</p>
+<pre class="literal-block">
+$ ./getCN1point
+  .... reading all maps ...
+ enter center lat, long of desired tile (q to quit)
+50 100
+ilat,ilon,crustal type:   41 281
+ topography:    1.6400000
+  layers: vp,vs,rho,bottom
+   1.50   0.00   1.02   1.64
+   3.81   1.94   0.92   1.64
+   2.50   1.07   2.11   1.54
+   0.00   0.00   0.00   1.54
+   0.00   0.00   0.00   1.54
+   6.10   3.55   2.74 -19.54
+   6.30   3.65   2.78 -38.22
+   7.00   3.99   2.95 -46.36
+ pn,sn,rho-mantle:    7.99   4.44   3.30
+ enter center lat, long of desired tile (q to quit)
+</pre>
+</div>
+<div class="section" id="getcn1maps">
+<h3><a class="toc-backref" href="#id18">getCN1maps</a></h3>
+<ul class="simple">
+<li>生成各层的Vp、Vs、<span class="math">\(\rho\)</span>、层边界深度，计4*9=36个文件，文件名map-vp[n]代表第n层的Vp，其他类似；</li>
+<li>生成各层的厚度，计1*8个文件，文件名类似map-th[n]；</li>
+<li>生成沉积层厚度sedthk和地壳厚度crsthk。</li>
+</ul>
+<p>所有文件均为ASCII格式；只有z值，没有x、y坐标，即z文件；</p>
+<p>将z文件转换为GMT可识别的网格文件需要使用xyz2grd命令。下面的命令给出具体的转换方法：</p>
+<p>使用-Rd或者-R-180/180/-90/90均可，但不可使用-Rg；注意-ZTLA选项的含义；</p>
+<p>GMT语法:</p>
+<pre class="literal-block">
+xyz2grd crsthk -Rd -I1/1 -Gout.grd -ZTLA -F -V
+</pre>
+<p>GMT5语法:</p>
+<pre class="literal-block">
+gmt xyz2grd crsthk -Rd -I1/1 -Gout.grd -ZTLA -r -V
+</pre>
+<p>注意：<span class="caps">GMT5</span>.1.1的xyz2grd存在Bug，因而该命令仅在GMT5.1.2及其之后版本中可用。</p>
+</div>
+<div class="section" id="getcn1xyz">
+<h3><a class="toc-backref" href="#id19">getCN1xyz</a></h3>
+<p>与getCN1maps生成类似的文件，只是此时的文件为xyz文件，每行三列。文件名以xyz开头或结尾。</p>
+<p>将xyz文件转换为GMT可识别的网格文件，使用xyz2grd。注意与上面命令的区别。</p>
+<p>GMT4语法:</p>
+<pre class="literal-block">
+xyz2grd crsthk.xyz -Rg -I1/1 -Gout.grd -F -V
+</pre>
+<p>GMT5语法:</p>
+<pre class="literal-block">
+gmt xyz2grd crsthk.xyz -Rg -I1/1 -Gout.grd -r -V
+</pre>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id20">绘图示例</a></h2>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+grd2cpt out.grd -Cpolar &gt; out.cpt
+grdimage out.grd -Rd -JN6i -B60/30 -Cout.cpt -V -K &gt; a.ps
+pscoast -R -J -W0.1p -O &gt;&gt; a.ps
+</pre></div>
+</td></tr></table><p>没有认真选择cpt文件，看上去效果不好，从细节上看，数据的转换是没有问题的。</p>
+<div class="figure">
+<img alt="crust1.0 model" src="/images/2013100301.jpg" style="width: 600px;"/>
+</div>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id21">修订历史</a></h2>
+<ul class="simple">
+<li>2013-10-03：初稿；</li>
+<li>2014-06-10：加入了GMT5的命令；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/global-crustal-model-crust1.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/global-crustal-model-crust1.html';
+    var disqus_url = 'http://seisman.info/global-crustal-model-crust1.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/grdraster-info-of-gmt-grid.html" title="GMT网格数据之grdraster.info">GMT网格数据之grdraster.info</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo2.html" title="全球地形起伏模型ETOPO2">全球地形起伏模型ETOPO2</a></li>
+<li><a href="http://seisman.info/gebco-global-bathymetry-data.html" title="全球水深数据GEBCO">全球水深数据GEBCO</a></li>
+<li><a href="http://seisman.info/images-of-crustal-age-of-the-ocean-floor.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/gmt-grdpaste.html" title="Previous: GMT之grdpaste合并网格文件">GMT之grdpaste合并网格文件</a></li>
+                <li class="next-article"><a href="http://seisman.info/python-pyenv.html" title="Next: Python多版本共存之pyenv">Python多版本共存之pyenv</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-10-03T00:28:00+08:00">2013-10-03</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-qiu-wu-li-xiang-guan-zi-yuan-ref">地球物理相关资源</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#can-kao-mo-xing-ref">参考模型
+                    <span>3</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>36</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
+                    <span>29</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#wang-ge-ref">网格
+                    <span>17</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/global-crustal-model-crust1.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GeoResource/2013-10-03_global-crustal-model-crust1.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type= "text/javascript">
+    MathJax.Hub.Config({
+        config: ["MMLorHTML.js"],
+        jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+            equationNumbers: { autoNumber: "AMS" }
+        },
+        extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+        tex2jax: { 
+            //inlineMath: [ [\'$\',\'$\'] ],
+            //displayMath: [ [\'$$\',\'$$\'] ],
+            inlineMath: [ ["\\(", "\\)"] ],
+            displayMath: [ ],
+            processClass: "math",
+            processEscapes: true
+        },
+        "HTML-CSS": {
+            styles: { ".MathJax .mo, .MathJax .mi": {color: "black ! important"}}
+        }
+       });
+</script>    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

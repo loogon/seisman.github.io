@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="时间变量 SAC用于处理时间序列，其头段变量中与时间有关的也很多，总的来说分为2类： GMT时间：绝对时间，或参考时间，包括NZYEAR、NZJDAY、NZHOUR、NZMIN、NZSEC、NZMSEC，分别代表年、日、时、分、秒、毫秒。注意这里没有月的概念，NZJDAY代表该年的第多少天。这6个变量构成了一个绝对时间，这个绝对时间以更易读的形式保存在变量KZDATE和 KZTIME中（这两个变量虽然说是头段变量，但是在文件中实际上并不对应这两个变量的存储空间），其是整个SAC文件中唯一的绝对时间，因而用作为参考时间去定义相对时间。 相对时间：包括B、E、O、A、F、Tn等等，这些相对时间的值都是相对于绝对时间来定义的。O=100即意味着发震时刻为参考时间加上100秒所对应的GMT时间。 测试 下面针对这些时间变量做一些测试，试着更深刻地理解SAC的时间。 原始数据 选取了一个地震的三分量，列出其kzdate、kztime、b、e如下： kzdate = MAR 11 ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="SAC技巧, 时间, SAC, " />
+
+<meta property="og:title" content="SAC的时间概念 "/>
+<meta property="og:url" content="http://seisman.info/timing-of-sac.html" />
+<meta property="og:description" content="时间变量 SAC用于处理时间序列，其头段变量中与时间有关的也很多，总的来说分为2类： GMT时间：绝对时间，或参考时间，包括NZYEAR、NZJDAY、NZHOUR、NZMIN、NZSEC、NZMSEC，分别代表年、日、时、分、秒、毫秒。注意这里没有月的概念，NZJDAY代表该年的第多少天。这6个变量构成了一个绝对时间，这个绝对时间以更易读的形式保存在变量KZDATE和 KZTIME中（这两个变量虽然说是头段变量，但是在文件中实际上并不对应这两个变量的存储空间），其是整个SAC文件中唯一的绝对时间，因而用作为参考时间去定义相对时间。 相对时间：包括B、E、O、A、F、Tn等等，这些相对时间的值都是相对于绝对时间来定义的。O=100即意味着发震时刻为参考时间加上100秒所对应的GMT时间。 测试 下面针对这些时间变量做一些测试，试着更深刻地理解SAC的时间。 原始数据 选取了一个地震的三分量，列出其kzdate、kztime、b、e如下： kzdate = MAR 11 ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2013-08-04T14:30:00+08:00" />
+<meta name="twitter:title" content="SAC的时间概念 ">
+<meta name="twitter:description" content="时间变量 SAC用于处理时间序列，其头段变量中与时间有关的也很多，总的来说分为2类： GMT时间：绝对时间，或参考时间，包括NZYEAR、NZJDAY、NZHOUR、NZMIN、NZSEC、NZMSEC，分别代表年、日、时、分、秒、毫秒。注意这里没有月的概念，NZJDAY代表该年的第多少天。这6个变量构成了一个绝对时间，这个绝对时间以更易读的形式保存在变量KZDATE和 KZTIME中（这两个变量虽然说是头段变量，但是在文件中实际上并不对应这两个变量的存储空间），其是整个SAC文件中唯一的绝对时间，因而用作为参考时间去定义相对时间。 相对时间：包括B、E、O、A、F、Tn等等，这些相对时间的值都是相对于绝对时间来定义的。O=100即意味着发震时刻为参考时间加上100秒所对应的GMT时间。 测试 下面针对这些时间变量做一些测试，试着更深刻地理解SAC的时间。 原始数据 选取了一个地震的三分量，列出其kzdate、kztime、b、e如下： kzdate = MAR 11 ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>SAC的时间概念  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/timing-of-sac.html"> SAC的时间概念  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id7">时间变量</a></li>
+<li><a class="reference internal" href="#id2" id="id8">测试</a><ul>
+<li><a class="reference internal" href="#id3" id="id9">原始数据</a></li>
+<li><a class="reference internal" href="#b" id="id10">修改文件起始时间b</a></li>
+<li><a class="reference internal" href="#e" id="id11">修改文件结束时间e</a></li>
+<li><a class="reference internal" href="#oaftn" id="id12">修改o、a、f、tn</a></li>
+<li><a class="reference internal" href="#id4" id="id13">修改参考时间</a></li>
+<li><a class="reference internal" href="#id5" id="id14">修改参考时间为发震时刻</a></li>
+<li><a class="reference internal" href="#gmt" id="id15">直接使用GMT时间</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id6" id="id16">总结</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id7">时间变量</a></h2>
+<p>SAC用于处理时间序列，其头段变量中与时间有关的也很多，总的来说分为2类：</p>
+<ol class="arabic simple">
+<li><strong>GMT时间</strong>：绝对时间，或参考时间，包括NZYEAR、<span class="caps">NZJDAY</span>、<span class="caps">NZHOUR</span>、<span class="caps">NZMIN</span>、<span class="caps">NZSEC</span>、<span class="caps">NZMSEC</span>，分别代表年、日、时、分、秒、毫秒。注意这里没有月的概念，NZJDAY代表该年的第多少天。这6个变量构成了一个绝对时间，这个绝对时间以更易读的形式保存在变量KZDATE和 KZTIME中（这两个变量虽然说是头段变量，但是在文件中实际上并不对应这两个变量的存储空间），其是整个SAC文件中唯一的绝对时间，因而用作为参考时间去定义相对时间。</li>
+<li><strong>相对时间</strong>：包括B、E、O、A、F、Tn等等，这些相对时间的值都是相对于绝对时间来定义的。O=100即意味着发震时刻为参考时间加上100秒所对应的GMT时间。</li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id8">测试</a></h2>
+<p>下面针对这些时间变量做一些测试，试着更深刻地理解SAC的时间。</p>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id9">原始数据</a></h3>
+<p>选取了一个地震的三分量，列出其kzdate、kztime、b、e如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:46:23.019
+b = 5.380000e-04
+e = 4.499951e+03
+</pre>
+</div>
+<div class="section" id="b">
+<h3><a class="toc-backref" href="#id10">修改文件起始时间b</a></h3>
+<p>用如下命令直接修改文件起始时间</p>
+<pre class="literal-block">
+ch b 10
+</pre>
+<p>得到结果如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:46:23.019
+b = 1.000000e+01
+e = 4.509950e+03
+</pre>
+<p>文件的参考时间没有发生变化，b和e都向后推迟了10s，这意味着整段SAC数据任一点的绝对时间延迟了10s，因而这一点可以用来校正时间零飘以及时区差异（但是前提是当前文件中o、a、f、tn未定义）。</p>
+</div>
+<div class="section" id="e">
+<h3><a class="toc-backref" href="#id11">修改文件结束时间e</a></h3>
+<p>用如下命令直接修改文件结束时间</p>
+<pre class="literal-block">
+ch e 0
+</pre>
+<p>得到结果如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:46:23.019
+b = 5.380000e-04
+e = 4.499951e+03
+</pre>
+<p>文件的参考时间以及e均没有发生变化，这意味着e的值不是可以任意改变的，而是根据b、delta及npts动态决定的，尝试修改delta，e值随之改变；尝试修改npts以达到类似“cut”的效果时，出现警告：</p>
+<pre class="literal-block">
+WARNING: NVHDR, NPTS, NWFID, NORID, and NEVID cannot be changed with CHNHDR
+</pre>
+</div>
+<div class="section" id="oaftn">
+<h3><a class="toc-backref" href="#id12">修改o、a、f、tn</a></h3>
+<p>这些变量是用于标记时刻的变量，不是必须的，用户可以随意修改，不会对参考时间等产生任何的影响。</p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id13">修改参考时间</a></h3>
+<p>随便定义了几个o、a、f、t0的值，以验证修改参考时间对这些时间变量的影响，原始变量值如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:46:23.019
+b = 5.380000e-04
+e = 4.499951e+03
+o = 2.000000e+01
+a = 4.000000e+01
+f = 9.000000e+01
+t0 = 6.000000e+01
+</pre>
+<p>用如下命令修改参考时间</p>
+<pre class="literal-block">
+ch nzmin 50
+</pre>
+<p>得到结果如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:50:23.019
+b = 5.380000e-04
+e = 4.499951e+03
+o = 2.000000e+01
+a = 4.000000e+01
+f = 9.000000e+01
+t0 = 6.000000e+01
+</pre>
+<p>整个SAC文件中除参考时间外其他时间都没有发生变化。参考时间变化了而相对时间没有变化，这导致SAC数据点的绝对时间发生了平移，与第一条中直接修改b的情况类似。可以通过修改参考时间的方式来校正时钟漂移和时区差异，当然一般不这么做。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id14">修改参考时间为发震时刻</a></h3>
+<p>很多情况下，需要将参考时间修改为发震时刻，从第四条可以看出，直接修改参考时间的方案是不可行的。</p>
+<p>当我们将参考时间提前10s的时候，为了保证其他时间变量所对应的绝对时间不发生变化，我们需要同时将各个相对时间加上10s（这样才能保证在某个参考时间下标记的震相到时等信息可以完全映射到另一个参考时间下的震相到时，这或许可以理解为时间坐标系下的坐标变换）。</p>
+<p>因为修改参考时间，而使得每个相对时间都要一一修改，这工作量有点大。SAC自身提供了一个更为简单的选项帮助我们实现了这一功能，如manaul中所说：“你可以使用alltt选项改变这个参考时间和其他所有的相对时间，这个秒数t增加到每个给定的相对时间上，同样的秒数也从参考时间中减去，这样就使数据实际的GMT时间保持不变”。</p>
+<p>还是上面那个例子，使用</p>
+<pre class="literal-block">
+ch allt 10
+</pre>
+<p>得到结果如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:46:13.019
+b = 1.000054e+01
+e = 4.509951e+03
+o = 3.000000e+01
+a = 5.000000e+01
+f = 1.000000e+02
+t0 = 7.000000e+01
+</pre>
+<p>相对时间都增加了10s，参考时间减少了10s。</p>
+</div>
+<div class="section" id="gmt">
+<h3><a class="toc-backref" href="#id15">直接使用GMT时间</a></h3>
+<p>为方便起见，你可以输入一个GMT时间而不是输入一个相对时间。当输入GMT时间时，SAC首先将其变为相对时间再存储到头段变量中。已知某事件的发震时刻，想要将发震时刻作为参考时间，其他所有的相对时间都变成相对这个参考时间的秒数，可以使用</p>
+<pre class="literal-block">
+ch o gmt 2011 070 05 50 23 019
+</pre>
+<p>得到如下结果：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:46:23.019
+b = 5.380000e-04
+e = 4.499951e+03
+o = 2.400000e+02
+a = 4.000000e+01
+f = 9.000000e+01
+t0 = 6.000000e+01
+</pre>
+<p>发震时刻被转换为相对时间240存储在头段变量o中，为了修改参考时间为发震时刻，需要将所有相对时间减去240s，参考时间加上240s，命令为</p>
+<pre class="literal-block">
+ch allt －240 iztype io
+</pre>
+<p>结果如下：</p>
+<pre class="literal-block">
+kzdate = MAR 11 (070), 2011
+kztime = 05:50:23.019
+b = -2.399995e+02
+e = 4.259951e+03
+o = 0.000000e+00
+a = -2.000000e+02
+f = -1.500000e+02
+t0 = -1.800000e+02
+</pre>
+<p>由结果可以看出，这么做达到了我们想要的目的。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id16">总结</a></h2>
+<p>将SAC中的时间变量可以细分为三类：</p>
+<ul class="simple">
+<li>第一类为参考时间，即NZYEAR、<span class="caps">NZJDAY</span>、<span class="caps">NZHOUR</span>、<span class="caps">NZMIN</span>、<span class="caps">NZSEC</span>、<span class="caps">NZMSEC</span>；</li>
+<li>第二类为相对时间，即o、a、f、tn；</li>
+<li>第三类为特殊的相对时间，即b、e。</li>
+</ul>
+<p>在第三类中e是不能随意改变的，所以可以不考虑。单独修改这三类时间变量都不会影响其他时间变量，修改第二类时间不会造成整个数据的绝对时间的改变，修改第一、三类时间变量时数据绝对时间会发生改变（该特性可用于校正时间零漂或时区不一致）。为了保证数据的绝对时间不发生改变，通常使用allt选项来实现。</p>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/timing-of-sac.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/timing-of-sac.html';
+    var disqus_url = 'http://seisman.info/timing-of-sac.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/notes-of-ppk.html" title="PPK标记震相到时的一些注意事项">PPK标记震相到时的一些注意事项</a></li>
+<li><a href="http://seisman.info/matlab-scripts-for-sac.html" title="用Matlab处理SAC数据的一些脚本">用Matlab处理SAC数据的一些脚本</a></li>
+<li><a href="http://seisman.info/sac-display-copyright.html" title="脚本中调用SAC时不显示版本信息">脚本中调用SAC时不显示版本信息</a></li>
+<li><a href="http://seisman.info/calculate-jday.html" title="计算某日是一年中的第几天">计算某日是一年中的第几天</a></li>
+<li><a href="http://seisman.info/change-background-color-of-window-in-sac.html" title="SAC修改绘图窗口的背景色">SAC修改绘图窗口的背景色</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/web-service-fetch-scripts.html" title="Previous: 利用Web Service Fetch scripts申请和下载数据">利用Web Service Fetch scripts申请和下载数据</a></li>
+                <li class="next-article"><a href="http://seisman.info/leap-year.html" title="Next: 闰年的判断">闰年的判断</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2013-08-04T14:30:00+08:00">2013-08-04</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#sac-ref">SAC</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#sacji-qiao-ref">SAC技巧
+                    <span>8</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#shi-jian-ref">时间
+                    <span>3</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/timing-of-sac.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SAC/2013-08-04_timing-of-sac.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

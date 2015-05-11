@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="本文所说的3D数据是指XYZD数据。常见的情况是数据中包含四列：经度、纬度、深度、值。 GMT几乎是不可以处理3D数据的，比如与网格相关的命令只支持2D netCDF文件。另外，GMT绘制3D图的效果也很一般，因而通常情况下都需要从3D数据中截取剖面，绘制剖面图。 本文试着介绍如何从3D数据中截取自己想要的剖面。 数据准备 因为我手头没有真实的数据，所以这里虚构一个3D数据。就示例而言，虚构的数据也许比真实的数据的演示效果更好。 虚构数据如下： X的范围为0到9，间隔为1； Y的范围为10到19，间隔为1； Z的范围为20到29，间隔为1； D的值由X、Y、Z的值唯一决定； 生成虚构数据的C代码如下： 1 2 3 4 5 6 7 8 9 10 11#include &lt;stdio.h&gt; int main() { int i, j, k ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GMT4, GMT5, GMT技巧, GMT, " />
+
+<meta property="og:title" content="从3D数据中截取剖面 "/>
+<meta property="og:url" content="http://seisman.info/profile-from-3d-data.html" />
+<meta property="og:description" content="本文所说的3D数据是指XYZD数据。常见的情况是数据中包含四列：经度、纬度、深度、值。 GMT几乎是不可以处理3D数据的，比如与网格相关的命令只支持2D netCDF文件。另外，GMT绘制3D图的效果也很一般，因而通常情况下都需要从3D数据中截取剖面，绘制剖面图。 本文试着介绍如何从3D数据中截取自己想要的剖面。 数据准备 因为我手头没有真实的数据，所以这里虚构一个3D数据。就示例而言，虚构的数据也许比真实的数据的演示效果更好。 虚构数据如下： X的范围为0到9，间隔为1； Y的范围为10到19，间隔为1； Z的范围为20到29，间隔为1； D的值由X、Y、Z的值唯一决定； 生成虚构数据的C代码如下： 1 2 3 4 5 6 7 8 9 10 11#include &lt;stdio.h&gt; int main() { int i, j, k ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2015-04-08T00:00:00+08:00" />
+<meta name="twitter:title" content="从3D数据中截取剖面 ">
+<meta name="twitter:description" content="本文所说的3D数据是指XYZD数据。常见的情况是数据中包含四列：经度、纬度、深度、值。 GMT几乎是不可以处理3D数据的，比如与网格相关的命令只支持2D netCDF文件。另外，GMT绘制3D图的效果也很一般，因而通常情况下都需要从3D数据中截取剖面，绘制剖面图。 本文试着介绍如何从3D数据中截取自己想要的剖面。 数据准备 因为我手头没有真实的数据，所以这里虚构一个3D数据。就示例而言，虚构的数据也许比真实的数据的演示效果更好。 虚构数据如下： X的范围为0到9，间隔为1； Y的范围为10到19，间隔为1； Z的范围为20到29，间隔为1； D的值由X、Y、Z的值唯一决定； 生成虚构数据的C代码如下： 1 2 3 4 5 6 7 8 9 10 11#include &lt;stdio.h&gt; int main() { int i, j, k ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>从3D数据中截取剖面  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/profile-from-3d-data.html"> 从3D数据中截取剖面  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <p>本文所说的3D数据是指XYZD数据。常见的情况是数据中包含四列：经度、纬度、深度、值。</p>
+<p>GMT几乎是不可以处理3D数据的，比如与网格相关的命令只支持2D&nbsp;netCDF文件。另外，GMT绘制3D图的效果也很一般，因而通常情况下都需要从3D数据中截取剖面，绘制剖面图。</p>
+<p>本文试着介绍如何从3D数据中截取自己想要的剖面。</p>
+<div class="section" id="id1">
+<h2>数据准备</h2>
+<p>因为我手头没有真实的数据，所以这里虚构一个3D数据。就示例而言，虚构的数据也许比真实的数据的演示效果更好。</p>
+<p>虚构数据如下：</p>
+<ul class="simple">
+<li>X的范围为0到9，间隔为1；</li>
+<li>Y的范围为10到19，间隔为1；</li>
+<li>Z的范围为20到29，间隔为1；</li>
+<li>D的值由X、Y、Z的值唯一决定；</li>
+</ul>
+<p>生成虚构数据的C代码如下：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">;</span> <span class="o">++</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d %d %d %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="mi">100</span><span class="o">+</span><span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span> <span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id2">
+<h2>截取垂直于坐标轴的剖面</h2>
+<p>最简单的情况是从3D速度结构中截取某个深度的速度结构，比如Z=24这个垂直于Z轴的平面。此时直接用<tt class="docutils literal">gawk</tt>将3D数据中Z=24的点提取出来:</p>
+<pre class="literal-block">
+gawk '$3==24 {print $1,$2,$4}' data.xyzd &gt; Z24.xyd
+</pre>
+<p>如果数据的间隔比较小，用<tt class="docutils literal"><span class="pre">$3==4</span></tt>去判断可能有些危险，更安全点的方法是:</p>
+<pre class="literal-block">
+gawk '$3&gt;23.999 &amp;&amp; $3&lt;24.001 {print $1,$2,$4}' data.xyzd &gt; Z24.xyd
+</pre>
+<p>截取了这个剖面之后，下面就是<tt class="docutils literal">xyz2grd</tt>和<tt class="docutils literal">grdimage</tt>了，不多说。</p>
+</div>
+<div class="section" id="id3">
+<h2>截取垂直于坐标平面的平面</h2>
+<p>最常见的情况是，地表有一个测线，需要做一个沿着这个测线的垂直于地表的剖面。</p>
+<p>这里用project命令虚构起点在(2,12)，终点为(5,16)，间距为1的剖面:</p>
+<pre class="literal-block">
+project -C2/12 -E5/16 -G1 &gt; track.data
+</pre>
+<p>track.data内容如下，三列数据分别为经度、纬度以及离起点的距离（大圆距离）:</p>
+<pre class="literal-block">
+2   12  0
+2.59831503664   12.8115096006   1
+3.20049364771   13.6216595304   2
+3.80680955458   14.4303509263   3
+4.41754162203   15.2374825707   4
+5   16  4.94662175502
+</pre>
+<p>思路其实很简单，如上面那个例子，先用gawk取深度Z=20处的平面，然后将其转换为网格文件，并用grdtrack取该深度在测线上的值；然后取下一个深度，依次处理下去。</p>
+<p>下面给出了一个示例脚本，该脚本可以解决本文的问题，但灵活性不够，所以使用者需要根据自己的情况改写或重写，理解原理最重要。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
+
+<span class="c"># 用于清除上一次执行该脚本时生成的文件</span>
+<span class="k">if</span> <span class="o">[</span> -e track.profile <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    rm track.profile
+<span class="k">fi</span>
+
+<span class="c"># 对深度进行循环</span>
+<span class="k">for</span> <span class="o">((</span> <span class="nv">i</span> <span class="o">=</span> 20<span class="p">;</span> i &lt; 30<span class="p">;</span> i++<span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+    <span class="c"># 取某个深度的剖面</span>
+    gawk -v <span class="nv">dep</span><span class="o">=</span><span class="nv">$i</span> <span class="s1">&#39;$3==dep {print $1,$2,$4}&#39;</span> data.xyzd &gt; <span class="nv">$i</span>.xyd
+    <span class="c"># 将数据转换为netCDF格式</span>
+    xyz2grd <span class="nv">$i</span>.xyd -R0/10/10/20 -I1/1 -G<span class="nv">$i</span>.nc
+    <span class="c"># 在该深度处做grdtrack，最终结果重定向到track.profile中</span>
+    grdtrack track.data -G<span class="nv">$i</span>.nc <span class="p">|</span> gawk -v <span class="nv">dep</span><span class="o">=</span><span class="nv">$i</span> <span class="s1">&#39;{print $3, dep, $4}&#39;</span> &gt;&gt; track.profile
+
+    rm <span class="nv">$i</span>.xyd <span class="nv">$i</span>.nc
+<span class="k">done</span><span class="p">;</span>
+</pre></div>
+</td></tr></table><p>几点说明:</p>
+<ol class="arabic simple">
+<li>使用gawk时，涉及到要向gawk传递一个bash中的变量，需要使用<tt class="docutils literal"><span class="pre">-v</span></tt>选项；</li>
+<li>grdtrack命令的输出有四列，分别是经度、纬度、离起点的距离以及Z；</li>
+<li>绘制剖面时，一般需要离起点的距离，以及深度这两个信息，所以用gawk处理了一下；</li>
+<li>所有的循环的输出都重定向到文件track.profile，最终该文件中有三列，离起点的距离、深度以及值；</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h2>任意一个倾斜剖面</h2>
+<p>这个说难不难，说简单也不简单。首先，如何用一些参数去定义这个剖面就是个问题。假设定义好了，就可以通过某些计算，得到这个剖面与地表的交线以及剖面与各个深度水平面的交线。</p>
+<p>有了这些交线，就可以用与上面的例子类似的方法对每个深度处做grdtrack，然后把结果收集起来即可。</p>
+<p>思路有了，具体的就不写啦。</p>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/profile-from-3d-data.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/profile-from-3d-data.html';
+    var disqus_url = 'http://seisman.info/profile-from-3d-data.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
+<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
+<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
+<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/srtm15-plus.html" title="Previous: 全球地形起伏数据：SRTM15_PLUS">全球地形起伏数据：SRTM15_PLUS</a></li>
+                <li class="next-article"><a href="http://seisman.info/my-referral-links.html" title="Next: 一些产品的推广链接">一些产品的推广链接</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-04-08T00:00:00+08:00">2015-04-08</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
+                    <span>60</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>36</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
+                    <span>27</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/profile-from-3d-data.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2015-04-08_profile-from-3d-data.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>
