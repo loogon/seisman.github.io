@@ -20628,11 +20628,12 @@ gmt psxy -J&lt;span class="nv"&gt;$J&lt;/span&gt; -R&lt;span class="nv"&gt;$R&lt
 &lt;li&gt;更新README，可根据说明自行编译源码生成PDF；&lt;/li&gt;
 &lt;li&gt;修改Makefile，对依赖的检测更加智能；&lt;/li&gt;
 &lt;li&gt;英文使用TeX默认字体；中文使用开源中文字体Fandol；&lt;/li&gt;
-&lt;li&gt;使用`minted`实现代码的语法高亮，替代`listings`；&lt;/li&gt;
+&lt;li&gt;使用&lt;tt class="docutils literal"&gt;minted&lt;/tt&gt;实现代码的语法高亮，替代&lt;tt class="docutils literal"&gt;listings&lt;/tt&gt;；&lt;/li&gt;
 &lt;li&gt;datetime宏包升级至datetime2；&lt;/li&gt;
 &lt;li&gt;简化了绘图脚本的Makefile；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;下载地址: &lt;a class="reference external" href="http://seisman.qiniudn.com/downloads/sac-manual-v3.2.pdf"&gt;SAC参考手册v3.2.pdf&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;传到网盘里的v3.2版的PDF似乎有问题，目前无法下载。而我现在没有v3.2版的PDF，所以无法替换有问题的版本。该链接暂时放在，有需要的直接下载3.3-dev版，也希望有曾经下过3.2版本的读者可以发一份v3.2的PDF给我，谢谢。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;2014-09-25 3.1版&lt;/a&gt;&lt;/h2&gt;
