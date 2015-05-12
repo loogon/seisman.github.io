@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeisMan</title><link>http://seisman.info/</link><description>学会整理自己的经验是科研的第一步。</description><atom:link href="http://seisman.info/feeds/seisman.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 11 May 2015 00:00:00 +0800</lastBuildDate><item><title>震相走时的计算</title><link>http://seisman.info/travel-time-calculation.html</link><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeisMan</title><link>http://seisman.info/</link><description>学会整理自己的经验是科研的第一步。</description><atom:link href="http://seisman.info/feeds/seisman.rss.xml" rel="self"></atom:link><lastBuildDate>Tue, 12 May 2015 00:00:00 +0800</lastBuildDate><item><title>CPS330的安装</title><link>http://seisman.info/install-cps330.html</link><description>&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
+&lt;p&gt;本文介绍如何在Linux系统下编译安装CPS330。&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;解压:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ tar -xvf NP330.Jun-11-2014.tgz
+$ cd PROGRAMS.330
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;配置&lt;/p&gt;
+&lt;p&gt;如果是32位系统则:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ ./Setup LINUX40
+&lt;/pre&gt;
+&lt;p&gt;如果是64位系统则:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ ./Setup LINUX6440
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;编译:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+$ ./C
+&lt;/pre&gt;
+&lt;p&gt;接下来会编译一段时间，最终在bin目录下应该生成149个可执行文件。当然，不同版本可能可执行文件的数目有差异。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;环境变量&lt;/p&gt;
+&lt;p&gt;把bin目录加入到环境变量PATH中，然后重启终端即可。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;说明：编译时使用gcc和gfortran编译器。g77已经是很老旧的版本了，稍微新的Linux发行版中都不再提供了，因而不推荐使用。&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Tue, 12 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2015-05-12:install-cps330.html</guid><category>安装</category><category>编译</category></item><item><title>震相走时的计算</title><link>http://seisman.info/travel-time-calculation.html</link><description>
 &lt;p&gt;震相走时的计算是地震学的基本问题之一。&lt;/p&gt;
 &lt;p&gt;目前，计算一维分层模型下的震相走时，主要使用两个程序包：ttimes和TauP。ttimes相对来说有些古老，所以多数情况下更推荐使用TauP。但TauP不支持PKPab、PKPbc这种震相名，所以偶尔可能还是需要使用ttimes。&lt;/p&gt;
 &lt;p&gt;ttimes和TauP都是根据Buland and Chapman（&lt;span class="caps"&gt;BSSA&lt;/span&gt;, 1983）提出的理论框架来实现的，本文是对这篇文章的核心内容的简单总结。&lt;/p&gt;

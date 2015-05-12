@@ -8,25 +8,25 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="Prof. Lupei Zhu最近又在网上公开了两个程序包，CCP和CAP。 CCP，即Common-Conversion-Point，用于共转换点地震数据的叠加，这个程序主要与hk1.3一起使用，用于接收函数的研究。 安装方法以及一些修改与hk1.3类似： 下载与解压 1 2 3 4$ wget http://www.eas.slu.edu/People/LZhu/downloads/ccp1.0.tar $ tar -xvf ccp1.0.tar $ cd ccp $ make clean 修改Makefile 在Makefile中加入如下两行，定义变量GMT_INC和GMT_LIB： 1 2GMT_INC = -I ...
+        <meta name="description" content="CPS330全称Computer Programs in Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。 本文介绍如何在Linux系统下编译安装CPS330。 解压: $ tar -xvf NP330.Jun-11-2014.tgz $ cd PROGRAMS.330 配置 如果是32位系统则: $ ./Setup LINUX40 如果是64位系统则: $ ./Setup LINUX6440 编译: $ ./C 接下来会编译一段时间，最终在bin目录下应该生成149个可执行文件。当然，不同版本可能可执行文件的数目有差异。 环境变量 把bin目录加入到环境变量PATH中，然后重启终端即可。 说明：编译时使用gcc和gfortran编译器。g77已经是很老旧的版本了，稍微新的Linux发行版中都不再提供了，因而不推荐使用。
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="接收函数, 编译, 地震学软件, " />
+<meta name="keywords" content="安装, 编译, 地震学软件, " />
 
-<meta property="og:title" content="CCP1.0编译 "/>
-<meta property="og:url" content="http://seisman.info/compilation-of-ccp.html" />
-<meta property="og:description" content="Prof. Lupei Zhu最近又在网上公开了两个程序包，CCP和CAP。 CCP，即Common-Conversion-Point，用于共转换点地震数据的叠加，这个程序主要与hk1.3一起使用，用于接收函数的研究。 安装方法以及一些修改与hk1.3类似： 下载与解压 1 2 3 4$ wget http://www.eas.slu.edu/People/LZhu/downloads/ccp1.0.tar $ tar -xvf ccp1.0.tar $ cd ccp $ make clean 修改Makefile 在Makefile中加入如下两行，定义变量GMT_INC和GMT_LIB： 1 2GMT_INC = -I ..." />
+<meta property="og:title" content="CPS330的安装 "/>
+<meta property="og:url" content="http://seisman.info/install-cps330.html" />
+<meta property="og:description" content="CPS330全称Computer Programs in Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。 本文介绍如何在Linux系统下编译安装CPS330。 解压: $ tar -xvf NP330.Jun-11-2014.tgz $ cd PROGRAMS.330 配置 如果是32位系统则: $ ./Setup LINUX40 如果是64位系统则: $ ./Setup LINUX6440 编译: $ ./C 接下来会编译一段时间，最终在bin目录下应该生成149个可执行文件。当然，不同版本可能可执行文件的数目有差异。 环境变量 把bin目录加入到环境变量PATH中，然后重启终端即可。 说明：编译时使用gcc和gfortran编译器。g77已经是很老旧的版本了，稍微新的Linux发行版中都不再提供了，因而不推荐使用。" />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
-<meta property="og:article:published_time" content="2013-11-29T16:37:00+08:00" />
-<meta name="twitter:title" content="CCP1.0编译 ">
-<meta name="twitter:description" content="Prof. Lupei Zhu最近又在网上公开了两个程序包，CCP和CAP。 CCP，即Common-Conversion-Point，用于共转换点地震数据的叠加，这个程序主要与hk1.3一起使用，用于接收函数的研究。 安装方法以及一些修改与hk1.3类似： 下载与解压 1 2 3 4$ wget http://www.eas.slu.edu/People/LZhu/downloads/ccp1.0.tar $ tar -xvf ccp1.0.tar $ cd ccp $ make clean 修改Makefile 在Makefile中加入如下两行，定义变量GMT_INC和GMT_LIB： 1 2GMT_INC = -I ...">
+<meta property="og:article:published_time" content="2015-05-12T00:00:00+08:00" />
+<meta name="twitter:title" content="CPS330的安装 ">
+<meta name="twitter:description" content="CPS330全称Computer Programs in Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。 本文介绍如何在Linux系统下编译安装CPS330。 解压: $ tar -xvf NP330.Jun-11-2014.tgz $ cd PROGRAMS.330 配置 如果是32位系统则: $ ./Setup LINUX40 如果是64位系统则: $ ./Setup LINUX6440 编译: $ ./C 接下来会编译一段时间，最终在bin目录下应该生成149个可执行文件。当然，不同版本可能可执行文件的数目有差异。 环境变量 把bin目录加入到环境变量PATH中，然后重启终端即可。 说明：编译时使用gcc和gfortran编译器。g77已经是很老旧的版本了，稍微新的Linux发行版中都不再提供了，因而不推荐使用。">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
-        <title>CCP1.0编译  · SeisMan
+        <title>CPS330的安装  · SeisMan
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
@@ -83,56 +83,44 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://seisman.info/compilation-of-ccp.html"> <span class="caps">CCP1</span>.0编译  </a></h1>
+    <h1><a href="http://seisman.info/install-cps330.html"> CPS330的安装  </a></h1>
     </header>
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contents</h4>
-        <html><body><div class="toc" id="">
-
-<ul class="simple">
-<li><a class="reference internal" href="#id1" id="id3">下载与解压</a></li>
-<li><a class="reference internal" href="#makefile" id="id4">修改Makefile</a></li>
-<li><a class="reference internal" href="#id2" id="id5">编译</a></li>
-</ul>
-</div></body></html>
-        </nav>
-    </div>
-    <div class="span8 article-content">
+        <div class="span8 offset2 article-content">
 
             
-            
-<p>Prof. Lupei Zhu最近又在网上公开了两个程序包，CCP和CAP。</p>
-<p><span class="caps">CCP</span>，即Common-Conversion-Point，用于共转换点地震数据的叠加，这个程序主要与<a class="reference external" href="http://seisman.info/compilation-of-hk.html">hk1.3</a>一起使用，用于接收函数的研究。</p>
-<p>安装方法以及一些修改与hk1.3类似：</p>
-<div class="section" id="id1">
-<h2><a class="toc-backref" href="#id3">下载与解压</a></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>wget http://www.eas.slu.edu/People/LZhu/downloads/ccp1.0.tar
-<span class="nv">$ </span>tar -xvf ccp1.0.tar
-<span class="nv">$ </span><span class="nb">cd </span>ccp
-<span class="nv">$ </span>make clean
-</pre></div>
-</td></tr></table></div>
-<div class="section" id="makefile">
-<h2><a class="toc-backref" href="#id4">修改Makefile</a></h2>
-<p>在Makefile中加入如下两行，定义变量<tt class="docutils literal">GMT_INC</tt>和<tt class="docutils literal">GMT_LIB</tt>：</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">GMT_INC</span> <span class="o">=</span> -I/opt/GMT/include
-<span class="nv">GMT_LIBS</span> <span class="o">=</span> -L/opt/GMT/lib -lgmt -lpsl -lnetcdf -lm -s
-</pre></div>
-</td></tr></table></div>
-<div class="section" id="id2">
-<h2><a class="toc-backref" href="#id5">编译</a></h2>
+            <p>CPS330全称Computer Programs in&nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。</p>
+<p>本文介绍如何在Linux系统下编译安装CPS330。</p>
+<ol class="arabic">
+<li><p class="first">解压:</p>
 <pre class="literal-block">
-$ make
+$ tar -xvf NP330.Jun-11-2014.tgz
+$ cd PROGRAMS.330
 </pre>
-</div>
+</li>
+<li><p class="first">配置</p>
+<p>如果是32位系统则:</p>
+<pre class="literal-block">
+$ ./Setup LINUX40
+</pre>
+<p>如果是64位系统则:</p>
+<pre class="literal-block">
+$ ./Setup LINUX6440
+</pre>
+</li>
+<li><p class="first">编译:</p>
+<pre class="literal-block">
+$ ./C
+</pre>
+<p>接下来会编译一段时间，最终在bin目录下应该生成149个可执行文件。当然，不同版本可能可执行文件的数目有差异。</p>
+</li>
+<li><p class="first">环境变量</p>
+<p>把bin目录加入到环境变量PATH中，然后重启终端即可。</p>
+</li>
+</ol>
+<p>说明：编译时使用gcc和gfortran编译器。g77已经是很老旧的版本了，稍微新的Linux发行版中都不再提供了，因而不推荐使用。</p>
 
             
             <section>
@@ -141,7 +129,7 @@ $ make
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="http://seisman.info/compilation-of-ccp.html#disqus_thread">
+                href="http://seisman.info/install-cps330.html#disqus_thread">
                 Comments
             </a>
         </div>
@@ -151,8 +139,8 @@ $ make
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'seisman';
-        var disqus_identifier = 'http://seisman.info/compilation-of-ccp.html';
-    var disqus_url = 'http://seisman.info/compilation-of-ccp.html';
+        var disqus_identifier = 'http://seisman.info/install-cps330.html';
+    var disqus_url = 'http://seisman.info/install-cps330.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -174,19 +162,18 @@ $ make
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/install-pssac2.html" title="pssac2的安装">pssac2的安装</a></li>
 <li><a href="http://seisman.info/fk-installation.html" title="fk3.2编译">fk3.2编译</a></li>
-<li><a href="http://seisman.info/compilation-of-hk.html" title="hk1.3编译">hk1.3编译</a></li>
+<li><a href="http://seisman.info/perl-plenv.html" title="Perl多版本共存之plenv">Perl多版本共存之plenv</a></li>
 <li><a href="http://seisman.info/install-gmt5-under-linux.html" title="GMT 5.1.2在Linux下的安装">GMT 5.1.2在Linux下的安装</a></li>
 <li><a href="http://seisman.info/install-gmt4-under-linux.html" title="GMT 4.5.13在Linux下的安装">GMT 4.5.13在Linux下的安装</a></li>
+<li><a href="http://seisman.info/compilation-of-ccp.html" title="CCP1.0编译">CCP1.0编译</a></li>
 </ul>
 <hr />
 </section>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="http://seisman.info/china-administrative-areas-data.html" title="Previous: 中国行政区划数据下载">中国行政区划数据下载</a></li>
-                <li class="next-article"><a href="http://seisman.info/sac-display-copyright.html" title="Next: 脚本中调用SAC时不显示版本信息">脚本中调用SAC时不显示版本信息</a> »</li>
+                <li class="previous-article">« <a href="http://seisman.info/travel-time-calculation.html" title="Previous: 震相走时的计算">震相走时的计算</a></li>
             </ul>
             </nav>
             </aside>
@@ -194,23 +181,23 @@ $ make
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2013-11-29T16:37:00+08:00">2013-11-29</time>
+            <time pubdate="pubdate" datetime="2015-05-12T00:00:00+08:00">2015-05-12</time>
             <h4>Category</h4>
             <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ruan-jian-ref">地震学软件</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#an-zhuang-ref">安装
+                    <span>10</span>
+</a></li>
                 <li><a href="http://seisman.info/tags.html#bian-yi-ref">编译
                     <span>9</span>
 </a></li>
-                <li><a href="http://seisman.info/tags.html#jie-shou-han-shu-ref">接收函数
-                    <span>3</span>
-</a></li>
             </ul>
             <h4>Features</h4>
-            <a href="http://seisman.qiniudn.com/pdfs/compilation-of-ccp.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+            <a href="http://seisman.qiniudn.com/pdfs/install-cps330.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2013-11-29_compilation-of-ccp.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2015-05-12_install-cps330.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>
