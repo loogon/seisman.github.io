@@ -20633,7 +20633,6 @@ gmt psxy -J&lt;span class="nv"&gt;$J&lt;/span&gt; -R&lt;span class="nv"&gt;$R&lt
 &lt;li&gt;简化了绘图脚本的Makefile；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;下载地址: &lt;a class="reference external" href="http://seisman.qiniudn.com/downloads/sac-manual-v3.2.pdf"&gt;SAC参考手册v3.2.pdf&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;传到网盘里的v3.2版的PDF似乎有问题，目前无法下载。而我现在没有v3.2版的PDF，所以无法替换有问题的版本。该链接暂时放在，有需要的直接下载3.3-dev版，也希望有曾经下过3.2版本的读者可以发一份v3.2的PDF给我，谢谢。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;2014-09-25 3.1版&lt;/a&gt;&lt;/h2&gt;
