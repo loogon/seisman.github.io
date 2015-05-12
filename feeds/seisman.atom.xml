@@ -16586,11 +16586,11 @@ psxy -J&lt;span class="nv"&gt;$J&lt;/span&gt; -R&lt;span class="nv"&gt;$R&lt;/sp
 
 &lt;span class="nv"&gt;J&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;X6i
 &lt;span class="nv"&gt;R&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;0/10/0/10
-&lt;span class="nv"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1/1&lt;span class="s2"&gt;"&lt;/span&gt;
-&lt;span class="s2"&gt;PS=TestB1.ps&lt;/span&gt;
+&lt;span class="nv"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;1/1
+&lt;span class="nv"&gt;PS&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;TestB1.ps
 
-&lt;span class="s2"&gt;psxy -J&lt;/span&gt;&lt;span class="nv"&gt;$J&lt;/span&gt;&lt;span class="s2"&gt; -R&lt;/span&gt;&lt;span class="nv"&gt;$R&lt;/span&gt;&lt;span class="s2"&gt; -B&lt;/span&gt;&lt;span class="nv"&gt;$B&lt;/span&gt;&lt;span class="s2"&gt; -T -K &amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;$PS&lt;/span&gt;&lt;span class="s2"&gt;&lt;/span&gt;
-&lt;span class="s2"&gt;psxy -J&lt;/span&gt;&lt;span class="nv"&gt;$J&lt;/span&gt;&lt;span class="s2"&gt; -R&lt;/span&gt;&lt;span class="nv"&gt;$R&lt;/span&gt;&lt;span class="s2"&gt; -T -O &amp;gt;&amp;gt; &lt;/span&gt;&lt;span class="nv"&gt;$PS&lt;/span&gt;&lt;span class="s2"&gt;&lt;/span&gt;
+psxy -J&lt;span class="nv"&gt;$J&lt;/span&gt; -R&lt;span class="nv"&gt;$R&lt;/span&gt; -B&lt;span class="nv"&gt;$B&lt;/span&gt; -T -K &amp;gt; &lt;span class="nv"&gt;$PS&lt;/span&gt;
+psxy -J&lt;span class="nv"&gt;$J&lt;/span&gt; -R&lt;span class="nv"&gt;$R&lt;/span&gt; -T -O &amp;gt;&amp;gt; &lt;span class="nv"&gt;$PS&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;这个例子给第一个psxy命令加上了-B选项，当然也改了一下名字。看一下TestB1.ps会发现，&lt;strong&gt;-B的作用是给图形绘制边框&lt;/strong&gt;，这是唯一的区别。&lt;/p&gt;
 &lt;/div&gt;

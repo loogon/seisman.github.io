@@ -154,11 +154,11 @@ psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -O &gt;&gt; <s
 
 <span class="nv">J</span><span class="o">=</span>X6i
 <span class="nv">R</span><span class="o">=</span>0/10/0/10
-<span class="nv">B</span><span class="o">=</span>1/1<span class="s2">"</span>
-<span class="s2">PS=TestB1.ps</span>
+<span class="nv">B</span><span class="o">=</span>1/1
+<span class="nv">PS</span><span class="o">=</span>TestB1.ps
 
-<span class="s2">psxy -J</span><span class="nv">$J</span><span class="s2"> -R</span><span class="nv">$R</span><span class="s2"> -B</span><span class="nv">$B</span><span class="s2"> -T -K &gt; </span><span class="nv">$PS</span><span class="s2"></span>
-<span class="s2">psxy -J</span><span class="nv">$J</span><span class="s2"> -R</span><span class="nv">$R</span><span class="s2"> -T -O &gt;&gt; </span><span class="nv">$PS</span><span class="s2"></span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -B<span class="nv">$B</span> -T -K &gt; <span class="nv">$PS</span>
+psxy -J<span class="nv">$J</span> -R<span class="nv">$R</span> -T -O &gt;&gt; <span class="nv">$PS</span>
 </pre></div>
 </td></tr></table><p>这个例子给第一个psxy命令加上了-B选项，当然也改了一下名字。看一下TestB1.ps会发现，<strong>-B的作用是给图形绘制边框</strong>，这是唯一的区别。</p>
 </div>
@@ -294,10 +294,10 @@ TestB3.ps   60993
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
-<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
+<li><a href="http://seisman.info/gmt-option-p.html" title="GMT进阶之-P选项">GMT进阶之-P选项</a></li>
 <li><a href="http://seisman.info/waveform-comparison-plot.html" title="绘制波形对比图">绘制波形对比图</a></li>
 <li><a href="http://seisman.info/gmt-option-b-colon.html" title="GMT进阶之-B选项中的冒号">GMT进阶之-B选项中的冒号</a></li>
-<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
+<li><a href="http://seisman.info/gmt-vector-shape.html" title="GMT进阶之修改箭头形状">GMT进阶之修改箭头形状</a></li>
 </ul>
 <hr />
 </section>
