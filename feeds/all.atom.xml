@@ -7621,9 +7621,10 @@ rm .gmt*
 &lt;p&gt;若ghostscript的安装没有问题，则在&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;C:\Program&lt;/span&gt; Files\gs\gs9.15\examples\cjk&lt;/tt&gt;目录下可以找到文件&lt;tt class="docutils literal"&gt;gscjk_ag.ps&lt;/tt&gt;。&lt;/p&gt;
 &lt;p&gt;启动cmd，键入如下命令:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
-C:\Program Files\gs\gs9.15\bin\gswin64c.exe C:\Program Files\gs\gs9.15\examples\cjk\gscjk_ag.ps
+cd "C:\Program Files\gs\gs9.16\bin"
+gswin64.exe ..\examples\cjk\gscjk_ag.ps
 &lt;/pre&gt;
-&lt;p&gt;该命令用命令行版本的gswin64c打开gscjk_ag.ps，若能看到中文，则说明ghostscript是可以正常支持中文的。&lt;/p&gt;
+&lt;p&gt;该命令用命令行版本的&lt;tt class="docutils literal"&gt;gswin64c&lt;/tt&gt;打开&lt;tt class="docutils literal"&gt;gscjk_ag.ps&lt;/tt&gt;，若能看到中文，则说明ghostscript是可以正常支持中文的。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="gsview"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id7"&gt;gsview的中文支持&lt;/a&gt;&lt;/h2&gt;

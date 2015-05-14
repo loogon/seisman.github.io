@@ -127,9 +127,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>若ghostscript的安装没有问题，则在<tt class="docutils literal"><span class="pre">C:\Program</span> Files\gs\gs9.15\examples\cjk</tt>目录下可以找到文件<tt class="docutils literal">gscjk_ag.ps</tt>。</p>
 <p>启动cmd，键入如下命令:</p>
 <pre class="literal-block">
-C:\Program Files\gs\gs9.15\bin\gswin64c.exe C:\Program Files\gs\gs9.15\examples\cjk\gscjk_ag.ps
+cd "C:\Program Files\gs\gs9.16\bin"
+gswin64.exe ..\examples\cjk\gscjk_ag.ps
 </pre>
-<p>该命令用命令行版本的gswin64c打开gscjk_ag.ps，若能看到中文，则说明ghostscript是可以正常支持中文的。</p>
+<p>该命令用命令行版本的<tt class="docutils literal">gswin64c</tt>打开<tt class="docutils literal">gscjk_ag.ps</tt>，若能看到中文，则说明ghostscript是可以正常支持中文的。</p>
 </div>
 <div class="section" id="gsview">
 <h2><a class="toc-backref" href="#id7">gsview的中文支持</a></h2>
@@ -254,10 +255,10 @@ gmt pstext tmp -R0/7/0/7 -JX6i/6i -Bafg -B+t<span class="s2">"GMT中文"</span> 
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
-<li><a href="http://seisman.info/calculate-distance-to-coast.html" title="计算某点离海岸线的距离">计算某点离海岸线的距离</a></li>
-<li><a href="http://seisman.info/install-yong-chinese-input-method-under-centos-7.html" title="CentOS 7.0下安装小小输入法">CentOS 7.0下安装小小输入法</a></li>
-<li><a href="http://seisman.info/how-to-use-gmt-under-windows.html" title="Windows下使用GMT的正确姿势">Windows下使用GMT的正确姿势</a></li>
-<li><a href="http://seisman.info/add-annotations-in-gmt.html" title="GMT中添加注释和标注">GMT中添加注释和标注</a></li>
+<li><a href="http://seisman.info/gmt-option-p.html" title="GMT进阶之-P选项">GMT进阶之-P选项</a></li>
+<li><a href="http://seisman.info/gmt-merge-images.html" title="GMT技巧之图像合并">GMT技巧之图像合并</a></li>
+<li><a href="http://seisman.info/gmt-map-coloring.html" title="GMT技巧之利用DCW数据进行区域涂色">GMT技巧之利用DCW数据进行区域涂色</a></li>
+<li><a href="http://seisman.info/change-title-of-postscript-files-generated-by-gmt.html" title="修改GMT生成的PS文件的标题">修改GMT生成的PS文件的标题</a></li>
 </ul>
 <hr />
 </section>
