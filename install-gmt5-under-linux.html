@@ -207,7 +207,7 @@ dcw-gmt-1.1.1.tar.gz gmt-5.1.2-src.tar.gz gshhg-gmt-2.3.4.tar.gz
 </pre></div>
 </td></tr></table><p>修改<tt class="docutils literal">ConfigUser.cmake</tt>以对安装的细节进行自定义。一个基本的示例如下，找到相关行，并去掉该行最前面的“#”，再根据自身情况修改:</p>
 <pre class="literal-block">
-set (CMAKE_INSTALL_PREFIX "/opt/GMT-5.1.1")
+set (CMAKE_INSTALL_PREFIX "/opt/GMT-5.1.2")
 set (GMT_INSTALL_MODULE_LINKS FALSE)
 set (GSHHG_ROOT "/home/seisman/Desktop/gmt/gshhg-gmt-2.3.4")
 set (COPY_GSHHG TRUE)
@@ -387,8 +387,8 @@ if &lt;module options&gt; is '=' we call exit (0) if module exist and non-zero o
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
+<li><a href="http://seisman.info/install-pssac.html" title="pssac之安装">pssac之安装</a></li>
 <li><a href="http://seisman.info/fk-installation.html" title="fk3.2编译">fk3.2编译</a></li>
-<li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv">Python多版本共存之pyenv</a></li>
 <li><a href="http://seisman.info/install-gmt4-under-linux.html" title="GMT 4.5.13在Linux下的安装">GMT 4.5.13在Linux下的安装</a></li>
 <li><a href="http://seisman.info/install-gmt5-under-windows.html" title="GMT 5.1.1在Windows下的安装">GMT 5.1.1在Windows下的安装</a></li>
 <li><a href="http://seisman.info/install-cps330.html" title="CPS330的安装">CPS330的安装</a></li>

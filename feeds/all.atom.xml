@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>SeisMan</title><link href="http://seisman.info/" rel="alternate"></link><link href="http://seisman.info/feeds/all.atom.xml" rel="self"></link><id>http://seisman.info/</id><updated>2015-05-12T00:00:00+08:00</updated><entry><title>CPS330的安装</title><link href="http://seisman.info/install-cps330.html" rel="alternate"></link><updated>2015-05-12T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-12:install-cps330.html</id><summary type="html">&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SeisMan</title><link href="http://seisman.info/" rel="alternate"></link><link href="http://seisman.info/feeds/all.atom.xml" rel="self"></link><id>http://seisman.info/</id><updated>2015-05-14T00:00:00+08:00</updated><entry><title>CPS330的安装</title><link href="http://seisman.info/install-cps330.html" rel="alternate"></link><updated>2015-05-12T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-12:install-cps330.html</id><summary type="html">&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
 &lt;p&gt;本文介绍如何在Linux系统下编译安装CPS330。&lt;/p&gt;
 &lt;ol class="arabic"&gt;
 &lt;li&gt;&lt;p class="first"&gt;解压:&lt;/p&gt;
@@ -11919,7 +11919,7 @@ dcw-gmt-1.1.1.tar.gz gmt-5.1.2-src.tar.gz gshhg-gmt-2.3.4.tar.gz
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;修改&lt;tt class="docutils literal"&gt;ConfigUser.cmake&lt;/tt&gt;以对安装的细节进行自定义。一个基本的示例如下，找到相关行，并去掉该行最前面的“#”，再根据自身情况修改:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
-set (CMAKE_INSTALL_PREFIX "/opt/GMT-5.1.1")
+set (CMAKE_INSTALL_PREFIX "/opt/GMT-5.1.2")
 set (GMT_INSTALL_MODULE_LINKS FALSE)
 set (GSHHG_ROOT "/home/seisman/Desktop/gmt/gshhg-gmt-2.3.4")
 set (COPY_GSHHG TRUE)
@@ -15045,21 +15045,14 @@ Type &lt;span class="s2"&gt;"help"&lt;/span&gt;, &lt;span class="s2"&gt;"copyrig
 &lt;li&gt;2014-10-07：将Python依赖包一段的位置提前；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</summary><category term="安装"></category><category term="Python"></category><category term="版本"></category></entry><entry><title>全球地壳模型crust 1.0</title><link href="http://seisman.info/global-crustal-model-crust1.html" rel="alternate"></link><updated>2013-10-03T00:28:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2013-10-03:global-crustal-model-crust1.html</id><summary type="html">
-&lt;p&gt;crust 1.0是一个常用的全球地壳模型，其从老版本的crust 5.1和crust 2.0升级得到。&lt;/p&gt;
+</summary><category term="安装"></category><category term="Python"></category><category term="版本"></category></entry><entry><title>全球地壳模型crust 1.0</title><link href="http://seisman.info/global-crustal-model-crust1.html" rel="alternate"></link><updated>2015-05-14T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2013-10-03:global-crustal-model-crust1.html</id><summary type="html">
+&lt;p&gt;crust 1.0是一个全球的三维地壳模型，其分辨率是1度。更老的版本还有分辨率低一些的crust 5.1和crust 2.0。&lt;/p&gt;
+&lt;p&gt;官方网址：&lt;a class="reference external" href="http://igppweb.ucsd.edu/~gabi/crust1.html"&gt;http://igppweb.ucsd.edu/~gabi/crust1.html&lt;/a&gt;&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id10"&gt;基本信息&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id8"&gt;模型基本信息&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
-&lt;li&gt;模型精度为1x1度；网格点定义在单元的中心，即纬度5-6度、经度150-151度的单元的值位于网格点(5.5,150.5)处；&lt;/li&gt;
-&lt;li&gt;模型中的海水深度和地形数据来自于NOAA的etopo1数据：etopo1是精度1弧分的全球起伏数据，crust 1.0从中提取了地形、海水深度和冰层厚度；对这些数据做处理得到1度精度的数据；&lt;/li&gt;
-&lt;li&gt;模型中包含了地壳的类型信息；&lt;/li&gt;
-&lt;li&gt;模型分为8层（也可以说是9层）；对于每个1x1度的单元，给出每层的Vp、Vs、&lt;span class="math"&gt;\(\rho\)&lt;/span&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id2"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id11"&gt;模型分层&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;模型分为8层，分别为&lt;/p&gt;
-&lt;ol class="arabic simple"&gt;
+&lt;li&gt;模型将全球划分为1度x1度的网格，共计360x180=64800个单元；&lt;/li&gt;
+&lt;li&gt;模型分为9层，每一层给出P和S波速度以及密度。这9层分别为&lt;ol class="arabic"&gt;
 &lt;li&gt;水层；&lt;/li&gt;
 &lt;li&gt;冰层；&lt;/li&gt;
 &lt;li&gt;上沉积层；&lt;/li&gt;
@@ -15068,45 +15061,48 @@ Type &lt;span class="s2"&gt;"help"&lt;/span&gt;, &lt;span class="s2"&gt;"copyrig
 &lt;li&gt;上地壳；&lt;/li&gt;
 &lt;li&gt;中地壳；&lt;/li&gt;
 &lt;li&gt;下地壳；&lt;/li&gt;
+&lt;li&gt;地幔&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;同时还给出了Moho之下地幔的参数，地幔的速度模型来自于LLNL-G3Dv3；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;模型中的海水深度和地形数据来自于NOAA的etopo1数据；etopo1是1分精度的全球地形起伏模型，crust1.0从该模型中提取海水深度和地形数据，做平均处理得到1度单元内的值；&lt;/li&gt;
+&lt;li&gt;模型中的冰层厚度来源于etopo1的bedrock和ice surface两个模型的差值；&lt;/li&gt;
+&lt;li&gt;地幔的参数，来自于LLNL-G3Dv3模型；&lt;/li&gt;
+&lt;li&gt;模型中还包含了每个单元的地壳类型信息；地壳类型信息可能主要由地壳年龄决定；&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;下载&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;crust1.0提供了多个压缩包，分别包含了不同的内容：&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;crust1.0.tar.gz：主压缩包，包含了全球地壳速度和密度模型；&lt;/li&gt;
+&lt;li&gt;crust1.0-addon：附加包，包含了全球地壳类型模型；&lt;/li&gt;
+&lt;li&gt;crsthk.xyz：地壳厚度的XYZ文件(不含水厚度)；&lt;/li&gt;
+&lt;li&gt;depthtomoho.xyz：Moho深度的XYZ文件（相对于海平面）；&lt;/li&gt;
+&lt;li&gt;sedthk.xyz：沉积层厚度的XYZ文件（单位km）；&lt;/li&gt;
+&lt;li&gt;sedthk-m.xyz：沉积层厚度XYZ文件（单位为m）；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="crust1-0"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id10"&gt;crust1.0&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;crust1.0中含说明文档readme一份，模型文件四个，用于读取模型的Fortran代码三个。&lt;/p&gt;
 &lt;div class="section" id="id3"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;下载&lt;/a&gt;&lt;/h2&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id11"&gt;模型&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;模型文件有四个，从模型文件的名字也可以猜出来，四个文件分别是Vp、Vs、密度和边界的深度。&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;全球被划分为1度x1度的网格单元；&lt;/li&gt;
+&lt;li&gt;网格点定义在单元的中心，即纬度5-6度、经度150-151度的单元的值位于网格点(5.5,150.5)处，也就是GMT中所说的像素配准；&lt;/li&gt;
+&lt;li&gt;全球共计360*180个单元；&lt;/li&gt;
+&lt;li&gt;数据点按照经度优先的准则保存，即在循环时先循环纬度，再循环经度；&lt;/li&gt;
+&lt;li&gt;第一个点的坐标为(179.5W,89.5N)，第二个点的坐标是(178.5,89.5)，依次类推；&lt;/li&gt;
+&lt;li&gt;每个模型文件中共有64800行，对应64800个单元，每行9列，对应每一层的值；&lt;/li&gt;
+&lt;li&gt;crust1.0.bnds给出了每一层的上边界的海拔；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id13"&gt;官方网址&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;a class="reference external" href="http://igppweb.ucsd.edu/~gabi/crust1.html"&gt;http://igppweb.ucsd.edu/~gabi/crust1.html&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id14"&gt;本站下载&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;对官方版本（20130715）重新打包，修改如下：&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;删除了官方包中的若干垃圾文件；&lt;/li&gt;
-&lt;li&gt;加入了Makefile文件实现快速编译；&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://seisman.qiniudn.com/downloads/crust1.0.tar.gz"&gt;crust1.0.tar.gz&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class="reference external" href="http://seisman.qiniudn.com/downloads/crust1.0-addon.tar.gz"&gt;crust1.0-addon.tar.gz&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;内容&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;内含说明文档readme一份；&lt;/p&gt;
-&lt;p&gt;内含模型文件四个：&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;crust1.bnds：各层上边界的深度；&lt;/li&gt;
-&lt;li&gt;crust1.vp：各层P波速度；&lt;/li&gt;
-&lt;li&gt;crust1.vs：各层S波速度；&lt;/li&gt;
-&lt;li&gt;crust1.rho：各层密度；&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;将全球划分1度x1度的单元，共计360*180个单元；该单元的值保存在单元的中心格点上。整个网格按照经度优先的准则保存，第一个点的坐标为(89.5N,179.5W)。&lt;/p&gt;
-&lt;p&gt;文件中共360*180=64800行，每行9列，给出每层的值；&lt;/p&gt;
-&lt;p&gt;内含Fortran代码三个，用于读取模型；&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;如何使用&lt;/a&gt;&lt;/h2&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id12"&gt;程序&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="section" id="getcn1point"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id17"&gt;getCN1point&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;获取任意一点的速度、密度剖面，具体用法如下例：&lt;/p&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id13"&gt;getCN1point&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;getCN1point&lt;/tt&gt;用于获取任意经纬度处的地壳模型，具体用法如下例:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ ./getCN1point
   .... reading all maps ...
@@ -15128,41 +15124,85 @@ ilat,ilon,crustal type:   41 281
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="getcn1maps"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id18"&gt;getCN1maps&lt;/a&gt;&lt;/h3&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;生成各层的Vp、Vs、&lt;span class="math"&gt;\(\rho\)&lt;/span&gt;、层边界深度，计4*9=36个文件，文件名map-vp[n]代表第n层的Vp，其他类似；&lt;/li&gt;
-&lt;li&gt;生成各层的厚度，计1*8个文件，文件名类似map-th[n]；&lt;/li&gt;
-&lt;li&gt;生成沉积层厚度sedthk和地壳厚度crsthk。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;所有文件均为ASCII格式；只有z值，没有x、y坐标，即z文件；&lt;/p&gt;
-&lt;p&gt;将z文件转换为GMT可识别的网格文件需要使用xyz2grd命令。下面的命令给出具体的转换方法：&lt;/p&gt;
-&lt;p&gt;使用-Rd或者-R-180/180/-90/90均可，但不可使用-Rg；注意-ZTLA选项的含义；&lt;/p&gt;
-&lt;p&gt;GMT语法:&lt;/p&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id14"&gt;getCN1maps&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;tt class="docutils literal"&gt;getCN1maps&lt;/tt&gt;从4个模型文件中提取信息，生成多个Z文件。&lt;/p&gt;
+&lt;p&gt;#. 生成各层的Vp、Vs、&lt;span class="math"&gt;\(\rho\)&lt;/span&gt;、边界深度，计4*9=36个文件，文件名map-vp[n]代表第n层的Vp，其他类似；
+- 生成各层的厚度，计1*8个文件，文件名类似map-th[n]，第n层的厚度由第n+1个边界的深度减去第n个边界的深度的结果取负值得到；
+- 生成沉积层厚度sedthk，由3-5层的厚度相加得到；
+- 地壳厚度crsthk：冰层+沉积层+6-8层厚度&lt;/p&gt;
+&lt;p&gt;生成的46个文件均为ASCII格式，只有Z值，没有经纬度坐标。可以通过GMT的&lt;tt class="docutils literal"&gt;xyz2grd&lt;/tt&gt;命令转换成GMT可识别的netCDF格式。&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;GMT4&lt;/span&gt;:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 xyz2grd crsthk -Rd -I1/1 -Gout.grd -ZTLA -F -V
 &lt;/pre&gt;
-&lt;p&gt;GMT5语法:&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;GMT5&lt;/span&gt;:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 gmt xyz2grd crsthk -Rd -I1/1 -Gout.grd -ZTLA -r -V
 &lt;/pre&gt;
-&lt;p&gt;注意：&lt;span class="caps"&gt;GMT5&lt;/span&gt;.1.1的xyz2grd存在Bug，因而该命令仅在GMT5.1.2及其之后版本中可用。&lt;/p&gt;
+&lt;p&gt;说明：&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;使用&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-Rd&lt;/span&gt;&lt;/tt&gt;或&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-R-180/180/-90/90&lt;/span&gt;&lt;/tt&gt;均可，但不可使用&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-Rg&lt;/span&gt;&lt;/tt&gt;；&lt;/li&gt;
+&lt;li&gt;注意&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-&lt;span class="caps"&gt;ZTLA&lt;/span&gt;&lt;/span&gt;&lt;/tt&gt;选项的含义；&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;GMT5&lt;/span&gt;.1.1的xyz2grd存在Bug，因而该命令仅在GMT5.1.2及其之后版本中可用。&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;div class="section" id="getcn1xyz"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id19"&gt;getCN1xyz&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;与getCN1maps生成类似的文件，只是此时的文件为xyz文件，每行三列。文件名以xyz开头或结尾。&lt;/p&gt;
-&lt;p&gt;将xyz文件转换为GMT可识别的网格文件，使用xyz2grd。注意与上面命令的区别。&lt;/p&gt;
-&lt;p&gt;GMT4语法:&lt;/p&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id15"&gt;getCN1xyz&lt;/a&gt;&lt;/h4&gt;
+&lt;p&gt;与&lt;tt class="docutils literal"&gt;getCN1maps&lt;/tt&gt;生成类似的文件，只是此时的文件为xyz文件，每行三列。文件名以xyz开头或结尾。XYZ文件相对来说更易读，因而推荐使用&lt;tt class="docutils literal"&gt;getCN1xyz&lt;/tt&gt;而不是&lt;tt class="docutils literal"&gt;getCN1maps&lt;/tt&gt;。&lt;/p&gt;
+&lt;p&gt;将xyz文件转换为GMT可识别的网格文件，使用&lt;tt class="docutils literal"&gt;xyz2grd&lt;/tt&gt;。注意与上面命令的区别。&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;GMT&lt;/span&gt; 4:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 xyz2grd crsthk.xyz -Rg -I1/1 -Gout.grd -F -V
 &lt;/pre&gt;
-&lt;p&gt;GMT5语法:&lt;/p&gt;
+&lt;p&gt;&lt;span class="caps"&gt;GMT&lt;/span&gt; 5:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 gmt xyz2grd crsthk.xyz -Rg -I1/1 -Gout.grd -r -V
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id8"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id20"&gt;绘图示例&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;说明&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;程序输出的地壳模型还是很让人困惑的，这里用&lt;tt class="docutils literal"&gt;getCN1point&lt;/tt&gt;获得的某一点的模型，并对输出结果做细致地解释。&lt;/p&gt;
+&lt;p&gt;对于(100.5E, 50.5N)来说:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+ enter center lat, long of desired tile (q to quit)
+50.5 100.5
+ilat,ilon,crustal type:   40 281
+ topography:    1.80999994
+  layers: vp,vs,rho,bottom
+   1.50   0.00   1.02   1.81
+   3.81   1.94   0.92   1.81
+   2.50   1.07   2.11   1.71
+   0.00   0.00   0.00   1.71
+   0.00   0.00   0.00   1.71
+   6.10   3.55   2.74 -18.93
+   6.30   3.65   2.78 -37.22
+   7.00   3.99   2.95 -45.19
+ pn,sn,rho-mantle:    7.96   4.43   3.28
+&lt;/pre&gt;
+&lt;p&gt;需要注意，第四列给出的是每一层的&lt;strong&gt;下边界&lt;/strong&gt;的海拔。记住这一点，就可以从输出中提取出很多信息：&lt;/p&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;这一点的地形为1.64km，注意，这里实际上是一度范围内的平均地形；&lt;/li&gt;
+&lt;li&gt;水层的下边界深度是1.81km，与地形相同，所以水层厚度为零；&lt;/li&gt;
+&lt;li&gt;冰层的下边界深度是1.81km，与水层的下边界深度相同，所以冰层厚度为零；&lt;/li&gt;
+&lt;li&gt;上沉积层的下边界深度厚度是1.71km，所以上沉积层厚度为0.1km；&lt;/li&gt;
+&lt;li&gt;中沉积层和下沉积层厚度均为0 km；&lt;/li&gt;
+&lt;li&gt;上地壳的下边界深度为18.93 km，算是地形并减去沉积层，上地壳的厚度是20.64km；&lt;/li&gt;
+&lt;li&gt;中地壳厚度为18.29 km，下地壳的厚度为7.97 km；&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;几个常见的疑问：&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;为了中、下沉积层的速度和密度为零？&lt;/p&gt;
+&lt;p&gt;因为此处中、下沉积层的厚度为零，即不存在这两层，不存在的东西当然不用给速度和密度了。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;为何水层和冰层的厚度为零，但是却有速度和密度？&lt;/p&gt;
+&lt;p&gt;虽然此处水层和冰层的厚度为零，但是因为水和冰的速度和密度在全球范围内是一个常数，所以虽然这里没有水和冰，还是可以给一个正确的速度和密度的。不像沉积层，不同地方的速度和密度差很大。这一点可以通过查看全球水层和冰层的速度和密度极值来验证。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id17"&gt;绘图示例&lt;/a&gt;&lt;/h2&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1
 2
 3
@@ -15176,14 +15216,15 @@ pscoast -R -J -W0.1p -O &amp;gt;&amp;gt; a.ps
 &lt;img alt="crust1.0 model" src="/images/2013100301.jpg" style="width: 600px;"/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id9"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id21"&gt;修订历史&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id18"&gt;修订历史&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;2013-10-03：初稿；&lt;/li&gt;
 &lt;li&gt;2014-06-10：加入了GMT5的命令；&lt;/li&gt;
+&lt;li&gt;2015-05-14：重新整理了文章结构，并对模型做更细致解释；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</summary><category term="数据"></category><category term="网格"></category><category term="参考模型"></category><category term="GMT4"></category><category term="GMT5"></category></entry><entry><title>GMT之grdpaste合并网格文件</title><link href="http://seisman.info/gmt-grdpaste.html" rel="alternate"></link><updated>2013-10-02T01:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2013-10-02:gmt-grdpaste.html</id><summary type="html">&lt;p&gt;该命令语法如下：&lt;/p&gt;
+</summary><category term="数据"></category><category term="网格"></category><category term="模型"></category><category term="GMT4"></category><category term="GMT5"></category></entry><entry><title>GMT之grdpaste合并网格文件</title><link href="http://seisman.info/gmt-grdpaste.html" rel="alternate"></link><updated>2013-10-02T01:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2013-10-02:gmt-grdpaste.html</id><summary type="html">&lt;p&gt;该命令语法如下：&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 grdpaste file_a.grd file_b.grd −Goutfile.grd [ −V ] [ −f[i|o]colinfo ]
 &lt;/pre&gt;
