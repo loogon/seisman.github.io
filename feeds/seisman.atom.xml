@@ -92,7 +92,7 @@ p = u \sin \theta = a r^b \sin \theta
 &lt;div class="math"&gt;
 \begin{equation*}
         = -\frac{p}{b} \int_{\theta_1}^{\theta_2} d(\frac{\cos\theta}{\sin\theta}-\theta)
-        = \frac{p}{b} (\theta - \frac{\cos\theta}{\sin\theta}) | _\theta_1^\theta_2
+        = \frac{p}{b}(\theta_2-\theta_1) - \frac{1}{b}(\eta_2-\eta_1)
 \end{equation*}
 &lt;/div&gt;
 &lt;/div&gt;
