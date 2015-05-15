@@ -30,30 +30,68 @@ v = a + b r
 &lt;p&gt;理论上，子球层的厚度越小，计算结果越精确，同时也导致计算量越大。而如果子球层的厚度取得不够小，则计算的误差可能稍大。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
-&lt;h2&gt;指数速度积分&lt;/h2&gt;
-&lt;p&gt;假设每一层的速度模型的形式为&lt;span class="math"&gt;\(v=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen&amp;nbsp;Type模型。&lt;/p&gt;
-&lt;p&gt;将上下边界的半径和速度带入：&lt;/p&gt;
+&lt;h2&gt;指数慢度模型&lt;/h2&gt;
+&lt;p&gt;假设每一层的&lt;strong&gt;慢度&lt;/strong&gt;模型的形式为&lt;span class="math"&gt;\(u=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen&amp;nbsp;Type模型。&lt;/p&gt;
+&lt;p&gt;将上下边界的半径和慢度带入：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-v_1 = a r_1^b
+u_1 = a r_1^b
 \end{equation*}
 &lt;/div&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-v_2 = a r_2^b
+u_2 = a r_2^b
 \end{equation*}
 &lt;/div&gt;
 &lt;p&gt;计算得到：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-b = \frac{ln v_1 - ln v_2}{ln r_1 - ln r_2}
+b = \frac{ln u_1/u_2}{ln r_1/r_2}
 \end{equation*}
 &lt;/div&gt;
 &lt;p&gt;在这样的近似下，tau函数的积分可以进一步简化。&lt;/p&gt;
-&lt;p&gt;根据射线参数的定义：&lt;/p&gt;
+&lt;p&gt;将慢度的公式代入射线参数的定义中：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-p = \frac{r \sin \theta}{v}
+p = u \sin \theta = a r^b \sin \theta
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;将上式对半径求导数：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+0 = ab r^{b-1} dr \sin \theta + a r^b \cos \theta d\theta
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;整理得到：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\frac{dr}{r} = - \frac{\cos\theta}{b \sin\theta} d\theta
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;代入tau函数的积分公式：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\tau(p) = \int_{r_1}^{r_2} \eta \frac{dr}{r}
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+        = \int_{r_1}^{r_2} p \frac{\cos \theta}{\sin\theta} \frac{dr}{r}
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+        = -\frac{p}{b} \int_{\theta_1}^{\theta_2} \frac{\cos^2\theta}{\sin^2\theta} d\theta
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+        = -\frac{p}{b} \int_{\theta_1}^{\theta_2} (\frac{1}{\sin^2\theta}-1) d\theta
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+        = - \frac{p}{b} (\theta+\frac{\cos\theta}{\sin\theta})|_\theta_1^\theta^2
 \end{equation*}
 &lt;/div&gt;
 &lt;/div&gt;

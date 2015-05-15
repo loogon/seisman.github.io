@@ -122,30 +122,68 @@ v = a + b r
 <p>理论上，子球层的厚度越小，计算结果越精确，同时也导致计算量越大。而如果子球层的厚度取得不够小，则计算的误差可能稍大。</p>
 </div>
 <div class="section" id="id4">
-<h2>指数速度积分</h2>
-<p>假设每一层的速度模型的形式为<span class="math">\(v=a r^b\)</span>，这种模型一般称为Bullen&nbsp;Type模型。</p>
-<p>将上下边界的半径和速度带入：</p>
+<h2>指数慢度模型</h2>
+<p>假设每一层的<strong>慢度</strong>模型的形式为<span class="math">\(u=a r^b\)</span>，这种模型一般称为Bullen&nbsp;Type模型。</p>
+<p>将上下边界的半径和慢度带入：</p>
 <div class="math">
 \begin{equation*}
-v_1 = a r_1^b
+u_1 = a r_1^b
 \end{equation*}
 </div>
 <div class="math">
 \begin{equation*}
-v_2 = a r_2^b
+u_2 = a r_2^b
 \end{equation*}
 </div>
 <p>计算得到：</p>
 <div class="math">
 \begin{equation*}
-b = \frac{ln v_1 - ln v_2}{ln r_1 - ln r_2}
+b = \frac{ln u_1/u_2}{ln r_1/r_2}
 \end{equation*}
 </div>
 <p>在这样的近似下，tau函数的积分可以进一步简化。</p>
-<p>根据射线参数的定义：</p>
+<p>将慢度的公式代入射线参数的定义中：</p>
 <div class="math">
 \begin{equation*}
-p = \frac{r \sin \theta}{v}
+p = u \sin \theta = a r^b \sin \theta
+\end{equation*}
+</div>
+<p>将上式对半径求导数：</p>
+<div class="math">
+\begin{equation*}
+0 = ab r^{b-1} dr \sin \theta + a r^b \cos \theta d\theta
+\end{equation*}
+</div>
+<p>整理得到：</p>
+<div class="math">
+\begin{equation*}
+\frac{dr}{r} = - \frac{\cos\theta}{b \sin\theta} d\theta
+\end{equation*}
+</div>
+<p>代入tau函数的积分公式：</p>
+<div class="math">
+\begin{equation*}
+\tau(p) = \int_{r_1}^{r_2} \eta \frac{dr}{r}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+        = \int_{r_1}^{r_2} p \frac{\cos \theta}{\sin\theta} \frac{dr}{r}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+        = -\frac{p}{b} \int_{\theta_1}^{\theta_2} \frac{\cos^2\theta}{\sin^2\theta} d\theta
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+        = -\frac{p}{b} \int_{\theta_1}^{\theta_2} (\frac{1}{\sin^2\theta}-1) d\theta
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+        = - \frac{p}{b} (\theta+\frac{\cos\theta}{\sin\theta})|_\theta_1^\theta^2
 \end{equation*}
 </div>
 </div>
@@ -190,8 +228,8 @@ p = \frac{r \sin \theta}{v}
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
+<li><a href="http://seisman.info/notes-of-ppk.html" title="PPK标记震相到时的一些注意事项">PPK标记震相到时的一些注意事项</a></li>
 <li><a href="http://seisman.info/pkp-travel-time-curve.html" title="PKP震相走时曲线">PKP震相走时曲线</a></li>
-<li><a href="http://seisman.info/travel-time-packages.html" title="走时计算软件包">走时计算软件包</a></li>
 <li><a href="http://seisman.info/hinet-arrival-time-and-focal-mechanism-catalog.html" title="Hi-net走时和震源机制数据">Hi-net走时和震源机制数据</a></li>
 <li><a href="http://seisman.info/install-taup.html" title="TauP的安装">TauP的安装</a></li>
 <li><a href="http://seisman.info/mark-travel-time-using-taup.html" title="利用TauP为SAC文件标记理论到时">利用TauP为SAC文件标记理论到时</a></li>
