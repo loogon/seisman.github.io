@@ -91,7 +91,8 @@ p = u \sin \theta = a r^b \sin \theta
 &lt;/div&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-        = - \frac{p}{b} (\theta+\frac{\cos\theta}{\sin\theta})|_\theta_1^\theta^2
+        = -\frac{p}{b} \int_{\theta_1}^{\theta_2} d(\frac{\cos\theta}{\sin\theta}-\theta)
+        = \frac{p}{b} (\theta - \frac{\cos\theta}{\sin\theta}) | _\theta_1^\theta_2
 \end{equation*}
 &lt;/div&gt;
 &lt;/div&gt;
