@@ -8,7 +8,7 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的Tau函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr \end{equation*} 其中\(r_a\)和\(r_b\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km ...
+        <meta name="description" content="在计算震相走时的过程中，对\(tau(p)\)函数的积分是其中比较重要的一步，具体\(tau(p)\)函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的\(tau(p)\)函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_1}^{r_2} \frac{\eta}{r} dr \end{equation*} 其中\(r_1\)和\(r_2\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种\(tau ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
@@ -17,12 +17,12 @@
 
 <meta property="og:title" content="球状模型下的Tau积分 "/>
 <meta property="og:url" content="http://seisman.info/tau-integral-in-spherical-earth.html" />
-<meta property="og:description" content="在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的Tau函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr \end{equation*} 其中\(r_a\)和\(r_b\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km ..." />
+<meta property="og:description" content="在计算震相走时的过程中，对\(tau(p)\)函数的积分是其中比较重要的一步，具体\(tau(p)\)函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的\(tau(p)\)函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_1}^{r_2} \frac{\eta}{r} dr \end{equation*} 其中\(r_1\)和\(r_2\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种\(tau ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2015-05-15T00:00:00+08:00" />
 <meta name="twitter:title" content="球状模型下的Tau积分 ">
-<meta name="twitter:description" content="在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的Tau函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr \end{equation*} 其中\(r_a\)和\(r_b\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km ...">
+<meta name="twitter:description" content="在计算震相走时的过程中，对\(tau(p)\)函数的积分是其中比较重要的一步，具体\(tau(p)\)函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的\(tau(p)\)函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_1}^{r_2} \frac{\eta}{r} dr \end{equation*} 其中\(r_1\)和\(r_2\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种\(tau ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
@@ -91,18 +91,18 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <div class="span8 offset2 article-content">
 
             
-            <p>在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。</p>
+            <p>在计算震相走时的过程中，对<span class="math">\(tau(p)\)</span>函数的积分是其中比较重要的一步，具体<span class="math">\(tau(p)\)</span>函数如何使用，在地震学教材里都有介绍。</p>
 <div class="section" id="id1">
 <h2>基本公式</h2>
-<p>在球状分层模型下，任意一层内的Tau函数的积分可以写成：</p>
+<p>在球状分层模型下，任意一层内的<span class="math">\(tau(p)\)</span>函数的积分可以写成：</p>
 <div class="math">
 \begin{equation*}
-\tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr
+\tau(p) = \int_{r_1}^{r_2} \frac{\eta}{r} dr
 \end{equation*}
 </div>
-<p>其中<span class="math">\(r_a\)</span>和<span class="math">\(r_b\)</span>分别是这一层的上下边界的地球半径。<span class="math">\(p\)</span>是射线参数（水平慢度），<span class="math">\(\eta\)</span>是垂直慢度，<span class="math">\(r\)</span>是地球半径。</p>
+<p>其中<span class="math">\(r_1\)</span>和<span class="math">\(r_2\)</span>分别是这一层的上下边界的地球半径。<span class="math">\(p\)</span>是射线参数（水平慢度），<span class="math">\(\eta\)</span>是垂直慢度，<span class="math">\(r\)</span>是地球半径。</p>
 <p>对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。</p>
-<p>下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20&nbsp;km/s。</p>
+<p>下面会介绍几种<span class="math">\(tau(p)\)</span>积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20&nbsp;km/s。</p>
 </div>
 <div class="section" id="id2">
 <h2>匀速层积分法</h2>
@@ -117,7 +117,7 @@ v = a + b r
 \end{equation*}
 </div>
 <p>其中a和b的值由上下边界的半径和速度决定。</p>
-<p>在速度线性变化的假定下，Tau函数的积分是没有解析表达式的，只能进行数值积分。</p>
+<p>在速度线性变化的假定下，<span class="math">\(tau(p)\)</span>函数的积分是没有解析表达式的，只能进行数值积分。</p>
 <p>数值积分的话，一般可以调用库函数，自己写的话也挺简单。比如可以考虑把100km的球层，再细分为1km的子球层，然后用矩形积分公式或梯形积分公式做数值积分。</p>
 <p>理论上，子球层的厚度越小，计算结果越精确，同时也导致计算量越大。而如果子球层的厚度取得不够小，则计算的误差可能稍大。</p>
 </div>
@@ -141,7 +141,7 @@ u_2 = a r_2^b
 b = \frac{ln u_1/u_2}{ln r_1/r_2}
 \end{equation*}
 </div>
-<p>在这样的近似下，tau函数的积分可以进一步简化。</p>
+<p>在这样的近似下，<span class="math">\(tau(p)\)</span>函数的积分可以进一步简化。</p>
 <p>将慢度的公式代入射线参数的定义中：</p>
 <div class="math">
 \begin{equation*}
@@ -265,8 +265,8 @@ X(p) = \frac{p}{b}(\theta_2-\theta_1)
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/taup-toolkit.html" title="走时计算软件TauP">走时计算软件TauP</a></li>
 <li><a href="http://seisman.info/notes-of-ppk.html" title="PPK标记震相到时的一些注意事项">PPK标记震相到时的一些注意事项</a></li>
+<li><a href="http://seisman.info/travel-time-packages.html" title="走时计算软件包">走时计算软件包</a></li>
 <li><a href="http://seisman.info/hinet-arrival-time-and-focal-mechanism-catalog.html" title="Hi-net走时和震源机制数据">Hi-net走时和震源机制数据</a></li>
 <li><a href="http://seisman.info/install-taup.html" title="TauP的安装">TauP的安装</a></li>
 <li><a href="http://seisman.info/mark-travel-time-using-taup.html" title="利用TauP为SAC文件标记理论到时">利用TauP为SAC文件标记理论到时</a></li>
