@@ -46,7 +46,7 @@ u_2 = a r_2^b
 &lt;p&gt;计算得到：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-b = \frac{ln u_1/u_2}{ln r_1/r_2}
+b = \frac{\log(u_1/u_2)}{\log(r_1/r_2)}
 \end{equation*}
 &lt;/div&gt;
 &lt;p&gt;在这样的近似下，&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;函数的积分可以进一步简化。&lt;/p&gt;
