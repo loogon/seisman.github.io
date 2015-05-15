@@ -8,26 +8,25 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。 这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为Makefile，并覆盖fk自带的Makefile即可。 修改版Makefile下载地址： http://seisman.qiniudn.com/downloads/Makefile.fk.3.2 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC ...
+        <meta name="description" content="在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的Tau函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr \end{equation*} 其中\(r_a\)和\(r_b\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="理论地震图, 编译, C, Fortran, Perl, 地震学软件, " />
+<meta name="keywords" content="走时, 地震学基础, " />
 
-<meta property="og:title" content="fk3.2编译 "/>
-<meta property="og:url" content="http://seisman.info/fk-installation.html" />
-<meta property="og:description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。 这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为Makefile，并覆盖fk自带的Makefile即可。 修改版Makefile下载地址： http://seisman.qiniudn.com/downloads/Makefile.fk.3.2 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC ..." />
+<meta property="og:title" content="球状模型下的Tau积分 "/>
+<meta property="og:url" content="http://seisman.info/tau-integral-in-spherical-earth.html" />
+<meta property="og:description" content="在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的Tau函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr \end{equation*} 其中\(r_a\)和\(r_b\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
-<meta property="og:article:published_time" content="2013-09-01T11:03:00+08:00" />
-<meta property="" content="2014-10-22T00:00:00+08:00" />
-<meta name="twitter:title" content="fk3.2编译 ">
-<meta name="twitter:description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。 这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为Makefile，并覆盖fk自带的Makefile即可。 修改版Makefile下载地址： http://seisman.qiniudn.com/downloads/Makefile.fk.3.2 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC ...">
+<meta property="og:article:published_time" content="2015-05-15T00:00:00+08:00" />
+<meta name="twitter:title" content="球状模型下的Tau积分 ">
+<meta name="twitter:description" content="在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。 基本公式 在球状分层模型下，任意一层内的Tau函数的积分可以写成： \begin{equation*} \tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr \end{equation*} 其中\(r_a\)和\(r_b\)分别是这一层的上下边界的地球半径。\(p\)是射线参数（水平慢度），\(\eta\)是垂直慢度，\(r\)是地球半径。 对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。 下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
-        <title>fk3.2编译  · SeisMan
+        <title>球状模型下的Tau积分  · SeisMan
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
@@ -84,113 +83,67 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://seisman.info/fk-installation.html"> fk3.2编译  </a></h1>
+    <h1><a href="http://seisman.info/tau-integral-in-spherical-earth.html"> 球状模型下的Tau积分  </a></h1>
     </header>
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contents</h4>
-        <html><body><div class="toc" id="">
-
-<ul class="simple">
-<li><a class="reference internal" href="#id1" id="id6">下载</a></li>
-<li><a class="reference internal" href="#id2" id="id7">解压</a></li>
-<li><a class="reference internal" href="#makefile" id="id8">修改Makefile</a><ul>
-<li><a class="reference internal" href="#fortran" id="id9">修改Fortran编译器选项</a></li>
-<li><a class="reference internal" href="#sac" id="id10">SAC子程序支持</a></li>
-<li><a class="reference internal" href="#sachd" id="id11">sachd链接数学库</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id3" id="id12">编译</a></li>
-<li><a class="reference internal" href="#id4" id="id13">安装</a></li>
-<li><a class="reference internal" href="#id5" id="id14">修订历史</a></li>
-</ul>
-</div></body></html>
-        </nav>
-    </div>
-    <div class="span8 article-content">
+        <div class="span8 offset2 article-content">
 
             
-            
-<p>fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。</p>
+            <p>在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。</p>
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id6">下载</a></h2>
-<p>下载地址： <a class="reference external" href="http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar">http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar</a></p>
+<h2>基本公式</h2>
+<p>在球状分层模型下，任意一层内的Tau函数的积分可以写成：</p>
+<div class="math">
+\begin{equation*}
+\tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr
+\end{equation*}
+</div>
+<p>其中<span class="math">\(r_a\)</span>和<span class="math">\(r_b\)</span>分别是这一层的上下边界的地球半径。<span class="math">\(p\)</span>是射线参数（水平慢度），<span class="math">\(\eta\)</span>是垂直慢度，<span class="math">\(r\)</span>是地球半径。</p>
+<p>对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。</p>
+<p>下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20&nbsp;km/s。</p>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id7">解压</a></h2>
-<pre class="literal-block">
-$ tar -xvf fk3.2.tar
-</pre>
-</div>
-<div class="section" id="makefile">
-<h2><a class="toc-backref" href="#id8">修改Makefile</a></h2>
-<p>fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。</p>
-<p>这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为<tt class="docutils literal">Makefile</tt>，并覆盖fk自带的Makefile即可。</p>
-<p>修改版Makefile下载地址： <a class="reference external" href="http://seisman.qiniudn.com/downloads/Makefile.fk.3.2">http://seisman.qiniudn.com/downloads/Makefile.fk.3.2</a></p>
-<div class="section" id="fortran">
-<h3><a class="toc-backref" href="#id9">修改Fortran编译器选项</a></h3>
-<p>程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下:</p>
-<pre class="literal-block">
-FC=gfortran -ffixed-line-length-none
-</pre>
-<p>其中<tt class="docutils literal"><span class="pre">-ffixed-line-length-none</span></tt>表示不限制每一行的长度。</p>
-</div>
-<div class="section" id="sac">
-<h3><a class="toc-backref" href="#id10">SAC子程序支持</a></h3>
-<p>部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将<tt class="docutils literal"><span class="caps">CFLAGS</span></tt>和<tt class="docutils literal"><span class="caps">SACLIB</span></tt>两行去除注释，并根据自己的SAC安装路径做修改。</p>
-</div>
-<div class="section" id="sachd">
-<h3><a class="toc-backref" href="#id11">sachd链接数学库</a></h3>
-<p>按照上面所说进行修改，make之后出现如下错误：</p>
-<pre class="literal-block">
-cc -O    -o sachd sachd.o sacio.o
-sacio.o: In function `read_sac2':
-sacio.c:(.text+0x831): undefined reference to `rintf'
-sacio.c:(.text+0x8e0): undefined reference to `rintf'
-collect2: ld 返回 1
-make: *** [sachd] 错误 1
-</pre>
-<p>这是由于sachd在链接时没有链接数学库<tt class="docutils literal"><span class="pre">-lm</span></tt>，将</p>
-<pre class="literal-block">
-sachd: sachd.o sacio.o
-    ${LINK.c} -o $@ $^
-</pre>
-<p>改成:</p>
-<pre class="literal-block">
-sachd: sachd.o sacio.o
-    ${LINK.c} -o $@ $^ -lm
-</pre>
-<p>即可。</p>
-</div>
+<h2>匀速层积分法</h2>
+<p>最简单的方法是将球层内的速度近似为一个常数。比如这里，可以把这个100km厚的球层当做是一个匀速层。但是这个速度怎么取就是一个问题了。取8.06的话积分结果偏大，取8.20的话积分结果偏小。取均值8.13吧，好像又没有什么道理，毕竟垂直慢度跟速度之间又不是线性关系。所以把整个球层当做匀速有点不靠谱，而且误差会很大。</p>
 </div>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id12">编译</a></h2>
-<pre class="literal-block">
-$ make
-</pre>
+<h2>线性速度积分法</h2>
+<p>一个比较合理的假设是，在球层内速度线性变化，即</p>
+<div class="math">
+\begin{equation*}
+v = a + b r
+\end{equation*}
+</div>
+<p>其中a和b的值由上下边界的半径和速度决定。</p>
+<p>在速度线性变化的假定下，Tau函数的积分是没有解析表达式的，只能进行数值积分。</p>
+<p>数值积分的话，一般可以调用库函数，自己写的话也挺简单。比如可以考虑把100km的球层，再细分为1km的子球层，然后用矩形积分公式或梯形积分公式做数值积分。</p>
+<p>理论上，子球层的厚度越小，计算结果越精确，同时也导致计算量越大。而如果子球层的厚度取得不够小，则计算的误差可能稍大。</p>
 </div>
 <div class="section" id="id4">
-<h2><a class="toc-backref" href="#id13">安装</a></h2>
-<p>为了使用的方便，建议将编译生成的二进制文件<tt class="docutils literal">fk</tt>、<tt class="docutils literal">st_fk</tt>、<tt class="docutils literal">syn</tt>和<tt class="docutils literal">trav</tt>、<tt class="docutils literal">sachd</tt>以及脚本文件<tt class="docutils literal">fk.pl</tt>复制到<tt class="docutils literal">$<span class="caps">HOME</span>/bin</tt>或者其他可搜索的路径中即可。</p>
-<ul class="simple">
-<li><tt class="docutils literal">fk</tt>：程序的核心，负责计算格林函数；</li>
-<li><tt class="docutils literal">st_fk</tt>：与fk相似，负责计算静态位移；</li>
-<li><tt class="docutils literal">trav</tt>：计算到时；</li>
-<li><tt class="docutils literal">syn</tt>：利用<tt class="docutils literal">fk</tt>计算出的格林函数合成最终地震图；</li>
-<li><tt class="docutils literal">sachd</tt>：用于修改SAC文件的头段信息；</li>
-<li><tt class="docutils literal">fk.pl</tt>：<tt class="docutils literal">fk</tt>的Perl封装，相对<tt class="docutils literal">fk</tt>来说更易于使用，其调用了<tt class="docutils literal">fk</tt>、<tt class="docutils literal">trav</tt>和<tt class="docutils literal">sachd</tt>；</li>
-</ul>
+<h2>指数速度积分</h2>
+<p>假设每一层的速度模型的形式为<span class="math">\(v=a r^b\)</span>，这种模型一般称为Bullen&nbsp;Type模型。</p>
+<p>将上下边界的半径和速度带入：</p>
+<div class="math">
+\begin{equation*}
+v_1 = a r_1^b
+v_2 = a r_2^b
+\end{equation*}
 </div>
-<div class="section" id="id5">
-<h2><a class="toc-backref" href="#id14">修订历史</a></h2>
-<ul class="simple">
-<li>2013-09-01：初稿；</li>
-<li>2013-10-07：关于fk 3.2的一点修改；</li>
-<li>2014-10-22：更新至fk 3.2；</li>
-</ul>
+<p>计算得到：</p>
+<div class="math">
+\begin{equation*}
+b = \frac{ln v_1 - ln v_2}{ln r_1 - ln r_2}
+\end{equation*}
+</div>
+<p>在这样的近似下，tau函数的积分可以进一步简化。</p>
+<p>根据射线参数的定义：</p>
+<div class="math">
+\begin{equation*}
+p = \frac{r \sin \theta}{v}
+\end{equation*}
+</div>
 </div>
 
             
@@ -200,7 +153,7 @@ $ make
     <div class="accordion-group">
         <div class="accordion-heading">
             <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
-                href="http://seisman.info/fk-installation.html#disqus_thread">
+                href="http://seisman.info/tau-integral-in-spherical-earth.html#disqus_thread">
                 Comments
             </a>
         </div>
@@ -210,8 +163,8 @@ $ make
                     <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = 'seisman';
-        var disqus_identifier = 'http://seisman.info/fk-installation.html';
-    var disqus_url = 'http://seisman.info/fk-installation.html';
+        var disqus_identifier = 'http://seisman.info/tau-integral-in-spherical-earth.html';
+    var disqus_url = 'http://seisman.info/tau-integral-in-spherical-earth.html';
 
     (function() {
          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -233,19 +186,18 @@ $ make
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/calculate-dist-az-baz.html" title="震中距、方位角和反方位角的计算">震中距、方位角和反方位角的计算</a></li>
-<li><a href="http://seisman.info/intel-non-commercial-software.html" title="Intel 非商业开发工具安装记录">Intel 非商业开发工具安装记录</a></li>
-<li><a href="http://seisman.info/perl-progressbar.html" title="实现进度条的模块">实现进度条的模块</a></li>
-<li><a href="http://seisman.info/perl-plenv.html" title="Perl多版本共存之plenv">Perl多版本共存之plenv</a></li>
-<li><a href="http://seisman.info/introduction-to-easybmp.html" title="EasyBMP：BMP图像处理函数库">EasyBMP：BMP图像处理函数库</a></li>
+<li><a href="http://seisman.info/notes-of-ppk.html" title="PPK标记震相到时的一些注意事项">PPK标记震相到时的一些注意事项</a></li>
+<li><a href="http://seisman.info/pkp-travel-time-curve.html" title="PKP震相走时曲线">PKP震相走时曲线</a></li>
+<li><a href="http://seisman.info/hinet-arrival-time-and-focal-mechanism-catalog.html" title="Hi-net走时和震源机制数据">Hi-net走时和震源机制数据</a></li>
+<li><a href="http://seisman.info/install-taup.html" title="TauP的安装">TauP的安装</a></li>
+<li><a href="http://seisman.info/mark-travel-time-using-taup.html" title="利用TauP为SAC文件标记理论到时">利用TauP为SAC文件标记理论到时</a></li>
 </ul>
 <hr />
 </section>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="http://seisman.info/mopad-moment-tensor-plotting-and-decomposition.html" title="Previous: MoPaD:地震矩绘制和分析工具">MoPaD:地震矩绘制和分析工具</a></li>
-                <li class="next-article"><a href="http://seisman.info/doule-couple-radition-pattern.html" title="Next: Doule Couple辐射花样可视化">Doule Couple辐射花样可视化</a> »</li>
+                <li class="previous-article">« <a href="http://seisman.info/install-cps330.html" title="Previous: CPS330的安装">CPS330的安装</a></li>
             </ul>
             </nav>
             </aside>
@@ -253,36 +205,20 @@ $ make
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2013-09-01T11:03:00+08:00">2013-09-01</time>
-
-<h4>Last Updated</h4>
-<time datetime="2014-10-22T00:00:00+08:00">2014-10-22</time>
-
+            <time pubdate="pubdate" datetime="2015-05-15T00:00:00+08:00">2015-05-15</time>
             <h4>Category</h4>
-            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ruan-jian-ref">地震学软件</a>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ji-chu-ref">地震学基础</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://seisman.info/tags.html#bian-yi-ref">编译
+                <li><a href="http://seisman.info/tags.html#zou-shi-ref">走时
                     <span>9</span>
-</a></li>
-                <li><a href="http://seisman.info/tags.html#c-ref">C
-                    <span>11</span>
-</a></li>
-                <li><a href="http://seisman.info/tags.html#fortran-ref">Fortran
-                    <span>4</span>
-</a></li>
-                <li><a href="http://seisman.info/tags.html#li-lun-di-zhen-tu-ref">理论地震图
-                    <span>5</span>
-</a></li>
-                <li><a href="http://seisman.info/tags.html#perl-ref">Perl
-                    <span>14</span>
 </a></li>
             </ul>
             <h4>Features</h4>
-            <a href="http://seisman.qiniudn.com/pdfs/fk-installation.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+            <a href="http://seisman.qiniudn.com/pdfs/tau-integral-in-spherical-earth.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2013-09-01_fk-installation.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisBasic/2015-05-15_tau-integral-in-spherical-earth.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>
@@ -371,7 +307,28 @@ $('#disqus_thread').on('shown', function () {
 </script>
 
 
-    </body>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type= "text/javascript">
+    MathJax.Hub.Config({
+        config: ["MMLorHTML.js"],
+        jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML"],
+        TeX: {
+            extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"],
+            equationNumbers: { autoNumber: "AMS" }
+        },
+        extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js"],
+        tex2jax: { 
+            //inlineMath: [ [\'$\',\'$\'] ],
+            //displayMath: [ [\'$$\',\'$$\'] ],
+            inlineMath: [ ["\\(", "\\)"] ],
+            displayMath: [ ],
+            processClass: "math",
+            processEscapes: true
+        },
+        "HTML-CSS": {
+            styles: { ".MathJax .mo, .MathJax .mi": {color: "black ! important"}}
+        }
+       });
+</script>    </body>
     <!-- Theme: Elegant built for Pelican
     License : http://oncrashreboot.com/pelican-elegant -->
 </html>

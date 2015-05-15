@@ -1,5 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeisMan</title><link>http://seisman.info/</link><description>学会整理自己的经验是科研的第一步。</description><atom:link href="http://seisman.info/feeds/seisman.rss.xml" rel="self"></atom:link><lastBuildDate>Thu, 14 May 2015 00:00:00 +0800</lastBuildDate><item><title>CPS330的安装</title><link>http://seisman.info/install-cps330.html</link><description>&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeisMan</title><link>http://seisman.info/</link><description>学会整理自己的经验是科研的第一步。</description><atom:link href="http://seisman.info/feeds/seisman.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 15 May 2015 00:00:00 +0800</lastBuildDate><item><title>球状模型下的Tau积分</title><link>http://seisman.info/tau-integral-in-spherical-earth.html</link><description>&lt;p&gt;在计算震相走时的过程中，对Tau函数的积分是其中比较重要的一步，具体Tau函数如何使用，在地震学教材里都有介绍。&lt;/p&gt;
+&lt;div class="section" id="id1"&gt;
+&lt;h2&gt;基本公式&lt;/h2&gt;
+&lt;p&gt;在球状分层模型下，任意一层内的Tau函数的积分可以写成：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\tau(p) = \int_{r_a}^{r_b} \frac{\eta}{r} dr
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;其中&lt;span class="math"&gt;\(r_a\)&lt;/span&gt;和&lt;span class="math"&gt;\(r_b\)&lt;/span&gt;分别是这一层的上下边界的地球半径。&lt;span class="math"&gt;\(p\)&lt;/span&gt;是射线参数（水平慢度），&lt;span class="math"&gt;\(\eta\)&lt;/span&gt;是垂直慢度，&lt;span class="math"&gt;\(r\)&lt;/span&gt;是地球半径。&lt;/p&gt;
+&lt;p&gt;对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。&lt;/p&gt;
+&lt;p&gt;下面会介绍几种Tau积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20&amp;nbsp;km/s。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id2"&gt;
+&lt;h2&gt;匀速层积分法&lt;/h2&gt;
+&lt;p&gt;最简单的方法是将球层内的速度近似为一个常数。比如这里，可以把这个100km厚的球层当做是一个匀速层。但是这个速度怎么取就是一个问题了。取8.06的话积分结果偏大，取8.20的话积分结果偏小。取均值8.13吧，好像又没有什么道理，毕竟垂直慢度跟速度之间又不是线性关系。所以把整个球层当做匀速有点不靠谱，而且误差会很大。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id3"&gt;
+&lt;h2&gt;线性速度积分法&lt;/h2&gt;
+&lt;p&gt;一个比较合理的假设是，在球层内速度线性变化，即&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+v = a + b r
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;其中a和b的值由上下边界的半径和速度决定。&lt;/p&gt;
+&lt;p&gt;在速度线性变化的假定下，Tau函数的积分是没有解析表达式的，只能进行数值积分。&lt;/p&gt;
+&lt;p&gt;数值积分的话，一般可以调用库函数，自己写的话也挺简单。比如可以考虑把100km的球层，再细分为1km的子球层，然后用矩形积分公式或梯形积分公式做数值积分。&lt;/p&gt;
+&lt;p&gt;理论上，子球层的厚度越小，计算结果越精确，同时也导致计算量越大。而如果子球层的厚度取得不够小，则计算的误差可能稍大。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;指数速度积分&lt;/h2&gt;
+&lt;p&gt;假设每一层的速度模型的形式为&lt;span class="math"&gt;\(v=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen&amp;nbsp;Type模型。&lt;/p&gt;
+&lt;p&gt;将上下边界的半径和速度带入：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+v_1 = a r_1^b
+v_2 = a r_2^b
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;计算得到：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+b = \frac{ln v_1 - ln v_2}{ln r_1 - ln r_2}
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;在这样的近似下，tau函数的积分可以进一步简化。&lt;/p&gt;
+&lt;p&gt;根据射线参数的定义：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+p = \frac{r \sin \theta}{v}
+\end{equation*}
+&lt;/div&gt;
+&lt;/div&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Fri, 15 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2015-05-15:tau-integral-in-spherical-earth.html</guid><category>走时</category></item><item><title>CPS330的安装</title><link>http://seisman.info/install-cps330.html</link><description>&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
 &lt;p&gt;本文介绍如何在Linux系统下编译安装CPS330。&lt;/p&gt;
 &lt;ol class="arabic"&gt;
 &lt;li&gt;&lt;p class="first"&gt;解压:&lt;/p&gt;
@@ -4577,7 +4631,7 @@ sudo yum install VirtualBox-4.3
 &lt;p&gt;需要注意两点：&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;若机器性能不够，虚拟机的使用体验会非常差，所以不建议在老机器上使用；&lt;/li&gt;
-&lt;li&gt;就个人经验，VirtualBox安装Windows 7虚拟机，每隔几天就会毫无征兆地异常退出一次，所以使用的时候注意随时保存数据；&lt;/li&gt;
+&lt;li&gt;更新kernel之后需要执行&lt;tt class="docutils literal"&gt;sudo /etc/init.d/vboxdrv setup&lt;/tt&gt;；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id30"&gt;
