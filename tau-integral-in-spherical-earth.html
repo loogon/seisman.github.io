@@ -184,7 +184,43 @@ p = u \sin \theta = a r^b \sin \theta
 <div class="math">
 \begin{equation*}
         = -\frac{p}{b} \int_{\theta_1}^{\theta_2} d(\frac{\cos\theta}{\sin\theta}-\theta)
-        = \frac{p}{b}(\theta_2-\theta_1) - \frac{1}{b}(\eta_2-\eta_1)
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+        = - \frac{p}{b}(\theta_2-\theta_1) - \frac{1}{b}(\eta_2-\eta_1)
+\end{equation*}
+</div>
+<p>根据tau函数的定义<span class="math">\(\tau(p)=T(p)-pX(p)\)</span>，对比上式有：</p>
+<div class="math">
+\begin{equation*}
+T(p) = \frac{1}{b}(\eta_1-\eta_2)
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+X(p) = \frac{p}{b}(\theta_2-\theta_1)
+\end{equation*}
+</div>
+<p>其中：</p>
+<div class="math">
+\begin{equation*}
+\eta_1 = \sqrt{u_1^2-p^2}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\eta_2 = \sqrt{u_2^2-p^2}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\theta_1 = \atan \frac{p}{\eta_1}
+\end{equation*}
+</div>
+<div class="math">
+\begin{equation*}
+\theta_2 = \atan \frac{p}{\eta_2}
 \end{equation*}
 </div>
 </div>
@@ -233,7 +269,7 @@ p = u \sin \theta = a r^b \sin \theta
 <li><a href="http://seisman.info/pkp-travel-time-curve.html" title="PKP震相走时曲线">PKP震相走时曲线</a></li>
 <li><a href="http://seisman.info/travel-time-packages.html" title="走时计算软件包">走时计算软件包</a></li>
 <li><a href="http://seisman.info/hinet-arrival-time-and-focal-mechanism-catalog.html" title="Hi-net走时和震源机制数据">Hi-net走时和震源机制数据</a></li>
-<li><a href="http://seisman.info/install-taup.html" title="TauP的安装">TauP的安装</a></li>
+<li><a href="http://seisman.info/mark-travel-time-using-taup.html" title="利用TauP为SAC文件标记理论到时">利用TauP为SAC文件标记理论到时</a></li>
 </ul>
 <hr />
 </section>

@@ -92,7 +92,43 @@ p = u \sin \theta = a r^b \sin \theta
 &lt;div class="math"&gt;
 \begin{equation*}
         = -\frac{p}{b} \int_{\theta_1}^{\theta_2} d(\frac{\cos\theta}{\sin\theta}-\theta)
-        = \frac{p}{b}(\theta_2-\theta_1) - \frac{1}{b}(\eta_2-\eta_1)
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+        = - \frac{p}{b}(\theta_2-\theta_1) - \frac{1}{b}(\eta_2-\eta_1)
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;根据tau函数的定义&lt;span class="math"&gt;\(\tau(p)=T(p)-pX(p)\)&lt;/span&gt;，对比上式有：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+T(p) = \frac{1}{b}(\eta_1-\eta_2)
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+X(p) = \frac{p}{b}(\theta_2-\theta_1)
+\end{equation*}
+&lt;/div&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\eta_1 = \sqrt{u_1^2-p^2}
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\eta_2 = \sqrt{u_2^2-p^2}
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\theta_1 = \atan \frac{p}{\eta_1}
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
+\theta_2 = \atan \frac{p}{\eta_2}
 \end{equation*}
 &lt;/div&gt;
 &lt;/div&gt;
