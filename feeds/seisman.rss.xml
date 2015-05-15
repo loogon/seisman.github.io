@@ -36,6 +36,10 @@ v = a + b r
 &lt;div class="math"&gt;
 \begin{equation*}
 v_1 = a r_1^b
+\end{equation*}
+&lt;/div&gt;
+&lt;div class="math"&gt;
+\begin{equation*}
 v_2 = a r_2^b
 \end{equation*}
 &lt;/div&gt;
