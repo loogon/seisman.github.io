@@ -8,7 +8,7 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC=gfortran -ffixed-line-length-none SAC子程序支持 部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将CFLAGS和SACLIB两行去除注释。 sachd链接数学库 按照上面所说进行修改，make之后出现如下错误： cc -O -o sachd sachd ...
+        <meta name="description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。 这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为Makefile，并覆盖fk自带的Makefile即可。 修改版Makefile下载地址： http://seisman.qiniudn.com/downloads/Makefile.fk.3.2 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
@@ -17,13 +17,13 @@
 
 <meta property="og:title" content="fk3.2编译 "/>
 <meta property="og:url" content="http://seisman.info/fk-installation.html" />
-<meta property="og:description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC=gfortran -ffixed-line-length-none SAC子程序支持 部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将CFLAGS和SACLIB两行去除注释。 sachd链接数学库 按照上面所说进行修改，make之后出现如下错误： cc -O -o sachd sachd ..." />
+<meta property="og:description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。 这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为Makefile，并覆盖fk自带的Makefile即可。 修改版Makefile下载地址： http://seisman.qiniudn.com/downloads/Makefile.fk.3.2 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2013-09-01T11:03:00+08:00" />
 <meta property="" content="2014-10-22T00:00:00+08:00" />
 <meta name="twitter:title" content="fk3.2编译 ">
-<meta name="twitter:description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC=gfortran -ffixed-line-length-none SAC子程序支持 部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将CFLAGS和SACLIB两行去除注释。 sachd链接数学库 按照上面所说进行修改，make之后出现如下错误： cc -O -o sachd sachd ...">
+<meta name="twitter:description" content="fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。 下载 下载地址： http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar 解压 $ tar -xvf fk3.2.tar 修改Makefile fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。 这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为Makefile，并覆盖fk自带的Makefile即可。 修改版Makefile下载地址： http://seisman.qiniudn.com/downloads/Makefile.fk.3.2 修改Fortran编译器选项 程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下: FC ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
@@ -95,19 +95,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id8">下载</a></li>
-<li><a class="reference internal" href="#id2" id="id9">解压</a></li>
-<li><a class="reference internal" href="#makefile" id="id10">修改Makefile</a><ul>
-<li><a class="reference internal" href="#fortran" id="id11">修改Fortran编译器选项</a></li>
-<li><a class="reference internal" href="#sac" id="id12">SAC子程序支持</a></li>
-<li><a class="reference internal" href="#sachd" id="id13">sachd链接数学库</a></li>
-<li><a class="reference internal" href="#id3" id="id14">Makefile下载</a></li>
+<li><a class="reference internal" href="#id1" id="id6">下载</a></li>
+<li><a class="reference internal" href="#id2" id="id7">解压</a></li>
+<li><a class="reference internal" href="#makefile" id="id8">修改Makefile</a><ul>
+<li><a class="reference internal" href="#fortran" id="id9">修改Fortran编译器选项</a></li>
+<li><a class="reference internal" href="#sac" id="id10">SAC子程序支持</a></li>
+<li><a class="reference internal" href="#sachd" id="id11">sachd链接数学库</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id4" id="id15">编译</a></li>
-<li><a class="reference internal" href="#id5" id="id16">安装</a></li>
-<li><a class="reference internal" href="#id6" id="id17">说明</a></li>
-<li><a class="reference internal" href="#id7" id="id18">修订历史</a></li>
+<li><a class="reference internal" href="#id3" id="id12">编译</a></li>
+<li><a class="reference internal" href="#id4" id="id13">安装</a></li>
+<li><a class="reference internal" href="#id5" id="id14">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -118,30 +116,34 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             
 <p>fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。</p>
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id8">下载</a></h2>
+<h2><a class="toc-backref" href="#id6">下载</a></h2>
 <p>下载地址： <a class="reference external" href="http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar">http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar</a></p>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id9">解压</a></h2>
+<h2><a class="toc-backref" href="#id7">解压</a></h2>
 <pre class="literal-block">
 $ tar -xvf fk3.2.tar
 </pre>
 </div>
 <div class="section" id="makefile">
-<h2><a class="toc-backref" href="#id10">修改Makefile</a></h2>
+<h2><a class="toc-backref" href="#id8">修改Makefile</a></h2>
+<p>fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。</p>
+<p>这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为<tt class="docutils literal">Makefile</tt>，并覆盖fk自带的Makefile即可。</p>
+<p>修改版Makefile下载地址： <a class="reference external" href="http://seisman.qiniudn.com/downloads/Makefile.fk.3.2">http://seisman.qiniudn.com/downloads/Makefile.fk.3.2</a></p>
 <div class="section" id="fortran">
-<h3><a class="toc-backref" href="#id11">修改Fortran编译器选项</a></h3>
+<h3><a class="toc-backref" href="#id9">修改Fortran编译器选项</a></h3>
 <p>程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下:</p>
 <pre class="literal-block">
 FC=gfortran -ffixed-line-length-none
 </pre>
+<p>其中<tt class="docutils literal"><span class="pre">-ffixed-line-length-none</span></tt>表示不限制每一行的长度。</p>
 </div>
 <div class="section" id="sac">
-<h3><a class="toc-backref" href="#id12">SAC子程序支持</a></h3>
-<p>部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将<tt class="docutils literal"><span class="caps">CFLAGS</span></tt>和<tt class="docutils literal"><span class="caps">SACLIB</span></tt>两行去除注释。</p>
+<h3><a class="toc-backref" href="#id10">SAC子程序支持</a></h3>
+<p>部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将<tt class="docutils literal"><span class="caps">CFLAGS</span></tt>和<tt class="docutils literal"><span class="caps">SACLIB</span></tt>两行去除注释，并根据自己的SAC安装路径做修改。</p>
 </div>
 <div class="section" id="sachd">
-<h3><a class="toc-backref" href="#id13">sachd链接数学库</a></h3>
+<h3><a class="toc-backref" href="#id11">sachd链接数学库</a></h3>
 <p>按照上面所说进行修改，make之后出现如下错误：</p>
 <pre class="literal-block">
 cc -O    -o sachd sachd.o sacio.o
@@ -156,31 +158,23 @@ make: *** [sachd] 错误 1
 sachd: sachd.o sacio.o
     ${LINK.c} -o $@ $^
 </pre>
-<p>改成</p>
+<p>改成:</p>
 <pre class="literal-block">
 sachd: sachd.o sacio.o
     ${LINK.c} -o $@ $^ -lm
 </pre>
 <p>即可。</p>
 </div>
+</div>
 <div class="section" id="id3">
-<h3><a class="toc-backref" href="#id14">Makefile下载</a></h3>
-<p>Makefile下载地址： <a class="reference external" href="http://seisman.qiniudn.com/downloads/Makefile.fk.3.2">http://seisman.qiniudn.com/downloads/Makefile.fk.3.2</a></p>
-<p>下载并将其覆盖fk自带的Makefile即可。</p>
-</div>
-</div>
-<div class="section" id="id4">
-<h2><a class="toc-backref" href="#id15">编译</a></h2>
+<h2><a class="toc-backref" href="#id12">编译</a></h2>
 <pre class="literal-block">
 $ make
 </pre>
 </div>
-<div class="section" id="id5">
-<h2><a class="toc-backref" href="#id16">安装</a></h2>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id13">安装</a></h2>
 <p>为了使用的方便，建议将编译生成的二进制文件<tt class="docutils literal">fk</tt>、<tt class="docutils literal">st_fk</tt>、<tt class="docutils literal">syn</tt>和<tt class="docutils literal">trav</tt>、<tt class="docutils literal">sachd</tt>以及脚本文件<tt class="docutils literal">fk.pl</tt>复制到<tt class="docutils literal">$<span class="caps">HOME</span>/bin</tt>或者其他可搜索的路径中即可。</p>
-</div>
-<div class="section" id="id6">
-<h2><a class="toc-backref" href="#id17">说明</a></h2>
 <ul class="simple">
 <li><tt class="docutils literal">fk</tt>：程序的核心，负责计算格林函数；</li>
 <li><tt class="docutils literal">st_fk</tt>：与fk相似，负责计算静态位移；</li>
@@ -190,8 +184,8 @@ $ make
 <li><tt class="docutils literal">fk.pl</tt>：<tt class="docutils literal">fk</tt>的Perl封装，相对<tt class="docutils literal">fk</tt>来说更易于使用，其调用了<tt class="docutils literal">fk</tt>、<tt class="docutils literal">trav</tt>和<tt class="docutils literal">sachd</tt>；</li>
 </ul>
 </div>
-<div class="section" id="id7">
-<h2><a class="toc-backref" href="#id18">修订历史</a></h2>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id14">修订历史</a></h2>
 <ul class="simple">
 <li>2013-09-01：初稿；</li>
 <li>2013-10-07：关于fk 3.2的一点修改；</li>
@@ -240,10 +234,10 @@ $ make
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/calculate-dist-az-baz.html" title="震中距、方位角和反方位角的计算">震中距、方位角和反方位角的计算</a></li>
-<li><a href="http://seisman.info/install-sac-from-source-code.html" title="SAC源代码安装">SAC源代码安装</a></li>
+<li><a href="http://seisman.info/perlbrew-for-multiple-versions-of-perl.html" title="Perl多版本共存之Perlbrew">Perl多版本共存之Perlbrew</a></li>
+<li><a href="http://seisman.info/breqfast-script.html" title="BREQ_FAST脚本实现">BREQ_FAST脚本实现</a></li>
 <li><a href="http://seisman.info/intel-non-commercial-software.html" title="Intel 非商业开发工具安装记录">Intel 非商业开发工具安装记录</a></li>
-<li><a href="http://seisman.info/timespan-in-perl.html" title="Perl中的时间加法">Perl中的时间加法</a></li>
-<li><a href="http://seisman.info/calculate-jday.html" title="计算某日是一年中的第几天">计算某日是一年中的第几天</a></li>
+<li><a href="http://seisman.info/reading-better-programming.html" title="读《编程修养》">读《编程修养》</a></li>
 </ul>
 <hr />
 </section>

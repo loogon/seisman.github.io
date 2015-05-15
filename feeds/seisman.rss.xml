@@ -16101,30 +16101,34 @@ $ make
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Mon, 02 Sep 2013 00:09:00 +0800</pubDate><guid>tag:seisman.info,2013-09-02:doule-couple-radition-pattern.html</guid><category>震源机制解</category><category>震源球</category><category>Mathematica</category></item><item><title>fk3.2编译</title><link>http://seisman.info/fk-installation.html</link><description>
 &lt;p&gt;fk是Prof. Lupei Zhu写的一个计算水平分层介质中理论地震图的小程序。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id8"&gt;下载&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id6"&gt;下载&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;下载地址： &lt;a class="reference external" href="http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar"&gt;http://www.eas.slu.edu/People/LZhu/downloads/fk3.2.tar&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id2"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;解压&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id7"&gt;解压&lt;/a&gt;&lt;/h2&gt;
 &lt;pre class="literal-block"&gt;
 $ tar -xvf fk3.2.tar
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="makefile"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id10"&gt;修改Makefile&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id8"&gt;修改Makefile&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;fk3.2自带的Makefile有一堆问题，下面会说明遇到的问题以及如何解决。&lt;/p&gt;
+&lt;p&gt;这里先提供我修改好的Makefile，读者可以直接下载这个文件，然后重命名为&lt;tt class="docutils literal"&gt;Makefile&lt;/tt&gt;，并覆盖fk自带的Makefile即可。&lt;/p&gt;
+&lt;p&gt;修改版Makefile下载地址： &lt;a class="reference external" href="http://seisman.qiniudn.com/downloads/Makefile.fk.3.2"&gt;http://seisman.qiniudn.com/downloads/Makefile.fk.3.2&lt;/a&gt;&lt;/p&gt;
 &lt;div class="section" id="fortran"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id11"&gt;修改Fortran编译器选项&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id9"&gt;修改Fortran编译器选项&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;程序的大部分代码是用Fortran 77的语法写的，由于Fortran 77规定每行超过第72列的字符会被忽略，而代码中部分行超过了72列。因而要修改编译器选项，加入语句如下:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 FC=gfortran -ffixed-line-length-none
 &lt;/pre&gt;
+&lt;p&gt;其中&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;-ffixed-line-length-none&lt;/span&gt;&lt;/tt&gt;表示不限制每一行的长度。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="sac"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id12"&gt;SAC子程序支持&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将&lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;CFLAGS&lt;/span&gt;&lt;/tt&gt;和&lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;SACLIB&lt;/span&gt;&lt;/tt&gt;两行去除注释。&lt;/p&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id10"&gt;SAC子程序支持&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;部分代码中调用了SAC提供的子程序，如果已经安装了SAC，那么可以将&lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;CFLAGS&lt;/span&gt;&lt;/tt&gt;和&lt;tt class="docutils literal"&gt;&lt;span class="caps"&gt;SACLIB&lt;/span&gt;&lt;/tt&gt;两行去除注释，并根据自己的SAC安装路径做修改。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="sachd"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id13"&gt;sachd链接数学库&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id11"&gt;sachd链接数学库&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;按照上面所说进行修改，make之后出现如下错误：&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 cc -O    -o sachd sachd.o sacio.o
@@ -16139,31 +16143,23 @@ make: *** [sachd] 错误 1
 sachd: sachd.o sacio.o
     ${LINK.c} -o $@ $^
 &lt;/pre&gt;
-&lt;p&gt;改成&lt;/p&gt;
+&lt;p&gt;改成:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sachd: sachd.o sacio.o
     ${LINK.c} -o $@ $^ -lm
 &lt;/pre&gt;
 &lt;p&gt;即可。&lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 &lt;div class="section" id="id3"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id14"&gt;Makefile下载&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Makefile下载地址： &lt;a class="reference external" href="http://seisman.qiniudn.com/downloads/Makefile.fk.3.2"&gt;http://seisman.qiniudn.com/downloads/Makefile.fk.3.2&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;下载并将其覆盖fk自带的Makefile即可。&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id4"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id15"&gt;编译&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;编译&lt;/a&gt;&lt;/h2&gt;
 &lt;pre class="literal-block"&gt;
 $ make
 &lt;/pre&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id5"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id16"&gt;安装&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id4"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id13"&gt;安装&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;为了使用的方便，建议将编译生成的二进制文件&lt;tt class="docutils literal"&gt;fk&lt;/tt&gt;、&lt;tt class="docutils literal"&gt;st_fk&lt;/tt&gt;、&lt;tt class="docutils literal"&gt;syn&lt;/tt&gt;和&lt;tt class="docutils literal"&gt;trav&lt;/tt&gt;、&lt;tt class="docutils literal"&gt;sachd&lt;/tt&gt;以及脚本文件&lt;tt class="docutils literal"&gt;fk.pl&lt;/tt&gt;复制到&lt;tt class="docutils literal"&gt;$&lt;span class="caps"&gt;HOME&lt;/span&gt;/bin&lt;/tt&gt;或者其他可搜索的路径中即可。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="id6"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id17"&gt;说明&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;tt class="docutils literal"&gt;fk&lt;/tt&gt;：程序的核心，负责计算格林函数；&lt;/li&gt;
 &lt;li&gt;&lt;tt class="docutils literal"&gt;st_fk&lt;/tt&gt;：与fk相似，负责计算静态位移；&lt;/li&gt;
@@ -16173,8 +16169,8 @@ $ make
 &lt;li&gt;&lt;tt class="docutils literal"&gt;fk.pl&lt;/tt&gt;：&lt;tt class="docutils literal"&gt;fk&lt;/tt&gt;的Perl封装，相对&lt;tt class="docutils literal"&gt;fk&lt;/tt&gt;来说更易于使用，其调用了&lt;tt class="docutils literal"&gt;fk&lt;/tt&gt;、&lt;tt class="docutils literal"&gt;trav&lt;/tt&gt;和&lt;tt class="docutils literal"&gt;sachd&lt;/tt&gt;；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id7"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id18"&gt;修订历史&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id14"&gt;修订历史&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;2013-09-01：初稿；&lt;/li&gt;
 &lt;li&gt;2013-10-07：关于fk 3.2的一点修改；&lt;/li&gt;
