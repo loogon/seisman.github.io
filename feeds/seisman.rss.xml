@@ -107,7 +107,7 @@ T(p) = \frac{1}{b}(\eta_1-\eta_2)
 &lt;/div&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
-X(p) = \frac{p}{b}(\theta_2-\theta_1)
+X(p) = \frac{1}{b}(\theta_2-\theta_1)
 \end{equation*}
 &lt;/div&gt;
 &lt;p&gt;其中：&lt;/p&gt;
