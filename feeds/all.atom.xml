@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>SeisMan</title><link href="http://seisman.info/" rel="alternate"></link><link href="http://seisman.info/feeds/all.atom.xml" rel="self"></link><id>http://seisman.info/</id><updated>2015-05-15T00:00:00+08:00</updated><entry><title>球状模型下的Tau积分</title><link href="http://seisman.info/tau-integral-in-spherical-earth.html" rel="alternate"></link><updated>2015-05-15T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-15:tau-integral-in-spherical-earth.html</id><summary type="html">&lt;p&gt;在计算震相走时的过程中，对&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;函数的积分是其中比较重要的一步，具体&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;函数如何使用，在地震学教材里都有介绍。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SeisMan</title><link href="http://seisman.info/" rel="alternate"></link><link href="http://seisman.info/feeds/all.atom.xml" rel="self"></link><id>http://seisman.info/</id><updated>2015-05-15T00:00:00+08:00</updated><entry><title>球状模型下的Tau积分</title><link href="http://seisman.info/tau-integral-in-spherical-earth.html" rel="alternate"></link><updated>2015-05-15T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-15:tau-integral-in-spherical-earth.html</id><summary type="html">
+&lt;p&gt;在计算震相走时的过程中，对&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;函数的积分是其中比较重要的一步，具体&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;函数如何使用，在地震学教材里都有介绍。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h2&gt;基本公式&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;基本公式&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;在球状分层模型下，任意一层内的&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;函数的积分可以写成：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
@@ -10,14 +11,14 @@
 &lt;/div&gt;
 &lt;p&gt;其中&lt;span class="math"&gt;\(r_1\)&lt;/span&gt;和&lt;span class="math"&gt;\(r_2\)&lt;/span&gt;分别是这一层的上下边界的地球半径。&lt;span class="math"&gt;\(p\)&lt;/span&gt;是射线参数（水平慢度），&lt;span class="math"&gt;\(\eta\)&lt;/span&gt;是垂直慢度，&lt;span class="math"&gt;\(r\)&lt;/span&gt;是地球半径。&lt;/p&gt;
 &lt;p&gt;对于常见的地球模型，比如PREM，都是给出了地球内部各个深度的速度值。因而对于每一个球层来说，速度都是半径的函数，进而导致垂直慢度是半径的函数，因而积分会变得复杂起来。&lt;/p&gt;
-&lt;p&gt;下面会介绍几种&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20&amp;nbsp;km/s。&lt;/p&gt;
+&lt;p&gt;下面会介绍几种&lt;span class="math"&gt;\(tau(p)\)&lt;/span&gt;积分的思路。为了更直观起见，现在假设有这一一个球层，上下边界的半径分别为3480 km和3380km，速度分别为8.06 km/s和8.20 km/s。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id2"&gt;
-&lt;h2&gt;匀速层积分法&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id10"&gt;匀速层积分法&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;最简单的方法是将球层内的速度近似为一个常数。比如这里，可以把这个100km厚的球层当做是一个匀速层。但是这个速度怎么取就是一个问题了。取8.06的话积分结果偏大，取8.20的话积分结果偏小。取均值8.13吧，好像又没有什么道理，毕竟垂直慢度跟速度之间又不是线性关系。所以把整个球层当做匀速有点不靠谱，而且误差会很大。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id3"&gt;
-&lt;h2&gt;线性速度积分法&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id11"&gt;线性速度积分法&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;一个比较合理的假设是，在球层内速度线性变化，即&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
@@ -30,8 +31,8 @@ v = a + b r
 &lt;p&gt;理论上，子球层的厚度越小，计算结果越精确，同时也导致计算量越大。而如果子球层的厚度取得不够小，则计算的误差可能稍大。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
-&lt;h2&gt;指数慢度模型&lt;/h2&gt;
-&lt;p&gt;假设每一层的&lt;strong&gt;慢度&lt;/strong&gt;模型的形式为&lt;span class="math"&gt;\(u=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen&amp;nbsp;Type模型，这也是TauP中使用的慢度模型。&lt;/p&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id12"&gt;指数慢度模型&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;假设每一层的&lt;strong&gt;慢度&lt;/strong&gt;模型的形式为&lt;span class="math"&gt;\(u=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen Type模型，这也是TauP中使用的慢度模型。&lt;/p&gt;
 &lt;p&gt;将上下边界的半径和慢度带入：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
@@ -134,32 +135,32 @@ X(p) = \frac{1}{b}(\theta_2-\theta_1)
 &lt;p&gt;整个球层的积分就被大大简化了。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id5"&gt;
-&lt;h2&gt;特殊处理&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id13"&gt;特殊处理&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="p-u1p-u2"&gt;
-&lt;h3&gt;p&amp;lt;u1且p&amp;lt;u2&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id14"&gt;p&amp;lt;u1且p&amp;lt;u2&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;此时该射线可以正常穿过该层，直接用公式计算即可。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id6"&gt;
-&lt;h3&gt;p&amp;lt;u1且p&amp;gt;u2&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id15"&gt;p&amp;lt;u1且p&amp;gt;u2&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;此时射线会进入该层，并在该层内入射角达到90度，最终反转，从下行波变成上行波。&lt;/p&gt;
 &lt;p&gt;射线反转时有&lt;span class="math"&gt;\(p=u\)&lt;/span&gt;，即垂直慢度为零，根据慢度模型可以直接计算出反转深度&lt;span class="math"&gt;\(r_p\)&lt;/span&gt;，此时&lt;span class="math"&gt;\(\tau(p)\)&lt;/span&gt;的积分上限&lt;span class="math"&gt;\(r_2\)&lt;/span&gt;应该改成反转深度&lt;span class="math"&gt;\(r_p\)&lt;/span&gt;。&lt;/p&gt;
 &lt;p&gt;实际计算时，并不需要计算反转深度，因而射线在反转深度处有&lt;span class="math"&gt;\(\eta_2=0\)&lt;/span&gt;且&lt;span class="math"&gt;\(\eta_2=\frac{\pi}{2}\)&lt;/span&gt;，可以直接代入公式即可。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="p-u2"&gt;
-&lt;h3&gt;p&amp;gt;u2&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id16"&gt;p&amp;gt;u2&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;此时，射线无法进入该层，直接返回零距离和零走时。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id7"&gt;
-&lt;h3&gt;速度间断面&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id17"&gt;速度间断面&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;在模型中，速度间断面是通过在同一深度给出两个不同的速度来表示的。在程序中，直接判断这一层的厚度是否等于零即可。若厚度为零，则表示该深度有速度间断，不可用上面的公式计算，直接返回零距离和零走时即可。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id8"&gt;
-&lt;h2&gt;参考&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id18"&gt;参考&lt;/a&gt;&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
-&lt;li&gt;An Introduction to Seismology, Earthquake, and Earth Structure, Seth Stein &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Michael Wysession, 2003,&amp;nbsp;P159&lt;/li&gt;
+&lt;li&gt;An Introduction to Seismology, Earthquake, and Earth Structure, Seth Stein &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Michael Wysession, 2003, P159&lt;/li&gt;
 &lt;li&gt;TauP软件包，SlownessLayer.java的TimeDist函数；&lt;/li&gt;
-&lt;li&gt;Introduction to Seismology, Peter Shearer, 2009,&amp;nbsp;P367&lt;/li&gt;
+&lt;li&gt;Introduction to Seismology, Peter Shearer, 2009, P367&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </summary><category term="走时"></category></entry><entry><title>CPS330的安装</title><link href="http://seisman.info/install-cps330.html" rel="alternate"></link><updated>2015-05-12T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-12:install-cps330.html</id><summary type="html">&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
