@@ -3,14 +3,11 @@ div#contents p.topic-title.first {
     display: none;
 }
 
-/* 固定边栏 */
-/*
 .sidebar-nav-fixed {
     position: fixed;
     top     : 84 px;
     width   : 16.48%;
 }
-*/
 
 table.docutils.footnote{
     table-layout: initial;
