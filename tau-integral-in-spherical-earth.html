@@ -123,7 +123,7 @@ v = a + b r
 </div>
 <div class="section" id="id4">
 <h2>指数慢度模型</h2>
-<p>假设每一层的<strong>慢度</strong>模型的形式为<span class="math">\(u=a r^b\)</span>，这种模型一般称为Bullen&nbsp;Type模型。</p>
+<p>假设每一层的<strong>慢度</strong>模型的形式为<span class="math">\(u=a r^b\)</span>，这种模型一般称为Bullen&nbsp;Type模型，这也是TauP中使用的慢度模型。</p>
 <p>将上下边界的半径和慢度带入：</p>
 <div class="math">
 \begin{equation*}
@@ -223,6 +223,36 @@ X(p) = \frac{1}{b}(\theta_2-\theta_1)
 \theta_2 = \arctan \frac{p}{\eta_2}
 \end{equation*}
 </div>
+<p>整个球层的积分就被大大简化了。</p>
+</div>
+<div class="section" id="id5">
+<h2>特殊处理</h2>
+<div class="section" id="p-u1p-u2">
+<h3>p&lt;u1且p&lt;u2</h3>
+<p>此时该射线可以正常穿过该层，直接用公式计算即可。</p>
+</div>
+<div class="section" id="id6">
+<h3>p&lt;u1且p&gt;u2</h3>
+<p>此时射线会进入该层，并在该层内入射角达到90度，最终反转，从下行波变成上行波。</p>
+<p>射线反转时有<span class="math">\(p=u\)</span>，即垂直慢度为零，根据慢度模型可以直接计算出反转深度<span class="math">\(r_p\)</span>，此时<span class="math">\(\tau(p)\)</span>的积分上限<span class="math">\(r_2\)</span>应该改成反转深度<span class="math">\(r_p\)</span>。</p>
+<p>实际计算时，并不需要计算反转深度，因而射线在反转深度处有<span class="math">\(\eta_2=0\)</span>且<span class="math">\(\eta_2=\frac{\pi}{2}\)</span>，可以直接代入公式即可。</p>
+</div>
+<div class="section" id="p-u2">
+<h3>p&gt;u2</h3>
+<p>此时，射线无法进入该层，直接返回零距离和零走时。</p>
+</div>
+<div class="section" id="id7">
+<h3>速度间断面</h3>
+<p>在模型中，速度间断面是通过在同一深度给出两个不同的速度来表示的。在程序中，直接判断这一层的厚度是否等于零即可。若厚度为零，则表示该深度有速度间断，不可用上面的公式计算，直接返回零距离和零走时即可。</p>
+</div>
+</div>
+<div class="section" id="id8">
+<h2>参考</h2>
+<ol class="arabic simple">
+<li>An Introduction to Seismology, Earthquake, and Earth Structure, Seth Stein <span class="amp">&amp;</span> Michael Wysession, 2003,&nbsp;P159</li>
+<li>TauP软件包，SlownessLayer.java的TimeDist函数；</li>
+<li>Introduction to Seismology, Peter Shearer, 2009,&nbsp;P367</li>
+</ol>
 </div>
 
             
@@ -266,10 +296,10 @@ X(p) = \frac{1}{b}(\theta_2-\theta_1)
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/taup-toolkit.html" title="走时计算软件TauP">走时计算软件TauP</a></li>
+<li><a href="http://seisman.info/notes-of-ppk.html" title="PPK标记震相到时的一些注意事项">PPK标记震相到时的一些注意事项</a></li>
 <li><a href="http://seisman.info/pkp-travel-time-curve.html" title="PKP震相走时曲线">PKP震相走时曲线</a></li>
-<li><a href="http://seisman.info/travel-time-packages.html" title="走时计算软件包">走时计算软件包</a></li>
 <li><a href="http://seisman.info/hinet-arrival-time-and-focal-mechanism-catalog.html" title="Hi-net走时和震源机制数据">Hi-net走时和震源机制数据</a></li>
-<li><a href="http://seisman.info/mark-travel-time-using-taup.html" title="利用TauP为SAC文件标记理论到时">利用TauP为SAC文件标记理论到时</a></li>
+<li><a href="http://seisman.info/travel-time-calculation.html" title="震相走时的计算">震相走时的计算</a></li>
 </ul>
 <hr />
 </section>

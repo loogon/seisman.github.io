@@ -31,7 +31,7 @@ v = a + b r
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
 &lt;h2&gt;指数慢度模型&lt;/h2&gt;
-&lt;p&gt;假设每一层的&lt;strong&gt;慢度&lt;/strong&gt;模型的形式为&lt;span class="math"&gt;\(u=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen&amp;nbsp;Type模型。&lt;/p&gt;
+&lt;p&gt;假设每一层的&lt;strong&gt;慢度&lt;/strong&gt;模型的形式为&lt;span class="math"&gt;\(u=a r^b\)&lt;/span&gt;，这种模型一般称为Bullen&amp;nbsp;Type模型，这也是TauP中使用的慢度模型。&lt;/p&gt;
 &lt;p&gt;将上下边界的半径和慢度带入：&lt;/p&gt;
 &lt;div class="math"&gt;
 \begin{equation*}
@@ -131,6 +131,36 @@ X(p) = \frac{1}{b}(\theta_2-\theta_1)
 \theta_2 = \arctan \frac{p}{\eta_2}
 \end{equation*}
 &lt;/div&gt;
+&lt;p&gt;整个球层的积分就被大大简化了。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id5"&gt;
+&lt;h2&gt;特殊处理&lt;/h2&gt;
+&lt;div class="section" id="p-u1p-u2"&gt;
+&lt;h3&gt;p&amp;lt;u1且p&amp;lt;u2&lt;/h3&gt;
+&lt;p&gt;此时该射线可以正常穿过该层，直接用公式计算即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id6"&gt;
+&lt;h3&gt;p&amp;lt;u1且p&amp;gt;u2&lt;/h3&gt;
+&lt;p&gt;此时射线会进入该层，并在该层内入射角达到90度，最终反转，从下行波变成上行波。&lt;/p&gt;
+&lt;p&gt;射线反转时有&lt;span class="math"&gt;\(p=u\)&lt;/span&gt;，即垂直慢度为零，根据慢度模型可以直接计算出反转深度&lt;span class="math"&gt;\(r_p\)&lt;/span&gt;，此时&lt;span class="math"&gt;\(\tau(p)\)&lt;/span&gt;的积分上限&lt;span class="math"&gt;\(r_2\)&lt;/span&gt;应该改成反转深度&lt;span class="math"&gt;\(r_p\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;实际计算时，并不需要计算反转深度，因而射线在反转深度处有&lt;span class="math"&gt;\(\eta_2=0\)&lt;/span&gt;且&lt;span class="math"&gt;\(\eta_2=\frac{\pi}{2}\)&lt;/span&gt;，可以直接代入公式即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="p-u2"&gt;
+&lt;h3&gt;p&amp;gt;u2&lt;/h3&gt;
+&lt;p&gt;此时，射线无法进入该层，直接返回零距离和零走时。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id7"&gt;
+&lt;h3&gt;速度间断面&lt;/h3&gt;
+&lt;p&gt;在模型中，速度间断面是通过在同一深度给出两个不同的速度来表示的。在程序中，直接判断这一层的厚度是否等于零即可。若厚度为零，则表示该深度有速度间断，不可用上面的公式计算，直接返回零距离和零走时即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id8"&gt;
+&lt;h2&gt;参考&lt;/h2&gt;
+&lt;ol class="arabic simple"&gt;
+&lt;li&gt;An Introduction to Seismology, Earthquake, and Earth Structure, Seth Stein &lt;span class="amp"&gt;&amp;amp;&lt;/span&gt; Michael Wysession, 2003,&amp;nbsp;P159&lt;/li&gt;
+&lt;li&gt;TauP软件包，SlownessLayer.java的TimeDist函数；&lt;/li&gt;
+&lt;li&gt;Introduction to Seismology, Peter Shearer, 2009,&amp;nbsp;P367&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 </summary><category term="走时"></category></entry><entry><title>CPS330的安装</title><link href="http://seisman.info/install-cps330.html" rel="alternate"></link><updated>2015-05-12T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-12:install-cps330.html</id><summary type="html">&lt;p&gt;CPS330全称Computer Programs in&amp;nbsp;Seismology，是圣路易斯大学地震中心开发并维护的一款地震学软件包，其主要关注地震波在地壳和上地幔介质中的传播和解释。&lt;/p&gt;
 &lt;p&gt;本文介绍如何在Linux系统下编译安装CPS330。&lt;/p&gt;
