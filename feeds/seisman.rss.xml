@@ -4191,10 +4191,10 @@ rpm -qa | grep intel | awk '{print &amp;quot;yum remove -y&amp;quot;,$1}' &amp;g
 &lt;/ol&gt;
 
 &lt;div class="section" id="centos"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id46"&gt;安装CentOS&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id47"&gt;安装CentOS&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;CentOS 7的安装与其他Linux发行版的安装差不多，个别地方稍有不同。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id47"&gt;准备工作&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id48"&gt;准备工作&lt;/a&gt;&lt;/h3&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;准备材料&lt;ul&gt;
 &lt;li&gt;U盘：容量700M以上，用于制作U盘启动盘，因为在制作启动盘时会格式化U盘，所以U盘内不要包含重要资料&lt;/li&gt;
@@ -4210,7 +4210,7 @@ rpm -qa | grep intel | awk '{print &amp;quot;yum remove -y&amp;quot;,$1}' &amp;g
 &lt;p&gt;注：Linux下可以通过&lt;tt class="docutils literal"&gt;dd&lt;/tt&gt;命令制作启动盘，但由于对原理不够了解，偶尔会导致制作失败，或制作成功后U盘容量有问题，还是用Windows下的Universal &lt;span class="caps"&gt;USB&lt;/span&gt; installer比较靠谱。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id2"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id48"&gt;安装过程&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id49"&gt;安装过程&lt;/a&gt;&lt;/h3&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;选择安装过程中使用的语言，这里应&lt;strong&gt;使用英语，不要使用汉语&lt;/strong&gt;。若安装界面使用汉语，最终安装的系统中会出现两个比较麻烦的问题：&lt;ol class="arabic"&gt;
 &lt;li&gt;家目录下的系统文件夹，比如Downloads、Desktop等会以中文表示，这使得在命令行cd变得很麻烦；&lt;/li&gt;
@@ -4224,7 +4224,7 @@ rpm -qa | grep intel | awk '{print &amp;quot;yum remove -y&amp;quot;,$1}' &amp;g
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id3"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id49"&gt;分区&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id50"&gt;分区&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;CentOS 7的分区似乎比较特别，自认为经验很丰富的我在第一次安装CentOS7时还是在分区上耽误了很多时间。后来找到比较合适的分区方法，如下：&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;点击“Click here to create them automatically”，即让安装程序帮忙分区&lt;/li&gt;
@@ -4242,7 +4242,7 @@ rpm -qa | grep intel | awk '{print &amp;quot;yum remove -y&amp;quot;,$1}' &amp;g
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id4"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id50"&gt;真正的安装&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id51"&gt;真正的安装&lt;/a&gt;&lt;/h3&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;设置root密码&lt;/li&gt;
 &lt;li&gt;创建一般用户&lt;/li&gt;
@@ -4253,13 +4253,13 @@ rpm -qa | grep intel | awk '{print &amp;quot;yum remove -y&amp;quot;,$1}' &amp;g
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id5"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id51"&gt;对系统的若干修改&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id52"&gt;对系统的若干修改&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="id6"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id52"&gt;若干原则&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id53"&gt;若干原则&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;为了搭建一个稳定的系统，尽量避免因为各种瞎折腾而导致的系统问题，特订立了一些软件安装的原则。具体参见《&lt;a class="reference external" href="http://seisman.info/how-to-install-softwares-under-centos-7.html"&gt;CentOS 7下的软件安装方法与策略&lt;/a&gt;》。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="root"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id53"&gt;给一般账号root权限&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id54"&gt;给一般账号root权限&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;默认情况下，一般账号是没有root权限的。为什么不直接用root账号，而是要给一般账号root权限呢？&lt;/p&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;&lt;strong&gt;日常工作中使用root账号，是非常糟糕且危险的习惯！无论是服务器还是个人电脑都是如此。&lt;/strong&gt;&lt;/li&gt;
@@ -4275,17 +4275,17 @@ seisman ALL=(ALL) ALL
 &lt;p&gt;其中seisman为当前用户名。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id8"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id54"&gt;添加第三方源&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id55"&gt;添加第三方源&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;CentOS由于很追求稳定性，所以官方源中自带的软件不多，因而需要一些第三方源，比如EPEL、ATrpms、ELRepo、Nux Dextop、RepoForge等。根据上面提到的软件安装原则，为了尽可能保证系统的稳定性，此处大型第三方源只添加EPEL源和ELRepo源。&lt;/p&gt;
 &lt;div class="section" id="epel"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id55"&gt;&lt;span class="caps"&gt;EPEL&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id56"&gt;&lt;span class="caps"&gt;EPEL&lt;/span&gt;&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://fedoraproject.org/wiki/EPEL"&gt;&lt;span class="caps"&gt;EPEL&lt;/span&gt;&lt;/a&gt;即Extra Packages for Enterprise Linux，为CentOS提供了额外的10000多个软件包，而且在不替换系统组件方面下了很多功夫，因而可以放心使用。&lt;/p&gt;
 &lt;table class="highlighttable"&gt;&lt;tr&gt;&lt;td class="linenos"&gt;&lt;div class="linenodiv"&gt;&lt;pre&gt;1&lt;/pre&gt;&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;div class="highlight"&gt;&lt;pre&gt;sudo yum install epel-release
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;p&gt;执行完该命令后，在&lt;tt class="docutils literal"&gt;/etc/yum.repos.d&lt;/tt&gt;目录下会多一个&lt;tt class="docutils literal"&gt;epel.repo&lt;/tt&gt;文件。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="elrepo"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id56"&gt;ELRepo&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id57"&gt;ELRepo&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;cite&gt;ELRepo&lt;/cite&gt;包含了一些硬件相关的驱动程序，比如显卡、声卡驱动。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
@@ -4295,7 +4295,7 @@ sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="yum-axelget"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id57"&gt;安装yum-axelget&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id58"&gt;安装yum-axelget&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://dl.fedoraproject.org/pub/epel/7/x86_64/repoview/yum-axelget.html"&gt;yum-axelget&lt;/a&gt;是EPEL提供的一个yum插件。使用该插件后用yum安装软件时可以并行下载，大大提高了软件的下载速度，减少了下载的等待时间:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install yum-axelget
@@ -4303,7 +4303,7 @@ sudo yum install yum-axelget
 &lt;p&gt;安装该插件的同时会安装另一个软件axel。axel是一个并行下载工具，在下载http、ftp等简单协议的文件时非常好用。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id9"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id58"&gt;第一次全面更新&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id59"&gt;第一次全面更新&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;在进一步操作之前，先把已经安装的软件包都升级到最新版:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum update
@@ -4311,11 +4311,11 @@ sudo yum update
 &lt;p&gt;要更新的软件包有些多，可能需要一段时间。不过有了yum-axelget插件，速度已经快了很多啦。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id10"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id59"&gt;重启&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id60"&gt;重启&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;此处建议重启。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="kernel"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id60"&gt;删除多余的kernel&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id61"&gt;删除多余的kernel&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;在前面的&lt;tt class="docutils literal"&gt;yum update&lt;/tt&gt;执行之后，可能会将kernel也一起更新，则在启动CentOS时启动项中会有很多项。&lt;/p&gt;
 &lt;p&gt;确认当前使用的kernel版本号:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -4343,9 +4343,9 @@ sudo yum remove kernel-devel-3.10.0-123.8.1.el7.x86_64
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id11"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id61"&gt;基础开发环境&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id62"&gt;基础开发环境&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="gcc"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id62"&gt;GCC系列&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id63"&gt;GCC系列&lt;/a&gt;&lt;/h3&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install gcc                     # C编译器
 sudo yum install gcc-c++                 # C++编译器
@@ -4357,7 +4357,7 @@ sudo yum install compat-libf2c-34        # g77 3.4.x兼容库
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id12"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id63"&gt;软件开发辅助工具&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id64"&gt;软件开发辅助工具&lt;/a&gt;&lt;/h3&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install make
 sudo yum install gdb     # 代码调试器
@@ -4368,9 +4368,9 @@ sudo yum install git-svn # git的svn插件
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id13"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id64"&gt;驱动程序&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id65"&gt;驱动程序&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="id14"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id65"&gt;显卡驱动&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id66"&gt;显卡驱动&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Linux默认只使用开源的显卡驱动，就目前的情况来看，开源驱动的效果还是不错的，但跟官方的闭源驱动相比还是有一定差距。最明显的区别是，在使用SAC的ppk功能放大波形时，使用开源驱动会出现延迟，而使用官方闭源则整个过程非常顺畅。&lt;/p&gt;
 &lt;p&gt;安装显卡检测程序:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -4393,7 +4393,7 @@ sudo yum remove xorg-x11-glamor
 &lt;p&gt;安装完显卡驱动后可以重启一下。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ntfs"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id66"&gt;NTFS驱动&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id67"&gt;NTFS驱动&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;CentOS下默认无法挂载NTFS格式的硬盘。需安装nfts-3g即可实现即插即用:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install ntfs-3g
@@ -4401,16 +4401,16 @@ sudo yum install ntfs-3g
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id15"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id67"&gt;进阶开发环境&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id68"&gt;进阶开发环境&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="java"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id68"&gt;Java环境&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id69"&gt;Java环境&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Java的一大特色在于跨平台，只有安装了Java运行环境，即可运行Java程序:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install java                        # java运行环境
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="clang"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id69"&gt;Clang系列&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id70"&gt;Clang系列&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Clang可以认为是GCC的替代品，可以用于编译C、C++、Objective-C和Objective-C++。其提供了更友好的报错信息，在有些方面比GCC更友好，同时其提供了一个代码静态分析器，可以用于分析代码中可能出现的bug和内存溢出问题。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install clang             # clang编译器
@@ -4418,16 +4418,16 @@ sudo yum install clang-analyzer    # clang静态分析器
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="intel"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id70"&gt;Intel系列&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id71"&gt;Intel系列&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Intel的大部分软件都是非开源且收费的，但同时部分软件也提供了Linux下的非商业免费版。比如icc、mkl数学库以及代码性能分析工具等。&lt;/p&gt;
 &lt;p&gt;Intel软件的申请以及安装参考《&lt;a class="reference external" href="http://seisman.info/intel-non-commercial-software.html"&gt;Intel非商业免费开发工具&lt;/a&gt;》。&lt;/p&gt;
 &lt;p&gt;还有一点需要注意的是，Intel也提供了并行相关的几个命令，比如mpicc、mpirun。所以openmpi、mpich和intel三者，在并行时只能用其中一个。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id17"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id71"&gt;并行计算&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id72"&gt;并行计算&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;并行可以用openmpi，也可以用mpich，二者应该是并列的。但是由于二者提供了几乎一样的命令，所以二者可以同时安装，但是不可以同时处于使用状态。&lt;/p&gt;
 &lt;div class="section" id="openmpi"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id72"&gt;openmpi&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id73"&gt;openmpi&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;安装openmpi:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install openmpi openmpi-devel
@@ -4440,7 +4440,7 @@ module load mpi/openmpi-x86_64
 &lt;p&gt;&lt;span class="caps"&gt;PS&lt;/span&gt;：要使用&lt;tt class="docutils literal"&gt;module&lt;/tt&gt;命令需要先安装&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;environment-modules&lt;/span&gt;&lt;/tt&gt;包。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mpich"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id73"&gt;mpich&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id74"&gt;mpich&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;安装mpich:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install mpich mpich-devel
@@ -4454,12 +4454,12 @@ module load mpi/mpich-x86_64
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id18"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id74"&gt;脚本语言环境&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id75"&gt;脚本语言环境&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="perl"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id75"&gt;Perl&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id76"&gt;Perl&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;CentOS 7.0自带了Perl 5.16.3（2013年03月11日发布），目前的最新版本为5.20.1（2014年09月14日发布）。&lt;/p&gt;
 &lt;div class="section" id="id19"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id76"&gt;系统自带Perl&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id77"&gt;系统自带Perl&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;系统自带Perl，就目前来看，版本不算老，基本够用。官方源和EPEL源中提供了1000多个模块，可以直接用yum安装:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install perl-Parallel-ForkManager  # 并行模块
@@ -4468,7 +4468,7 @@ sudo yum install perl-Parallel-ForkManager  # 并行模块
 &lt;p&gt;优先级：yum &amp;gt; cpan。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="plenv"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id77"&gt;plenv管理新版本&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id78"&gt;plenv管理新版本&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;若需要使用最新版本的perl，可以使用&lt;a class="reference external" href="http://seisman.info/perl-plenv.html"&gt;plenv&lt;/a&gt;安装新版本的perl，并使用plenv提供的cpanm命令安装模块:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 cpanm install Parallel::ForkManager # 并行模块
@@ -4476,10 +4476,10 @@ cpanm install Parallel::ForkManager # 并行模块
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="python"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id78"&gt;Python&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id79"&gt;Python&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;CentOS 7.0自带Python 2.7.5，目前Python 2的最新版本为2.7.8，Python 3的最新版本为3.4.2。&lt;/p&gt;
 &lt;div class="section" id="id21"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id79"&gt;系统自带Python&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id80"&gt;系统自带Python&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;系统自带的Python 2.7.5，基本已经够用，Python 2常用的模块在官方源或EPEL源中也有有编译好的包，因而直接通过yum安装即可:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install python-matplotlib  # 2D绘图库
@@ -4492,7 +4492,7 @@ sudo yum install gdal-python    # gdal的Python绑定
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="pyenvpython3"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id80"&gt;pyenv管理Python3&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id81"&gt;pyenv管理Python3&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;Python2与Python3之间是不完全兼容的，而我以Python3为主，所以需要安装一个Python3。&lt;/p&gt;
 &lt;p&gt;首先，安装&lt;a class="reference external" href="http://seisman.info/python-pyenv.html"&gt;pyenv&lt;/a&gt;来管理多个Python版本，然后利用pyenv安装anaconda3（即Python 3.4）。anaconda自带了众多科学计算所需的包，免去了安装的麻烦，对于其他包，则可以利用Python自带的pip安装:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -4503,27 +4503,27 @@ pip install docopt
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id22"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id81"&gt;编程相关软件&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id82"&gt;编程相关软件&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="id23"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id82"&gt;编辑器&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id83"&gt;编辑器&lt;/a&gt;&lt;/h3&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;vim&lt;/li&gt;
 &lt;li&gt;sublime text 3&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ide"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id83"&gt;&lt;span class="caps"&gt;IDE&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id84"&gt;&lt;span class="caps"&gt;IDE&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;Python &lt;span class="caps"&gt;IDE&lt;/span&gt;：&lt;a class="reference external" href="https://www.jetbrains.com/pycharm/"&gt;PyCharm Community Edition&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id24"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id84"&gt;日常软件&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id85"&gt;日常软件&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="office"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id85"&gt;Office套件&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id86"&gt;Office套件&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="section" id="libreoffice"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id86"&gt;LibreOffice&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id87"&gt;LibreOffice&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;大多数Linux发行版都自带LibreOffice:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install libreoffice
@@ -4531,13 +4531,13 @@ sudo yum install libreoffice
 &lt;p&gt;LibreOffice与Microsoft Office的兼容性不太好，操作界面与MS Office也有较大差异，让人不太习惯。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="wps-office"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id87"&gt;&lt;span class="caps"&gt;WPS&lt;/span&gt; Office&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id88"&gt;&lt;span class="caps"&gt;WPS&lt;/span&gt; Office&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;若在Linux下对于文档处理有更高一些的要求，可以尝试目前还处于测试版的WPS Office for Linux。&lt;span class="caps"&gt;WPS&lt;/span&gt; Office的兼容性以及界面都比LibreOffice要好很多，值得期待，当然还是不能做到完全兼容MS Office。&lt;/p&gt;
 &lt;p&gt;安装过程参考&lt;a class="reference external" href="http://seisman.info/wps-office-for-centos7.html"&gt;CentOS下安装WPS Office&lt;/a&gt;一文。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="texlive-2014"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id88"&gt;TeXLive 2014&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id89"&gt;TeXLive 2014&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;系统是自带了TeXLive，版本较老，还是安装最新版比较好。&lt;/p&gt;
 &lt;p&gt;根据&lt;a class="reference external" href="http://seisman.info/install-texlive-under-linux.html"&gt;Linux下安装TeXLive&lt;/a&gt;一文，从ISO文件中安装TeXLive。&lt;/p&gt;
 &lt;p&gt;安装完成后，更新所有模块:&lt;/p&gt;
@@ -4546,7 +4546,7 @@ tlmgr update --all
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mendeley"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id89"&gt;Mendeley&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id90"&gt;Mendeley&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Mendeley是一个跨平台的文献管理软件，其内部自带了一个可以添加注释的PDF阅读器。&lt;/p&gt;
 &lt;p&gt;下载Generic Linux (64 bits) ：&lt;a class="reference external" href="http://www.mendeley.com/download-mendeley-desktop"&gt;http://www.mendeley.com/download-mendeley-desktop&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;安装:&lt;/p&gt;
@@ -4563,7 +4563,7 @@ cp /opt/mendeleydesktop/share/icons/hicolor/128x128/apps/mendeleydesktop.png ~/.
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="google-chrome"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id90"&gt;Google Chrome浏览器&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id91"&gt;Google Chrome浏览器&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;默认的浏览器是Firefox，还是更喜欢Chrome浏览器。&lt;/p&gt;
 &lt;p&gt;在&lt;tt class="docutils literal"&gt;/etc/yum.repos.d/&lt;/tt&gt;目录下新建文件&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;google-chrome.repo&lt;/span&gt;&lt;/tt&gt;，向其中添加如下内容:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -4591,7 +4591,7 @@ enabled=1
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="opera"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id91"&gt;Opera浏览器&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id92"&gt;Opera浏览器&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;也可以选择Opera浏览器。&lt;/p&gt;
 &lt;p&gt;下载地址：&lt;a class="reference external" href="http://www.opera.com/download/guide/?os=linux"&gt;http://www.opera.com/download/guide/?os=linux&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;选择CentOS &lt;span class="caps"&gt;RPM&lt;/span&gt; package进行下载。下载完成后，执行:&lt;/p&gt;
@@ -4604,7 +4604,7 @@ sudo yum remove opera
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="flash"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id92"&gt;Flash插件&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id93"&gt;Flash插件&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Flash插件主要是看在线视频的时候要用。Google浏览器自带了Flash插件，所以这里安装的flash插件主要是为了firefox。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
@@ -4613,7 +4613,7 @@ sudo yum install flash-plugin
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id25"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id93"&gt;解压软件&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id94"&gt;解压软件&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;解压7z或zip格式需要p7zip，由EPEL提供:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install p7zip
@@ -4624,7 +4624,7 @@ sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/unrar-5.0.
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="ftp"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id94"&gt;FTP客户端&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id95"&gt;FTP客户端&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;FTP客户端，还是有界面的filezilla比较方便些。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install filezilla
@@ -4632,20 +4632,20 @@ sudo yum install filezilla
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id26"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id95"&gt;效率类软件&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id96"&gt;效率类软件&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;这一类工具能够在不同方面提高科研的效率，也提高了使用者的体验。&lt;/p&gt;
 &lt;div class="section" id="id27"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id96"&gt;终端模拟器&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id97"&gt;终端模拟器&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Gnome自带的终端模拟器是gnome-terminal。经常会需要开十几个终端，切换和管理起来比较麻烦。&lt;/p&gt;
 &lt;div class="section" id="terminator"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id97"&gt;terminator&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id98"&gt;terminator&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;terminator有很多功能，我只用到了终端分割的功能。&lt;tt class="docutils literal"&gt;Ctrl+Shift+O&lt;/tt&gt;对终端水平分隔，&lt;tt class="docutils literal"&gt;Ctrl+Shift+E&lt;/tt&gt;对终端垂直分隔，&lt;tt class="docutils literal"&gt;Alt+上下左右&lt;/tt&gt;可以在各子终端中切换。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/terminator-0.97-6.el7.nux.noarch.rpm
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="guake"&gt;
-&lt;h4&gt;&lt;a class="toc-backref" href="#id98"&gt;guake&lt;/a&gt;&lt;/h4&gt;
+&lt;h4&gt;&lt;a class="toc-backref" href="#id99"&gt;guake&lt;/a&gt;&lt;/h4&gt;
 &lt;p&gt;有些时候需要临时执行一两个命令，但是又不想额外启动一个终端的情况下，guake是个不错的选择。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/guake-0.4.4-11.el7.nux.x86_64.rpm
@@ -4654,7 +4654,7 @@ sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/guake-0.4.
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="zshoh-my-zsh"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id99"&gt;zsh与oh my zsh&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id100"&gt;zsh与oh my zsh&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;Linux下有很多shell，比如最常见的bash，除此之外还有csh、ksh。zsh也是一个shell。&lt;/p&gt;
 &lt;p&gt;zsh的特点在于：&lt;/p&gt;
 &lt;ul class="simple"&gt;
@@ -4696,7 +4696,7 @@ chsh -s /bin/zsh
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;div class="section" id="autojump"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id100"&gt;autojump&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id101"&gt;autojump&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/joelthelion/autojump"&gt;autojump&lt;/a&gt;是一个非常智能的目录快速切换的工具。简单演示如下:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ pwd
@@ -4718,31 +4718,16 @@ sudo yum install autojump-zsh
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id29"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id101"&gt;中文输入法&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id102"&gt;中文输入法&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;刚安装的系统可能是没有中文输入法的，源中带的中文输入法应该是ibus，使用效果一般。fcitx是更好的选择，基于fcitx框架的搜狗输入法或许是更好的选择。&lt;/p&gt;
 &lt;p&gt;参考&lt;a class="reference external" href="http://seisman.info/fcitx-for-centos-7.html"&gt;CentOS7安装fcitx中文输入法&lt;/a&gt;。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="hosttool"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id102"&gt;HostTool&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id103"&gt;HostTool&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;科学上网几乎已经成为每个搞科研的人的必备技能。&lt;/p&gt;
 &lt;p&gt;科学上网的方式有很多，这里只说HostTool：&lt;a class="reference external" href="https://hosts.huhamhire.com/"&gt;https://hosts.huhamhire.com/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;HostTool科学上网本质上就是用最新的host文件替代了系统自带的host文件。&lt;/p&gt;
 &lt;p&gt;下载解压后，进入目录，直接&lt;tt class="docutils literal"&gt;sudo python2 hoststool.py&lt;/tt&gt;即可运行，具体的用法自己研究一下。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="section" id="virtualbox"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id103"&gt;VirtualBox虚拟机&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;有时候可能需要在Windows下做一些操作，如果机器性能足够好的话，可以安装VirtualBox虚拟机。&lt;/p&gt;
-&lt;pre class="literal-block"&gt;
-wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
-sudo mv virtualbox.repo /etc/yum.repos.d/
-sudo yum install VirtualBox-4.3
-&lt;/pre&gt;
-&lt;p&gt;这样就可以在Linux下虚拟一个Windows啦，好开心。&lt;/p&gt;
-&lt;p&gt;需要注意两点：&lt;/p&gt;
-&lt;ul class="simple"&gt;
-&lt;li&gt;若机器性能不够，虚拟机的使用体验会非常差，所以不建议在老机器上使用；&lt;/li&gt;
-&lt;li&gt;更新kernel之后需要执行&lt;tt class="docutils literal"&gt;sudo /etc/init.d/vboxdrv setup&lt;/tt&gt;；&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id30"&gt;
 &lt;h3&gt;&lt;a class="toc-backref" href="#id104"&gt;等宽字体&lt;/a&gt;&lt;/h3&gt;
@@ -4757,11 +4742,36 @@ sudo yum install VirtualBox-4.3
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class="section" id="id31"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id105"&gt;同步网盘&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id105"&gt;虚拟机&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;有时候可能需要在Windows下做一些操作，如果机器性能足够好的话，可以安装虚拟机。&lt;/p&gt;
+&lt;div class="section" id="virtualbox"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id106"&gt;VirtualBox虚拟机&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;VirtuabBox的安装:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
+sudo mv virtualbox.repo /etc/yum.repos.d/
+sudo yum install VirtualBox-4.3
+&lt;/pre&gt;
+&lt;p&gt;需要注意两点：&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;若机器性能不够，虚拟机的使用体验会非常差，所以不建议在老机器上使用；&lt;/li&gt;
+&lt;li&gt;更新kernel之后需要执行&lt;tt class="docutils literal"&gt;sudo /etc/init.d/vboxdrv setup&lt;/tt&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="gnome-boxes"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id107"&gt;gnome-boxes&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;gnome-boxes是GNOME3开发的一个虚拟机工具:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sudo yum install gnome-boxes
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="section" id="id32"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id108"&gt;同步网盘&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;网盘根据功能大概可以分为两类：同步网盘和备份网盘。既然是同步网盘，Linux下的客户端必不可少。就目前已知的情况来看，CentOS7下能使用的同步网盘只有三个：Dropbox、MEGA和坚果云。&lt;/p&gt;
 &lt;p&gt;我主要用同步网盘将Linux机器上的PDF文献同步到iPad上。&lt;/p&gt;
 &lt;div class="section" id="dropbox"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id106"&gt;Dropbox&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id109"&gt;Dropbox&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;又是一个被墙的工具，熟练掌握科学上网技巧的人可以使用，一般人还是不要用了。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 wget https://www.dropbox.com/download?dl=packages/fedora/nautilus-dropbox-1.6.2-1.fedora.x86_64.rpm
@@ -4769,7 +4779,7 @@ sudo rpm -i nautilus-dropbox-1.6.2-1.fedora.x86_64.rpm
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="mega"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id107"&gt;&lt;span class="caps"&gt;MEGA&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id110"&gt;&lt;span class="caps"&gt;MEGA&lt;/span&gt;&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;span class="caps"&gt;MEGA&lt;/span&gt;： &lt;a class="reference external" href="https://mega.co.nz/"&gt;https://mega.co.nz/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;免费容量50G，作为同步盘来说基本是够用了。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
@@ -4781,8 +4791,8 @@ sudo yum localinstall megasync-CentOS_7.x86_64.rpm
 sudo yum localinstall nautilus-megasync-CentOS_7.x86_64.rpm
 &lt;/pre&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id32"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id108"&gt;坚果云&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="id33"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id111"&gt;坚果云&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;国内的全平台同步网盘，不限空间，但限制每月上传流量1G，下载流量3G。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 # 坚果云依赖于notify-python，该包位于Nux Dextop源中
@@ -4793,10 +4803,10 @@ sudo rpm -i nautilus_nutstore_amd64.rpm
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id33"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id109"&gt;工具软件&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="id34"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id110"&gt;视频下载工具&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id112"&gt;工具软件&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id35"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id113"&gt;视频下载工具&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="https://github.com/soimort/you-get"&gt;you-get&lt;/a&gt;和&lt;cite&gt;youtube-dl &amp;lt;https://github.com/rg3/youtube-dl&amp;gt;&lt;/cite&gt;是两个用于从视频网站上下载视频文件的工具。其中，后者支持的网站更多，但前者对国内的视频网站支持更好。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 pip install you-get
@@ -4805,20 +4815,20 @@ pip install youtube-dl
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="section" id="pdf"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id111"&gt;PDF处理工具&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id114"&gt;PDF处理工具&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://community.coherentpdf.com/"&gt;cpdf&lt;/a&gt;是一个跨平台的PDF处理工具，可以完成常见的PDF合并、切割、加密解密、书签、水印等功能。&lt;/p&gt;
 &lt;p&gt;下载已编译好的&lt;a class="reference external" href="https://github.com/coherentgraphics/cpdf-binaries/archive/master.zip"&gt;二进制包&lt;/a&gt;，解压，并将与自己的平台对应的二进制文件复制到&lt;tt class="docutils literal"&gt;&lt;span class="pre"&gt;${&lt;span class="caps"&gt;HOME&lt;/span&gt;}/bin&lt;/span&gt;&lt;/tt&gt;目录下即可使用。&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="section" id="bt"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id112"&gt;BT软件&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id115"&gt;BT软件&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;transmission是Linux下常用的Torrent下载软件:&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install transmission
 &lt;/pre&gt;
 &lt;p&gt;在“Application”-&amp;gt;“Internet”-&amp;gt;中可以启动transmission。&lt;/p&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id36"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id113"&gt;其他工具&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="section" id="id37"&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id116"&gt;其他工具&lt;/a&gt;&lt;/h3&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install nfs-utils     # 挂载NFS文件系统所必须
 sudo yum install xclip         # 终端的文本复制工具
@@ -4827,8 +4837,8 @@ sudo yum install dos2unix unix2dos  # Windows和Linux换行符互相转换
 &lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id37"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id114"&gt;地球物理相关&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id38"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id117"&gt;地球物理相关&lt;/a&gt;&lt;/h2&gt;
 &lt;ol class="arabic"&gt;
 &lt;li&gt;&lt;p class="first"&gt;&lt;span class="caps"&gt;SAC&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;参考《&lt;a class="reference external" href="http://seisman.info/sac-manual.html"&gt;SAC参考手册&lt;/a&gt;》中的相关章节。&lt;/p&gt;
@@ -4851,16 +4861,16 @@ sudo yum install dos2unix unix2dos  # Windows和Linux换行符互相转换
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id38"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id115"&gt;娱乐&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id39"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id118"&gt;娱乐&lt;/a&gt;&lt;/h2&gt;
 &lt;pre class="literal-block"&gt;
 sudo yum install 2048-cli   # 2048命令行版
 &lt;/pre&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id39"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id116"&gt;未完成&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id40"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id119"&gt;未完成&lt;/a&gt;&lt;/h2&gt;
 &lt;div class="section" id="google-earth"&gt;
-&lt;h3&gt;&lt;a class="toc-backref" href="#id117"&gt;Google Earth&lt;/a&gt;&lt;/h3&gt;
+&lt;h3&gt;&lt;a class="toc-backref" href="#id120"&gt;Google Earth&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;理论上Google Earth应该可以跟Google Chrome用类似的方法来安装的，但是由于Google Earth的rpm包存在bug，导致无法通过上面的方法安装。&lt;/p&gt;
 &lt;pre class="literal-block"&gt;
 $ cd -
@@ -4874,16 +4884,16 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
 &lt;p&gt;安装完成后，启动后奔溃。。&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id40"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id118"&gt;参考&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id41"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id121"&gt;参考&lt;/a&gt;&lt;/h2&gt;
 &lt;ol class="arabic simple"&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://elrepo.org/tiki/tiki-index.php"&gt;ELRepo官方网站&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://elrepo.org/tiki/kmod-nvidia"&gt;ELRepo kmod-nvidia&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class="reference external" href="http://wiki.centos.org/zh/AdditionalResources/Repositories/GoogleYumRepos"&gt;CentOS Yum软件库样例&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-&lt;div class="section" id="id42"&gt;
-&lt;h2&gt;&lt;a class="toc-backref" href="#id119"&gt;修订历史&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="section" id="id43"&gt;
+&lt;h2&gt;&lt;a class="toc-backref" href="#id122"&gt;修订历史&lt;/a&gt;&lt;/h2&gt;
 &lt;ul class="simple"&gt;
 &lt;li&gt;2014-07-15：初稿；&lt;/li&gt;
 &lt;li&gt;2014-09-05：EPEL已经发布正式版；修改了epel-release的下载链接；修订了import步骤的错误；&lt;/li&gt;
@@ -4901,6 +4911,7 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
 &lt;li&gt;2015-03-03：新增filezilla和transmission；&lt;/li&gt;
 &lt;li&gt;2015-03-26：安装过程中不应使用中文安装界面；&lt;/li&gt;
 &lt;li&gt;2015-05-11：新增MEGA同步网盘；&lt;/li&gt;
+&lt;li&gt;2015-05-16：新增gnome-boxes；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Mon, 11 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2014-07-15:linux-environment-for-seismology-research.html</guid><category>CentOS</category><category>Perl</category><category>Python</category></item><item><title>Linux下安装NVIDIA显卡驱动</title><link>http://seisman.info/install-nvidia-drivers-under-linux.html</link><description>&lt;p&gt;大部分Linux发行版都使用开源的显卡驱动nouveau，对于nvidia显卡来说，还是闭源的官方驱动的效果更好。最明显的一点是，在使用SAC拾取震相的时候，使用官方显卡驱动在刷新界面的时候要快很多。&lt;/p&gt;
