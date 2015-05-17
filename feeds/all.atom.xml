@@ -15369,7 +15369,7 @@ ilat,ilon,crustal type:   40 281
 &lt;/ol&gt;
 &lt;p&gt;几个常见的疑问：&lt;/p&gt;
 &lt;ol class="arabic"&gt;
-&lt;li&gt;&lt;p class="first"&gt;为了中、下沉积层的速度和密度为零？&lt;/p&gt;
+&lt;li&gt;&lt;p class="first"&gt;为何中、下沉积层的速度和密度为零？&lt;/p&gt;
 &lt;p&gt;因为此处中、下沉积层的厚度为零，即不存在这两层，不存在的东西当然不用给速度和密度了。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p class="first"&gt;为何水层和冰层的厚度为零，但是却有速度和密度？&lt;/p&gt;
