@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>SeisMan</title><link href="http://seisman.info/" rel="alternate"></link><link href="http://seisman.info/feeds/all.atom.xml" rel="self"></link><id>http://seisman.info/</id><updated>2015-05-15T00:00:00+08:00</updated><entry><title>球状模型下的Tau积分</title><link href="http://seisman.info/tau-integral-in-spherical-earth.html" rel="alternate"></link><updated>2015-05-15T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-15:tau-integral-in-spherical-earth.html</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>SeisMan</title><link href="http://seisman.info/" rel="alternate"></link><link href="http://seisman.info/feeds/all.atom.xml" rel="self"></link><id>http://seisman.info/</id><updated>2015-05-17T00:00:00+08:00</updated><entry><title>球状模型下的Tau积分</title><link href="http://seisman.info/tau-integral-in-spherical-earth.html" rel="alternate"></link><updated>2015-05-15T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2015-05-15:tau-integral-in-spherical-earth.html</id><summary type="html">
 &lt;p&gt;在计算震相走时的过程中，对&lt;span class="math"&gt;\(\tau(p)\)&lt;/span&gt;函数的积分是其中比较重要的一步，具体&lt;span class="math"&gt;\(\tau(p)\)&lt;/span&gt;函数如何使用，在地震学教材里都有介绍。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;基本公式&lt;/a&gt;&lt;/h2&gt;
@@ -5359,7 +5359,7 @@ alias sac=&amp;quot;${SACHOME}/bin/sac ${SACAUX}/init.m&amp;quot;
 color black background cyan
 &lt;/pre&gt;
 &lt;p&gt;即可。&lt;/p&gt;
-</summary><category term="SAC技巧"></category><category term="图像"></category></entry><entry><title>gCAP的安装</title><link href="http://seisman.info/compile-gcap.html" rel="alternate"></link><updated>2015-05-11T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2014-06-13:compile-gcap.html</id><summary type="html">&lt;p&gt;gCAP是Prof. Lupei&amp;nbsp;Zhu发展的一种反演震源机制解的一种方法。目前该代码已经公开。&lt;/p&gt;
+</summary><category term="SAC技巧"></category><category term="图像"></category></entry><entry><title>gCAP的安装</title><link href="http://seisman.info/compile-gcap.html" rel="alternate"></link><updated>2015-05-17T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2014-06-13:compile-gcap.html</id><summary type="html">&lt;p&gt;gCAP是Prof. Lupei&amp;nbsp;Zhu发展的一种反演震源机制解的一种方法。目前该代码已经公开。&lt;/p&gt;
 &lt;ol class="arabic"&gt;
 &lt;li&gt;&lt;p class="first"&gt;下载gCAP源码&lt;/p&gt;
 &lt;p&gt;下载地址： &lt;a class="reference external" href="http://www.eas.slu.edu/People/LZhu/downloads/gcap1.0.tar"&gt;http://www.eas.slu.edu/People/LZhu/downloads/gcap1.0.tar&lt;/a&gt;&lt;/p&gt;
@@ -21481,7 +21481,7 @@ G(f)=S_{d1} A_0 H_p(s) S_{d2} S_{d3} = S_{d0} A_o H_p(s)
 &lt;li&gt;2013-06-26：初稿。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</summary><category term="仪器响应"></category></entry><entry><title>地震学的仪器响应</title><link href="http://seisman.info/instrumental-response-in-seismology.html" rel="alternate"></link><updated>2015-05-11T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2013-06-23:instrumental-response-in-seismology.html</id><summary type="html">
+</summary><category term="仪器响应"></category></entry><entry><title>地震学的仪器响应</title><link href="http://seisman.info/instrumental-response-in-seismology.html" rel="alternate"></link><updated>2015-05-17T00:00:00+08:00</updated><author><name>SeisMan</name></author><id>tag:seisman.info,2013-06-23:instrumental-response-in-seismology.html</id><summary type="html">
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id14"&gt;引言&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;地震仪观测到的地面运动记录可以表示为&lt;/p&gt;

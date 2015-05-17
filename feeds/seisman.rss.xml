@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeisMan</title><link>http://seisman.info/</link><description>学会整理自己的经验是科研的第一步。</description><atom:link href="http://seisman.info/feeds/seisman.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 15 May 2015 00:00:00 +0800</lastBuildDate><item><title>球状模型下的Tau积分</title><link>http://seisman.info/tau-integral-in-spherical-earth.html</link><description>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SeisMan</title><link>http://seisman.info/</link><description>学会整理自己的经验是科研的第一步。</description><atom:link href="http://seisman.info/feeds/seisman.rss.xml" rel="self"></atom:link><lastBuildDate>Sun, 17 May 2015 00:00:00 +0800</lastBuildDate><item><title>球状模型下的Tau积分</title><link>http://seisman.info/tau-integral-in-spherical-earth.html</link><description>
 &lt;p&gt;在计算震相走时的过程中，对&lt;span class="math"&gt;\(\tau(p)\)&lt;/span&gt;函数的积分是其中比较重要的一步，具体&lt;span class="math"&gt;\(\tau(p)\)&lt;/span&gt;函数如何使用，在地震学教材里都有介绍。&lt;/p&gt;
 &lt;div class="section" id="id1"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;基本公式&lt;/a&gt;&lt;/h2&gt;
@@ -5393,7 +5393,7 @@ make
 &lt;p&gt;&lt;cite&gt;cap.pl&lt;/cite&gt;中第15行与第19行包含了两个绝对路径，分别包含了绘图脚本&lt;cite&gt;cap_plt.pl&lt;/cite&gt;和Green函数库&lt;cite&gt;Glib&lt;/cite&gt;的路径，需要根据自身情况修改。&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Mon, 11 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2014-06-13:compile-gcap.html</guid><category>震源机制解</category></item><item><title>GMT绘制双Y轴</title><link>http://seisman.info/double-y-axis-plot.html</link><description>&lt;p&gt;所谓双Y轴，指的是在一张图中同时使用两个完全不同的Y轴。这种类型的图在某些情况下会用到。&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Sun, 17 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2014-06-13:compile-gcap.html</guid><category>震源机制解</category></item><item><title>GMT绘制双Y轴</title><link>http://seisman.info/double-y-axis-plot.html</link><description>&lt;p&gt;所谓双Y轴，指的是在一张图中同时使用两个完全不同的Y轴。这种类型的图在某些情况下会用到。&lt;/p&gt;
 &lt;p&gt;这样一张图的绘制其实很简单，只需要绘制两个basemap即可。第一个basemap只绘制X轴和左Y轴；第二个只绘制右Y轴。&lt;/p&gt;
 &lt;p&gt;GMT的-B选项中，WESN分别表示在四个坐标轴上显示坐标轴及标注文字、刻度；小写news表示在四个坐标轴上只显示坐标轴和刻度，不标注文字；若某个坐标轴上没有相关参数，则什么都不画。因而第一个basemap使用SW，第二个basemap使用E。&lt;/p&gt;
 &lt;div class="figure"&gt;
@@ -21574,7 +21574,7 @@ u(t)=s(t)*g(t)*i(t)
 &lt;li&gt;2014-07-06：修订了一些描述；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Mon, 11 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2013-06-23:instrumental-response-in-seismology.html</guid><category>仪器响应</category></item><item><title>一切重新开始</title><link>http://seisman.info/all-start-again.html</link><description>
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SeisMan</dc:creator><pubDate>Sun, 17 May 2015 00:00:00 +0800</pubDate><guid>tag:seisman.info,2013-06-23:instrumental-response-in-seismology.html</guid><category>仪器响应</category></item><item><title>一切重新开始</title><link>http://seisman.info/all-start-again.html</link><description>
 &lt;div class="section" id="id2"&gt;
 &lt;h2&gt;&lt;a class="toc-backref" href="#id9"&gt;前世&lt;/a&gt;&lt;/h2&gt;
 &lt;dl class="docutils"&gt;
