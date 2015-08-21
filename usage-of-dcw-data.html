@@ -146,7 +146,7 @@ pscoast -R70/140/15/55 -JM15c -B10 -N1/0.25p,blue -W1/0.3p,black -U &gt; china.p
 <ul class="simple">
 <li>想要绘制某个或某些国家的边界，可以使用<tt class="docutils literal"><span class="pre">code1,code2,...</span></tt>来选定，其中每个code代表不同的国家2位代码，用逗号分隔。</li>
 <li>如果想要选择某个国家的某个省的边界，则code应该为<tt class="docutils literal">country.state</tt>的格式，比如<tt class="docutils literal"><span class="caps">US</span>.<span class="caps">TX</span></tt>代表美国的Texas州。</li>
-<li>如果想要选定整个大洲，则需要在洲代码<strong>前</strong>加上等于号，比如code为"=<span class="caps">AF</span>"则表示选择整个非洲的数据；</li>
+<li>如果想要选定整个大洲，则需要在洲代码<strong>前</strong>加上等于号，比如code为”=<span class="caps">AF</span>”则表示选择整个非洲的数据；</li>
 <li>追加<strong>+l</strong>会列出国家名以及国家代码，不提取数据或绘图。（没试出效果）</li>
 <li>追加<strong>+L</strong>会列出州/省名，以及代码；</li>
 <li>追加<strong>+r</strong>会计算当前选择的边界数据的范围，并返回该范围；还可以加入xinc/yinc或者winc/einc/sinc/ninc来指定-B选项；（没理解）</li>
@@ -267,11 +267,11 @@ gmt psxy -R<span class="nv">$R</span> -J<span class="nv">$J</span> -T -O &gt;&gt
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/grdraster-info-of-gmt-grid.html" title="GMT网格数据之grdraster.info">GMT网格数据之grdraster.info</a></li>
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
 <li><a href="http://seisman.info/global-relief-model-etopo1.html" title="全球地形起伏模型ETOPO1">全球地形起伏模型ETOPO1</a></li>
-<li><a href="http://seisman.info/introduction-to-dcw-gmt5.html" title="GMT5的DCW数据简介">GMT5的DCW数据简介</a></li>
-<li><a href="http://seisman.info/add-annotations-in-gmt.html" title="GMT中添加注释和标注">GMT中添加注释和标注</a></li>
-<li><a href="http://seisman.info/profile-from-3d-data.html" title="从3D数据中截取剖面">从3D数据中截取剖面</a></li>
+<li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
+<li><a href="http://seisman.info/gmt-map-coloring.html" title="GMT技巧之利用DCW数据进行区域涂色">GMT技巧之利用DCW数据进行区域涂色</a></li>
+<li><a href="http://seisman.info/gmt5-custom-axes.html" title="GMT5自定义坐标轴">GMT5自定义坐标轴</a></li>
 </ul>
 <hr />
 </section>
@@ -293,23 +293,23 @@ gmt psxy -R<span class="nv">$R</span> -J<span class="nv">$J</span> -T -O &gt;&gt
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
-                    <span>28</span>
+                    <span>35</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtjiao-ben-ref">GMT脚本
-                    <span>9</span>
+                    <span>8</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
-                    <span>29</span>
+                    <span>27</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/usage-of-dcw-data.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-11-21_usage-of-dcw-data.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

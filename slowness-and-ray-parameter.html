@@ -21,6 +21,7 @@
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2015-02-05T00:00:00+08:00" />
+<meta property="" content="2015-07-08T00:00:00+08:00" />
 <meta name="twitter:title" content="慢度与射线参数 ">
 <meta name="twitter:description" content="本文介绍几个专业名词： 慢度 水平慢度/垂直慢度 射线参数 视速度/视慢度 这些名词其实很简单，但是在大三一直到研一的几年间，这几个名词在我脑中的概念是有些混乱的，我把混乱的原因归结于不同课本对同一个专业名词乱用了不同的词汇。故而在这里总结一下。 慢度 速度\(v\)是用于衡量波在介质中传播的快慢的物理量，单位一般是km/s。 慢度是速度的倒数，单位为s/km: \begin{equation*} s = \frac{1}{v} \end{equation*} 所以慢度是一个用于描述介质的物理量。 慢度矢量 对于一个在介质中传播的射线来说，取射线中的任何一段，射线都有一个方向，同时该段射线所在的介质都有一个慢度值。 介质的慢度值以及射线的方向构成了该段射线的一个属性，即慢度矢量。 \begin{equation*} \mathbf{s} = \frac{1}{v} \mathbf{e_s ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
@@ -94,12 +95,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#id2" id="id8">慢度</a></li>
-<li><a class="reference internal" href="#id3" id="id9">慢度矢量</a></li>
-<li><a class="reference internal" href="#id4" id="id10">水平慢度和垂直慢度</a></li>
-<li><a class="reference internal" href="#id5" id="id11">射线参数</a></li>
-<li><a class="reference internal" href="#id6" id="id12">视速度/视慢度</a></li>
-<li><a class="reference internal" href="#id7" id="id13">球状分层介质</a></li>
+<li><a class="reference internal" href="#id2" id="id9">慢度</a></li>
+<li><a class="reference internal" href="#id3" id="id10">慢度矢量</a></li>
+<li><a class="reference internal" href="#id4" id="id11">水平慢度和垂直慢度</a></li>
+<li><a class="reference internal" href="#id5" id="id12">射线参数</a></li>
+<li><a class="reference internal" href="#id6" id="id13">视速度/视慢度</a></li>
+<li><a class="reference internal" href="#id7" id="id14">球状分层介质</a></li>
+<li><a class="reference internal" href="#id8" id="id15">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -117,7 +119,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 <p>这些名词其实很简单，但是在大三一直到研一的几年间，这几个名词在我脑中的概念是有些混乱的，我把混乱的原因归结于不同课本对同一个专业名词乱用了不同的词汇。故而在这里总结一下。</p>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id8">慢度</a></h2>
+<h2><a class="toc-backref" href="#id9">慢度</a></h2>
 <p>速度<span class="math">\(v\)</span>是用于衡量波在介质中传播的快慢的物理量，单位一般是km/s。</p>
 <p>慢度是速度的倒数，单位为s/km:</p>
 <div class="math">
@@ -128,7 +130,7 @@ s = \frac{1}{v}
 <p>所以慢度是一个用于描述介质的物理量。</p>
 </div>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id9">慢度矢量</a></h2>
+<h2><a class="toc-backref" href="#id10">慢度矢量</a></h2>
 <p>对于一个在介质中传播的射线来说，取射线中的任何一段，射线都有一个方向，同时该<strong>段</strong>射线所在的介质都有一个慢度值。</p>
 <p>介质的慢度值以及射线的方向构成了该<strong>段</strong>射线的一个属性，即慢度矢量。</p>
 <div class="math">
@@ -139,7 +141,7 @@ s = \frac{1}{v}
 <p>根据慢度矢量的定义可知，慢度矢量是与射线相关的量，且慢度矢量是一个局部量，一条射线中的不同段，其慢度矢量是不同的。</p>
 </div>
 <div class="section" id="id4">
-<h2><a class="toc-backref" href="#id10">水平慢度和垂直慢度</a></h2>
+<h2><a class="toc-backref" href="#id11">水平慢度和垂直慢度</a></h2>
 <p>既然是一个矢量，就可以将其分解到水平方向和垂直方向。</p>
 <p>在<strong>水平分层模型</strong>下，定义射线方向与垂直方向的夹角为<span class="math">\(\theta\)</span>，则水平慢度为：</p>
 <div class="math">
@@ -156,7 +158,7 @@ p = s\sin \theta = \frac{\sin \theta}{v}
 <p>所以实际上水平慢度和垂直慢度，也是一个局部量，同一条射线，不同段的水平慢度和垂直慢度是不同的。</p>
 </div>
 <div class="section" id="id5">
-<h2><a class="toc-backref" href="#id11">射线参数</a></h2>
+<h2><a class="toc-backref" href="#id12">射线参数</a></h2>
 <p>射线在经过两种介质的分界面时，满足Snell定律:</p>
 <div class="math">
 \begin{equation*}
@@ -183,7 +185,7 @@ p = \frac{\sin \theta}{v}
 <p>需要注意的是，“射线参数不变”这个准则仅在水平分层等特殊的情况下成立，若存在倾斜界面，则该准则不再成立。</p>
 </div>
 <div class="section" id="id6">
-<h2><a class="toc-backref" href="#id12">视速度/视慢度</a></h2>
+<h2><a class="toc-backref" href="#id13">视速度/视慢度</a></h2>
 <p>在水平分层模型下，每条射线对应了唯一的射线参数，因而射线参数是很重要的一个量。</p>
 <p>经过一些简单的推导，可知：</p>
 <div class="math">
@@ -195,7 +197,7 @@ p = \frac{\sin \theta}{v}
 <p><span class="math">\(\frac{dT}{dX}\)</span>即波前在经过不同震中距的台站的到时差，即所谓的视慢度，所以平常说的视慢度其实就是射线参数。</p>
 </div>
 <div class="section" id="id7">
-<h2><a class="toc-backref" href="#id13">球状分层介质</a></h2>
+<h2><a class="toc-backref" href="#id14">球状分层介质</a></h2>
 <p>上面的一些概念大都是在水平分层模型下解释的，更常见的模型是球状分层模型。</p>
 <p>在球状分层模型下，射线参数的定义变成：</p>
 <div class="math">
@@ -204,7 +206,15 @@ p = \frac{r \sin \theta}{v}
 \end{equation*}
 </div>
 <p>其中<span class="math">\(r\)</span>是计算射线参数时所使用的半径，<span class="math">\(\theta\)</span>为射线与径向方向的夹角。</p>
+<p>球状分层模型下，p的单位为<tt class="docutils literal">s/radian</tt>，需要乘以<span class="math">\(2\pi/360\)</span>单位才是<tt class="docutils literal">s/deg</tt>。</p>
 <p>做了这样的定义之后，在水平分层模型下推导的公式基本都可以直接推广到球状分层模型中了。</p>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id15">修订历史</a></h2>
+<ul class="simple">
+<li>2015-02-05：初稿；</li>
+<li>2015-07-08：修正了球层介质下射线参数的一个bug；</li>
+</ul>
 </div>
 
             
@@ -247,9 +257,9 @@ p = \frac{r \sin \theta}{v}
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
+<li><a href="http://seisman.info/calculate-dist-az-baz.html" title="震中距、方位角和反方位角的计算">震中距、方位角和反方位角的计算</a></li>
 <li><a href="http://seisman.info/terms-about-tex.html" title="与TeX相关的一些名词">与TeX相关的一些名词</a></li>
 <li><a href="http://seisman.info/faults-in-seismology.html" title="地震学断层的定义">地震学断层的定义</a></li>
-<li><a href="http://seisman.info/pkp-ray-path.html" title="PKP射线路径">PKP射线路径</a></li>
 <li><a href="http://seisman.info/calculate-pierce-points-using-taup.html" title="利用TauP计算射线穿透点">利用TauP计算射线穿透点</a></li>
 <li><a href="http://seisman.info/calculate-travel-time-using-taup.html" title="用taup_time计算震相走时及射线信息">用taup_time计算震相走时及射线信息</a></li>
 </ul>
@@ -268,6 +278,10 @@ p = \frac{r \sin \theta}{v}
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
             <time pubdate="pubdate" datetime="2015-02-05T00:00:00+08:00">2015-02-05</time>
+
+<h4>Last Updated</h4>
+<time datetime="2015-07-08T00:00:00+08:00">2015-07-08</time>
+
             <h4>Category</h4>
             <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ji-chu-ref">地震学基础</a>
             <h4>Tags</h4>
@@ -276,14 +290,14 @@ p = \frac{r \sin \theta}{v}
                     <span>4</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#she-xian-ref">射线
-                    <span>5</span>
+                    <span>3</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/slowness-and-ray-parameter.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisBasic/2015-02-05_slowness-and-ray-parameter.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

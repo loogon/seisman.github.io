@@ -110,7 +110,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             
 <div class="section" id="id1">
 <h2><a class="toc-backref" href="#id9">前言</a></h2>
-<p>GMT中与绘图相关的大部分命令的输出都是PS代码，我们一般将输出通过"&gt;"或者"&gt;&gt;"重定向到ps文件中，然后用gs查看。PS是矢量图像格式，因而可以任意放大而不失真，满足了出版社对高质量图像的要求。有时候在用word随便写点文章或者制作ppt时，ps图像无法直接插入，因而需要将ps文件转换为常见的其他图像格式。格式转换可以使用强大的convert命令，不过GMT提供的ps2raster命令已经足够了。</p>
+<p>GMT中与绘图相关的大部分命令的输出都是PS代码，我们一般将输出通过”&gt;”或者”&gt;&gt;”重定向到ps文件中，然后用gs查看。PS是矢量图像格式，因而可以任意放大而不失真，满足了出版社对高质量图像的要求。有时候在用word随便写点文章或者制作ppt时，ps图像无法直接插入，因而需要将ps文件转换为常见的其他图像格式。格式转换可以使用强大的convert命令，不过GMT提供的ps2raster命令已经足够了。</p>
 <p>ps2raster利用ghostscript程序将ps文件转换为多种格式，<span class="caps">BMP</span>, <span class="caps">EPS</span>, <span class="caps">JPEG</span>, <span class="caps">PDF</span>, <span class="caps">PNG</span>, <span class="caps">PPM</span>, <span class="caps">TIFF</span>。</p>
 </div>
 <div class="section" id="id2">
@@ -209,11 +209,11 @@ ps2raster -A -P test.ps
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/gmtdefaults4.html" title="GMT之gmtdefaults">GMT之gmtdefaults</a></li>
-<li><a href="http://seisman.info/gmtset-gmtget.html" title="GMT之gmtset与gmtget">GMT之gmtset与gmtget</a></li>
+<li><a href="http://seisman.info/gmt-minmax.html" title="GMT之利用minmax寻找数据极值">GMT之利用minmax寻找数据极值</a></li>
+<li><a href="http://seisman.info/gmt-merge-images.html" title="GMT技巧之图像合并">GMT技巧之图像合并</a></li>
 <li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
-<li><a href="http://seisman.info/generate-xyz-file-for-gmt-grid.html" title="如何生成GMT网格数据(I)">如何生成GMT网格数据(I)</a></li>
 <li><a href="http://seisman.info/gmt-psimage.html" title="GMT命令之很有用但是却不常用的psimage">GMT命令之很有用但是却不常用的psimage</a></li>
+<li><a href="http://seisman.info/gmt-pslegend.html" title="GMT命令之用pslegend绘制图例">GMT命令之用pslegend绘制图例</a></li>
 </ul>
 <hr />
 </section>
@@ -238,20 +238,20 @@ ps2raster -A -P test.ps
                     <span>14</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtming-ling-ref">GMT命令
-                    <span>12</span>
+                    <span>11</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#tu-xiang-ref">图像
-                    <span>13</span>
+                    <span>12</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/format-conversion-using-ps2raster.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-15_format-conversion-using-ps2raster.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

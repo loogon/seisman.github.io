@@ -4,13 +4,10 @@ div#contents p.topic-title.first {
 }
 
 /* 固定边栏 */
-/*
-.sidebar-nav-fixed {
-    position: fixed;
-    top     : 84 px;
-    width   : 16.48%;
-}
-*/
+/*.table-of-content .toc {
+    position:fixed;
+    font-size: .9em;
+}*/
 
 table.docutils.footnote{
     table-layout: initial;

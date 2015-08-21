@@ -95,20 +95,21 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id14">说明</a></li>
-<li><a class="reference internal" href="#id2" id="id15">下载</a></li>
-<li><a class="reference internal" href="#id3" id="id16">依赖关系</a><ul>
-<li><a class="reference internal" href="#id4" id="id17">基础依赖包</a></li>
-<li><a class="reference internal" href="#id5" id="id18">软件依赖包</a></li>
+<li><a class="reference internal" href="#id1" id="id11">说明</a></li>
+<li><a class="reference internal" href="#id2" id="id12">下载</a></li>
+<li><a class="reference internal" href="#id3" id="id13">依赖关系</a><ul>
+<li><a class="reference internal" href="#id4" id="id14">基础依赖包</a></li>
+<li><a class="reference internal" href="#id5" id="id15">软件依赖包</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#gmt" id="id19">安装GMT</a><ul>
-<li><a class="reference internal" href="#id10" id="id20">编译GMT源码</a></li>
-<li><a class="reference internal" href="#id11" id="id21">安装海岸线数据</a></li>
-<li><a class="reference internal" href="#id12" id="id22">修改环境变量</a></li>
+<li><a class="reference internal" href="#gmt" id="id16">安装GMT</a><ul>
+<li><a class="reference internal" href="#id6" id="id17">编译GMT源码</a></li>
+<li><a class="reference internal" href="#id7" id="id18">安装海岸线数据</a></li>
+<li><a class="reference internal" href="#id8" id="id19">修改环境变量</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id13" id="id23">修订历史</a></li>
+<li><a class="reference internal" href="#id9" id="id20">命令测试</a></li>
+<li><a class="reference internal" href="#id10" id="id21">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -118,12 +119,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             
             
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id14">说明</a></h2>
+<h2><a class="toc-backref" href="#id11">说明</a></h2>
 <p>本文介绍如何在Linux下编译GMT4的最新版本：<span class="caps">GMT</span> 4.5.13。</p>
 <p>很多Linux发行版的源中带有GMT软件包，但是版本一般较老，因而这里假定想要自己编译GMT4的读者，下载和编译的都是GMT4的最新版本，因而本文会随着GMT4新版本的发行而不断作出修改。</p>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id15">下载</a></h2>
+<h2><a class="toc-backref" href="#id12">下载</a></h2>
 <p>官方ftp：<a class="reference external" href="ftp://ftp.soest.hawaii.edu/gmt">ftp://ftp.soest.hawaii.edu/gmt</a></p>
 <p>需要下载的包包括：</p>
 <ul class="simple">
@@ -133,48 +134,43 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>注：GMT中的<tt class="docutils literal">triangulate</tt>命令有两个不同的源码，其中一个遵循GPL协议，另一个不遵循GPL协议。GMT的src包中包含了前者。若有特殊需求，需要使用后者源码的功能，可以下载<a class="reference external" href="ftp://ftp.soest.hawaii.edu/gmt/gmt-4.5.13-non-gpl-src.tar.bz2">gmt-4.5.13-non-gpl-src.tar.bz2</a>，并将解压后的triangulate源码覆盖<tt class="docutils literal"><span class="pre">gmt-4.5.13-src.tar.bz2</span></tt>中的相应源码。</p>
 </div>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id16">依赖关系</a></h2>
+<h2><a class="toc-backref" href="#id13">依赖关系</a></h2>
 <div class="section" id="id4">
-<h3><a class="toc-backref" href="#id17">基础依赖包</a></h3>
+<h3><a class="toc-backref" href="#id14">基础依赖包</a></h3>
 <p>GMT编译过程需要C编译器，以及一些底层的库文件。</p>
 <p>对于Ubuntu/Debian:</p>
 <pre class="literal-block">
-sudo apt-get install g++ libxt-dev libxaw7-dev libxmu-dev libSM-dev
+sudo apt-get install gcc g++ make
+sudo apt-get install libxt-dev libxaw7-dev libxmu-dev libSM-dev
 </pre>
 <p>对于CentOS/<span class="caps">RHEL</span>/Fedora:</p>
 <pre class="literal-block">
-sudo yum install gcc-c++ libXt-devel libXaw-devel libXmu-devel libSM-devel
+sudo yum install gcc gcc-c++ make
+sudo yum install libXt-devel libXaw-devel libXmu-devel libSM-devel zlib-devel
 </pre>
 </div>
 <div class="section" id="id5">
-<h3><a class="toc-backref" href="#id18">软件依赖包</a></h3>
-<p>GMT4主要依赖于netCDF，可以直接使用Linux发行版官方源中提供的netCDF包<a class="footnote-reference" href="#id8" id="id6">[*]</a>。除了netcdf之外，建议还安装gdal包。虽然GMT不依赖于gdal，但gdal可以轻松地将其他数据格式转换为GMT可识别的格式。</p>
+<h3><a class="toc-backref" href="#id15">软件依赖包</a></h3>
+<p>GMT4主要依赖于netCDF4，可以直接使用Linux发行版官方源中提供的netCDF包。除了netcdf之外，建议还安装gdal包。虽然GMT不依赖于gdal，但gdal可以轻松地将其他数据格式转换为GMT可识别的格式。</p>
 <p>对于Ubuntu/Debian:</p>
 <pre class="literal-block">
 sudo apt-get install libnetcdf-dev libgdal1-dev
 </pre>
-<p>对于RHEL/CentOS/Fedora<a class="footnote-reference" href="#id9" id="id7">[†]</a></p>
+<p>对于RHEL/CentOS/Fedora:</p>
 <pre class="literal-block">
 sudo yum install netcdf netcdf-devel gdal gdal-devel
 </pre>
-<table class="docutils footnote" frame="void" id="id8" rules="none">
-<colgroup><col class="label"></col><col></col></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id6">[*]</a></td><td>GMT4可以使用netCDF3或netCDF4，但新版本的GMT正在逐渐放弃对netCDF3的支持，因而建议<strong>使用netCDF4</strong>，且建议<strong>不要自行编译netCDF4</strong>。</td></tr>
-</tbody>
-</table>
-<table class="docutils footnote" frame="void" id="id9" rules="none">
-<colgroup><col class="label"></col><col></col></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id7">[†]</a></td><td>CentOS和RHEL的官方源中没有netCDF，需要首先添加EPEL源再安装netCDF。</td></tr>
-</tbody>
-</table>
+<p>注意：</p>
+<ol class="arabic simple">
+<li>一定不要试图自己手动编译netCDF。如果在阅读本文之前曾经手动编译过，一定要将原来手动编译生成的文件删除干净。通常可以使用<tt class="docutils literal">locate netcdf</tt>，找到<tt class="docutils literal">/usr/local</tt>目录下的与netCDF相关的文件，直接删除即可。</li>
+<li>CentOS和RHEL的官方源中没有netCDF，需要首先添加EPEL源再安装netCDF；Fedora官方源中自带netCDF；</li>
+</ol>
 </div>
 </div>
 <div class="section" id="gmt">
-<h2><a class="toc-backref" href="#id19">安装GMT</a></h2>
-<div class="section" id="id10">
-<h3><a class="toc-backref" href="#id20">编译GMT源码</a></h3>
+<h2><a class="toc-backref" href="#id16">安装GMT</a></h2>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id17">编译GMT源码</a></h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -185,9 +181,10 @@ sudo yum install netcdf netcdf-devel gdal gdal-devel
 <span class="nv">$ </span>make
 <span class="nv">$ </span>sudo make install-all
 </pre></div>
-</td></tr></table></div>
-<div class="section" id="id11">
-<h3><a class="toc-backref" href="#id21">安装海岸线数据</a></h3>
+</td></tr></table><p>其中<tt class="docutils literal"><span class="pre">--prefix</span></tt>指定了GMT安装路径，你可以指定为其他路径，但要注意后面其他步骤要与这里的路径统一。</p>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id18">安装海岸线数据</a></h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>tar -zxvf gshhg-gmt-2.3.4.tar.gz
@@ -195,8 +192,8 @@ sudo yum install netcdf netcdf-devel gdal gdal-devel
 <span class="nv">$ </span>sudo cp -r gshhg-gmt-2.3.4/* /opt/GMT-4.5.13/share/coast/
 </pre></div>
 </td></tr></table></div>
-<div class="section" id="id12">
-<h3><a class="toc-backref" href="#id22">修改环境变量</a></h3>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id19">修改环境变量</a></h3>
 <p>向<tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>中加入GMT4的环境变量，并使环境变量生效：</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -215,8 +212,16 @@ sudo yum install netcdf netcdf-devel gdal gdal-devel
 </ul>
 </div>
 </div>
-<div class="section" id="id13">
-<h2><a class="toc-backref" href="#id23">修订历史</a></h2>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id20">命令测试</a></h2>
+<p>在终端键入<tt class="docutils literal">psxy -</tt>，若出现如下输出，则安装成功:</p>
+<pre class="literal-block">
+$ psxy -
+psxy 4.5.13 [64-bit] - Plot lines, polygons, and symbols on maps
+</pre>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id21">修订历史</a></h2>
 <ul class="simple">
 <li>2013-11-07：针对GMT 4.5.11发布初稿；</li>
 <li>2014-03-02：针对GMT 4.5.12进行更新；</li>
@@ -270,9 +275,9 @@ sudo yum install netcdf netcdf-devel gdal gdal-devel
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/install-pssac.html" title="pssac之安装">pssac之安装</a></li>
-<li><a href="http://seisman.info/gmtdefaults4.html" title="GMT之gmtdefaults">GMT之gmtdefaults</a></li>
-<li><a href="http://seisman.info/compilation-of-hk.html" title="hk1.3编译">hk1.3编译</a></li>
+<li><a href="http://seisman.info/install-pssac.html" title="安装pssac">安装pssac</a></li>
+<li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
+<li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv">Python多版本共存之pyenv</a></li>
 <li><a href="http://seisman.info/install-gmt5-under-linux.html" title="GMT 5.1.2在Linux下的安装">GMT 5.1.2在Linux下的安装</a></li>
 <li><a href="http://seisman.info/install-cps330.html" title="CPS330的安装">CPS330的安装</a></li>
 </ul>
@@ -300,20 +305,20 @@ sudo yum install netcdf netcdf-devel gdal gdal-devel
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#an-zhuang-ref">安装
-                    <span>10</span>
+                    <span>8</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#bian-yi-ref">编译
-                    <span>9</span>
+                    <span>8</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/install-gmt4-under-linux.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-11-07_install-gmt4-under-linux.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

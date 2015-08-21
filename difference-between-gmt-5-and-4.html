@@ -8,7 +8,7 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="期待了很久的GMT5终于出来了，先总结一下GMT5相对于GMT4的变化。内容主要来自于GMT manual。 一些基本的变化 GMT5文档本身变丑了，没有设计封面，完全没有美感可言，内部的排版也没有GMT4的文档美观； 增加了200+新特性； 重写了PSL绘图函数库，生成的PS代码更短更兼容； 开放了API，可以供C/C++直接调用，部分可以支持F77。目前正在开发Matlab接口，并计划开发Python接口； GMT5的部分命令以及几乎全部默认参数名都发生了变化，但是GMT5提供了兼容模式，可以良好执行GMT4语法； 命令的变化 对于GMT4而言，GMT/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令gmt和几个辅助型bash脚本，其他命令如psxy都是指向gmt的符号链接。GMT5采用&#34;gmt module&#34;的方式执行单个命令，比如gmt pscoast与GMT4中的pscoast相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。 之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法 ...
+        <meta name="description" content="期待了很久的GMT5终于出来了，先总结一下GMT5相对于GMT4的变化。内容主要来自于GMT manual。 一些基本的变化 GMT5文档本身变丑了，没有设计封面，完全没有美感可言，内部的排版也没有GMT4的文档美观； 增加了200+新特性； 重写了PSL绘图函数库，生成的PS代码更短更兼容； 开放了API，可以供C/C++直接调用，部分可以支持F77。目前正在开发Matlab接口，并计划开发Python接口； GMT5的部分命令以及几乎全部默认参数名都发生了变化，但是GMT5提供了兼容模式，可以良好执行GMT4语法； 命令的变化 对于GMT4而言，GMT/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令gmt和几个辅助型bash脚本，其他命令如psxy都是指向gmt的符号链接。GMT5采用”gmt module”的方式执行单个命令，比如gmt pscoast与GMT4中的pscoast相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。 之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法 ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
@@ -17,12 +17,12 @@
 
 <meta property="og:title" content="GMT5相对GMT4的一些变化 "/>
 <meta property="og:url" content="http://seisman.info/difference-between-gmt-5-and-4.html" />
-<meta property="og:description" content="期待了很久的GMT5终于出来了，先总结一下GMT5相对于GMT4的变化。内容主要来自于GMT manual。 一些基本的变化 GMT5文档本身变丑了，没有设计封面，完全没有美感可言，内部的排版也没有GMT4的文档美观； 增加了200+新特性； 重写了PSL绘图函数库，生成的PS代码更短更兼容； 开放了API，可以供C/C++直接调用，部分可以支持F77。目前正在开发Matlab接口，并计划开发Python接口； GMT5的部分命令以及几乎全部默认参数名都发生了变化，但是GMT5提供了兼容模式，可以良好执行GMT4语法； 命令的变化 对于GMT4而言，GMT/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令gmt和几个辅助型bash脚本，其他命令如psxy都是指向gmt的符号链接。GMT5采用&#34;gmt module&#34;的方式执行单个命令，比如gmt pscoast与GMT4中的pscoast相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。 之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法 ..." />
+<meta property="og:description" content="期待了很久的GMT5终于出来了，先总结一下GMT5相对于GMT4的变化。内容主要来自于GMT manual。 一些基本的变化 GMT5文档本身变丑了，没有设计封面，完全没有美感可言，内部的排版也没有GMT4的文档美观； 增加了200+新特性； 重写了PSL绘图函数库，生成的PS代码更短更兼容； 开放了API，可以供C/C++直接调用，部分可以支持F77。目前正在开发Matlab接口，并计划开发Python接口； GMT5的部分命令以及几乎全部默认参数名都发生了变化，但是GMT5提供了兼容模式，可以良好执行GMT4语法； 命令的变化 对于GMT4而言，GMT/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令gmt和几个辅助型bash脚本，其他命令如psxy都是指向gmt的符号链接。GMT5采用”gmt module”的方式执行单个命令，比如gmt pscoast与GMT4中的pscoast相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。 之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法 ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2013-11-08T00:17:00+08:00" />
 <meta name="twitter:title" content="GMT5相对GMT4的一些变化 ">
-<meta name="twitter:description" content="期待了很久的GMT5终于出来了，先总结一下GMT5相对于GMT4的变化。内容主要来自于GMT manual。 一些基本的变化 GMT5文档本身变丑了，没有设计封面，完全没有美感可言，内部的排版也没有GMT4的文档美观； 增加了200+新特性； 重写了PSL绘图函数库，生成的PS代码更短更兼容； 开放了API，可以供C/C++直接调用，部分可以支持F77。目前正在开发Matlab接口，并计划开发Python接口； GMT5的部分命令以及几乎全部默认参数名都发生了变化，但是GMT5提供了兼容模式，可以良好执行GMT4语法； 命令的变化 对于GMT4而言，GMT/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令gmt和几个辅助型bash脚本，其他命令如psxy都是指向gmt的符号链接。GMT5采用&#34;gmt module&#34;的方式执行单个命令，比如gmt pscoast与GMT4中的pscoast相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。 之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法 ...">
+<meta name="twitter:description" content="期待了很久的GMT5终于出来了，先总结一下GMT5相对于GMT4的变化。内容主要来自于GMT manual。 一些基本的变化 GMT5文档本身变丑了，没有设计封面，完全没有美感可言，内部的排版也没有GMT4的文档美观； 增加了200+新特性； 重写了PSL绘图函数库，生成的PS代码更短更兼容； 开放了API，可以供C/C++直接调用，部分可以支持F77。目前正在开发Matlab接口，并计划开发Python接口； GMT5的部分命令以及几乎全部默认参数名都发生了变化，但是GMT5提供了兼容模式，可以良好执行GMT4语法； 命令的变化 对于GMT4而言，GMT/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令gmt和几个辅助型bash脚本，其他命令如psxy都是指向gmt的符号链接。GMT5采用”gmt module”的方式执行单个命令，比如gmt pscoast与GMT4中的pscoast相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。 之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法 ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
@@ -121,7 +121,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </div>
 <div class="section" id="id2">
 <h2><a class="toc-backref" href="#id8">命令的变化</a></h2>
-<p>对于GMT4而言，<span class="caps">GMT</span>/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令<tt class="docutils literal">gmt</tt>和几个辅助型bash脚本，其他命令如<tt class="docutils literal">psxy</tt>都是指向gmt的符号链接。GMT5采用"gmt module"的方式执行单个命令，比如<tt class="docutils literal">gmt pscoast</tt>与GMT4中的<tt class="docutils literal">pscoast</tt>相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。</p>
+<p>对于GMT4而言，<span class="caps">GMT</span>/bin目录下有143个可执行文件，而对于GMT5来说，只有一个命令<tt class="docutils literal">gmt</tt>和几个辅助型bash脚本，其他命令如<tt class="docutils literal">psxy</tt>都是指向gmt的符号链接。GMT5采用”gmt module”的方式执行单个命令，比如<tt class="docutils literal">gmt pscoast</tt>与GMT4中的<tt class="docutils literal">pscoast</tt>相同。这样做的好处在于，避免了GMT的psxy命令与其他软件的psxy命令相互冲突。</p>
 <p>之所以建立指向gmt的众多符号链接，是为了满足GMT4兼容性的需求。其实，或许有个更好的办法，下一篇博文再说。</p>
 <p>有部分命令修改了名字，有部分命令从原来的补充包中提升到标准包中，具体的不说。</p>
 </div>
@@ -209,10 +209,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/global-relief-model-etopo1.html" title="全球地形起伏模型ETOPO1">全球地形起伏模型ETOPO1</a></li>
-<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
-<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
-<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
+<li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
+<li><a href="http://seisman.info/ocean-floor-crustal-age.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
+<li><a href="http://seisman.info/how-to-use-gmt-under-windows.html" title="Windows下使用GMT的正确姿势">Windows下使用GMT的正确姿势</a></li>
 <li><a href="http://seisman.info/srtm15-plus.html" title="全球地形起伏数据：SRTM15_PLUS">全球地形起伏数据：SRTM15_PLUS</a></li>
 </ul>
 <hr />
@@ -221,7 +221,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             <nav>
             <ul class="articles-timeline">
                 <li class="previous-article">« <a href="http://seisman.info/install-gmt4-under-linux.html" title="Previous: GMT 4.5.13在Linux下的安装">GMT 4.5.13在Linux下的安装</a></li>
-                <li class="next-article"><a href="http://seisman.info/multiple-versions-of-gmt.html" title="Next: GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a> »</li>
+                <li class="next-article"><a href="http://seisman.info/multiple-versions-of-gmt.html" title="Next: GMT4与GMT5双版本共存">GMT4与GMT5双版本共存</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -235,17 +235,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/difference-between-gmt-5-and-4.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-11-08_difference-between-gmt-5-and-4.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

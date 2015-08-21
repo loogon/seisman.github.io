@@ -13,7 +13,7 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="GMT4, GMT5, Windows, 胡言乱语, " />
+<meta name="keywords" content="GMT4, GMT5, Windows, GMT, " />
 
 <meta property="og:title" content="Windows下使用GMT的正确姿势 "/>
 <meta property="og:url" content="http://seisman.info/how-to-use-gmt-under-windows.html" />
@@ -218,6 +218,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </div>
 <p>在console中可以看到bat脚本中的每个命令的执行，当然，如果命令有错误，也会显示报错信息。这样，在编辑器里就既可以编辑bat脚本，也可以执行bat脚本，并可以根据终端的输出来判断命令是否有错误以及警告。</p>
 <p>如果脚本有问题就需要修改，修改完成后保存，再次键入F6，又会出现“Execute”对话框，<tt class="docutils literal">$(FULL_CURRENT_PATH)</tt>已经输入好了，再点击一次“<span class="caps">OK</span>”即可再次运行修改后的脚本。不过，按F6再点击OK还是有些麻烦：当脚本执行过一次之后，可以用快捷键Ctrl+F6重新运行脚本。</p>
+<p>每次修改代码之后都要先保存再执行也挺麻烦的，最好能够在运行之前自动保存。在“插件”-&gt;“NppExec”中选中“Save all files on execute”即可实现每次运行之前自动保存代码。</p>
 <p>对于终端，还可以做一些额外的设置，可以在“插件”-&gt;“NppExec”中进一步调整：</p>
 <ol class="arabic simple">
 <li>“Change Console font”来挑选一个合适的等宽字体和字号；</li>
@@ -254,7 +255,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <img alt="notepad++ with nppexec" src="/images/2014121011.png" style="width: 700px;"/>
 </div>
 <p>这里在命令里加了个输出，并且故意把命令写错了，所以出现了蓝色的输出和报错信息，一眼就可以看到错误信息，看上去更直观。</p>
-<p>需要注意的一点是，每次修改完脚本之后，需要Ctrl+S保存之后，再Ctrl+F6执行脚本。</p>
+<p><strong>注意</strong>: 似乎该插件不会输出GMT命令中-V显示的信息，原因未知。</p>
 </div>
 </div>
 <div class="section" id="ps">
@@ -337,10 +338,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/gmt-option-j-and-r.html" title="GMT进阶之理解-J和-R的共生关系">GMT进阶之理解-J和-R的共生关系</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
 <li><a href="http://seisman.info/global-relief-model-etopo1.html" title="全球地形起伏模型ETOPO1">全球地形起伏模型ETOPO1</a></li>
-<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
-<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
+<li><a href="http://seisman.info/ocean-floor-crustal-age.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
 <li><a href="http://seisman.info/srtm15-plus.html" title="全球地形起伏数据：SRTM15_PLUS">全球地形起伏数据：SRTM15_PLUS</a></li>
 </ul>
 <hr />
@@ -348,7 +349,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="Previous: GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+                <li class="previous-article">« <a href="http://seisman.info/blurry-frame-in-GMT.html" title="Previous: GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
                 <li class="next-article"><a href="http://seisman.info/add-annotations-in-gmt.html" title="Next: GMT中添加注释和标注">GMT中添加注释和标注</a> »</li>
             </ul>
             </nav>
@@ -363,14 +364,14 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <time datetime="2015-01-13T00:00:00+08:00">2015-01-13</time>
 
             <h4>Category</h4>
-            <a class="category-link" href="http://seisman.info/categories.html#hu-yan-luan-yu-ref">胡言乱语</a>
+            <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#windows-ref">Windows
                     <span>4</span>
@@ -380,7 +381,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             <a href="http://seisman.qiniudn.com/pdfs/how-to-use-gmt-under-windows.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/FreeTalk/2014-12-10_how-to-use-gmt-under-windows.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

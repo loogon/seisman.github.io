@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2014-11-23T00:00:00+08:00" />
-<meta property="" content="2014-12-01T00:00:00+08:00" />
+<meta property="" content="2015-07-14T00:00:00+08:00" />
 <meta name="twitter:title" content="CentOS 7下的软件安装方法及策略 ">
 <meta name="twitter:description" content="一些废话 2010年开始正式接触Linux，入门发行版是Ubuntu 10.10，后来过渡到Ubunu 11.04，这其中也尝试了很多其他主流的发行版。进入实验室之后，开始用CentOS 5，然后是CentOS 6，现在进化到CentOS 7。 使用了四年的Linux，前三年都是在瞎折腾，浪费了不少时间，也得到了不少经验与教训。现在可能是真的老了，已经不愿意折腾了，只希望配置好一个系统之后，就一直使用下去。 为什么要写/读这一篇 使用Linux尤其是CentOS会遇到一些坑，或是一些有洁癖的人不能忍的事情： 官方源中的软件包版本太老，在功能上无法满足需求； 多个源的软件包存在版本冲突； 手动编译软件，默认会将不同文件放置在/usr/local下不同的子目录下，使得软件的更新和删除变得麻烦。 等等… 在经历了几次重装CentOS之后，特总结出如下几条软件安装的方法与原则，以尽可能保证当前系统的稳定、整洁，尽可能降低系统洁癖引起的重装冲动。 以下所说，仅限于CentOS7，对其他发行版，或许有借鉴意义。 官方源 CentOS自带的四个官方源中，默认打开的有base ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
@@ -166,6 +166,7 @@ sudo yum install PackageName
 <li>大型第三方源，已确认不会替换官方源的包，且相互之间无冲突<ol class="arabic">
 <li><span class="caps">EPEL</span>：包含6500多个软件，科研必备</li>
 <li>ELRepo：包含几十个各种硬件的驱动程序</li>
+<li>Nux Dextop：多媒体相关的软件包（与EPEL的个别软件相冲突，可忽略）</li>
 </ol>
 </li>
 <li>有些小型第三方源，仅包含了几个软件，确认与官方源和EPEL源不会冲突，也可以添加<ol class="arabic">
@@ -291,7 +292,7 @@ echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
 <h2><a class="toc-backref" href="#id29">总结</a></h2>
 <p>简单总结一下:</p>
 <ol class="arabic simple">
-<li>为系统添加EPEL源、ELRepo源和个别其他小型第三方源</li>
+<li>为系统添加EPEL源、Nux Dextop、ELRepo源和个别其他小型第三方源</li>
 <li>能够从源中安装的就从源中安装</li>
 <li>不能从源中安装的尽量找rpm包安装</li>
 <li>找不到rpm包的就试试linuxbrew</li>
@@ -303,6 +304,7 @@ echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
 <ol class="arabic simple">
 <li>2014-11-23：初稿；</li>
 <li>2014-12-01：第三方源中加入ELRepo源；</li>
+<li>2015-07-14：第三方源中加入Nux Dextop；</li>
 </ol>
 </div>
 
@@ -346,11 +348,11 @@ echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/conflict-between-epel-and-rpmforge.html" title="使用EPEL和RPMforge源安装netcdf时的冲突">使用EPEL和RPMforge源安装netcdf时的冲突</a></li>
 <li><a href="http://seisman.info/install-yong-chinese-input-method-under-centos-7.html" title="CentOS 7.0下安装小小输入法">CentOS 7.0下安装小小输入法</a></li>
 <li><a href="http://seisman.info/install-nvidia-drivers-under-linux.html" title="Linux下安装NVIDIA显卡驱动">Linux下安装NVIDIA显卡驱动</a></li>
 <li><a href="http://seisman.info/linux-environment-for-seismology-research.html" title="用CentOS 7打造合适的科研环境">用CentOS 7打造合适的科研环境</a></li>
 <li><a href="http://seisman.info/uninstall-intel-parallel-studio-completely.html" title="如何彻底卸载Intel Parallel Studio">如何彻底卸载Intel Parallel Studio</a></li>
+<li><a href="http://seisman.info/fcitx-for-centos-7.html" title="CentOS 7安装fcitx中文输入法">CentOS 7安装fcitx中文输入法</a></li>
 </ul>
 <hr />
 </section>
@@ -358,7 +360,7 @@ echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
             <nav>
             <ul class="articles-timeline">
                 <li class="previous-article">« <a href="http://seisman.info/historical-versions-of-posts.html" title="Previous: 阅读博文的历史版本">阅读博文的历史版本</a></li>
-                <li class="next-article"><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="Next: GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a> »</li>
+                <li class="next-article"><a href="http://seisman.info/blurry-frame-in-GMT.html" title="Next: GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -369,7 +371,7 @@ echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
             <time pubdate="pubdate" datetime="2014-11-23T00:00:00+08:00">2014-11-23</time>
 
 <h4>Last Updated</h4>
-<time datetime="2014-12-01T00:00:00+08:00">2014-12-01</time>
+<time datetime="2015-07-14T00:00:00+08:00">2015-07-14</time>
 
             <h4>Category</h4>
             <a class="category-link" href="http://seisman.info/categories.html#linux-ref">Linux</a>
@@ -383,7 +385,7 @@ echo 'export PATH=${HOME}/bin:$PATH' &gt;&gt; ~/.bashrc
             <a href="http://seisman.qiniudn.com/pdfs/how-to-install-softwares-under-centos-7.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/Linux/2014-11-23_how-to-install-softwares-under-centos-7.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

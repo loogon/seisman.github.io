@@ -8,7 +8,7 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做&#34;GMT进阶&#34;，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ...
+        <meta name="description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做”GMT进阶”，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
@@ -17,12 +17,12 @@
 
 <meta property="og:title" content="GMT进阶之理解-J和-R的共生关系 "/>
 <meta property="og:url" content="http://seisman.info/gmt-option-j-and-r.html" />
-<meta property="og:description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做&#34;GMT进阶&#34;，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ..." />
+<meta property="og:description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做”GMT进阶”，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2013-07-15T01:35:00+08:00" />
 <meta name="twitter:title" content="GMT进阶之理解-J和-R的共生关系 ">
-<meta name="twitter:description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做&#34;GMT进阶&#34;，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ...">
+<meta name="twitter:description" content="-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。 既然博文名字叫做”GMT进阶”，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。 地图投影 根据维基百科中地图投影的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标\((\varphi,\lambda)\)与平面直角坐标\((x,y)\)建立起函数关系。 -R选项 -R选项很简单，给出要绘制的地图的范围。-Rxmin/xmax/ymin/ymax。 -J选项 -J选项指定投影方式以及地图的尺寸。 J和R结合 下面以最简单的笛卡尔坐标系（-JX）为例，谈一谈J和R为什么必须同时指定。 GMT默认的纸张大小为A4纸，也就是大小为210mm*297mm。假定要研究的范围是-R0/10 ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
@@ -108,7 +108,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             
             
 <p>-J和-R是GMT的标准命令行选项中很重要的两个。这里“标准”的意思是“在所有具有该选项的命令中，其含义和用法相同”，而不是“所有命令都有这个选项”。</p>
-<p>既然博文名字叫做"GMT进阶"，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。</p>
+<p>既然博文名字叫做”GMT进阶”，那么选项的具体用法在这里就不讨论了，这里想要思考的是“这两个选项为什么要同时存在？”的问题。</p>
 <div class="section" id="id1">
 <h2><a class="toc-backref" href="#id3">地图投影</a></h2>
 <p>根据维基百科中<a class="reference internal" href="#id1">地图投影</a>的解释，由于地球是一个不可展的球体，使用物理方法将其展平会引起褶皱、拉伸和断裂，因此要使用数学方法实现由曲面向平面的转化。地图投影，是指按照一定的数学法则将地球椭球面上的经纬网转换到平面上，使地面的地理坐标<span class="math">\((\varphi,\lambda)\)</span>与平面直角坐标<span class="math">\((x,y)\)</span>建立起函数关系。</p>
@@ -180,16 +180,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/gmt-option-ko.html" title="GMT进阶之深入理解-K和-O选项">GMT进阶之深入理解-K和-O选项</a></li>
 <li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
-<li><a href="http://seisman.info/global-relief-model-etopo1.html" title="全球地形起伏模型ETOPO1">全球地形起伏模型ETOPO1</a></li>
-<li><a href="http://seisman.info/gmt-option-u.html" title="GMT选项之时间戳-U">GMT选项之时间戳-U</a></li>
-<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
+<li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
+<li><a href="http://seisman.info/srtm15-plus.html" title="全球地形起伏数据：SRTM15_PLUS">全球地形起伏数据：SRTM15_PLUS</a></li>
 </ul>
 <hr />
 </section>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="http://seisman.info/development-of-sac.html" title="Previous: 从SAC 101.6的一个bug谈起">从SAC 101.6的一个bug谈起</a></li>
+                <li class="previous-article">« <a href="http://seisman.info/java-plugin-of-firefox.html" title="Previous: Firefox安装Java插件">Firefox安装Java插件</a></li>
                 <li class="next-article"><a href="http://seisman.info/from-moment-tensor-to-double-couple.html" title="Next: 由矩张量计算双力偶断层参数">由矩张量计算双力偶断层参数</a> »</li>
             </ul>
             </nav>
@@ -204,20 +204,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtxuan-xiang-ref">GMT选项
-                    <span>8</span>
+                    <span>7</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/gmt-option-j-and-r.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-07-15_gmt-option-j-and-r.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

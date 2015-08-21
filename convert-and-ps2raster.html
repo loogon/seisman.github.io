@@ -8,7 +8,7 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="在《GMT之利用ps2raster实现图像格式转换》中介绍了如何利用ps2raster将GMT的PS文件转换成其他常见的图片格式。 一般情况下，如果只用GMT做图的话，ps2raster基本可以满足需求了。 遇到几个特殊的情况如下： GMT中设置纸张背景色PAGE_COLOR，此时ps2raster无法实现切边； 用其他软件绘图，比如LaTeX的TikZ/PGF包，得到PS或PDF文件，无法使用ps2raster实现格式转换； … 这个时候就需要使用convert命令。convert命令的选项非常多，学起来比ps2raster要复杂多了。 ps2raster中常用的选项有-A、-E、-T、-P。convert众多选项中与之对应的选项如下： -trim：切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题； -density widthxheight：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母&#34;x&#34;； -rotatedegree：实现图像旋转，-rotate 90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。 convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；这里列出了convert支持的上百种图像/动画格式。 下面给出最常用的一个例子 ...
+        <meta name="description" content="在《GMT之利用ps2raster实现图像格式转换》中介绍了如何利用ps2raster将GMT的PS文件转换成其他常见的图片格式。 一般情况下，如果只用GMT做图的话，ps2raster基本可以满足需求了。 遇到几个特殊的情况如下： GMT中设置纸张背景色PAGE_COLOR，此时ps2raster无法实现切边； 用其他软件绘图，比如LaTeX的TikZ/PGF包，得到PS或PDF文件，无法使用ps2raster实现格式转换； … 这个时候就需要使用convert命令。convert命令的选项非常多，学起来比ps2raster要复杂多了。 ps2raster中常用的选项有-A、-E、-T、-P。convert众多选项中与之对应的选项如下： -trim：切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题； -density widthxheight：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母”x”； -rotatedegree：实现图像旋转，-rotate 90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。 convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；这里列出了convert支持的上百种图像/动画格式。 下面给出最常用的一个例子 ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
@@ -17,12 +17,12 @@
 
 <meta property="og:title" content="图像格式转换工具convert "/>
 <meta property="og:url" content="http://seisman.info/convert-and-ps2raster.html" />
-<meta property="og:description" content="在《GMT之利用ps2raster实现图像格式转换》中介绍了如何利用ps2raster将GMT的PS文件转换成其他常见的图片格式。 一般情况下，如果只用GMT做图的话，ps2raster基本可以满足需求了。 遇到几个特殊的情况如下： GMT中设置纸张背景色PAGE_COLOR，此时ps2raster无法实现切边； 用其他软件绘图，比如LaTeX的TikZ/PGF包，得到PS或PDF文件，无法使用ps2raster实现格式转换； … 这个时候就需要使用convert命令。convert命令的选项非常多，学起来比ps2raster要复杂多了。 ps2raster中常用的选项有-A、-E、-T、-P。convert众多选项中与之对应的选项如下： -trim：切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题； -density widthxheight：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母&#34;x&#34;； -rotatedegree：实现图像旋转，-rotate 90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。 convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；这里列出了convert支持的上百种图像/动画格式。 下面给出最常用的一个例子 ..." />
+<meta property="og:description" content="在《GMT之利用ps2raster实现图像格式转换》中介绍了如何利用ps2raster将GMT的PS文件转换成其他常见的图片格式。 一般情况下，如果只用GMT做图的话，ps2raster基本可以满足需求了。 遇到几个特殊的情况如下： GMT中设置纸张背景色PAGE_COLOR，此时ps2raster无法实现切边； 用其他软件绘图，比如LaTeX的TikZ/PGF包，得到PS或PDF文件，无法使用ps2raster实现格式转换； … 这个时候就需要使用convert命令。convert命令的选项非常多，学起来比ps2raster要复杂多了。 ps2raster中常用的选项有-A、-E、-T、-P。convert众多选项中与之对应的选项如下： -trim：切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题； -density widthxheight：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母”x”； -rotatedegree：实现图像旋转，-rotate 90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。 convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；这里列出了convert支持的上百种图像/动画格式。 下面给出最常用的一个例子 ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2013-09-27T00:16:00+08:00" />
 <meta name="twitter:title" content="图像格式转换工具convert ">
-<meta name="twitter:description" content="在《GMT之利用ps2raster实现图像格式转换》中介绍了如何利用ps2raster将GMT的PS文件转换成其他常见的图片格式。 一般情况下，如果只用GMT做图的话，ps2raster基本可以满足需求了。 遇到几个特殊的情况如下： GMT中设置纸张背景色PAGE_COLOR，此时ps2raster无法实现切边； 用其他软件绘图，比如LaTeX的TikZ/PGF包，得到PS或PDF文件，无法使用ps2raster实现格式转换； … 这个时候就需要使用convert命令。convert命令的选项非常多，学起来比ps2raster要复杂多了。 ps2raster中常用的选项有-A、-E、-T、-P。convert众多选项中与之对应的选项如下： -trim：切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题； -density widthxheight：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母&#34;x&#34;； -rotatedegree：实现图像旋转，-rotate 90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。 convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；这里列出了convert支持的上百种图像/动画格式。 下面给出最常用的一个例子 ...">
+<meta name="twitter:description" content="在《GMT之利用ps2raster实现图像格式转换》中介绍了如何利用ps2raster将GMT的PS文件转换成其他常见的图片格式。 一般情况下，如果只用GMT做图的话，ps2raster基本可以满足需求了。 遇到几个特殊的情况如下： GMT中设置纸张背景色PAGE_COLOR，此时ps2raster无法实现切边； 用其他软件绘图，比如LaTeX的TikZ/PGF包，得到PS或PDF文件，无法使用ps2raster实现格式转换； … 这个时候就需要使用convert命令。convert命令的选项非常多，学起来比ps2raster要复杂多了。 ps2raster中常用的选项有-A、-E、-T、-P。convert众多选项中与之对应的选项如下： -trim：切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题； -density widthxheight：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母”x”； -rotatedegree：实现图像旋转，-rotate 90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。 convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；这里列出了convert支持的上百种图像/动画格式。 下面给出最常用的一个例子 ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
@@ -104,7 +104,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <ul class="simple">
 <li><strong>-trim：</strong>切边，等效于ps2raster的-A选项；其可以解决上面的第一个问题；</li>
 <li><strong>-density</strong>
-<em>width</em><strong>x</strong><em>height</em>：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母&quot;x&quot;；</li>
+<em>width</em><strong>x</strong><em>height</em>：设置图像精度，等效于ps2raster的-E选项；按照GMT的惯例，width=300即可，height可以指定或不指定。注意width和height中间的字符是字母&#8221;x&#8221;；</li>
 <li><strong>-rotate</strong><em>degree</em>：实现图像旋转，-rotate&nbsp;90等效于ps2raster的-P选项，当然rotate可以旋转各种角度。</li>
 <li>convert没有与ps2raster中-T相应的选项，因为convert通过识别后缀直接进行转换；<a class="reference external" href="http://www.imagemagick.org/script/formats.php">这里</a>列出了convert支持的上百种图像/动画格式。</li>
 </ul>
@@ -186,23 +186,23 @@ ps2raster -A -E300 -P -Tg test.ps
                     <span>14</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
-                    <span>28</span>
+                    <span>35</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtming-ling-ref">GMT命令
-                    <span>12</span>
+                    <span>11</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#tu-xiang-ref">图像
-                    <span>13</span>
+                    <span>12</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/convert-and-ps2raster.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-09-27_convert-and-ps2raster.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

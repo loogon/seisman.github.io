@@ -183,8 +183,8 @@ xyz2grd xyzfile -Ggrdfile -Ixinc[unit][=|+][/yinc[unit][=|+]]
 <li><span class="caps">LB</span>：第一点为左下角；</li>
 <li><span class="caps">RB</span>：第一点为右上角；</li>
 </ul>
-<p>对于gridline registered网格数据，若数据是周期性的(比如经度的0度和360度实际上是一个点)，但是输入数据不包含xmax处的值，则要加入"x"；对于y方向同理；</p>
-<p>加入<strong>s</strong>n可以跳过z数据的前几个记录（在z数据有头段的时候经常用到）；若需要交换字节序，则加入"w"；</p>
+<p>对于gridline registered网格数据，若数据是周期性的(比如经度的0度和360度实际上是一个点)，但是输入数据不包含xmax处的值，则要加入”x”；对于y方向同理；</p>
+<p>加入<strong>s</strong>n可以跳过z数据的前几个记录（在z数据有头段的时候经常用到）；若需要交换字节序，则加入”w”；</p>
 <p>还需要指定z数据的具体数据类型：</p>
 <ul class="simple">
 <li>A：数据为ASCII格式，每行包含一个或多个浮点型数据；</li>
@@ -277,11 +277,11 @@ xyz2grd topo30. -Dm/m/m/1/0/=/= -Gustopo.nc -R234/294/24/50 -I30s -N-9999 -B -ZT
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/grdraster-info-of-gmt-grid.html" title="GMT网格数据之grdraster.info">GMT网格数据之grdraster.info</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
 <li><a href="http://seisman.info/global-relief-model-etopo1.html" title="全球地形起伏模型ETOPO1">全球地形起伏模型ETOPO1</a></li>
-<li><a href="http://seisman.info/srtm.html" title="高精度地形网格数据SRTM">高精度地形网格数据SRTM</a></li>
-<li><a href="http://seisman.info/gmt-grdpaste.html" title="GMT之grdpaste合并网格文件">GMT之grdpaste合并网格文件</a></li>
-<li><a href="http://seisman.info/images-of-crustal-age-of-the-ocean-floor.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
+<li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
+<li><a href="http://seisman.info/gebco-global-bathymetry-data.html" title="全球水深数据GEBCO">全球水深数据GEBCO</a></li>
+<li><a href="http://seisman.info/ocean-floor-crustal-age.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
 </ul>
 <hr />
 </section>
@@ -303,13 +303,13 @@ xyz2grd topo30. -Dm/m/m/1/0/=/= -Gustopo.nc -R234/294/24/50 -I30s -N-9999 -B -ZT
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtming-ling-ref">GMT命令
-                    <span>12</span>
+                    <span>11</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
-                    <span>29</span>
+                    <span>27</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#wang-ge-ref">网格
                     <span>17</span>
@@ -319,7 +319,7 @@ xyz2grd topo30. -Dm/m/m/1/0/=/= -Gustopo.nc -R234/294/24/50 -I30s -N-9999 -B -ZT
             <a href="http://seisman.qiniudn.com/pdfs/gmt-xyz2grd.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-09-28_gmt-xyz2grd.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

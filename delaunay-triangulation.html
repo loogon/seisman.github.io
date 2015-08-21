@@ -139,7 +139,7 @@ usage: triangulate &lt;infiles&gt; [-Dx|y] [-E&lt;empty&gt;] [-F] [-G&lt;grdfile
 </ul>
 <p>默认输出的每个记录是每个三角形的三个顶点的id号（文件中第一个点id=0），可以通过下面两个选项修改输出：</p>
 <ul class="simple">
-<li>-m：将整个三角剖分的结果以多个线段表示，每个线段记录的第一个字符为"&gt;"，这样的输出可以用于psxy绘图</li>
+<li>-m：将整个三角剖分的结果以多个线段表示，每个线段记录的第一个字符为”&gt;”，这样的输出可以用于psxy绘图</li>
 <li>-Q：输出Voronoi单元的边。（需要-m和-R）</li>
 </ul>
 <p>下面的选项可以将三角剖分的结果保存为网格文件：</p>
@@ -255,11 +255,11 @@ triangulate zj_stn.txt -m -Q -R118.4/122.5/27.4/30.9 | psxy -m -R -JM6.5i -W0.5p
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/format-conversion-using-ps2raster.html" title="GMT之利用ps2raster实现图像格式转换">GMT之利用ps2raster实现图像格式转换</a></li>
-<li><a href="http://seisman.info/gmtdefaults4.html" title="GMT之gmtdefaults">GMT之gmtdefaults</a></li>
-<li><a href="http://seisman.info/gmtset-gmtget.html" title="GMT之gmtset与gmtget">GMT之gmtset与gmtget</a></li>
-<li><a href="http://seisman.info/gmt-xyz2grd.html" title="GMT命令之xyz2grd生成网格数据">GMT命令之xyz2grd生成网格数据</a></li>
+<li><a href="http://seisman.info/gmt-minmax.html" title="GMT之利用minmax寻找数据极值">GMT之利用minmax寻找数据极值</a></li>
+<li><a href="http://seisman.info/gmt-grdpaste.html" title="GMT之grdpaste合并网格文件">GMT之grdpaste合并网格文件</a></li>
 <li><a href="http://seisman.info/gmt-pstext.html" title="GMT命令之用pstext在图上写入文本">GMT命令之用pstext在图上写入文本</a></li>
+<li><a href="http://seisman.info/gmt-psimage.html" title="GMT命令之很有用但是却不常用的psimage">GMT命令之很有用但是却不常用的psimage</a></li>
+<li><a href="http://seisman.info/gmt-pslegend.html" title="GMT命令之用pslegend绘制图例">GMT命令之用pslegend绘制图例</a></li>
 </ul>
 <hr />
 </section>
@@ -281,14 +281,14 @@ triangulate zj_stn.txt -m -Q -R118.4/122.5/27.4/30.9 | psxy -m -R -JM6.5i -W0.5p
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmtming-ling-ref">GMT命令
-                    <span>12</span>
+                    <span>11</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/delaunay-triangulation.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-08-14_delaunay-triangulation.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

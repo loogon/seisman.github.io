@@ -196,22 +196,22 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 STA NN YYYY MM DD HH MM SS.TTTT YYYY MM DD HH MM SS.TTTT #_CH CH1 CH2 CHn LI
 </pre>
 <ul class="simple">
-<li><span class="caps">STA</span>：台站名</li>
-<li><span class="caps">NN</span>：台网或虚拟台网名</li>
+<li><tt class="docutils literal"><span class="caps">STA</span></tt>：台站名</li>
+<li><tt class="docutils literal"><span class="caps">NN</span></tt>：台网或虚拟台网名</li>
 <li><span class="caps">YYYY</span>、<span class="caps">MM</span>、<span class="caps">DD</span>、<span class="caps">HH</span>、<span class="caps">MM</span>：年份（四位）、月、日、时、分</li>
-<li><span class="caps">SS</span>.<span class="caps">TTTT</span>：秒；小数点后为毫秒，可以省略；</li>
+<li><tt class="docutils literal"><span class="caps">SS</span>.<span class="caps">TTTT</span></tt>：秒；小数点后为毫秒，可以省略；</li>
 <li>日期和时间出现了两次，分别代表要申请的数据的开始时间和结束时间；</li>
-<li>#_CH：接下来出现的通道标识的数目；</li>
-<li>CHn：通道标识符，可以包含通配符；</li>
-<li><span class="caps">LI</span>：位置号，可选</li>
+<li><tt class="docutils literal">#_CH</tt>：接下来出现的通道标识的数目；</li>
+<li><tt class="docutils literal">CHn</tt>：通道标识符，可以包含通配符；</li>
+<li><tt class="docutils literal"><span class="caps">LI</span></tt>：<span class="caps">LOCATION</span> <span class="caps">ID</span>，可选</li>
 </ul>
 <p>每行最多包含100个字符。</p>
 </div>
 <div class="section" id="id5">
 <h2><a class="toc-backref" href="#id15">通配符</a></h2>
-<p>通道标识符支持通配符，目前仅支持通配符"?"，代表任意单个字符，比如"<span class="caps">BH</span>?"代表所有宽频带（Broadband）高增益（High gain）的通道，可能包含BHE、<span class="caps">BHN</span>、<span class="caps">BHZ</span>、<span class="caps">BH1</span>、BH2等等；通道列表可以包含多个字段，比如 <tt class="docutils literal">3 <span class="caps">LHZ</span> <span class="caps">BH</span>? <span class="pre">S??</span></tt>。</p>
+<p>通道标识符支持通配符，目前仅支持通配符”?”，代表任意单个字符，比如”<span class="caps">BH</span>?”代表所有宽频带（Broadband）高增益（High gain）的通道，可能包含BHE、<span class="caps">BHN</span>、<span class="caps">BHZ</span>、<span class="caps">BH1</span>、BH2等等；通道列表可以包含多个字段，比如 <tt class="docutils literal">3 <span class="caps">LHZ</span> <span class="caps">BH</span>? <span class="pre">S??</span></tt>。</p>
 <p>一般通道名长度为三个字符，第一个字符为Band Code，第二个字符为Source Code，第三个字符为Orientation Code。</p>
-<p>台网和台站也可使用通配符，但是不建议台网和台站同时使用通配符；单个"?"可以匹配该台网的所有台站。</p>
+<p>台网和台站也可使用通配符，但是不建议台网和台站同时使用通配符；单个”?”可以匹配该台网的所有台站。</p>
 <p>如果不指定位置号，则获取该台站的全部location的数据。</p>
 <p>对于每个台站可以分别指定数据窗范围，因而可以根据到时信息确定需要的数据窗，最大程度减少数据量。不过长一点也无所谓。</p>
 </div>
@@ -259,14 +259,15 @@ PAS  TS 1999  1  4  2 10 49   1999  1  4  2 12 49    3 BH? SHZ L??
 </div>
 <div class="section" id="id8">
 <h2><a class="toc-backref" href="#id18">申请回应</a></h2>
-<p>IRIS在收到申请邮件后会检查格式，通过邮件方式通知发件人邮件内容是否正确、是否被接收；待数据准备完毕后，发送邮件，给出FTP地址供用户下载。</p>
+<p>发送数据请求之后，会收到两封回复邮件。第一封邮件告诉你IRIS已经收到邮件，且邮件格式正确。第二封邮件告诉你数据已经准备完毕，并给出下载地址。</p>
+<p>注意：有多人反映，发送申请邮件之后很久没有收到第一封邮件。似乎直接通过网页版的邮箱界面发送邮件会出现这个问题，而通过命令行发送则没有问题。如果出现未收到回复邮件的情况，可以考虑用Perl或Python发送邮件。</p>
 </div>
 <div class="section" id="bug">
 <h2><a class="toc-backref" href="#id19">Bug和限制</a></h2>
 <ul class="simple">
 <li>无法识别超过正常范围的时间，比如分钟数大于59，这要求用户自己认真处理时间问题；</li>
 <li>每行必须左对齐；</li>
-<li>通配符只支持"?"</li>
+<li>通配符只支持”?”</li>
 </ul>
 </div>
 <div class="section" id="id9">
@@ -320,9 +321,9 @@ PAS  TS 1999  1  4  2 10 49   1999  1  4  2 12 49    3 BH? SHZ L??
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/breqfast-script.html" title="BREQ_FAST脚本实现">BREQ_FAST脚本实现</a></li>
 <li><a href="http://seisman.info/iris-data-request.html" title="地震数据申请">地震数据申请</a></li>
-<li><a href="http://seisman.info/web-service-fetch-scripts.html" title="利用Web Service Fetch scripts申请和下载数据">利用Web Service Fetch scripts申请和下载数据</a></li>
 <li><a href="http://seisman.info/download-data-from-iris-ftp.html" title="IRIS FTP数据下载的几个方法">IRIS FTP数据下载的几个方法</a></li>
 <li><a href="http://seisman.info/perl-script-for-downloading-iris-ftp-data.html" title="IRIS FTP数据下载脚本">IRIS FTP数据下载脚本</a></li>
+<li><a href="http://seisman.info/send-email-in-python.html" title="Python发送邮件到BREA_FAST">Python发送邮件到BREA_FAST</a></li>
 </ul>
 <hr />
 </section>
@@ -347,7 +348,7 @@ PAS  TS 1999  1  4  2 10 49   1999  1  4  2 12 49    3 BH? SHZ L??
                     <span>6</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#iris-ref">IRIS
-                    <span>8</span>
+                    <span>7</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#shu-ju-shen-qing-ref">数据申请
                     <span>3</span>
@@ -357,7 +358,7 @@ PAS  TS 1999  1  4  2 10 49   1999  1  4  2 12 49    3 BH? SHZ L??
             <a href="http://seisman.qiniudn.com/pdfs/iris-breq-fast.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/SeisWare/2013-07-23_iris-breq-fast.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

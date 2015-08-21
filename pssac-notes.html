@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="SeisMan" />
+        <meta name="copyright" content="SeisMan" />
+
+        <meta name="baidu-site-verification" content="bH1LL8vy2G" />
+        <meta name="description" content="pssac可以读取SAC波形数据，并利用GMT的绘图功能将波形数据绘制在PS文件中。pssac绘制的波形图，大致可以分为三类： 波形振幅图：横轴是时间，纵轴是振幅； 剖面图：横轴是时间，纵轴是其他物理量（比如震中距、方位角、反方位角以及文件号）； 任意位置图：将波形文件绘制在图上的任意位置； 本文首先简单介绍pssac的各个选项，然后依次介绍如何绘制波形振幅图、剖面图以及任意位置图，在这个过程中会详细介绍较复杂的选项。 选项一览 终端输入pssac即可得到pssac的使用说明。pssac的命令中主要包含了三个部分： GMT的标准选项 pssac的特有选项 SAC文件 GMT标准选项 pssac继承了GMT的众多标准选项，包括： 必须选项：-J -R 可选选项：-B -K -O -U -X -Y -W 这些选项的具体用法可以参考GMT官方文档，简单说明如下： -J：设置投影方式以及底图尺寸； -R ...
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="pssac, 用法, 教程, 地震学软件, " />
+
+<meta property="og:title" content="pssac使用教程 "/>
+<meta property="og:url" content="http://seisman.info/pssac-notes.html" />
+<meta property="og:description" content="pssac可以读取SAC波形数据，并利用GMT的绘图功能将波形数据绘制在PS文件中。pssac绘制的波形图，大致可以分为三类： 波形振幅图：横轴是时间，纵轴是振幅； 剖面图：横轴是时间，纵轴是其他物理量（比如震中距、方位角、反方位角以及文件号）； 任意位置图：将波形文件绘制在图上的任意位置； 本文首先简单介绍pssac的各个选项，然后依次介绍如何绘制波形振幅图、剖面图以及任意位置图，在这个过程中会详细介绍较复杂的选项。 选项一览 终端输入pssac即可得到pssac的使用说明。pssac的命令中主要包含了三个部分： GMT的标准选项 pssac的特有选项 SAC文件 GMT标准选项 pssac继承了GMT的众多标准选项，包括： 必须选项：-J -R 可选选项：-B -K -O -U -X -Y -W 这些选项的具体用法可以参考GMT官方文档，简单说明如下： -J：设置投影方式以及底图尺寸； -R ..." />
+<meta property="og:site_name" content="SeisMan" />
+<meta property="og:article:author" content="SeisMan" />
+<meta property="og:article:published_time" content="2015-07-17T00:00:00+08:00" />
+<meta name="twitter:title" content="pssac使用教程 ">
+<meta name="twitter:description" content="pssac可以读取SAC波形数据，并利用GMT的绘图功能将波形数据绘制在PS文件中。pssac绘制的波形图，大致可以分为三类： 波形振幅图：横轴是时间，纵轴是振幅； 剖面图：横轴是时间，纵轴是其他物理量（比如震中距、方位角、反方位角以及文件号）； 任意位置图：将波形文件绘制在图上的任意位置； 本文首先简单介绍pssac的各个选项，然后依次介绍如何绘制波形振幅图、剖面图以及任意位置图，在这个过程中会详细介绍较复杂的选项。 选项一览 终端输入pssac即可得到pssac的使用说明。pssac的命令中主要包含了三个部分： GMT的标准选项 pssac的特有选项 SAC文件 GMT标准选项 pssac继承了GMT的众多标准选项，包括： 必须选项：-J -R 可选选项：-B -K -O -U -X -Y -W 这些选项的具体用法可以参考GMT官方文档，简单说明如下： -J：设置投影方式以及底图尺寸； -R ...">
+<meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
+<meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
+
+        <title>pssac使用教程  · SeisMan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="http://seisman.info/theme/css/style.min.css">
+        <link rel="shortcut icon" href="http://seisman.info/theme/images/favicon.ico" type="image/x-icon" type="image/png" />
+        <link rel="icon" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link rel="apple-touch-icon" href="http://seisman.info/theme/images/apple-touch-icon.png"  type="image/png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="http://seisman.info/theme/images/apple-touch-icon-57x57.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://seisman.info/theme/images/apple-touch-icon-72x72.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="http://seisman.info/theme/images/apple-touch-icon-76x76.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="http://seisman.info/theme/images/apple-touch-icon-114x114.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="http://seisman.info/theme/images/apple-touch-icon-120x120.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="http://seisman.info/theme/images/apple-touch-icon-144x144.png" type="image/png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="http://seisman.info/theme/images/apple-touch-icon-152x152.png" type="image/png" />
+        <link href="http://seisman.info/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="SeisMan - Atom Feed" />
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65542808c7a590c2137aef85e1116ace' type='text/javascript'%3E%3C/script%3E"));
+</script>
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <div class="span1"></div>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="http://seisman.info/"><span class=site-name>SeisMan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="http://seisman.info">Home</a></li>
+                            <li ><a href="http://seisman.info/about.html">About</a></li>
+                            <li ><a href="http://seisman.info/collections.html">Collections</a></li>
+                            <li ><a href="http://seisman.info/donations.html">Donations</a></li>
+                            <li ><a href="http://seisman.info/links.html">Links</a></li>
+                            <li ><a href="http://seisman.info/categories.html">Categories</a></li>
+                            <li ><a href="http://seisman.info/tags.html">Tags</a></li>
+                            <li ><a href="http://seisman.info/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="http://seisman.info/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="http://seisman.info/pssac-notes.html"> pssac使用教程  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <html><body><div class="toc" id="">
+
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id16">选项一览</a><ul>
+<li><a class="reference internal" href="#gmt" id="id17">GMT标准选项</a></li>
+<li><a class="reference internal" href="#id2" id="id18">pssac特有选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3" id="id19">波形振幅图</a><ul>
+<li><a class="reference internal" href="#sac" id="id20">示例SAC数据</a></li>
+<li><a class="reference internal" href="#id4" id="id21">单个波形的振幅</a></li>
+<li><a class="reference internal" href="#id5" id="id22">绘制多个波形</a></li>
+<li><a class="reference internal" href="#s" id="id23">-S选项的效果</a></li>
+<li><a class="reference internal" href="#c" id="id24">-C选项的效果</a></li>
+<li><a class="reference internal" href="#i-q-r" id="id25">-I, -Q, -r</a></li>
+<li><a class="reference internal" href="#m" id="id26">-M选项</a><ul>
+<li><a class="reference internal" href="#msize" id="id27">-Msize</a></li>
+<li><a class="reference internal" href="#alpha-0" id="id28">alpha&lt;0</a></li>
+<li><a class="reference internal" href="#id6" id="id29">alpha&gt;0</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#n" id="id30">-N选项</a></li>
+<li><a class="reference internal" href="#v" id="id31">-V选项</a></li>
+<li><a class="reference internal" href="#w-g" id="id32">-W和-G选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7" id="id33">剖面图</a><ul>
+<li><a class="reference internal" href="#id8" id="id34">生成示例数据</a></li>
+<li><a class="reference internal" href="#id9" id="id35">波形振幅图</a></li>
+<li><a class="reference internal" href="#id10" id="id36">最简单的剖面图</a></li>
+<li><a class="reference internal" href="#id11" id="id37">-C选项</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id12" id="id38">任意位置图</a></li>
+<li><a class="reference internal" href="#id13" id="id39">其他</a><ul>
+<li><a class="reference internal" href="#id14" id="id40">-Msize归一化</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15" id="id41">修订历史</a></li>
+</ul>
+</div></body></html>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+
+            
+            
+<p><tt class="docutils literal">pssac</tt>可以读取SAC波形数据，并利用GMT的绘图功能将波形数据绘制在PS文件中。<tt class="docutils literal">pssac</tt>绘制的波形图，大致可以分为三类：</p>
+<ol class="arabic simple">
+<li>波形振幅图：横轴是时间，纵轴是振幅；</li>
+<li>剖面图：横轴是时间，纵轴是其他物理量（比如震中距、方位角、反方位角以及文件号）；</li>
+<li>任意位置图：将波形文件绘制在图上的任意位置；</li>
+</ol>
+<p>本文首先简单介绍<tt class="docutils literal">pssac</tt>的各个选项，然后依次介绍如何绘制波形振幅图、剖面图以及任意位置图，在这个过程中会详细介绍较复杂的选项。</p>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id16">选项一览</a></h2>
+<p>终端输入<tt class="docutils literal">pssac</tt>即可得到pssac的使用说明。pssac的命令中主要包含了三个部分：</p>
+<ol class="arabic simple">
+<li>GMT的标准选项</li>
+<li>pssac的特有选项</li>
+<li>SAC文件</li>
+</ol>
+<div class="section" id="gmt">
+<h3><a class="toc-backref" href="#id17">GMT标准选项</a></h3>
+<p>pssac继承了GMT的众多标准选项，包括：</p>
+<ol class="arabic simple">
+<li>必须选项：<tt class="docutils literal"><span class="pre">-J</span> <span class="pre">-R</span></tt></li>
+<li>可选选项：<tt class="docutils literal"><span class="pre">-B</span> <span class="pre">-K</span> <span class="pre">-O</span> <span class="pre">-U</span> <span class="pre">-X</span> <span class="pre">-Y</span> <span class="pre">-W</span></tt></li>
+</ol>
+<p>这些选项的具体用法可以参考GMT官方文档，简单说明如下：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">-J</span></tt>：设置投影方式以及底图尺寸；</li>
+<li><tt class="docutils literal"><span class="pre">-R</span></tt>：设置横纵坐标的范围；</li>
+<li><tt class="docutils literal"><span class="pre">-B</span></tt>：设置底图边框的属性；</li>
+<li><tt class="docutils literal"><span class="pre">-K</span> <span class="pre">-O</span></tt>：图层叠加；</li>
+<li><tt class="docutils literal"><span class="pre">-U</span></tt>：Unix时间戳；</li>
+<li><tt class="docutils literal"><span class="pre">-X</span> <span class="pre">-Y</span></tt>：移动绘图原点；</li>
+<li><tt class="docutils literal"><span class="pre">-W</span></tt>：用于设置线条的粗细、颜色与线型；</li>
+</ul>
+<p>需要注意：<tt class="docutils literal">pssac</tt>不支持<tt class="docutils literal"><span class="pre">-P</span></tt>选项。</p>
+</div>
+<div class="section" id="id2">
+<h3><a class="toc-backref" href="#id18">pssac特有选项</a></h3>
+<p><tt class="docutils literal">pssac</tt>的特有选项有:</p>
+<pre class="literal-block">
+-C -E -G -I -M -N -Q -r -S -V
+</pre>
+<p>先简单介绍一个这些选项的作用：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">-I</span></tt>：绘图之前先对波形做积分；代码中在做积分时，没有乘以采样间隔，因而导致波形的绝对振幅有误，但波形的形状是正确的；</li>
+<li><tt class="docutils literal"><span class="pre">-Q</span></tt>：绘图之前先对波形做平方；</li>
+<li><tt class="docutils literal"><span class="pre">-r</span></tt>：绘图之前先去除均值；该选项仅在同时使用<tt class="docutils literal"><span class="pre">-M</span></tt>选项时有效；</li>
+<li><tt class="docutils literal"><span class="pre">-Nclip</span></tt>：使用该选项会使得波形振幅限制在<tt class="docutils literal"><span class="pre">[-clip,</span> clip]</tt>范围内；若波形数据中某数据点的振幅值大于clip，则该数据点会被赋值为clip；若某数据点的振幅值小于-clip，则该数据点会被赋值为-clip；该选项仅在同时使用<tt class="docutils literal"><span class="pre">-M</span></tt>选项时有效；</li>
+<li><tt class="docutils literal"><span class="pre">-Gr/g/b/c</span></tt>：将振幅大于<tt class="docutils literal">c</tt>的部分填色，颜色由<tt class="docutils literal">r/g/b</tt>决定；此处只支持RGB颜色；不支持颜色名、HSV等；</li>
+<li><tt class="docutils literal"><span class="pre">-Ct1/t2</span></tt>：只截取波形中t1到t2时间段内的数据；若只使用<tt class="docutils literal"><span class="pre">-C</span></tt>而不给出t1和t2，则会根据<tt class="docutils literal"><span class="pre">-R</span></tt>选项指定的X轴范围对数据做截取；</li>
+<li><tt class="docutils literal"><span class="pre">-Msize/alpha</span></tt>：将波形数据振幅归一化到某个尺寸；</li>
+<li><tt class="docutils literal"><span class="pre">-Sshift</span></tt>：将波形数据整体移动shift秒，相当于<tt class="docutils literal">b=b+shift</tt>；</li>
+<li><tt class="docutils literal"><span class="pre">-E</span></tt>：设置剖面图的Y轴类型，以及数据的时间对齐方式；</li>
+<li><tt class="docutils literal"><span class="pre">-V</span></tt>：垂直绘制波形，即交换X轴和Y轴；</li>
+</ul>
+<p>不同的选项对数据做了不同的处理，这就涉及到数据处理的顺序问题。前面的处理会影响到后面的处理，因而也会影响到其他选项的参数的选取。pssac中波形的处理顺序，或者说不同选项之间的优先级：</p>
+<ol class="arabic">
+<li><p class="first">先处理X轴:</p>
+<pre class="literal-block">
+波形对齐(-E) =&gt; 波形整体shift(-S) =&gt; 截窗(-C)
+</pre>
+</li>
+<li><p class="first">再处理Y轴，即波形发生了变化:</p>
+<pre class="literal-block">
+积分(-I) =&gt; 平方(-Q) =&gt; 去均值(-r) =&gt; 振幅归“一”化(-M) =&gt; 限幅处理(-N)
+</pre>
+</li>
+<li><p class="first">交换X轴和Y轴（-V）</p>
+</li>
+<li><p class="first">绘制波形:</p>
+<pre class="literal-block">
+绘制波形(-W) =&gt; 填色(-G)
+</pre>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id19">波形振幅图</a></h2>
+<p>这一节会介绍如何用pssac绘制最简单的波形振幅图，在介绍的同时会尽可能详细的说明每个选项的意义。由于波形振幅图中不需要还有-E选项，因而-E选项的介绍放在后面。</p>
+<div class="section" id="sac">
+<h3><a class="toc-backref" href="#id20">示例SAC数据</a></h3>
+<p>先用SAC生成两个示例数据，以方便重复下面的绘图:</p>
+<pre class="literal-block">
+SAC&gt; fg seis
+SAC&gt; rmean
+SAC&gt; ch t0 12   // 做了t0标记，供后面使用
+SAC&gt; w seis.1
+SAC&gt; mul 2      // 将数据整体乘以2，写到新文件中
+SAC&gt; w seis.2
+</pre>
+<p>用<tt class="docutils literal">saclst</tt>查看一下两个数据的头段信息:</p>
+<pre class="literal-block">
+$ saclst b e t0 depmax depmin f seis.?
+seis.1         9.46       19.45          12     1.61919    -1.47073
+seis.2         9.46       19.45          12     3.23837    -2.94147
+</pre>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id21">单个波形的振幅</a></h3>
+<p>先以<tt class="docutils literal">seis.1</tt>为例，根据头段信息可知，该数据的时间范围为<tt class="docutils literal">[9.46,19.45]</tt>，振幅范围为<tt class="docutils literal"><span class="pre">[-1.47,1.62]</span></tt>。据此，可以设置-R选项的参数为<tt class="docutils literal"><span class="pre">-R9/20/-2/2</span></tt></p>
+<pre class="literal-block">
+pssac -JX20c/10c -R9/20/-2/2 seis.1 &gt; test.ps
+</pre>
+<div class="figure align-center">
+<img alt="Figure1" src="/images/2015071701.png" style="width: 600px;"/>
+</div>
+<p>上面的例子中只使用了-J和-R选项，是pssac的最小示例。通常情况下，还需要使用-B选项给波形图加上边框:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R9/20/-2/2 -B1:"T(s)":/0.5:"Amplitude":WSen seis.1 &gt; test.ps
+</pre>
+<div class="figure align-center">
+<img alt="Figure2" src="/images/2015071702.png" style="width: 600px;"/>
+</div>
+<p>加上边框之后就很清楚了，横轴表示时间，纵轴表示波形的绝对振幅。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id22">绘制多个波形</a></h3>
+<p>绘制一个波形是不够的，pssac还可以一次性绘制多个波形:</p>
+<pre class="literal-block">
+pssac -JX25c/5c -R10/16/-3.2/3.2 -B1:"T(s)":/1:"Amplitude":WSen seis.? &gt; test.ps
+</pre>
+<p>这个例子中，同时绘制了seis.1和seis.2两个波形，为了看上去更明显，这里使用了稍稍不同的-J和-R。可以看到seis.2和seis.1共用了X轴和Y轴，跟SAC中的<tt class="docutils literal">plot2</tt>命令的效果相同。</p>
+<div class="figure align-center">
+<img alt="Figure3" src="/images/2015071703.png" style="width: 600px;"/>
+</div>
+</div>
+<div class="section" id="s">
+<h3><a class="toc-backref" href="#id23">-S选项的效果</a></h3>
+<p><tt class="docutils literal"><span class="pre">-S</span></tt>选项相当于将数据的b值加上了<tt class="docutils literal">shift</tt>秒，因而会影响到X轴的范围，即影响到-R选项的参数:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R29/40/-2/2 -B1:"T(s)":/0.5:"Amplitude":WSen -S20 seis.1 &gt; test.ps
+</pre>
+<p>上面的代码中使用了<tt class="docutils literal"><span class="pre">-S20</span></tt>，将波形整体移动了20秒，此时移动后的波形<tt class="docutils literal">b=29.46, e=39.45</tt>，因而<tt class="docutils literal"><span class="pre">-R</span></tt>选项也要相应的变化。</p>
+<div class="figure align-center">
+<img alt="Figure4" src="/images/2015071704.png" style="width: 600px;"/>
+</div>
+</div>
+<div class="section" id="c">
+<h3><a class="toc-backref" href="#id24">-C选项的效果</a></h3>
+<p><tt class="docutils literal"><span class="pre">-C</span></tt>选项的作用在于从当前数据中截取其中一段，这样可以只显示一个长波形中的一小段:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R9/20/-2/2 -B1:"T(s)":/0.5:"Amplitude":WSen -C11/14 seis.1 &gt; test.ps
+</pre>
+<p>本例中，数据的时间范围是<tt class="docutils literal">[9.46, 19.45]</tt>，<tt class="docutils literal"><span class="pre">-C</span></tt>选项截取了其中的11到14秒，用于绘图，效果图如下，注意与图2对比。</p>
+<div class="figure align-center">
+<img alt="Figure5" src="/images/2015071705.png" style="width: 600px;"/>
+</div>
+<p>由于<tt class="docutils literal"><span class="pre">-S</span></tt>选项优先于<tt class="docutils literal"><span class="pre">-C</span></tt>选项，因而使用<tt class="docutils literal"><span class="pre">-S</span></tt>选项会对<tt class="docutils literal"><span class="pre">-R</span></tt>和<tt class="docutils literal"><span class="pre">-C</span></tt>的参数同时产生影响:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R29/40/-2/2 -B1:"T(s)":/0.5:"Amplitude":WSen seis.1 -S20 -C31/34 &gt; test.ps
+</pre>
+<div class="figure align-center">
+<img alt="Figure6" src="/images/2015071706.png" style="width: 600px;"/>
+</div>
+<p>本例中，同时使用了<tt class="docutils literal"><span class="pre">-S</span></tt>和<tt class="docutils literal"><span class="pre">-C</span></tt>，由于<tt class="docutils literal"><span class="pre">-S</span></tt>优先于<tt class="docutils literal"><span class="pre">-C</span></tt>，所以波形数据的时间范围首先被<tt class="docutils literal"><span class="pre">-S20</span></tt>选项从<tt class="docutils literal">[9.46, 19.45]</tt>移动到<tt class="docutils literal">[29.46, 39.45]</tt>，而<tt class="docutils literal"><span class="pre">-C31/34</span></tt>则截取了偏移后的波形数据的31到34秒，相当于截取偏移之前数据的11到14秒。</p>
+</div>
+<div class="section" id="i-q-r">
+<h3><a class="toc-backref" href="#id25">-I, -Q, -r</a></h3>
+<p>三个选项分别实现波形的积分、平方和去均值，加上这些选项后会影响波形的振幅，因而需要调整-R中Y轴的范围。另外需要注意的是，<tt class="docutils literal"><span class="pre">-C</span></tt>选项的优先级要高于这三个选项，因而若同时使用了<tt class="docutils literal"><span class="pre">-C</span></tt>选项，则只会对截取的这一段数据做积分/平方/去均值的操作。这几个选项相对简单，且不常用，暂且不多说。</p>
+</div>
+<div class="section" id="m">
+<h3><a class="toc-backref" href="#id26">-M选项</a></h3>
+<p><tt class="docutils literal"><span class="pre">-M</span></tt>选项会对波形进行“归一化”，只是这里的“归一化”并不真的代表将振幅归一化到1。</p>
+<p><tt class="docutils literal"><span class="pre">-M</span></tt>选项的语法为<tt class="docutils literal"><span class="pre">-Msize[/alpha]</span></tt>，依据参数的不同可以进一步分为三种用法。</p>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">-Msize</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">-Msize/alpha</span></tt>(alpha&lt;0)</li>
+<li><tt class="docutils literal"><span class="pre">-Msize/alpha</span></tt>(alpha&gt;0)</li>
+</ol>
+<p><tt class="docutils literal"><span class="pre">-M</span></tt>选项多用于剖面图中，很少用于波形振幅图中，但本质上是没有区别的，故而在这里一并介绍。</p>
+<div class="section" id="msize">
+<h4><a class="toc-backref" href="#id27">-Msize</a></h4>
+<p>size的单位是英寸，这种用法会使得所有波形的最大振幅差在图上的长度为size英寸。其中，最大振幅差是指波形的最大振幅值与最小振幅值的差的绝对值，即<tt class="docutils literal"><span class="pre">abs(depmax-depmin)</span></tt>。</p>
+<pre class="literal-block">
+pssac -JX6i/5i -R9/20/-2.5/2.5 -B1:"T(s)":/0.5g0.5:"Amplitude":WSen -M2 seis.? &gt; test.ps
+</pre>
+<p>这个例子中，<tt class="docutils literal"><span class="pre">-M2</span></tt>将所有波形做归一化使得最大振幅差对应的高度为2英寸。由于Y轴的范围是<tt class="docutils literal"><span class="pre">[-2.5,</span> 2.5]</tt>，Y轴的高度为5英寸，即图上1个Y单位所对应的长度为1英寸，因而归一化之后最大振幅差对应2英寸，即2个Y单位，从图中也可以很明显的看出来。</p>
+<div class="figure align-center">
+<img alt="Figure7" src="/images/2015071707.png" style="width: 600px;"/>
+</div>
+<p>这种做法使得所有波形在图上看上去最大振幅差都是size英寸，因而所有波形都失去了绝对振幅和相对振幅信息。以这个例子为例，图中读出的振幅值已经不再是波形真实的振幅值，即丢失了绝对振幅；另一方面，本例中绘制了seis.1和seis.2两个SAC文件，尽管两个SAC文件的振幅有两倍的差距，归一化之后相对振幅信息丢失，所以看上去两个波形完全重合了。</p>
+</div>
+<div class="section" id="alpha-0">
+<h4><a class="toc-backref" href="#id28">alpha&lt;0</a></h4>
+<p>若alpha&lt;0，则会根据第一个波形数据计算归一化因子，使得第一个波形的最大振幅差在图上等于size英寸，而其余的波形则会乘以同一个归一化因子。因而这种做法，所有波形虽然失去了绝对振幅信息，但却保留了相对振幅信息。</p>
+</div>
+<div class="section" id="id6">
+<h4><a class="toc-backref" href="#id29">alpha&gt;0</a></h4>
+<p>这种情况下，归一化因子为:</p>
+<pre class="literal-block">
+yscale = pow(abs(h.dist), alpha)*size
+</pre>
+<p>这样设计的原因是，对于一个正常的波形来说，震中距越大，由于几何扩散的效应，振幅越小。这个选项相当于对几何扩散项进行校正，即绘制了不考虑几何扩散情况下波形的相对振幅。</p>
+<p>其中alpha是几何扩散因子，而size的含义不是太清晰。</p>
+</div>
+</div>
+<div class="section" id="n">
+<h3><a class="toc-backref" href="#id30">-N选项</a></h3>
+<p><tt class="docutils literal"><span class="pre">-Nclip</span></tt>选项会将绝对振幅超过clip的部分做截断。需要注意，<tt class="docutils literal"><span class="pre">-N</span></tt>的优先级很低，因而clip值的选取要考虑其他选项对振幅的影响:</p>
+<pre class="literal-block">
+pssac -JX6i/5i -R9/20/-2.5/2.5 -B1:"T(s)":/0.5g0.5:"Amplitude":WSen -M2 -N0.3 seis.1 &gt; test.ps
+</pre>
+<p>本例中，对绝对振幅超过0.3的部分做截断。此处的0.3是经过归一化之后的振幅值，因而没有明确的物理含义。</p>
+<div class="figure align-center">
+<img alt="Figure8" src="/images/2015071708.png" style="width: 600px;"/>
+</div>
+</div>
+<div class="section" id="v">
+<h3><a class="toc-backref" href="#id31">-V选项</a></h3>
+<p><tt class="docutils literal"><span class="pre">-V</span></tt>选项会交换X轴和Y轴，因而<tt class="docutils literal"><span class="pre">-J</span></tt>、<tt class="docutils literal"><span class="pre">-R</span></tt>和<tt class="docutils literal"><span class="pre">-B</span></tt>都需要做相应修改:</p>
+<pre class="literal-block">
+pssac -JX5c/10c -R-2/2/9/20 -B1/2WSen seis.1 -V &gt; test.ps
+</pre>
+<div class="figure align-center">
+<img alt="Figure9" src="/images/2015071709.png" style="width: 300px;"/>
+</div>
+<p>在某些特定的研究中会需要使用竖排模式。比如接收函数中，地震图中的某个震相到时可能与某个界面的深度成正比。通过将一系列波形竖排起来，纵坐标的时间对应某个特定的深度，因而可以很直观地看到界面深度的变化。</p>
+</div>
+<div class="section" id="w-g">
+<h3><a class="toc-backref" href="#id32">-W和-G选项</a></h3>
+<p><tt class="docutils literal"><span class="pre">-W</span></tt>选项用于设置画笔数学，<tt class="docutils literal"><span class="pre">-G</span></tt>选项用于控制波形的颜色填充:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R9/20/-2/2 -B1:"T(s)":/0.5:"Amplitude":WSen -W0.2p,blue -G255/0/0/0 seis.1 &gt; test.ps
+</pre>
+<p>本例中，线条宽度为0.2p，颜色为蓝色，并对大于0的部分填充红色（<tt class="docutils literal">255/0/0</tt>）。</p>
+<div class="figure align-center">
+<img alt="Figure10" src="/images/2015071710.png" style="width: 600px;"/>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id33">剖面图</a></h2>
+<p>剖面图：横轴为时间，纵轴为其他物理量，pssac中纵轴可以是震中距、方位角、反方位角以及文件序号。</p>
+<p>pssac使用<tt class="docutils literal"><span class="pre">-E</span></tt>选择来指定剖面图的具体性质，同时用<tt class="docutils literal"><span class="pre">-M</span></tt>选项对多个波形做归一化。其他的选项参考前面的说明。</p>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id34">生成示例数据</a></h3>
+<p>先利用SAC自带的数据，生成绘制剖面图所需要的示例数据:</p>
+<pre class="literal-block">
+SAC&gt; dg sub local cal.z cao.z cda.z cdv.z cmn.z cva.z cvl.z cvy.z
+SAC&gt; rmean
+SAC&gt; taper
+SAC&gt; bp c 0.5 3
+SAC&gt; w cal.z cao.z cda.z cdv.z cmn.z cva.z cvl.z cvy.z
+</pre>
+<p>查看一下这些文件的基本头段信息：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span class="nv">$ </span>saclst b e a dist gcarc az baz f *.z
+cal.z      9.99365     50.0089     20.5949     12.4876    0.112316      234.02     53.9503
+cao.z      9.99365     50.0089     22.2028     23.0074    0.206933      144.09     324.182
+cda.z      9.99365     50.0089      23.078     23.9117    0.215068     350.813     170.787
+cdv.z      9.99365     50.0089     19.5975      5.4563   0.0490751     4.64117     184.644
+cmn.z      9.99365     50.0089     20.6763     12.3995    0.111524     350.452     170.437
+cva.z      9.99365     50.0089     20.7882     12.9964    0.116892     329.957     149.912
+cvl.z      9.99365     50.0089      21.867     17.9895    0.161802     312.309     132.218
+cvy.z      9.99365     50.0089     22.3656     18.8976     0.16997     318.278     138.192
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id35">波形振幅图</a></h3>
+<p>先用前面介绍过的方法，绘制一个波形振幅图。从数据的头段中可知，时间范围大概是<tt class="docutils literal">[10, 50]</tt>，振幅的范围为<tt class="docutils literal"><span class="pre">[-500,500]</span></tt>，因而设置-R的范围为<tt class="docutils literal"><span class="pre">-R9/55/-500/500</span></tt></p>
+<pre class="literal-block">
+pssac -JX20c/10c -R9/55/-500/500 -B10/100WSen *.z &gt; test.ps
+</pre>
+<p>此时，所有的波形共用X轴和Y轴，类似于SAC中<tt class="docutils literal">plot2</tt>的绘图效果。</p>
+<div class="figure align-center">
+<img alt="Figure11" src="/images/2015071711.png" style="width: 600px;"/>
+</div>
+</div>
+<div class="section" id="id10">
+<h3><a class="toc-backref" href="#id36">最简单的剖面图</a></h3>
+<p><tt class="docutils literal"><span class="pre">-E</span></tt>选项表明要绘制剖面图，其语法为<tt class="docutils literal"><span class="pre">-E(k|d|a|n|b)(t[n]|vel)</span></tt>。语法中被小括号分开的两部分，分别用于指定剖面类型和时间轴对齐方式。</p>
+<p>pssac支持的剖面类型包括：</p>
+<ul class="simple">
+<li>a：Y轴为方位角</li>
+<li>b：Y轴为反方位角</li>
+<li>d：Y轴为震中距（单位为度）</li>
+<li>k：Y轴为震中距（单位为千米）</li>
+<li>n：Y轴为波形的序号（从1到N）</li>
+</ul>
+<p>不同的剖面类型，对应的Y轴的范围就不同。下面的例子展示了不同的剖面类型所使用的命令，注意其中-R和-B选项的差异:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R10/50/0/0.25 -B10:"T(s)":/0.05:"Dist(km)":WSen -Edt -M0.5 *.z &gt; test.ps
+pssac -JX20c/10c -R10/50/-50/380 -B10:"T(s)":/60:"Azimuth":WSen -Eat -M0.5 *.z &gt; test.ps
+pssac -JX20c/10c -R10/50/-50/380 -B10:"T(s)":/60:"Back Azimuth":WSen -Ebt -M0.5 *.z &gt; test.ps
+pssac -JX20c/10c -R10/50/0/0.25 -B10:"T(s)":/0.05:"Dist(degree)":WSen -Edt -M0.5 *.z &gt; test.ps
+pssac -JX20c/10c -R10/50/0/9 -B10:"T(s)":/1:"No.":WSen -Ent -M0.5 *.z &gt; test.ps
+</pre>
+<p>这里只展示一下<tt class="docutils literal"><span class="pre">-Ek</span></tt>的结果，其他结果类似，此处-M的含义与之前介绍的相同。</p>
+<div class="figure align-center">
+<img alt="Figure12" src="/images/2015071712.png" style="width: 600px;"/>
+</div>
+<p>时间轴对齐方式有三种（下面的例子中剖面类型都假定为<tt class="docutils literal">k</tt>）：</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">-Ekt</span></tt>表示按照绝对时间对齐</li>
+<li><tt class="docutils literal"><span class="pre">-Ektn</span></tt>表示按照某个头段对齐</li>
+<li><tt class="docutils literal"><span class="pre">-Ekvel</span></tt>表示按照给定的视速度对齐</li>
+</ul>
+<p>说明：</p>
+<ol class="arabic simple">
+<li>n可以取值为-5，-3，-2，以及0到9<ul>
+<li>-5表示按照文件开始时间（b）对齐</li>
+<li>-3表示按发震时刻（o）对齐</li>
+<li>-2表示按初至到时对齐（a）对齐</li>
+<li>0到9表示按照t0-t9对齐</li>
+</ul>
+</li>
+<li>按照视速度对齐的代码是<tt class="docutils literal">t <span class="pre">-=</span> <span class="pre">fabs(h.dist)/reduce_vel</span></tt></li>
+</ol>
+<p>下面的例子中展示了按照b值对齐，按照a值对齐，以及按照视速度7 km/s对齐的结果，注意其中-R选项的区别:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R0/40/0/0.25 -B10:"T(s)":/0.05:"Dist(km)":WSen -Edt-5 -M0.5 *.z &gt; test.ps
+pssac -JX20c/10c -R-15/35/0/0.25 -B10:"T(s)":/0.05:"Dist(km)":WSen -Edt-2 -M0.5 *.z &gt; test.ps
+pssac -JX20c/10c -R10/50/0/0.25 -B10:"T(s)":/0.05:"Dist(km)":WSen -Ed7 -M0.5 *.z &gt; test.ps
+</pre>
+<p>这里只给出<tt class="docutils literal"><span class="pre">-Edt-2</span></tt>的绘图结果：</p>
+<div class="figure align-center">
+<img alt="Figure13" src="/images/2015071713.png" style="width: 600px;"/>
+</div>
+<p><tt class="docutils literal"><span class="pre">-Edt-2</span></tt>表示所有的波形要按照头段中的a值对齐，此时，波形中a所对应的数据点都位于X轴的0值处。因为数据中a大概在20秒左右，因而按照a值对齐之后，原波形的X轴范围<tt class="docutils literal">[10,50]</tt>就变成了现在的<tt class="docutils literal"><span class="pre">[-10,</span> 30]</tt>左右。</p>
+</div>
+<div class="section" id="id11">
+<h3><a class="toc-backref" href="#id37">-C选项</a></h3>
+<p>由于<tt class="docutils literal"><span class="pre">-E</span></tt>的优先级高于<tt class="docutils literal"><span class="pre">-C</span></tt>的优先级，故而-C中的时间窗要根据对齐后的数据时间轴来选择:</p>
+<pre class="literal-block">
+pssac -JX20c/10c -R-15/35/0/0.25 -B10:"T(s)":/0.05:"Dist(km)":WSen -Edt-2 -M0.5 -C-5/25 *.z &gt; a.ps
+</pre>
+<p>如下图所示，对齐后的X轴范围是-15到35，此时的截窗范围为对齐后的-5到25秒：</p>
+<div class="figure align-center">
+<img alt="Figure14" src="/images/2015071714.png" style="width: 600px;"/>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h2><a class="toc-backref" href="#id38">任意位置图</a></h2>
+<p>pssac只支持5种剖面类型，有时候可能想要绘制其他量的剖面（比如慢度），或者想要在任意位置放置一个波形，或者想要不同波形有不同的画笔属性。这就需要用到pssac的另一个功能，即从标准输入中传递数据给pssac。</p>
+<p>要传递给pssac的数据有四列，格式为:</p>
+<pre class="literal-block">
+sacfile X Y pen
+</pre>
+<p>其中<tt class="docutils literal">sacfile</tt>为SAC文件名，X为波形起点时刻的shift量，Y为波形在Y轴的位置，pen为画笔属性。</p>
+<pre class="literal-block">
+$ pssac -JX20c/10c -R10/70/0/15 -B10/5 -M1 &gt; a.ps &lt;&lt; EOF
+cal.z 10 3 1p,black,-
+cao.z 15 6 1p,red,-
+cda.z 15 10 2p,black
+EOF
+</pre>
+<p>效果图如下：</p>
+<div class="figure align-center">
+<img alt="Figure15" src="/images/2015071715.png" style="width: 600px;"/>
+</div>
+<p>注意：这一功能不能用于将波形画在地图上。对于地图而言，-R指定的横轴为经度、纵轴是纬度，而pssac中-R指定的横轴是时间，纵轴是振幅。对于纵轴，可以使用<tt class="docutils literal"><span class="pre">-M</span></tt>选项对振幅进行任意比例的缩放，所以振幅和纬度之间的不一致性是可以消除的。而对于横轴而言，经度与时间的不一致性却很难消除。因而，想要用pssac将波形绘制在地图上，没有一个比较好的解决方案。但对于具体需求而言，是有可能使用某些“黑科技”来实现的，这将放在单独的博文中讨论。</p>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id39">其他</a></h2>
+<p>这里会介绍算法中的一些细节。</p>
+<div class="section" id="id14">
+<h3><a class="toc-backref" href="#id40">-Msize归一化</a></h3>
+<p>振幅的归一化算法中实际上是将数据的振幅乘以比例因子yscale，其中:</p>
+<pre class="literal-block">
+yscale = size*fabs((north-south))/(h.depmax-h.depmin)/project_info.pars[1])
+</pre>
+<p>其中，</p>
+<ul class="simple">
+<li><tt class="docutils literal">north</tt>和<tt class="docutils literal">south</tt>为-R选项中指定的Y轴的最大值和最小值；</li>
+<li><tt class="docutils literal">h.depmax</tt>和<tt class="docutils literal">h.depmin</tt>为当前数据的振幅的最大值和最小值；</li>
+<li><tt class="docutils literal">project_info.pars[1]</tt>是-J选项中当前投影的高度，单位为inch；</li>
+</ul>
+<p>在这个例子中:</p>
+<pre class="literal-block">
+pssac -JX6i/5i -R9/20/-2.5/2.5 -B1:"T(s)":/0.5g0.5:"Amplitude":WSen -M2 seis.1 &gt; test.ps
+</pre>
+<ul class="simple">
+<li><tt class="docutils literal">north=2.5 Y; <span class="pre">south=-2.5</span> Y</tt>（这里Y表示Y轴的单位，其物理意义可以是振幅，也可以是震中距等）</li>
+<li><tt class="docutils literal">h.depmax=1.619187 Y; <span class="pre">h.depmin=-1.470733</span> Y</tt></li>
+<li><tt class="docutils literal">project_info.pars[1] = 5 inch</tt></li>
+<li><tt class="docutils literal">size = 2 inch</tt></li>
+</ul>
+<p>则波形的最大振幅差经过归一化之后为:</p>
+<pre class="literal-block">
+(h.depmax-h.depmin) * yscale = size * abs(north-south)/project_info.pars[1]
+                             = 2 inch * (2.5 Y - (-2.5 Y))/5 inch
+                             = 2 Y
+</pre>
+<p>即归一化之后的最大振幅差在图上的高度为2个Y单位。</p>
+</div>
+</div>
+<div class="section" id="id15">
+<h2><a class="toc-backref" href="#id41">修订历史</a></h2>
+<ul class="simple">
+<li>2013-08-08：初稿；</li>
+<li>2015-07-17：将原稿的几篇合并并整理成一篇；</li>
+</ul>
+</div>
+
+            
+            <section>
+<p id="comment-message">So what do you think? Did I miss something? Is any part unclear? Leave your comments below. </p>
+<div class="accordion" id="accordion2">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle disqus-comment-count" data-toggle="collapse" data-parent="#accordion2"
+                href="http://seisman.info/pssac-notes.html#disqus_thread">
+                Comments
+            </a>
+        </div>
+        <div id="disqus_thread" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <div class="comments">
+                    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'seisman';
+        var disqus_identifier = 'http://seisman.info/pssac-notes.html';
+    var disqus_url = 'http://seisman.info/pssac-notes.html';
+
+    (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+     })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+            <hr/>
+<section>
+    <h2>Related Posts:</h2>
+<ul class="related-posts-list">
+<li><a href="http://seisman.info/install-pssac.html" title="安装pssac">安装pssac</a></li>
+<li><a href="http://seisman.info/waveform-comparison-plot.html" title="绘制波形对比图">绘制波形对比图</a></li>
+<li><a href="http://seisman.info/perl-progressbar.html" title="实现进度条的模块">实现进度条的模块</a></li>
+<li><a href="http://seisman.info/introduction-to-pdftk.html" title="PDF合并和分割工具—PDFtk">PDF合并和分割工具—PDFtk</a></li>
+<li><a href="http://seisman.info/plot-traces-on-maps.html" title="在地图上绘制波形">在地图上绘制波形</a></li>
+</ul>
+<hr />
+</section>
+            <aside>
+            <nav>
+            <ul class="articles-timeline">
+                <li class="previous-article">« <a href="http://seisman.info/axes-without-ticks.html" title="Previous: GMT绘制无刻度轴">GMT绘制无刻度轴</a></li>
+                <li class="next-article"><a href="http://seisman.info/plot-traces-on-maps.html" title="Next: 在地图上绘制波形">在地图上绘制波形</a> »</li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2015-07-17T00:00:00+08:00">2015-07-17</time>
+            <h4>Category</h4>
+            <a class="category-link" href="http://seisman.info/categories.html#di-zhen-xue-ruan-jian-ref">地震学软件</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="http://seisman.info/tags.html#jiao-cheng-ref">教程
+                    <span>1</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#pssac-ref">pssac
+                    <span>4</span>
+</a></li>
+                <li><a href="http://seisman.info/tags.html#yong-fa-ref">用法
+                    <span>3</span>
+</a></li>
+            </ul>
+            <h4>Features</h4>
+            <a href="http://seisman.qiniudn.com/pdfs/pssac-notes.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
+            </a>
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
+                <i class="fa fa-history  sidebar-social-links"></i>
+            </a>
+<h4>Contact Me</h4>
+    <a href="mailto:seisman.info@gmail.com" title="My Email Address" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-envelope sidebar-social-links"></i></a>
+    <a href="http://github.com/seisman" title="My GitHub Profile" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-github sidebar-social-links"></i></a>
+    <a href="http://seisman.info/feeds/all.atom.xml" title="Subscribe in a reader" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-rss sidebar-social-links"></i></a>
+    <a href="http://seisman.info/donations.html" title="Donation to me" class="sidebar-social-links" target="_blank">
+    <i class="fa fa-cny sidebar-social-links"></i></a>
+<!-- Begin MailChimp Signup Form -->
+<div id="mc-embed-signup">
+<form action="http://seisman.us3.list-manage1.com/subscribe/post?u=03bdd9e889c533d6db4dd0454&amp;id=dc5a50f619" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<h4>Get Weekly Updates</h4>
+<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Enter your email..." required>
+<div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+</form>
+</div>
+<!--End mc_embed_signup-->
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-subtitle"><span class="site-name">SeisMan</span> - 学会整理自己的经验是科研的第一步。</li>
+        <li class="elegant-license">2013-2015 Copyright &copy; by <a href="http://seisman.info">SeisMan</a>; Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a></li>
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <a href="#0" class="cd-top">Top</a>
+        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script type="text/javascript" src="http://seisman.info/theme/cd-to-top/cd-to-top.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+            <script type="text/javascript">
+var disqus_shortname = 'seisman';
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script  language="javascript" type="text/javascript">
+function uncollapse() {
+    if (window.location.hash.match(/^#comment-\d+$/)) {
+        $('#disqus_thread').collapse('show');
+    }
+}
+</script>
+<script type="text/javascript" language="JavaScript">
+uncollapse();
+window.onhashchange=function(){
+    if (window.location.hash.match(/^#comment-\d+$/))
+        window.location.reload(true);
+}
+</script>
+<script>
+$('#disqus_thread').on('shown', function () {
+    var link = document.getElementsByClassName('accordion-toggle');
+    var old_innerHTML = link[0].innerHTML;
+    $(link[0]).fadeOut(500, function() {
+        $(this).text('Click here to hide comments').fadeIn(500);
+    });
+    $('#disqus_thread').on('hidden', function () {
+        $(link[0]).fadeOut(500, function() {
+            $(this).text(old_innerHTML).fadeIn(500);
+        });
+    })
+})
+</script>
+
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>

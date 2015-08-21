@@ -94,11 +94,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id5">简介</a></li>
-<li><a class="reference internal" href="#id2" id="id6">基本信息</a></li>
-<li><a class="reference internal" href="#id3" id="id7">其他信息</a></li>
-<li><a class="reference internal" href="#id4" id="id8">格式转换</a></li>
-<li><a class="reference internal" href="#srtm" id="id9">与SRTM的区别</a></li>
+<li><a class="reference internal" href="#id1" id="id6">简介</a></li>
+<li><a class="reference internal" href="#id2" id="id7">基本信息</a></li>
+<li><a class="reference internal" href="#id3" id="id8">其他信息</a></li>
+<li><a class="reference internal" href="#id4" id="id9">格式转换</a></li>
+<li><a class="reference internal" href="#srtm" id="id10">与SRTM的区别</a></li>
+<li><a class="reference internal" href="#id5" id="id11">数据合并</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -108,18 +109,18 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             
             
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id5">简介</a></h2>
+<h2><a class="toc-backref" href="#id6">简介</a></h2>
 <p><span class="caps">ASTER</span> <span class="caps">GDEM</span>，即先进星载热发射和反射辐射仪全球数字高程模型，与SRTM一样为数字高程DEM，其全球空间分辨率为30米。该数据是根据NASA的新一代对地观测卫星Terra的详尽观测结果制作完成的。其数据覆盖范围为北纬83°到南纬83°之间的所有陆地区域，达到了地球陆地表面的99%。（摘自百度百科）。号称是“迄今最完整的全球地形数据”。</p>
 <p>网站： <a class="reference external" href="http://gdem.ersdac.jspacesystems.or.jp">http://gdem.ersdac.jspacesystems.or.jp</a></p>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id6">基本信息</a></h2>
+<h2><a class="toc-backref" href="#id7">基本信息</a></h2>
 <p>空间分辨率：1弧度秒 （约30 米）</p>
 <p>精度：垂直精度20米，水平精度30米</p>
 <p>更多信息： <a class="reference external" href="http://www.gscloud.cn/userfiles/file/gdem3.pdf">http://www.gscloud.cn/userfiles/file/gdem3.pdf</a></p>
 </div>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id7">其他信息</a></h2>
+<h2><a class="toc-backref" href="#id8">其他信息</a></h2>
 <ul class="simple">
 <li>网站需要注册，即可免费下载数据；</li>
 <li>点击“Search”即可进入数据选择界面；</li>
@@ -132,17 +133,25 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 </div>
 <div class="section" id="id4">
-<h2><a class="toc-backref" href="#id8">格式转换</a></h2>
+<h2><a class="toc-backref" href="#id9">格式转换</a></h2>
 <p>使用GDAL提供的工具将其转换为GMT可识别的netCDF格式：</p>
 <pre class="literal-block">
-gdal_translate -of GMT ASTGTM2_N36E111_dem.tif ASTGTM2_N36E111_dem.grd
+gdal_translate -of GMT ASTGTM2_N36E111_dem.tif ASTGTM2_N36E111_dem.nc
 </pre>
 </div>
 <div class="section" id="srtm">
-<h2><a class="toc-backref" href="#id9">与SRTM的区别</a></h2>
+<h2><a class="toc-backref" href="#id10">与SRTM的区别</a></h2>
 <ul class="simple">
 <li>SRTM数据的纬度覆盖范围是[-60,60]，<span class="caps">ASTER</span> GDEM数据的纬度覆盖范围为[-83,83]；</li>
 <li>SRTM的空间分辨率一般为90m，只有美国境内存在空间分辨率为30m的数据；<span class="caps">ASTER</span> GDEM的空间分辨率为30m；</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id11">数据合并</a></h2>
+<p>可以使用GMT自带的grdpaster命令将两个相邻的网格文件合并起来。</p>
+<ul class="simple">
+<li><span class="caps">GMT</span> 4.5.13的grdpaste有问题，会出现“Grids do not share command edge.”的错误；</li>
+<li><span class="caps">GMT</span> 5.1.2的grdpaste没有问题；</li>
 </ul>
 </div>
 
@@ -221,20 +230,20 @@ gdal_translate -of GMT ASTGTM2_N36E111_dem.tif ASTGTM2_N36E111_dem.grd
                     <span>14</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
-                    <span>29</span>
+                    <span>27</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/aster-gdem.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GeoResource/2014-01-12_aster-gdem.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

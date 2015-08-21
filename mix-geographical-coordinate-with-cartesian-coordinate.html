@@ -8,22 +8,22 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="提出问题 要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图： 解决问题 因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用JX投影来绘制整张图。最简单的例子如下: psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps 很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下: psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps 需要注意三点： -JX15cd/10c：X轴多了一个d ...
+        <meta name="description" content="提出问题 需要画一个沿着某个经线或纬线的深度剖面图，即X轴表示经度或纬度，Y轴表示深度，如下图： 分析问题 这张图比较特殊的地方在于，X轴是地理坐标，Y轴是笛卡尔坐标。最简单的办法是直接用线性投影-JX来绘制整张图，比如: gmt psbasemap -R40/50/0/600 -JX15c/-10c -Bx2 -By100 &gt; mix.ps 效果如下图： 显然，这张图还差了一点，X轴的坐标都没有“度”符号以及WSEN后缀，无法体现出其地理坐标的特征。 解决问题 解决办法如下: gmt set FORMAT_GEO_MAP +ddd:mmF gmt psbasemap -R40/50/0/600 -JX15cd/-10c -Bx2 -By100 &gt; mix ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="GMT技巧, GMT4, GMT, " />
+<meta name="keywords" content="GMT技巧, GMT5, GMT, " />
 
 <meta property="og:title" content="GMT技巧之地理坐标与笛卡尔坐标混合体 "/>
 <meta property="og:url" content="http://seisman.info/mix-geographical-coordinate-with-cartesian-coordinate.html" />
-<meta property="og:description" content="提出问题 要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图： 解决问题 因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用JX投影来绘制整张图。最简单的例子如下: psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps 很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下: psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps 需要注意三点： -JX15cd/10c：X轴多了一个d ..." />
+<meta property="og:description" content="提出问题 需要画一个沿着某个经线或纬线的深度剖面图，即X轴表示经度或纬度，Y轴表示深度，如下图： 分析问题 这张图比较特殊的地方在于，X轴是地理坐标，Y轴是笛卡尔坐标。最简单的办法是直接用线性投影-JX来绘制整张图，比如: gmt psbasemap -R40/50/0/600 -JX15c/-10c -Bx2 -By100 &gt; mix.ps 效果如下图： 显然，这张图还差了一点，X轴的坐标都没有“度”符号以及WSEN后缀，无法体现出其地理坐标的特征。 解决问题 解决办法如下: gmt set FORMAT_GEO_MAP +ddd:mmF gmt psbasemap -R40/50/0/600 -JX15cd/-10c -Bx2 -By100 &gt; mix ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2014-04-26T09:00:00+08:00" />
-<meta property="" content="2014-11-24T00:00:00+08:00" />
+<meta property="" content="2015-06-29T00:00:00+08:00" />
 <meta name="twitter:title" content="GMT技巧之地理坐标与笛卡尔坐标混合体 ">
-<meta name="twitter:description" content="提出问题 要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图： 解决问题 因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用JX投影来绘制整张图。最简单的例子如下: psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps 很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下: psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps 需要注意三点： -JX15cd/10c：X轴多了一个d ...">
+<meta name="twitter:description" content="提出问题 需要画一个沿着某个经线或纬线的深度剖面图，即X轴表示经度或纬度，Y轴表示深度，如下图： 分析问题 这张图比较特殊的地方在于，X轴是地理坐标，Y轴是笛卡尔坐标。最简单的办法是直接用线性投影-JX来绘制整张图，比如: gmt psbasemap -R40/50/0/600 -JX15c/-10c -Bx2 -By100 &gt; mix.ps 效果如下图： 显然，这张图还差了一点，X轴的坐标都没有“度”符号以及WSEN后缀，无法体现出其地理坐标的特征。 解决问题 解决办法如下: gmt set FORMAT_GEO_MAP +ddd:mmF gmt psbasemap -R40/50/0/600 -JX15cd/-10c -Bx2 -By100 &gt; mix ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
@@ -95,19 +95,20 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id10">提出问题</a></li>
-<li><a class="reference internal" href="#id2" id="id11">解决问题</a></li>
-<li><a class="reference internal" href="#id3" id="id12">其它解决方法</a><ul>
-<li><a class="reference internal" href="#id4" id="id13">分析问题</a></li>
-<li><a class="reference internal" href="#id5" id="id14">解决问题</a><ul>
-<li><a class="reference internal" href="#id6" id="id15">法1</a></li>
-<li><a class="reference internal" href="#id7" id="id16">法2</a></li>
+<li><a class="reference internal" href="#id1" id="id11">提出问题</a></li>
+<li><a class="reference internal" href="#id2" id="id12">分析问题</a></li>
+<li><a class="reference internal" href="#id3" id="id13">解决问题</a></li>
+<li><a class="reference internal" href="#id4" id="id14">其它解决方法</a><ul>
+<li><a class="reference internal" href="#id5" id="id15">分析问题</a></li>
+<li><a class="reference internal" href="#id6" id="id16">解决问题</a><ul>
+<li><a class="reference internal" href="#id7" id="id17">法1</a></li>
+<li><a class="reference internal" href="#id8" id="id18">法2</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id8" id="id17">其它的说明</a></li>
+<li><a class="reference internal" href="#id9" id="id19">其它的说明</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id9" id="id18">修订历史</a></li>
+<li><a class="reference internal" href="#id10" id="id20">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -117,38 +118,44 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             
             
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id10">提出问题</a></h2>
-<p>要绘制这么一张图，X轴是经度（地理坐标），Y轴是深度（笛卡尔坐标），如下图：</p>
+<h2><a class="toc-backref" href="#id11">提出问题</a></h2>
+<p>需要画一个沿着某个经线或纬线的深度剖面图，即X轴表示经度或纬度，Y轴表示深度，如下图：</p>
 <div class="figure">
-<img alt="mix-geographical-coordinate-with-cartesian-coordinate" src="/images/2014042601.jpg" style="width: 700px;"/>
+<img alt="mix-geographical-coordinate-with-cartesian-coordinate" src="/images/2014042601.png" style="width: 700px;"/>
 </div>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id11">解决问题</a></h2>
-<p>因为Y轴是深度，其坐标范围已经超过了正负90的范围，因为只能用<tt class="docutils literal"><span class="caps">JX</span></tt>投影来绘制整张图。最简单的例子如下:</p>
+<h2><a class="toc-backref" href="#id12">分析问题</a></h2>
+<p>这张图比较特殊的地方在于，X轴是地理坐标，Y轴是笛卡尔坐标。最简单的办法是直接用线性投影<tt class="docutils literal"><span class="pre">-<span class="caps">JX</span></span></tt>来绘制整张图，比如:</p>
 <pre class="literal-block">
-psbasemap -R40/50/0/600 -JX15c/10c -B2/100 &gt; mix.ps
+gmt psbasemap -R40/50/0/600 -JX15c/-10c -Bx2 -By100 &gt; mix.ps
 </pre>
-<div class="figure">
-<img alt="mix-geographical-coordinate-with-cartesian-coordinate" src="/images/2014042602.jpg" style="width: 700px;"/>
+<p>效果如下图：</p>
+<div class="figure align-center">
+<img alt="mix-geographical-coordinate-with-cartesian-coordinate" src="/images/2014042602.png" style="width: 700px;"/>
 </div>
-<p>很显然，这样的绘图结果无法满足要求，主要在于X轴坐标的“度”符号以及后缀上。解决办法如下:</p>
-<pre class="literal-block">
-psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; mix.ps
-</pre>
-<p>需要注意三点：</p>
-<ul class="simple">
-<li><tt class="docutils literal"><span class="pre">-JX15cd/10c</span></tt>：X轴多了一个<tt class="docutils literal">d</tt>，表示X轴为地理坐标；Y轴没有<tt class="docutils literal">d</tt>，为正常的笛卡尔坐标；</li>
-<li><tt class="docutils literal"><span class="pre">--PLOT_DEGREE_FORMAT=+ddd:mmF</span></tt>：已经设定了X轴为地理坐标，通过<tt class="docutils literal"><span class="pre">--PLOT_DEGREE_FORMAT=+F</span></tt>进一步修改地理坐标在绘图时的显示方式。</li>
-<li>若要求Y轴向下递增，正确的做法是设置投影方式为<tt class="docutils literal"><span class="pre">-JX15cd/-10c</span></tt>。由于可能存在的Bug，这样做会导致X轴的Annotation的位置出现问题。</li>
-</ul>
+<p>显然，这张图还差了一点，X轴的坐标都没有“度”符号以及WSEN后缀，无法体现出其地理坐标的特征。</p>
 </div>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id12">其它解决方法</a></h2>
-<p>上面给出的解决方案很简单，完全可以满足需求。</p>
-<p>最开始遇到这个问题的时候没有想到这种方法，所以把问题想复杂了。下面列出最初对于这个问题的分析以及两种稍复杂的解决方案。虽说下面的两种方案更复杂了，但其思路与想法还是很有意思的，或许在其它问题上可以借鉴，因而将其列出。</p>
+<h2><a class="toc-backref" href="#id13">解决问题</a></h2>
+<p>解决办法如下:</p>
+<pre class="literal-block">
+gmt set FORMAT_GEO_MAP +ddd:mmF
+gmt psbasemap -R40/50/0/600 -JX15cd/-10c -Bx2 -By100 &gt; mix.ps
+</pre>
+<p>几点说明：</p>
+<ul class="simple">
+<li><tt class="docutils literal">FORMAT_GEO_MAP</tt>用于设置地理坐标的显示方式。这里的<tt class="docutils literal">+ddd:mmF</tt>表示以“度:分”的形式显示，并加上EWSN后缀；</li>
+<li><tt class="docutils literal"><span class="pre">-JX15cd/-10c</span></tt>设定了线性投影方式。X轴多了一个<tt class="docutils literal">d</tt>，用于显式指定X轴为地理坐标；Y轴没有<tt class="docutils literal">d</tt>，为正常的笛卡尔坐标；这里Y轴的长度是负值，表示Y值从上到下递增，以符合常见的深度的定义；</li>
+<li>GMT4同理，但GMT 4.5.13似乎存在bug，当使用<tt class="docutils literal"><span class="pre">-JX15cd/-10c</span></tt>时，X轴的标注的位置会出现偏差；尚未发布的GMT 4.5.14中该bug已被修复；</li>
+<li>X轴由于是地理坐标，所以不能用-B选项给X轴加标题；如果需要加标题的话，只能使用pstext；</li>
+</ul>
+</div>
 <div class="section" id="id4">
-<h3><a class="toc-backref" href="#id13">分析问题</a></h3>
+<h2><a class="toc-backref" href="#id14">其它解决方法</a></h2>
+<p>下面列出最初对于这个问题的分析以及两种稍复杂的解决方案。虽说下面的两种方案更复杂了，但其思路与想法还是很有意思的，或许在其它问题上可以借鉴，因而将其列出。</p>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id15">分析问题</a></h3>
 <ol class="arabic simple">
 <li>因为Y轴是线性坐标，所以必然只能选择线性投影，即<tt class="docutils literal"><span class="pre">-<span class="caps">JX</span></span></tt></li>
 <li>线性投影的情况下，图的主体很简单，关键在于X轴坐标的“度”符号以及后缀E上</li>
@@ -158,10 +165,10 @@ psbasemap -R40/50/0/600 -JX15cd/10c -B2/100 --PLOT_DEGREE_FORMAT=+ddd:mmF &gt; m
 <li>关于如何绘制地理坐标的X轴，有两种解决办法。</li>
 </ol>
 </div>
-<div class="section" id="id5">
-<h3><a class="toc-backref" href="#id14">解决问题</a></h3>
 <div class="section" id="id6">
-<h4><a class="toc-backref" href="#id15">法1</a></h4>
+<h3><a class="toc-backref" href="#id16">解决问题</a></h3>
+<div class="section" id="id7">
+<h4><a class="toc-backref" href="#id17">法1</a></h4>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -199,8 +206,8 @@ rm .gmt*
 </td></tr></table><p>这里绘制X轴时直接使用<tt class="docutils literal"><span class="pre">--D_FORMAT=%g\260E</span></tt>，使得在该命令中D_FORMAT的值为<tt class="docutils literal">%g\260E</tt>，即设置显示浮点数时在其后加上“度”符号以及后缀“E”。</p>
 <p>此法的优点在于简单，缺点在于后缀“E”是固定值，无法处理东西经同时存在的情况。</p>
 </div>
-<div class="section" id="id7">
-<h4><a class="toc-backref" href="#id16">法2</a></h4>
+<div class="section" id="id8">
+<h4><a class="toc-backref" href="#id18">法2</a></h4>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -239,8 +246,8 @@ rm .gmt*
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="id8">
-<h3><a class="toc-backref" href="#id17">其它的说明</a></h3>
+<div class="section" id="id9">
+<h3><a class="toc-backref" href="#id19">其它的说明</a></h3>
 <ol class="arabic simple">
 <li>GMT的B选项提供了这样一个功能，可以使用形如<tt class="docutils literal"><span class="pre">-Bgxmin/xmax/ymin/ymax</span></tt>的语法，其中<tt class="docutils literal">g</tt>告诉命令即便使用<tt class="docutils literal"><span class="pre">-<span class="caps">JX</span></span></tt>投影，也认为其是地理坐标。由于是地理坐标，“度”符号以及后缀“E”就很容易出来了</li>
 <li>使用<tt class="docutils literal"><span class="pre">-Bgxmin/xmax/ymin/ymax</span></tt>存在两个问题<ol class="arabic">
@@ -253,15 +260,16 @@ rm .gmt*
 <p>这样，X轴和Y轴就都设计好了，接下来要做的就只是保证其它命令都不使用B选项即可。</p>
 </div>
 </div>
-<div class="section" id="id9">
-<h2><a class="toc-backref" href="#id18">修订历史</a></h2>
-<ol class="arabic simple">
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id20">修订历史</a></h2>
+<ul class="simple">
 <li>2014-04-26：初稿；</li>
 <li>2014-04-26：修改脚本，解决了对Y轴范围的限制；Thanks to Chen Zhaohui；</li>
 <li>2014-06-09：通过修改<tt class="docutils literal">D_FORMAT</tt>以解决地理坐标的度符号；该方法由刘珠妹提供；</li>
 <li>2014-07-09：找到了一种非常简单的方法来解决该问题；</li>
-<li>2014-11-24：修正了<tt class="docutils literal"><span class="pre">-PLOT_DEGREE_FORMAT</span></tt>中的小问题；</li>
-</ol>
+<li>2014-11-24：修正了<tt class="docutils literal"><span class="pre">--PLOT_DEGREE_FORMAT</span></tt>中的小问题；</li>
+<li>2015-06-29：<span class="caps">GMT4</span>.5.13在解决该问题时有其他bug，这里使用GMT5；</li>
+</ul>
 </div>
 
             
@@ -304,19 +312,19 @@ rm .gmt*
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/modify-default-parameters.html" title="GMT修改默认参数">GMT修改默认参数</a></li>
-<li><a href="http://seisman.info/convert-and-ps2raster.html" title="图像格式转换工具convert">图像格式转换工具convert</a></li>
-<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
-<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+<li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
+<li><a href="http://seisman.info/add-annotations-in-gmt.html" title="GMT中添加注释和标注">GMT中添加注释和标注</a></li>
 <li><a href="http://seisman.info/profile-from-3d-data.html" title="从3D数据中截取剖面">从3D数据中截取剖面</a></li>
+<li><a href="http://seisman.info/gmt5-custom-axes.html" title="GMT5自定义坐标轴">GMT5自定义坐标轴</a></li>
+<li><a href="http://seisman.info/axes-without-ticks.html" title="GMT绘制无刻度轴">GMT绘制无刻度轴</a></li>
 </ul>
 <hr />
 </section>
             <aside>
             <nav>
             <ul class="articles-timeline">
-                <li class="previous-article">« <a href="http://seisman.info/history-and-copyright-of-sac.html" title="Previous: SAC发展史及其版权">SAC发展史及其版权</a></li>
-                <li class="next-article"><a href="http://seisman.info/traps-using-hinet-data.html" title="Next: 细数使用Hi-net数据遇到的坑">细数使用Hi-net数据遇到的坑</a> »</li>
+                <li class="previous-article">« <a href="http://seisman.info/passive-seismology-toolbox-for-matlab-and-gnu-octave.html" title="Previous: SEIZMO：天然地震学Matlab工具箱">SEIZMO：天然地震学Matlab工具箱</a></li>
+                <li class="next-article"><a href="http://seisman.info/radiation-pattern-and-beach-ball.html" title="Next: 辐射花样的计算与震源球的绘制">辐射花样的计算与震源球的绘制</a> »</li>
             </ul>
             </nav>
             </aside>
@@ -327,24 +335,24 @@ rm .gmt*
             <time pubdate="pubdate" datetime="2014-04-26T09:00:00+08:00">2014-04-26</time>
 
 <h4>Last Updated</h4>
-<time datetime="2014-11-24T00:00:00+08:00">2014-11-24</time>
+<time datetime="2015-06-29T00:00:00+08:00">2015-06-29</time>
 
             <h4>Category</h4>
             <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
-                    <span>28</span>
+                    <span>35</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/mix-geographical-coordinate-with-cartesian-coordinate.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2014-04-26_mix-geographical-coordinate-with-cartesian-coordinate.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
 <meta property="og:article:published_time" content="2014-07-15T13:07:00+08:00" />
-<meta property="" content="2015-05-11T00:00:00+08:00" />
+<meta property="" content="2015-07-14T00:00:00+08:00" />
 <meta name="twitter:title" content="用CentOS 7打造合适的科研环境 ">
 <meta name="twitter:description" content="这篇博文记录了我用CentOS 7搭建地震学科研环境的过程，供我个人在未来重装系统时参考。对于其他地震学科研人员，也许有借鉴意义。 阅读须知： 本文适用于个人电脑，不适用于服务器； 不推荐刚接触Linux的人使用CentOS发行版； 本文尽量写的浅显易懂，但要求读者掌握Linux基础知识； 本文所有操作均在CentOS 7下完成，其他发行版或多或少与CentOS 7不同，因而仅供参考； 本文所安装的软件纯粹出于个人习惯及喜好，读者应自己判断，按需安装； 安装CentOS CentOS 7的安装与其他Linux发行版的安装差不多，个别地方稍有不同。 准备工作 准备材料 U盘：容量700M以上，用于制作U盘启动盘，因为在制作启动盘时会格式化U盘，所以U盘内不要包含重要资料 CentOS 7.1 LiveCD ISO镜像文件 Universal USB installer：Windows下的U盘启动盘制作工具 一个已安装Windows的电脑：用于制作U盘启动盘 运行Universal USB installer并制作U盘启动盘 将U盘插入计算机，重启，进入BIOS选择从U盘启动，即可进入CentOS的LiveCD ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
@@ -95,120 +95,134 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#centos" id="id47">安装CentOS</a><ul>
-<li><a class="reference internal" href="#id1" id="id48">准备工作</a></li>
-<li><a class="reference internal" href="#id2" id="id49">安装过程</a></li>
-<li><a class="reference internal" href="#id3" id="id50">分区</a></li>
-<li><a class="reference internal" href="#id4" id="id51">真正的安装</a></li>
+<li><a class="reference internal" href="#centos" id="id52">安装CentOS</a><ul>
+<li><a class="reference internal" href="#id1" id="id53">准备工作</a></li>
+<li><a class="reference internal" href="#id2" id="id54">安装过程</a></li>
+<li><a class="reference internal" href="#id3" id="id55">分区</a></li>
+<li><a class="reference internal" href="#id4" id="id56">真正的安装</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id5" id="id52">对系统的若干修改</a><ul>
-<li><a class="reference internal" href="#id6" id="id53">若干原则</a></li>
-<li><a class="reference internal" href="#root" id="id54">给一般账号root权限</a></li>
-<li><a class="reference internal" href="#id8" id="id55">添加第三方源</a><ul>
-<li><a class="reference internal" href="#epel" id="id56"><span class="caps">EPEL</span></a></li>
-<li><a class="reference internal" href="#elrepo" id="id57">ELRepo</a></li>
+<li><a class="reference internal" href="#id5" id="id57">对系统的若干修改</a><ul>
+<li><a class="reference internal" href="#id6" id="id58">若干原则</a></li>
+<li><a class="reference internal" href="#root" id="id59">给一般账号root权限</a></li>
+<li><a class="reference internal" href="#id8" id="id60">添加第三方源</a><ul>
+<li><a class="reference internal" href="#epel" id="id61"><span class="caps">EPEL</span></a></li>
+<li><a class="reference internal" href="#nux-dextop" id="id62">Nux Dextop</a></li>
+<li><a class="reference internal" href="#elrepo" id="id63">ELRepo</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#yum-axelget" id="id58">安装yum-axelget</a></li>
-<li><a class="reference internal" href="#id9" id="id59">第一次全面更新</a></li>
-<li><a class="reference internal" href="#id10" id="id60">重启</a></li>
-<li><a class="reference internal" href="#kernel" id="id61">删除多余的kernel</a></li>
+<li><a class="reference internal" href="#yum-axelget" id="id64">安装yum-axelget</a></li>
+<li><a class="reference internal" href="#id9" id="id65">第一次全面更新</a></li>
+<li><a class="reference internal" href="#id10" id="id66">重启</a></li>
+<li><a class="reference internal" href="#kernel" id="id67">删除多余的kernel</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id11" id="id62">基础开发环境</a><ul>
-<li><a class="reference internal" href="#gcc" id="id63">GCC系列</a></li>
-<li><a class="reference internal" href="#id12" id="id64">软件开发辅助工具</a></li>
+<li><a class="reference internal" href="#id11" id="id68">基础开发环境</a><ul>
+<li><a class="reference internal" href="#gcc" id="id69">GCC系列</a></li>
+<li><a class="reference internal" href="#id12" id="id70">软件开发辅助工具</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id13" id="id65">驱动程序</a><ul>
-<li><a class="reference internal" href="#id14" id="id66">显卡驱动</a></li>
-<li><a class="reference internal" href="#ntfs" id="id67">NTFS驱动</a></li>
+<li><a class="reference internal" href="#id13" id="id71">驱动程序</a><ul>
+<li><a class="reference internal" href="#id14" id="id72">显卡驱动</a></li>
+<li><a class="reference internal" href="#ntfs" id="id73">NTFS驱动</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id15" id="id68">进阶开发环境</a><ul>
-<li><a class="reference internal" href="#java" id="id69">Java环境</a></li>
-<li><a class="reference internal" href="#clang" id="id70">Clang系列</a></li>
-<li><a class="reference internal" href="#intel" id="id71">Intel系列</a></li>
-<li><a class="reference internal" href="#id17" id="id72">并行计算</a><ul>
-<li><a class="reference internal" href="#openmpi" id="id73">openmpi</a></li>
-<li><a class="reference internal" href="#mpich" id="id74">mpich</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id18" id="id75">脚本语言环境</a><ul>
-<li><a class="reference internal" href="#perl" id="id76">Perl</a><ul>
-<li><a class="reference internal" href="#id19" id="id77">系统自带Perl</a></li>
-<li><a class="reference internal" href="#plenv" id="id78">plenv管理新版本</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#python" id="id79">Python</a><ul>
-<li><a class="reference internal" href="#id21" id="id80">系统自带Python</a></li>
-<li><a class="reference internal" href="#pyenvpython3" id="id81">pyenv管理Python3</a></li>
+<li><a class="reference internal" href="#id15" id="id74">进阶开发环境</a><ul>
+<li><a class="reference internal" href="#java" id="id75">Java环境</a></li>
+<li><a class="reference internal" href="#clang" id="id76">Clang系列</a></li>
+<li><a class="reference internal" href="#intel" id="id77">Intel系列</a></li>
+<li><a class="reference internal" href="#id17" id="id78">并行计算</a><ul>
+<li><a class="reference internal" href="#openmpi" id="id79">openmpi</a></li>
+<li><a class="reference internal" href="#mpich" id="id80">mpich</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id22" id="id82">编程相关软件</a><ul>
-<li><a class="reference internal" href="#id23" id="id83">编辑器</a></li>
-<li><a class="reference internal" href="#ide" id="id84"><span class="caps">IDE</span></a></li>
+<li><a class="reference internal" href="#id18" id="id81">脚本语言环境</a><ul>
+<li><a class="reference internal" href="#perl" id="id82">Perl</a><ul>
+<li><a class="reference internal" href="#id19" id="id83">系统自带Perl</a></li>
+<li><a class="reference internal" href="#plenv" id="id84">plenv管理新版本</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id24" id="id85">日常软件</a><ul>
-<li><a class="reference internal" href="#office" id="id86">Office套件</a><ul>
-<li><a class="reference internal" href="#libreoffice" id="id87">LibreOffice</a></li>
-<li><a class="reference internal" href="#wps-office" id="id88"><span class="caps">WPS</span> Office</a></li>
+<li><a class="reference internal" href="#python" id="id85">Python</a><ul>
+<li><a class="reference internal" href="#id21" id="id86">系统自带Python</a></li>
+<li><a class="reference internal" href="#pyenvpython3" id="id87">pyenv管理Python3</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#texlive-2014" id="id89">TeXLive 2014</a></li>
-<li><a class="reference internal" href="#mendeley" id="id90">Mendeley</a></li>
-<li><a class="reference internal" href="#google-chrome" id="id91">Google Chrome浏览器</a></li>
-<li><a class="reference internal" href="#opera" id="id92">Opera浏览器</a></li>
-<li><a class="reference internal" href="#flash" id="id93">Flash插件</a></li>
-<li><a class="reference internal" href="#id25" id="id94">解压软件</a></li>
-<li><a class="reference internal" href="#ftp" id="id95">FTP客户端</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id26" id="id96">效率类软件</a><ul>
-<li><a class="reference internal" href="#id27" id="id97">终端模拟器</a><ul>
-<li><a class="reference internal" href="#terminator" id="id98">terminator</a></li>
-<li><a class="reference internal" href="#guake" id="id99">guake</a></li>
+<li><a class="reference internal" href="#id22" id="id88">编程相关软件</a><ul>
+<li><a class="reference internal" href="#id23" id="id89">编辑器</a></li>
+<li><a class="reference internal" href="#ide" id="id90"><span class="caps">IDE</span></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#zshoh-my-zsh" id="id100">zsh与oh my zsh</a></li>
-<li><a class="reference internal" href="#autojump" id="id101">autojump</a></li>
-<li><a class="reference internal" href="#id29" id="id102">中文输入法</a></li>
-<li><a class="reference internal" href="#hosttool" id="id103">HostTool</a></li>
-<li><a class="reference internal" href="#id30" id="id104">等宽字体</a></li>
+<li><a class="reference internal" href="#id24" id="id91">日常软件</a><ul>
+<li><a class="reference internal" href="#office" id="id92">Office套件</a><ul>
+<li><a class="reference internal" href="#libreoffice" id="id93">LibreOffice</a></li>
+<li><a class="reference internal" href="#wps-office" id="id94"><span class="caps">WPS</span> Office</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id31" id="id105">虚拟机</a><ul>
-<li><a class="reference internal" href="#virtualbox" id="id106">VirtualBox虚拟机</a></li>
-<li><a class="reference internal" href="#gnome-boxes" id="id107">gnome-boxes</a></li>
+<li><a class="reference internal" href="#ps-pdf" id="id95"><span class="caps">PS</span>/PDF阅读器</a><ul>
+<li><a class="reference internal" href="#zathura" id="id96">zathura</a></li>
+<li><a class="reference internal" href="#ghostscript" id="id97">ghostscript</a></li>
+<li><a class="reference internal" href="#master-pdf-editor" id="id98">master-pdf-editor</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id32" id="id108">同步网盘</a><ul>
-<li><a class="reference internal" href="#dropbox" id="id109">Dropbox</a></li>
-<li><a class="reference internal" href="#mega" id="id110"><span class="caps">MEGA</span></a></li>
-<li><a class="reference internal" href="#id33" id="id111">坚果云</a></li>
+<li><a class="reference internal" href="#texlive-2015" id="id99">TeXLive 2015</a></li>
+<li><a class="reference internal" href="#mendeley" id="id100">Mendeley</a></li>
+<li><a class="reference internal" href="#google-chrome" id="id101">Google Chrome浏览器</a></li>
+<li><a class="reference internal" href="#opera" id="id102">Opera浏览器</a></li>
+<li><a class="reference internal" href="#flash" id="id103">Flash插件</a></li>
+<li><a class="reference internal" href="#id25" id="id104">解压软件</a></li>
+<li><a class="reference internal" href="#ftp" id="id105">FTP客户端</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id34" id="id112">工具软件</a><ul>
-<li><a class="reference internal" href="#id35" id="id113">视频下载工具</a></li>
-<li><a class="reference internal" href="#pdf" id="id114">PDF处理工具</a></li>
-<li><a class="reference internal" href="#bt" id="id115">BT软件</a></li>
-<li><a class="reference internal" href="#id37" id="id116">其他工具</a></li>
+<li><a class="reference internal" href="#id26" id="id106">效率类软件</a><ul>
+<li><a class="reference internal" href="#id27" id="id107">终端模拟器</a><ul>
+<li><a class="reference internal" href="#terminator" id="id108">terminator</a></li>
+<li><a class="reference internal" href="#guake" id="id109">guake</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id38" id="id117">地球物理相关</a></li>
-<li><a class="reference internal" href="#id39" id="id118">娱乐</a></li>
-<li><a class="reference internal" href="#id40" id="id119">未完成</a><ul>
-<li><a class="reference internal" href="#google-earth" id="id120">Google Earth</a></li>
+<li><a class="reference internal" href="#zshoh-my-zsh" id="id110">zsh与oh my zsh</a></li>
+<li><a class="reference internal" href="#autojump" id="id111">autojump</a></li>
+<li><a class="reference internal" href="#id29" id="id112">中文输入法</a></li>
+<li><a class="reference internal" href="#hosttool" id="id113">HostTool</a></li>
+<li><a class="reference internal" href="#id30" id="id114">等宽字体</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id41" id="id121">参考</a></li>
-<li><a class="reference internal" href="#id43" id="id122">修订历史</a></li>
+<li><a class="reference internal" href="#id31" id="id115">虚拟机</a><ul>
+<li><a class="reference internal" href="#virtualbox" id="id116">VirtualBox虚拟机</a></li>
+<li><a class="reference internal" href="#gnome-boxes" id="id117">gnome-boxes</a></li>
+<li><a class="reference internal" href="#wine" id="id118">Wine</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id32" id="id119">同步网盘</a><ul>
+<li><a class="reference internal" href="#dropbox" id="id120">Dropbox</a></li>
+<li><a class="reference internal" href="#mega" id="id121"><span class="caps">MEGA</span></a></li>
+<li><a class="reference internal" href="#id33" id="id122">坚果云</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id34" id="id123">工具软件</a><ul>
+<li><a class="reference internal" href="#id35" id="id124">视频下载工具</a></li>
+<li><a class="reference internal" href="#pdf" id="id125">PDF处理工具</a></li>
+<li><a class="reference internal" href="#bt" id="id126">BT软件</a></li>
+<li><a class="reference internal" href="#uget" id="id127">uGet</a></li>
+<li><a class="reference internal" href="#shutter" id="id128">截图软件shutter</a></li>
+<li><a class="reference internal" href="#id38" id="id129">其他工具</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id39" id="id130">地球物理相关</a></li>
+<li><a class="reference internal" href="#id40" id="id131">娱乐</a><ul>
+<li><a class="reference internal" href="#id41" id="id132">影音播放器</a></li>
+<li><a class="reference internal" href="#id42" id="id133">游戏</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id43" id="id134">未完成</a><ul>
+<li><a class="reference internal" href="#google-earth" id="id135">Google Earth</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id44" id="id136">参考</a></li>
+<li><a class="reference internal" href="#id46" id="id137">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -227,10 +241,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ol>
 
 <div class="section" id="centos">
-<h2><a class="toc-backref" href="#id47">安装CentOS</a></h2>
+<h2><a class="toc-backref" href="#id52">安装CentOS</a></h2>
 <p>CentOS 7的安装与其他Linux发行版的安装差不多，个别地方稍有不同。</p>
 <div class="section" id="id1">
-<h3><a class="toc-backref" href="#id48">准备工作</a></h3>
+<h3><a class="toc-backref" href="#id53">准备工作</a></h3>
 <ol class="arabic simple">
 <li>准备材料<ul>
 <li>U盘：容量700M以上，用于制作U盘启动盘，因为在制作启动盘时会格式化U盘，所以U盘内不要包含重要资料</li>
@@ -246,10 +260,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>注：Linux下可以通过<tt class="docutils literal">dd</tt>命令制作启动盘，但由于对原理不够了解，偶尔会导致制作失败，或制作成功后U盘容量有问题，还是用Windows下的Universal <span class="caps">USB</span> installer比较靠谱。</p>
 </div>
 <div class="section" id="id2">
-<h3><a class="toc-backref" href="#id49">安装过程</a></h3>
+<h3><a class="toc-backref" href="#id54">安装过程</a></h3>
 <ol class="arabic simple">
 <li>选择安装过程中使用的语言，这里应<strong>使用英语，不要使用汉语</strong>。若安装界面使用汉语，最终安装的系统中会出现两个比较麻烦的问题：<ol class="arabic">
-<li>家目录下的系统文件夹，比如Downloads、Desktop等会以中文表示，这使得在命令行cd变得很麻烦；</li>
+<li>家目录下的系统文件夹，比如Downloads、Desktop等会以中文表示，这使得在命令行<tt class="docutils literal">cd</tt>变得很麻烦；</li>
 <li>终端中某些字符用英文字体，某些字符用中文字体，效果非常差，需要自己修改终端字体方可；</li>
 </ol>
 </li>
@@ -260,7 +274,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ol>
 </div>
 <div class="section" id="id3">
-<h3><a class="toc-backref" href="#id50">分区</a></h3>
+<h3><a class="toc-backref" href="#id55">分区</a></h3>
 <p>CentOS 7的分区似乎比较特别，自认为经验很丰富的我在第一次安装CentOS7时还是在分区上耽误了很多时间。后来找到比较合适的分区方法，如下：</p>
 <ul class="simple">
 <li>点击“Click here to create them automatically”，即让安装程序帮忙分区</li>
@@ -278,7 +292,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 </div>
 <div class="section" id="id4">
-<h3><a class="toc-backref" href="#id51">真正的安装</a></h3>
+<h3><a class="toc-backref" href="#id56">真正的安装</a></h3>
 <ol class="arabic simple">
 <li>设置root密码</li>
 <li>创建一般用户</li>
@@ -289,13 +303,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </div>
 </div>
 <div class="section" id="id5">
-<h2><a class="toc-backref" href="#id52">对系统的若干修改</a></h2>
+<h2><a class="toc-backref" href="#id57">对系统的若干修改</a></h2>
 <div class="section" id="id6">
-<h3><a class="toc-backref" href="#id53">若干原则</a></h3>
+<h3><a class="toc-backref" href="#id58">若干原则</a></h3>
 <p>为了搭建一个稳定的系统，尽量避免因为各种瞎折腾而导致的系统问题，特订立了一些软件安装的原则。具体参见《<a class="reference external" href="http://seisman.info/how-to-install-softwares-under-centos-7.html">CentOS 7下的软件安装方法与策略</a>》。</p>
 </div>
 <div class="section" id="root">
-<h3><a class="toc-backref" href="#id54">给一般账号root权限</a></h3>
+<h3><a class="toc-backref" href="#id59">给一般账号root权限</a></h3>
 <p>默认情况下，一般账号是没有root权限的。为什么不直接用root账号，而是要给一般账号root权限呢？</p>
 <ul class="simple">
 <li><strong>日常工作中使用root账号，是非常糟糕且危险的习惯！无论是服务器还是个人电脑都是如此。</strong></li>
@@ -311,18 +325,25 @@ seisman ALL=(ALL) ALL
 <p>其中seisman为当前用户名。</p>
 </div>
 <div class="section" id="id8">
-<h3><a class="toc-backref" href="#id55">添加第三方源</a></h3>
-<p>CentOS由于很追求稳定性，所以官方源中自带的软件不多，因而需要一些第三方源，比如EPEL、ATrpms、ELRepo、Nux Dextop、RepoForge等。根据上面提到的软件安装原则，为了尽可能保证系统的稳定性，此处大型第三方源只添加EPEL源和ELRepo源。</p>
+<h3><a class="toc-backref" href="#id60">添加第三方源</a></h3>
+<p>CentOS由于很追求稳定性，所以官方源中自带的软件不多，因而需要一些第三方源，比如EPEL、ATrpms、ELRepo、Nux Dextop、RepoForge等。根据上面提到的软件安装原则，为了尽可能保证系统的稳定性，此处大型第三方源只添加EPEL源、Nux Dextop和ELRepo源。</p>
 <div class="section" id="epel">
-<h4><a class="toc-backref" href="#id56"><span class="caps">EPEL</span></a></h4>
+<h4><a class="toc-backref" href="#id61"><span class="caps">EPEL</span></a></h4>
 <p><a class="reference external" href="https://fedoraproject.org/wiki/EPEL"><span class="caps">EPEL</span></a>即Extra Packages for Enterprise Linux，为CentOS提供了额外的10000多个软件包，而且在不替换系统组件方面下了很多功夫，因而可以放心使用。</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre>sudo yum install epel-release
 </pre></div>
 </td></tr></table><p>执行完该命令后，在<tt class="docutils literal">/etc/yum.repos.d</tt>目录下会多一个<tt class="docutils literal">epel.repo</tt>文件。</p>
 </div>
+<div class="section" id="nux-dextop">
+<h4><a class="toc-backref" href="#id62">Nux Dextop</a></h4>
+<p><a class="reference external" href="http://li.nux.ro/repos.html">Nux Dextop</a>中包含了一些与多媒体相关的软件包，作者尽量保证不覆盖base源。官方说明中说该源与EPEL兼容，实际上个别软件包存在冲突，但基本不会造成影响:</p>
+<blockquote>
+sudo rpm -Uvh <a class="reference external" href="http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm">http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm</a></blockquote>
+<p>完成该命令后，在<tt class="docutils literal">/etc/yum/repos.d</tt>目录下会多一个<tt class="docutils literal"><span class="pre">nux-dextop.repo</span></tt>文件。</p>
+</div>
 <div class="section" id="elrepo">
-<h4><a class="toc-backref" href="#id57">ELRepo</a></h4>
-<p><cite>ELRepo</cite>包含了一些硬件相关的驱动程序，比如显卡、声卡驱动。</p>
+<h4><a class="toc-backref" href="#id63">ELRepo</a></h4>
+<p><cite>ELRepo</cite>包含了一些硬件相关的驱动程序，比如显卡、声卡驱动:</p>
 <pre class="literal-block">
 sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
@@ -331,7 +352,7 @@ sudo rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm
 </div>
 </div>
 <div class="section" id="yum-axelget">
-<h3><a class="toc-backref" href="#id58">安装yum-axelget</a></h3>
+<h3><a class="toc-backref" href="#id64">安装yum-axelget</a></h3>
 <p><a class="reference external" href="https://dl.fedoraproject.org/pub/epel/7/x86_64/repoview/yum-axelget.html">yum-axelget</a>是EPEL提供的一个yum插件。使用该插件后用yum安装软件时可以并行下载，大大提高了软件的下载速度，减少了下载的等待时间:</p>
 <pre class="literal-block">
 sudo yum install yum-axelget
@@ -339,7 +360,7 @@ sudo yum install yum-axelget
 <p>安装该插件的同时会安装另一个软件axel。axel是一个并行下载工具，在下载http、ftp等简单协议的文件时非常好用。</p>
 </div>
 <div class="section" id="id9">
-<h3><a class="toc-backref" href="#id59">第一次全面更新</a></h3>
+<h3><a class="toc-backref" href="#id65">第一次全面更新</a></h3>
 <p>在进一步操作之前，先把已经安装的软件包都升级到最新版:</p>
 <pre class="literal-block">
 sudo yum update
@@ -347,11 +368,11 @@ sudo yum update
 <p>要更新的软件包有些多，可能需要一段时间。不过有了yum-axelget插件，速度已经快了很多啦。</p>
 </div>
 <div class="section" id="id10">
-<h3><a class="toc-backref" href="#id60">重启</a></h3>
+<h3><a class="toc-backref" href="#id66">重启</a></h3>
 <p>此处建议重启。</p>
 </div>
 <div class="section" id="kernel">
-<h3><a class="toc-backref" href="#id61">删除多余的kernel</a></h3>
+<h3><a class="toc-backref" href="#id67">删除多余的kernel</a></h3>
 <p>在前面的<tt class="docutils literal">yum update</tt>执行之后，可能会将kernel也一起更新，则在启动CentOS时启动项中会有很多项。</p>
 <p>确认当前使用的kernel版本号:</p>
 <pre class="literal-block">
@@ -379,9 +400,9 @@ sudo yum remove kernel-devel-3.10.0-123.8.1.el7.x86_64
 </div>
 </div>
 <div class="section" id="id11">
-<h2><a class="toc-backref" href="#id62">基础开发环境</a></h2>
+<h2><a class="toc-backref" href="#id68">基础开发环境</a></h2>
 <div class="section" id="gcc">
-<h3><a class="toc-backref" href="#id63">GCC系列</a></h3>
+<h3><a class="toc-backref" href="#id69">GCC系列</a></h3>
 <pre class="literal-block">
 sudo yum install gcc                     # C编译器
 sudo yum install gcc-c++                 # C++编译器
@@ -393,7 +414,7 @@ sudo yum install compat-libf2c-34        # g77 3.4.x兼容库
 </pre>
 </div>
 <div class="section" id="id12">
-<h3><a class="toc-backref" href="#id64">软件开发辅助工具</a></h3>
+<h3><a class="toc-backref" href="#id70">软件开发辅助工具</a></h3>
 <pre class="literal-block">
 sudo yum install make
 sudo yum install gdb     # 代码调试器
@@ -404,9 +425,9 @@ sudo yum install git-svn # git的svn插件
 </div>
 </div>
 <div class="section" id="id13">
-<h2><a class="toc-backref" href="#id65">驱动程序</a></h2>
+<h2><a class="toc-backref" href="#id71">驱动程序</a></h2>
 <div class="section" id="id14">
-<h3><a class="toc-backref" href="#id66">显卡驱动</a></h3>
+<h3><a class="toc-backref" href="#id72">显卡驱动</a></h3>
 <p>Linux默认只使用开源的显卡驱动，就目前的情况来看，开源驱动的效果还是不错的，但跟官方的闭源驱动相比还是有一定差距。最明显的区别是，在使用SAC的ppk功能放大波形时，使用开源驱动会出现延迟，而使用官方闭源则整个过程非常顺畅。</p>
 <p>安装显卡检测程序:</p>
 <pre class="literal-block">
@@ -429,7 +450,7 @@ sudo yum remove xorg-x11-glamor
 <p>安装完显卡驱动后可以重启一下。</p>
 </div>
 <div class="section" id="ntfs">
-<h3><a class="toc-backref" href="#id67">NTFS驱动</a></h3>
+<h3><a class="toc-backref" href="#id73">NTFS驱动</a></h3>
 <p>CentOS下默认无法挂载NTFS格式的硬盘。需安装nfts-3g即可实现即插即用:</p>
 <pre class="literal-block">
 sudo yum install ntfs-3g
@@ -437,16 +458,16 @@ sudo yum install ntfs-3g
 </div>
 </div>
 <div class="section" id="id15">
-<h2><a class="toc-backref" href="#id68">进阶开发环境</a></h2>
+<h2><a class="toc-backref" href="#id74">进阶开发环境</a></h2>
 <div class="section" id="java">
-<h3><a class="toc-backref" href="#id69">Java环境</a></h3>
-<p>Java的一大特色在于跨平台，只有安装了Java运行环境，即可运行Java程序:</p>
+<h3><a class="toc-backref" href="#id75">Java环境</a></h3>
+<p>Java的一大特色在于跨平台，安装了Java运行环境，即可运行Java程序:</p>
 <pre class="literal-block">
 sudo yum install java                        # java运行环境
 </pre>
 </div>
 <div class="section" id="clang">
-<h3><a class="toc-backref" href="#id70">Clang系列</a></h3>
+<h3><a class="toc-backref" href="#id76">Clang系列</a></h3>
 <p>Clang可以认为是GCC的替代品，可以用于编译C、C++、Objective-C和Objective-C++。其提供了更友好的报错信息，在有些方面比GCC更友好，同时其提供了一个代码静态分析器，可以用于分析代码中可能出现的bug和内存溢出问题。</p>
 <pre class="literal-block">
 sudo yum install clang             # clang编译器
@@ -454,16 +475,16 @@ sudo yum install clang-analyzer    # clang静态分析器
 </pre>
 </div>
 <div class="section" id="intel">
-<h3><a class="toc-backref" href="#id71">Intel系列</a></h3>
+<h3><a class="toc-backref" href="#id77">Intel系列</a></h3>
 <p>Intel的大部分软件都是非开源且收费的，但同时部分软件也提供了Linux下的非商业免费版。比如icc、mkl数学库以及代码性能分析工具等。</p>
 <p>Intel软件的申请以及安装参考《<a class="reference external" href="http://seisman.info/intel-non-commercial-software.html">Intel非商业免费开发工具</a>》。</p>
 <p>还有一点需要注意的是，Intel也提供了并行相关的几个命令，比如mpicc、mpirun。所以openmpi、mpich和intel三者，在并行时只能用其中一个。</p>
 </div>
 <div class="section" id="id17">
-<h3><a class="toc-backref" href="#id72">并行计算</a></h3>
+<h3><a class="toc-backref" href="#id78">并行计算</a></h3>
 <p>并行可以用openmpi，也可以用mpich，二者应该是并列的。但是由于二者提供了几乎一样的命令，所以二者可以同时安装，但是不可以同时处于使用状态。</p>
 <div class="section" id="openmpi">
-<h4><a class="toc-backref" href="#id73">openmpi</a></h4>
+<h4><a class="toc-backref" href="#id79">openmpi</a></h4>
 <p>安装openmpi:</p>
 <pre class="literal-block">
 sudo yum install openmpi openmpi-devel
@@ -476,7 +497,7 @@ module load mpi/openmpi-x86_64
 <p><span class="caps">PS</span>：要使用<tt class="docutils literal">module</tt>命令需要先安装<tt class="docutils literal"><span class="pre">environment-modules</span></tt>包。</p>
 </div>
 <div class="section" id="mpich">
-<h4><a class="toc-backref" href="#id74">mpich</a></h4>
+<h4><a class="toc-backref" href="#id80">mpich</a></h4>
 <p>安装mpich:</p>
 <pre class="literal-block">
 sudo yum install mpich mpich-devel
@@ -490,12 +511,12 @@ module load mpi/mpich-x86_64
 </div>
 </div>
 <div class="section" id="id18">
-<h2><a class="toc-backref" href="#id75">脚本语言环境</a></h2>
+<h2><a class="toc-backref" href="#id81">脚本语言环境</a></h2>
 <div class="section" id="perl">
-<h3><a class="toc-backref" href="#id76">Perl</a></h3>
+<h3><a class="toc-backref" href="#id82">Perl</a></h3>
 <p>CentOS 7.0自带了Perl 5.16.3（2013年03月11日发布），目前的最新版本为5.20.1（2014年09月14日发布）。</p>
 <div class="section" id="id19">
-<h4><a class="toc-backref" href="#id77">系统自带Perl</a></h4>
+<h4><a class="toc-backref" href="#id83">系统自带Perl</a></h4>
 <p>系统自带Perl，就目前来看，版本不算老，基本够用。官方源和EPEL源中提供了1000多个模块，可以直接用yum安装:</p>
 <pre class="literal-block">
 sudo yum install perl-Parallel-ForkManager  # 并行模块
@@ -504,7 +525,7 @@ sudo yum install perl-Parallel-ForkManager  # 并行模块
 <p>优先级：yum &gt; cpan。</p>
 </div>
 <div class="section" id="plenv">
-<h4><a class="toc-backref" href="#id78">plenv管理新版本</a></h4>
+<h4><a class="toc-backref" href="#id84">plenv管理新版本</a></h4>
 <p>若需要使用最新版本的perl，可以使用<a class="reference external" href="http://seisman.info/perl-plenv.html">plenv</a>安装新版本的perl，并使用plenv提供的cpanm命令安装模块:</p>
 <pre class="literal-block">
 cpanm install Parallel::ForkManager # 并行模块
@@ -512,10 +533,10 @@ cpanm install Parallel::ForkManager # 并行模块
 </div>
 </div>
 <div class="section" id="python">
-<h3><a class="toc-backref" href="#id79">Python</a></h3>
+<h3><a class="toc-backref" href="#id85">Python</a></h3>
 <p>CentOS 7.0自带Python 2.7.5，目前Python 2的最新版本为2.7.8，Python 3的最新版本为3.4.2。</p>
 <div class="section" id="id21">
-<h4><a class="toc-backref" href="#id80">系统自带Python</a></h4>
+<h4><a class="toc-backref" href="#id86">系统自带Python</a></h4>
 <p>系统自带的Python 2.7.5，基本已经够用，Python 2常用的模块在官方源或EPEL源中也有有编译好的包，因而直接通过yum安装即可:</p>
 <pre class="literal-block">
 sudo yum install python-matplotlib  # 2D绘图库
@@ -528,7 +549,7 @@ sudo yum install gdal-python    # gdal的Python绑定
 </pre>
 </div>
 <div class="section" id="pyenvpython3">
-<h4><a class="toc-backref" href="#id81">pyenv管理Python3</a></h4>
+<h4><a class="toc-backref" href="#id87">pyenv管理Python3</a></h4>
 <p>Python2与Python3之间是不完全兼容的，而我以Python3为主，所以需要安装一个Python3。</p>
 <p>首先，安装<a class="reference external" href="http://seisman.info/python-pyenv.html">pyenv</a>来管理多个Python版本，然后利用pyenv安装anaconda3（即Python 3.4）。anaconda自带了众多科学计算所需的包，免去了安装的麻烦，对于其他包，则可以利用Python自带的pip安装:</p>
 <pre class="literal-block">
@@ -539,27 +560,27 @@ pip install docopt
 </div>
 </div>
 <div class="section" id="id22">
-<h2><a class="toc-backref" href="#id82">编程相关软件</a></h2>
+<h2><a class="toc-backref" href="#id88">编程相关软件</a></h2>
 <div class="section" id="id23">
-<h3><a class="toc-backref" href="#id83">编辑器</a></h3>
+<h3><a class="toc-backref" href="#id89">编辑器</a></h3>
 <ol class="arabic simple">
 <li>vim</li>
 <li>sublime text 3</li>
 </ol>
 </div>
 <div class="section" id="ide">
-<h3><a class="toc-backref" href="#id84"><span class="caps">IDE</span></a></h3>
+<h3><a class="toc-backref" href="#id90"><span class="caps">IDE</span></a></h3>
 <ul class="simple">
 <li>Python <span class="caps">IDE</span>：<a class="reference external" href="https://www.jetbrains.com/pycharm/">PyCharm Community Edition</a></li>
 </ul>
 </div>
 </div>
 <div class="section" id="id24">
-<h2><a class="toc-backref" href="#id85">日常软件</a></h2>
+<h2><a class="toc-backref" href="#id91">日常软件</a></h2>
 <div class="section" id="office">
-<h3><a class="toc-backref" href="#id86">Office套件</a></h3>
+<h3><a class="toc-backref" href="#id92">Office套件</a></h3>
 <div class="section" id="libreoffice">
-<h4><a class="toc-backref" href="#id87">LibreOffice</a></h4>
+<h4><a class="toc-backref" href="#id93">LibreOffice</a></h4>
 <p>大多数Linux发行版都自带LibreOffice:</p>
 <pre class="literal-block">
 sudo yum install libreoffice
@@ -567,13 +588,37 @@ sudo yum install libreoffice
 <p>LibreOffice与Microsoft Office的兼容性不太好，操作界面与MS Office也有较大差异，让人不太习惯。</p>
 </div>
 <div class="section" id="wps-office">
-<h4><a class="toc-backref" href="#id88"><span class="caps">WPS</span> Office</a></h4>
+<h4><a class="toc-backref" href="#id94"><span class="caps">WPS</span> Office</a></h4>
 <p>若在Linux下对于文档处理有更高一些的要求，可以尝试目前还处于测试版的WPS Office for Linux。<span class="caps">WPS</span> Office的兼容性以及界面都比LibreOffice要好很多，值得期待，当然还是不能做到完全兼容MS Office。</p>
 <p>安装过程参考<a class="reference external" href="http://seisman.info/wps-office-for-centos7.html">CentOS下安装WPS Office</a>一文。</p>
 </div>
 </div>
-<div class="section" id="texlive-2014">
-<h3><a class="toc-backref" href="#id89">TeXLive 2014</a></h3>
+<div class="section" id="ps-pdf">
+<h3><a class="toc-backref" href="#id95"><span class="caps">PS</span>/PDF阅读器</a></h3>
+<p>系统自带的evince阅读器，可以打开PS和PDF文件，基本足够日常的使用了。</p>
+<div class="section" id="zathura">
+<h4><a class="toc-backref" href="#id96">zathura</a></h4>
+<p>zathura可以查看PS、<span class="caps">PDF</span>、djvu格式的文件，可以作为evince的替代品:</p>
+<pre class="literal-block">
+sudo yum install zathura zathura-plugins-all
+</pre>
+</div>
+<div class="section" id="ghostscript">
+<h4><a class="toc-backref" href="#id97">ghostscript</a></h4>
+<pre class="literal-block">
+sudo yum install ghostscript
+</pre>
+</div>
+<div class="section" id="master-pdf-editor">
+<h4><a class="toc-backref" href="#id98">master-pdf-editor</a></h4>
+<p>官方网站: <a class="reference external" href="https://code-industry.net/free-pdf-editor/">https://code-industry.net/free-pdf-editor/</a></p>
+<pre class="literal-block">
+sudo yum localinstall http://get.code-industry.net/public/master-pdf-editor3-3.2.62-1.x86_64.rpm
+</pre>
+</div>
+</div>
+<div class="section" id="texlive-2015">
+<h3><a class="toc-backref" href="#id99">TeXLive 2015</a></h3>
 <p>系统是自带了TeXLive，版本较老，还是安装最新版比较好。</p>
 <p>根据<a class="reference external" href="http://seisman.info/install-texlive-under-linux.html">Linux下安装TeXLive</a>一文，从ISO文件中安装TeXLive。</p>
 <p>安装完成后，更新所有模块:</p>
@@ -582,7 +627,7 @@ tlmgr update --all
 </pre>
 </div>
 <div class="section" id="mendeley">
-<h3><a class="toc-backref" href="#id90">Mendeley</a></h3>
+<h3><a class="toc-backref" href="#id100">Mendeley</a></h3>
 <p>Mendeley是一个跨平台的文献管理软件，其内部自带了一个可以添加注释的PDF阅读器。</p>
 <p>下载Generic Linux (64 bits) ：<a class="reference external" href="http://www.mendeley.com/download-mendeley-desktop">http://www.mendeley.com/download-mendeley-desktop</a></p>
 <p>安装:</p>
@@ -599,7 +644,7 @@ cp /opt/mendeleydesktop/share/icons/hicolor/128x128/apps/mendeleydesktop.png ~/.
 </pre>
 </div>
 <div class="section" id="google-chrome">
-<h3><a class="toc-backref" href="#id91">Google Chrome浏览器</a></h3>
+<h3><a class="toc-backref" href="#id101">Google Chrome浏览器</a></h3>
 <p>默认的浏览器是Firefox，还是更喜欢Chrome浏览器。</p>
 <p>在<tt class="docutils literal">/etc/yum.repos.d/</tt>目录下新建文件<tt class="docutils literal"><span class="pre">google-chrome.repo</span></tt>，向其中添加如下内容:</p>
 <pre class="literal-block">
@@ -614,20 +659,19 @@ gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
 <pre class="literal-block">
 sudo yum install google-chrome-stable
 </pre>
-<p>由于Google的官方源在国内可能无法正常访问，导致安装失败或安装后无法正常更新。有人在国内服务器上做了Google官方源的镜像，若你相信该镜像是安全的，则可使用此国内镜像代替Google官方源，<tt class="docutils literal"><span class="pre">google-chrome.repo</span></tt>的内容改为:</p>
-<pre class="literal-block">
-[google-chrome]
-name=google-chrome
-#baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch
-#gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub
-mirrorlist=http://1dot75cm.tk/mirrorlist
-gpgkey=http://1dot75cm.tk/src/linux_signing_key.pub
-gpgcheck=1
-enabled=1
-</pre>
+<p>Google官方源在国内可能无法正常访问，导致安装失败或安装后无法正常更新，可以尝试修改<tt class="docutils literal">gpgcheck=0</tt>再安装。(Thanks to 徐弥坚)</p>
+<!-- 这个私人镜像似乎已经不再更新了，故而删除。 -->
+<!-- 有人在国内服务器上做了Google官方源的镜像，若你相信该镜像是安全的，则可使用此国内镜像代替Google官方源，\ ``google-chrome.repo``\ 的内容改为:: -->
+<!-- name=google-chrome -->
+<!-- #baseurl=http://dl.google.com/linux/chrome/rpm/stable/$basearch -->
+<!-- #gpgkey=https://dl-ssl.google.com/linux/linux_signing_key.pub -->
+<!-- mirrorlist=http://1dot75cm.tk/mirrorlist -->
+<!-- gpgkey=http://1dot75cm.tk/src/linux_signing_key.pub -->
+<!-- gpgcheck=1 -->
+<!-- enabled=1 -->
 </div>
 <div class="section" id="opera">
-<h3><a class="toc-backref" href="#id92">Opera浏览器</a></h3>
+<h3><a class="toc-backref" href="#id102">Opera浏览器</a></h3>
 <p>也可以选择Opera浏览器。</p>
 <p>下载地址：<a class="reference external" href="http://www.opera.com/download/guide/?os=linux">http://www.opera.com/download/guide/?os=linux</a></p>
 <p>选择CentOS <span class="caps">RPM</span> package进行下载。下载完成后，执行:</p>
@@ -640,7 +684,7 @@ sudo yum remove opera
 </pre>
 </div>
 <div class="section" id="flash">
-<h3><a class="toc-backref" href="#id93">Flash插件</a></h3>
+<h3><a class="toc-backref" href="#id103">Flash插件</a></h3>
 <p>Flash插件主要是看在线视频的时候要用。Google浏览器自带了Flash插件，所以这里安装的flash插件主要是为了firefox。</p>
 <pre class="literal-block">
 sudo rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm
@@ -649,18 +693,18 @@ sudo yum install flash-plugin
 </pre>
 </div>
 <div class="section" id="id25">
-<h3><a class="toc-backref" href="#id94">解压软件</a></h3>
+<h3><a class="toc-backref" href="#id104">解压软件</a></h3>
 <p>解压7z或zip格式需要p7zip，由EPEL提供:</p>
 <pre class="literal-block">
 sudo yum install p7zip
 </pre>
-<p>解压rar格式需要unrar，该软件由Nux Dextop提供，但该源与EPEL源有冲突，所以直接下载该rpm进行安装:</p>
+<p>解压rar格式需要unrar，该软件由Nux Dextop提供:</p>
 <pre class="literal-block">
-sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/unrar-5.0.12-2.el7.nux.x86_64.rpm
+sudo yum install unrar
 </pre>
 </div>
 <div class="section" id="ftp">
-<h3><a class="toc-backref" href="#id95">FTP客户端</a></h3>
+<h3><a class="toc-backref" href="#id105">FTP客户端</a></h3>
 <p>FTP客户端，还是有界面的filezilla比较方便些。</p>
 <pre class="literal-block">
 sudo yum install filezilla
@@ -668,29 +712,29 @@ sudo yum install filezilla
 </div>
 </div>
 <div class="section" id="id26">
-<h2><a class="toc-backref" href="#id96">效率类软件</a></h2>
+<h2><a class="toc-backref" href="#id106">效率类软件</a></h2>
 <p>这一类工具能够在不同方面提高科研的效率，也提高了使用者的体验。</p>
 <div class="section" id="id27">
-<h3><a class="toc-backref" href="#id97">终端模拟器</a></h3>
+<h3><a class="toc-backref" href="#id107">终端模拟器</a></h3>
 <p>Gnome自带的终端模拟器是gnome-terminal。经常会需要开十几个终端，切换和管理起来比较麻烦。</p>
 <div class="section" id="terminator">
-<h4><a class="toc-backref" href="#id98">terminator</a></h4>
-<p>terminator有很多功能，我只用到了终端分割的功能。<tt class="docutils literal">Ctrl+Shift+O</tt>对终端水平分隔，<tt class="docutils literal">Ctrl+Shift+E</tt>对终端垂直分隔，<tt class="docutils literal">Alt+上下左右</tt>可以在各子终端中切换。</p>
+<h4><a class="toc-backref" href="#id108">terminator</a></h4>
+<p>terminator有很多功能，我只用到了终端分割的功能。<tt class="docutils literal">Ctrl+Shift+O</tt>对终端水平分隔，<tt class="docutils literal">Ctrl+Shift+E</tt>对终端垂直分隔，<tt class="docutils literal">Alt+上下左右</tt>可以在各子终端中切换。terminator由Nux Dextop提供:</p>
 <pre class="literal-block">
-sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/terminator-0.97-6.el7.nux.noarch.rpm
+sudo yum install terminator
 </pre>
 </div>
 <div class="section" id="guake">
-<h4><a class="toc-backref" href="#id99">guake</a></h4>
+<h4><a class="toc-backref" href="#id109">guake</a></h4>
 <p>有些时候需要临时执行一两个命令，但是又不想额外启动一个终端的情况下，guake是个不错的选择。</p>
 <pre class="literal-block">
-sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/guake-0.4.4-11.el7.nux.x86_64.rpm
+sudo yum install guake
 </pre>
 <p>安装完成后，在Application-&gt;System Tools里找到guake Terminal即可启动。按下F12即可呼出guake，再次按下F12即可隐藏。也可在终端执行<tt class="docutils literal"><span class="pre">guake-prefs</span></tt>对gauke进行配置。</p>
 </div>
 </div>
 <div class="section" id="zshoh-my-zsh">
-<h3><a class="toc-backref" href="#id100">zsh与oh my zsh</a></h3>
+<h3><a class="toc-backref" href="#id110">zsh与oh my zsh</a></h3>
 <p>Linux下有很多shell，比如最常见的bash，除此之外还有csh、ksh。zsh也是一个shell。</p>
 <p>zsh的特点在于：</p>
 <ul class="simple">
@@ -732,7 +776,7 @@ chsh -s /bin/zsh
 </ol>
 </div>
 <div class="section" id="autojump">
-<h3><a class="toc-backref" href="#id101">autojump</a></h3>
+<h3><a class="toc-backref" href="#id111">autojump</a></h3>
 <p><a class="reference external" href="https://github.com/joelthelion/autojump">autojump</a>是一个非常智能的目录快速切换的工具。简单演示如下:</p>
 <pre class="literal-block">
 $ pwd
@@ -754,19 +798,19 @@ sudo yum install autojump-zsh
 </pre>
 </div>
 <div class="section" id="id29">
-<h3><a class="toc-backref" href="#id102">中文输入法</a></h3>
+<h3><a class="toc-backref" href="#id112">中文输入法</a></h3>
 <p>刚安装的系统可能是没有中文输入法的，源中带的中文输入法应该是ibus，使用效果一般。fcitx是更好的选择，基于fcitx框架的搜狗输入法或许是更好的选择。</p>
 <p>参考<a class="reference external" href="http://seisman.info/fcitx-for-centos-7.html">CentOS7安装fcitx中文输入法</a>。</p>
 </div>
 <div class="section" id="hosttool">
-<h3><a class="toc-backref" href="#id103">HostTool</a></h3>
+<h3><a class="toc-backref" href="#id113">HostTool</a></h3>
 <p>科学上网几乎已经成为每个搞科研的人的必备技能。</p>
 <p>科学上网的方式有很多，这里只说HostTool：<a class="reference external" href="https://hosts.huhamhire.com/">https://hosts.huhamhire.com/</a></p>
 <p>HostTool科学上网本质上就是用最新的host文件替代了系统自带的host文件。</p>
 <p>下载解压后，进入目录，直接<tt class="docutils literal">sudo python2 hoststool.py</tt>即可运行，具体的用法自己研究一下。</p>
 </div>
 <div class="section" id="id30">
-<h3><a class="toc-backref" href="#id104">等宽字体</a></h3>
+<h3><a class="toc-backref" href="#id114">等宽字体</a></h3>
 <p>编程要用等宽字体，这点是常识了。一款适合编程的等宽字体，至少要满足如下几个要求：</p>
 <ol class="arabic simple">
 <li>易于区分“1”、“i”和“l”</li>
@@ -778,36 +822,44 @@ sudo yum install autojump-zsh
 </div>
 </div>
 <div class="section" id="id31">
-<h2><a class="toc-backref" href="#id105">虚拟机</a></h2>
+<h2><a class="toc-backref" href="#id115">虚拟机</a></h2>
 <p>有时候可能需要在Windows下做一些操作，如果机器性能足够好的话，可以安装虚拟机。</p>
 <div class="section" id="virtualbox">
-<h3><a class="toc-backref" href="#id106">VirtualBox虚拟机</a></h3>
+<h3><a class="toc-backref" href="#id116">VirtualBox虚拟机</a></h3>
 <p>VirtuabBox的安装:</p>
 <pre class="literal-block">
 wget http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo
 sudo mv virtualbox.repo /etc/yum.repos.d/
-sudo yum install VirtualBox-4.3
+sudo yum install VirtualBox-5.0
 </pre>
 <p>需要注意两点：</p>
 <ul class="simple">
 <li>若机器性能不够，虚拟机的使用体验会非常差，所以不建议在老机器上使用；</li>
 <li>更新kernel之后需要执行<tt class="docutils literal">sudo /etc/init.d/vboxdrv setup</tt>；</li>
+<li>在VirtualBox安装虚拟系统后，记得使用“设备”-&gt;“安装增强功能”，使用效果会更好；</li>
 </ul>
 </div>
 <div class="section" id="gnome-boxes">
-<h3><a class="toc-backref" href="#id107">gnome-boxes</a></h3>
-<p>gnome-boxes是GNOME3开发的一个虚拟机工具:</p>
+<h3><a class="toc-backref" href="#id117">gnome-boxes</a></h3>
+<p>gnome-boxes是GNOME3开发的一个虚拟机工具，使用体验不如VirtualBox:</p>
 <pre class="literal-block">
 sudo yum install gnome-boxes
 </pre>
 </div>
+<div class="section" id="wine">
+<h3><a class="toc-backref" href="#id118">Wine</a></h3>
+<p>Wine是一个可以让Windows程序运行在Linux下的软件。类似虚拟机，但跟虚拟机又不太一样:</p>
+<pre class="literal-block">
+sudo yum install wine
+</pre>
+</div>
 </div>
 <div class="section" id="id32">
-<h2><a class="toc-backref" href="#id108">同步网盘</a></h2>
+<h2><a class="toc-backref" href="#id119">同步网盘</a></h2>
 <p>网盘根据功能大概可以分为两类：同步网盘和备份网盘。既然是同步网盘，Linux下的客户端必不可少。就目前已知的情况来看，CentOS7下能使用的同步网盘只有三个：Dropbox、MEGA和坚果云。</p>
 <p>我主要用同步网盘将Linux机器上的PDF文献同步到iPad上。</p>
 <div class="section" id="dropbox">
-<h3><a class="toc-backref" href="#id109">Dropbox</a></h3>
+<h3><a class="toc-backref" href="#id120">Dropbox</a></h3>
 <p>又是一个被墙的工具，熟练掌握科学上网技巧的人可以使用，一般人还是不要用了。</p>
 <pre class="literal-block">
 wget https://www.dropbox.com/download?dl=packages/fedora/nautilus-dropbox-1.6.2-1.fedora.x86_64.rpm
@@ -815,7 +867,7 @@ sudo rpm -i nautilus-dropbox-1.6.2-1.fedora.x86_64.rpm
 </pre>
 </div>
 <div class="section" id="mega">
-<h3><a class="toc-backref" href="#id110"><span class="caps">MEGA</span></a></h3>
+<h3><a class="toc-backref" href="#id121"><span class="caps">MEGA</span></a></h3>
 <p><span class="caps">MEGA</span>： <a class="reference external" href="https://mega.co.nz/">https://mega.co.nz/</a></p>
 <p>免费容量50G，作为同步盘来说基本是够用了。</p>
 <pre class="literal-block">
@@ -828,11 +880,11 @@ sudo yum localinstall nautilus-megasync-CentOS_7.x86_64.rpm
 </pre>
 </div>
 <div class="section" id="id33">
-<h3><a class="toc-backref" href="#id111">坚果云</a></h3>
+<h3><a class="toc-backref" href="#id122">坚果云</a></h3>
 <p>国内的全平台同步网盘，不限空间，但限制每月上传流量1G，下载流量3G。</p>
 <pre class="literal-block">
-# 坚果云依赖于notify-python，该包位于Nux Dextop源中
-sudo yum localinstall http://li.nux.ro/download/nux/dextop/el7/x86_64/notify-python-0.1.1-25.el7.nux.x86_64.rpm
+# 坚果云依赖于notify-python
+sudo yum install notify-python
 # 下载
 wget https://jianguoyun.com/static/exe/installer/fedora/nautilus_nutstore_amd64.rpm
 sudo rpm -i nautilus_nutstore_amd64.rpm
@@ -840,9 +892,9 @@ sudo rpm -i nautilus_nutstore_amd64.rpm
 </div>
 </div>
 <div class="section" id="id34">
-<h2><a class="toc-backref" href="#id112">工具软件</a></h2>
+<h2><a class="toc-backref" href="#id123">工具软件</a></h2>
 <div class="section" id="id35">
-<h3><a class="toc-backref" href="#id113">视频下载工具</a></h3>
+<h3><a class="toc-backref" href="#id124">视频下载工具</a></h3>
 <p><a class="reference external" href="https://github.com/soimort/you-get">you-get</a>和<cite>youtube-dl &lt;https://github.com/rg3/youtube-dl&gt;</cite>是两个用于从视频网站上下载视频文件的工具。其中，后者支持的网站更多，但前者对国内的视频网站支持更好。</p>
 <pre class="literal-block">
 pip install you-get
@@ -851,30 +903,48 @@ pip install youtube-dl
 </pre>
 </div>
 <div class="section" id="pdf">
-<h3><a class="toc-backref" href="#id114">PDF处理工具</a></h3>
+<h3><a class="toc-backref" href="#id125">PDF处理工具</a></h3>
 <p><a class="reference external" href="http://community.coherentpdf.com/">cpdf</a>是一个跨平台的PDF处理工具，可以完成常见的PDF合并、切割、加密解密、书签、水印等功能。</p>
 <p>下载已编译好的<a class="reference external" href="https://github.com/coherentgraphics/cpdf-binaries/archive/master.zip">二进制包</a>，解压，并将与自己的平台对应的二进制文件复制到<tt class="docutils literal"><span class="pre">${<span class="caps">HOME</span>}/bin</span></tt>目录下即可使用。</p>
 </div>
 <div class="section" id="bt">
-<h3><a class="toc-backref" href="#id115">BT软件</a></h3>
+<h3><a class="toc-backref" href="#id126">BT软件</a></h3>
 <p>transmission是Linux下常用的Torrent下载软件:</p>
 <pre class="literal-block">
 sudo yum install transmission
 </pre>
 <p>在“Application”-&gt;“Internet”-&gt;中可以启动transmission。</p>
 </div>
-<div class="section" id="id37">
-<h3><a class="toc-backref" href="#id116">其他工具</a></h3>
+<div class="section" id="uget">
+<h3><a class="toc-backref" href="#id127">uGet</a></h3>
+<p><a class="reference external" href="http://ugetdm.com/">http://ugetdm.com/</a></p>
+<p>uGet是Linux下的一个下载工具，支持HTTP、<span class="caps">HTTPS</span>、<span class="caps">FTP</span>、Torrent等，支持多连接，并可以监视剪贴板:</p>
+<pre class="literal-block">
+sudo yum --enablerepo=epel-testing install uget aria2
+</pre>
+</div>
+<div class="section" id="shutter">
+<h3><a class="toc-backref" href="#id128">截图软件shutter</a></h3>
+<p>GNOME自带了截图工具。<tt class="docutils literal">PrtScn</tt>为截取整个屏幕；<tt class="docutils literal">Alt+PrtScn</tt>为截取当前窗口；<tt class="docutils literal">Shift+PrtScn</tt>为自定义截屏区域。</p>
+<p><a class="reference external" href="http://shutter-project.org/">shutter</a>是一个功能更强大的截图工具，支持不同的截图方式、图片格式，还支持图片的简单编辑与注释:</p>
+<pre class="literal-block">
+sudo yum install shutter
+</pre>
+<p>可以通过<a class="reference external" href="http://shutter-project.org/faq-help/set-shutter-as-the-default-screenshot-tool/">修改快捷键使shutter成为默认的截图工具</a>。</p>
+</div>
+<div class="section" id="id38">
+<h3><a class="toc-backref" href="#id129">其他工具</a></h3>
 <pre class="literal-block">
 sudo yum install nfs-utils     # 挂载NFS文件系统所必须
 sudo yum install xclip         # 终端的文本复制工具
 sudo yum install ImageMagick   # 其中的import和convert命令很有用
 sudo yum install dos2unix unix2dos  # Windows和Linux换行符互相转换
+sudo yum install meld          # 图形界面下的文件差异比较工具
 </pre>
 </div>
 </div>
-<div class="section" id="id38">
-<h2><a class="toc-backref" href="#id117">地球物理相关</a></h2>
+<div class="section" id="id39">
+<h2><a class="toc-backref" href="#id130">地球物理相关</a></h2>
 <ol class="arabic">
 <li><p class="first"><span class="caps">SAC</span></p>
 <p>参考《<a class="reference external" href="http://seisman.info/sac-manual.html">SAC参考手册</a>》中的相关章节。</p>
@@ -897,16 +967,27 @@ sudo yum install dos2unix unix2dos  # Windows和Linux换行符互相转换
 </li>
 </ol>
 </div>
-<div class="section" id="id39">
-<h2><a class="toc-backref" href="#id118">娱乐</a></h2>
+<div class="section" id="id40">
+<h2><a class="toc-backref" href="#id131">娱乐</a></h2>
+<div class="section" id="id41">
+<h3><a class="toc-backref" href="#id132">影音播放器</a></h3>
+<p>Nux Dextop提供了mplayer和VLC，可以用于播放常见格式的音频和视频，二者选其一安装即可:</p>
+<pre class="literal-block">
+sudo yum install mplayer
+sudo yum install vlc
+</pre>
+</div>
+<div class="section" id="id42">
+<h3><a class="toc-backref" href="#id133">游戏</a></h3>
 <pre class="literal-block">
 sudo yum install 2048-cli   # 2048命令行版
 </pre>
 </div>
-<div class="section" id="id40">
-<h2><a class="toc-backref" href="#id119">未完成</a></h2>
+</div>
+<div class="section" id="id43">
+<h2><a class="toc-backref" href="#id134">未完成</a></h2>
 <div class="section" id="google-earth">
-<h3><a class="toc-backref" href="#id120">Google Earth</a></h3>
+<h3><a class="toc-backref" href="#id135">Google Earth</a></h3>
 <p>理论上Google Earth应该可以跟Google Chrome用类似的方法来安装的，但是由于Google Earth的rpm包存在bug，导致无法通过上面的方法安装。</p>
 <pre class="literal-block">
 $ cd -
@@ -920,16 +1001,16 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
 <p>安装完成后，启动后奔溃。。</p>
 </div>
 </div>
-<div class="section" id="id41">
-<h2><a class="toc-backref" href="#id121">参考</a></h2>
+<div class="section" id="id44">
+<h2><a class="toc-backref" href="#id136">参考</a></h2>
 <ol class="arabic simple">
 <li><a class="reference external" href="http://elrepo.org/tiki/tiki-index.php">ELRepo官方网站</a></li>
 <li><a class="reference external" href="http://elrepo.org/tiki/kmod-nvidia">ELRepo kmod-nvidia</a></li>
 <li><a class="reference external" href="http://wiki.centos.org/zh/AdditionalResources/Repositories/GoogleYumRepos">CentOS Yum软件库样例</a></li>
 </ol>
 </div>
-<div class="section" id="id43">
-<h2><a class="toc-backref" href="#id122">修订历史</a></h2>
+<div class="section" id="id46">
+<h2><a class="toc-backref" href="#id137">修订历史</a></h2>
 <ul class="simple">
 <li>2014-07-15：初稿；</li>
 <li>2014-09-05：EPEL已经发布正式版；修改了epel-release的下载链接；修订了import步骤的错误；</li>
@@ -948,6 +1029,8 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
 <li>2015-03-26：安装过程中不应使用中文安装界面；</li>
 <li>2015-05-11：新增MEGA同步网盘；</li>
 <li>2015-05-16：新增gnome-boxes；</li>
+<li>2015-06-26：新增zathura和ghostscript；</li>
+<li>2015-07-14：新增Nux Dextop源，uGet、shutter；</li>
 </ul>
 </div>
 
@@ -991,11 +1074,11 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/single-quoted-string-literals-in-perl.html" title="Perl的单引号字符直接量">Perl的单引号字符直接量</a></li>
-<li><a href="http://seisman.info/find-intersection-and-difference-of-two-arrays.html" title="Perl如何找出两个数组的交集、并集">Perl如何找出两个数组的交集、并集</a></li>
-<li><a href="http://seisman.info/conflict-between-epel-and-rpmforge.html" title="使用EPEL和RPMforge源安装netcdf时的冲突">使用EPEL和RPMforge源安装netcdf时的冲突</a></li>
+<li><a href="http://seisman.info/calculate-dist-az-baz.html" title="震中距、方位角和反方位角的计算">震中距、方位角和反方位角的计算</a></li>
+<li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv">Python多版本共存之pyenv</a></li>
+<li><a href="http://seisman.info/timespan-in-perl.html" title="Perl中的时间加法">Perl中的时间加法</a></li>
+<li><a href="http://seisman.info/learning-python.html" title="Python相关资源">Python相关资源</a></li>
 <li><a href="http://seisman.info/personal-preferences.html" title="个人偏好列表">个人偏好列表</a></li>
-<li><a href="http://seisman.info/send-email-in-python.html" title="Python发送邮件到BREA_FAST">Python发送邮件到BREA_FAST</a></li>
 </ul>
 <hr />
 </section>
@@ -1014,7 +1097,7 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
             <time pubdate="pubdate" datetime="2014-07-15T13:07:00+08:00">2014-07-15</time>
 
 <h4>Last Updated</h4>
-<time datetime="2015-05-11T00:00:00+08:00">2015-05-11</time>
+<time datetime="2015-07-14T00:00:00+08:00">2015-07-14</time>
 
             <h4>Category</h4>
             <a class="category-link" href="http://seisman.info/categories.html#linux-ref">Linux</a>
@@ -1024,17 +1107,17 @@ $ sudo ln -s /opt/google/earth/free/googleearth /usr/bin/google-earth
                     <span>8</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#perl-ref">Perl
-                    <span>14</span>
+                    <span>13</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#python-ref">Python
-                    <span>15</span>
+                    <span>14</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/linux-environment-for-seismology-research.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/Linux/2014-07-15_linux-environment-for-seismology-research.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

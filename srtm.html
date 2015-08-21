@@ -150,7 +150,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <div class="section" id="for-5x5">
 <h3><a class="toc-backref" href="#id17">数据信息 For 5x5</a></h3>
 <p>部分网站将数据分割为5度*5度单元，其相对1度*1度单元使用起来免去了cut和paste的麻烦。在经度方向上，从-180度到180度，划分为72个区块；在纬度方向上，从60度到-60度，划分为24个区块，可以参考<a class="reference external" href="http://srtm.csi.cgiar.org/SELECTION/inputCoord.asp">这里</a>的图示，其文件名格式为“srtm_经度区块数_纬度区块数.zip”。</p>
-<p>或者也可以这样计算</p>
+<p>或者也可以这样计算:</p>
 <pre class="literal-block">
 x = int((lon+180.0)/5.0)+1;
 y = int((60-lat)/5.0)+1;
@@ -178,10 +178,12 @@ y = int((60-lat)/5.0)+1;
 <li>推荐使用<tt class="docutils literal">GeoTiff</tt>格式，文件尺寸相对于<tt class="docutils literal">ArcInfo <span class="caps">ASCII</span></tt>文件要小很多；</li>
 </ul>
 <p><strong>数据转换：</strong></p>
-<p>ArcInfo ASCII格式转GMT可识别的netCDF格式:</p>
+<p>ArcInfo ASCII格式：</p>
+<p>GMT4提供的xyz2grd命令可以直接将ArcInfo ASCII格式的数据转换为GMT可识别的netCDF格式:</p>
 <pre class="literal-block">
 xyz2grd srtm_63_02.asc -Gstrm_63_02.grd -E -V
 </pre>
+<p>GMT5的xyz2grd不再支持ArcInfo ASCII格式，但可使用gdal实现转换。</p>
 <p>GeoTiff格式转netCDF格式（详情参考<a class="reference external" href="http://seisman.info/convert-geotiff-to-gmt.html">本文</a>）:</p>
 <pre class="literal-block">
 gdal_translate -of GMT srtm_56_05.tif srtm_56_05.grd
@@ -362,13 +364,13 @@ xyz2grd n52_e130_3arc_v1.bil -GN52E130.grd -I6c/3c -R$R -N-32768 -ZTLh
                     <span>14</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
-                    <span>29</span>
+                    <span>27</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#wang-ge-ref">网格
                     <span>17</span>
@@ -378,7 +380,7 @@ xyz2grd n52_e130_3arc_v1.bil -GN52E130.grd -I6c/3c -R$R -N-32768 -ZTLh
             <a href="http://seisman.qiniudn.com/pdfs/srtm.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GeoResource/2013-09-29_srtm.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

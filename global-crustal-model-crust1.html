@@ -95,21 +95,22 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#id1" id="id8">模型基本信息</a></li>
-<li><a class="reference internal" href="#id2" id="id9">下载</a></li>
-<li><a class="reference internal" href="#crust1-0" id="id10">crust1.0</a><ul>
-<li><a class="reference internal" href="#id3" id="id11">模型</a></li>
-<li><a class="reference internal" href="#id4" id="id12">程序</a><ul>
-<li><a class="reference internal" href="#getcn1point" id="id13">getCN1point</a></li>
-<li><a class="reference internal" href="#getcn1maps" id="id14">getCN1maps</a></li>
-<li><a class="reference internal" href="#getcn1xyz" id="id15">getCN1xyz</a></li>
+<li><a class="reference internal" href="#id1" id="id9">模型基本信息</a></li>
+<li><a class="reference internal" href="#id2" id="id10">下载</a></li>
+<li><a class="reference internal" href="#crust1-0" id="id11">crust1.0</a><ul>
+<li><a class="reference internal" href="#id3" id="id12">模型</a></li>
+<li><a class="reference internal" href="#id4" id="id13">程序</a><ul>
+<li><a class="reference internal" href="#id5" id="id14">编译代码</a></li>
+<li><a class="reference internal" href="#getcn1point" id="id15">getCN1point</a></li>
+<li><a class="reference internal" href="#getcn1maps" id="id16">getCN1maps</a></li>
+<li><a class="reference internal" href="#getcn1xyz" id="id17">getCN1xyz</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id5" id="id16">说明</a></li>
-<li><a class="reference internal" href="#id6" id="id17">绘图示例</a></li>
-<li><a class="reference internal" href="#id7" id="id18">修订历史</a></li>
+<li><a class="reference internal" href="#id6" id="id18">说明</a></li>
+<li><a class="reference internal" href="#id7" id="id19">绘图示例</a></li>
+<li><a class="reference internal" href="#id8" id="id20">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -121,7 +122,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <p>crust 1.0是一个全球的三维地壳模型，其分辨率是1度。更老的版本还有分辨率低一些的crust 5.1和crust 2.0。</p>
 <p>官方网址：<a class="reference external" href="http://igppweb.ucsd.edu/~gabi/crust1.html">http://igppweb.ucsd.edu/~gabi/crust1.html</a></p>
 <div class="section" id="id1">
-<h2><a class="toc-backref" href="#id8">模型基本信息</a></h2>
+<h2><a class="toc-backref" href="#id9">模型基本信息</a></h2>
 <ul class="simple">
 <li>模型将全球划分为1度x1度的网格，共计360x180=64800个单元；</li>
 <li>模型分为9层，每一层给出P和S波速度以及密度。这9层分别为<ol class="arabic">
@@ -143,7 +144,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 </div>
 <div class="section" id="id2">
-<h2><a class="toc-backref" href="#id9">下载</a></h2>
+<h2><a class="toc-backref" href="#id10">下载</a></h2>
 <p>crust1.0提供了多个压缩包，分别包含了不同的内容：</p>
 <ol class="arabic simple">
 <li>crust1.0.tar.gz：主压缩包，包含了全球地壳速度和密度模型；</li>
@@ -155,10 +156,10 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ol>
 </div>
 <div class="section" id="crust1-0">
-<h2><a class="toc-backref" href="#id10">crust1.0</a></h2>
+<h2><a class="toc-backref" href="#id11">crust1.0</a></h2>
 <p>crust1.0中含说明文档readme一份，模型文件四个，用于读取模型的Fortran代码三个。</p>
 <div class="section" id="id3">
-<h3><a class="toc-backref" href="#id11">模型</a></h3>
+<h3><a class="toc-backref" href="#id12">模型</a></h3>
 <p>模型文件有四个，从模型文件的名字也可以猜出来，四个文件分别是Vp、Vs、密度和边界的深度。</p>
 <ul class="simple">
 <li>全球被划分为1度x1度的网格单元；</li>
@@ -171,9 +172,17 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </ul>
 </div>
 <div class="section" id="id4">
-<h3><a class="toc-backref" href="#id12">程序</a></h3>
+<h3><a class="toc-backref" href="#id13">程序</a></h3>
+<div class="section" id="id5">
+<h4><a class="toc-backref" href="#id14">编译代码</a></h4>
+<p>使用如下命令编译:</p>
+<pre class="literal-block">
+gfortran getCN1point.f -o getCN1point
+</pre>
+<p>其他同理。</p>
+</div>
 <div class="section" id="getcn1point">
-<h4><a class="toc-backref" href="#id13">getCN1point</a></h4>
+<h4><a class="toc-backref" href="#id15">getCN1point</a></h4>
 <p><tt class="docutils literal">getCN1point</tt>用于获取任意经纬度处的地壳模型，具体用法如下例:</p>
 <pre class="literal-block">
 $ ./getCN1point
@@ -196,7 +205,7 @@ ilat,ilon,crustal type:   41 281
 </pre>
 </div>
 <div class="section" id="getcn1maps">
-<h4><a class="toc-backref" href="#id14">getCN1maps</a></h4>
+<h4><a class="toc-backref" href="#id16">getCN1maps</a></h4>
 <p><tt class="docutils literal">getCN1maps</tt>从4个模型文件中提取信息，生成多个Z文件。</p>
 <p>#. 生成各层的Vp、Vs、<span class="math">\(\rho\)</span>、边界深度，计4*9=36个文件，文件名map-vp[n]代表第n层的Vp，其他类似；
 - 生成各层的厚度，计1*8个文件，文件名类似map-th[n]，第n层的厚度由第n+1个边界的深度减去第n个边界的深度的结果取负值得到；
@@ -219,7 +228,7 @@ gmt xyz2grd crsthk -Rd -I1/1 -Gout.grd -ZTLA -r -V
 </ol>
 </div>
 <div class="section" id="getcn1xyz">
-<h4><a class="toc-backref" href="#id15">getCN1xyz</a></h4>
+<h4><a class="toc-backref" href="#id17">getCN1xyz</a></h4>
 <p>与<tt class="docutils literal">getCN1maps</tt>生成类似的文件，只是此时的文件为xyz文件，每行三列。文件名以xyz开头或结尾。XYZ文件相对来说更易读，因而推荐使用<tt class="docutils literal">getCN1xyz</tt>而不是<tt class="docutils literal">getCN1maps</tt>。</p>
 <p>将xyz文件转换为GMT可识别的网格文件，使用<tt class="docutils literal">xyz2grd</tt>。注意与上面命令的区别。</p>
 <p><span class="caps">GMT</span> 4:</p>
@@ -233,8 +242,8 @@ gmt xyz2grd crsthk.xyz -Rg -I1/1 -Gout.grd -r -V
 </div>
 </div>
 </div>
-<div class="section" id="id5">
-<h2><a class="toc-backref" href="#id16">说明</a></h2>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id18">说明</a></h2>
 <p>程序输出的地壳模型还是很让人困惑的，这里用<tt class="docutils literal">getCN1point</tt>获得的某一点的模型，并对输出结果做细致地解释。</p>
 <p>对于(100.5E, 50.5N)来说:</p>
 <pre class="literal-block">
@@ -255,7 +264,7 @@ ilat,ilon,crustal type:   40 281
 </pre>
 <p>需要注意，第四列给出的是每一层的<strong>下边界</strong>的海拔。记住这一点，就可以从输出中提取出很多信息：</p>
 <ol class="arabic simple">
-<li>这一点的地形为1.64km，注意，这里实际上是一度范围内的平均地形；</li>
+<li>这一点的地形为1.81km，注意，这里实际上是一度范围内的平均地形；</li>
 <li>水层的下边界深度是1.81km，与地形相同，所以水层厚度为零；</li>
 <li>冰层的下边界深度是1.81km，与水层的下边界深度相同，所以冰层厚度为零；</li>
 <li>上沉积层的下边界深度厚度是1.71km，所以上沉积层厚度为0.1km；</li>
@@ -273,8 +282,8 @@ ilat,ilon,crustal type:   40 281
 </li>
 </ol>
 </div>
-<div class="section" id="id6">
-<h2><a class="toc-backref" href="#id17">绘图示例</a></h2>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id19">绘图示例</a></h2>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -288,8 +297,8 @@ pscoast -R -J -W0.1p -O &gt;&gt; a.ps
 <img alt="crust1.0 model" src="/images/2013100301.png" style="width: 600px;"/>
 </div>
 </div>
-<div class="section" id="id7">
-<h2><a class="toc-backref" href="#id18">修订历史</a></h2>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id20">修订历史</a></h2>
 <ul class="simple">
 <li>2013-10-03：初稿；</li>
 <li>2014-06-10：加入了GMT5的命令；</li>
@@ -337,11 +346,11 @@ pscoast -R -J -W0.1p -O &gt;&gt; a.ps
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/grdraster-info-of-gmt-grid.html" title="GMT网格数据之grdraster.info">GMT网格数据之grdraster.info</a></li>
-<li><a href="http://seisman.info/global-relief-model-etopo1.html" title="全球地形起伏模型ETOPO1">全球地形起伏模型ETOPO1</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo5.html" title="全球地形起伏模型etopo5">全球地形起伏模型etopo5</a></li>
+<li><a href="http://seisman.info/global-relief-model-etopo2.html" title="全球地形起伏模型ETOPO2">全球地形起伏模型ETOPO2</a></li>
 <li><a href="http://seisman.info/global-digital-elevation-model-gtopo30.html" title="全球数字高程模型GTOPO30">全球数字高程模型GTOPO30</a></li>
-<li><a href="http://seisman.info/srtm.html" title="高精度地形网格数据SRTM">高精度地形网格数据SRTM</a></li>
-<li><a href="http://seisman.info/images-of-crustal-age-of-the-ocean-floor.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
+<li><a href="http://seisman.info/gebco-global-bathymetry-data.html" title="全球水深数据GEBCO">全球水深数据GEBCO</a></li>
+<li><a href="http://seisman.info/ocean-floor-crustal-age.html" title="洋壳年龄数据">洋壳年龄数据</a></li>
 </ul>
 <hr />
 </section>
@@ -367,16 +376,16 @@ pscoast -R -J -W0.1p -O &gt;&gt; a.ps
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#mo-xing-ref">模型
                     <span>1</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#shu-ju-ref">数据
-                    <span>29</span>
+                    <span>27</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#wang-ge-ref">网格
                     <span>17</span>
@@ -386,7 +395,7 @@ pscoast -R -J -W0.1p -O &gt;&gt; a.ps
             <a href="http://seisman.qiniudn.com/pdfs/global-crustal-model-crust1.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GeoResource/2013-10-03_global-crustal-model-crust1.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

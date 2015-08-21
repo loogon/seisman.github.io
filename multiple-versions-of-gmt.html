@@ -8,25 +8,26 @@
         <meta name="copyright" content="SeisMan" />
 
         <meta name="baidu-site-verification" content="bH1LL8vy2G" />
-        <meta name="description" content="想要看具体的解决办法，可以直接跳转至第4部分。 2013年11月05日，GMT 4以及GMT 5同时发布了最新版本。GMT 4.5.11在经历了4系列的不断升级后，其稳定性值得信任。而5系列相对于4系列的变化非常之大，几乎重写或重整了全部代码，功能更丰富，bug“可能”会多一些。 一个是已经用习惯的老版本，一个是必须去适应的新版本，该怎么选择是个问题。官方声称GMT 4系列会继续维护更新直到GMT6出来，按照现在的速度，GMT4应该还会维护至少4-5年，即便4-5年之后GMT4不再更新，使用GMT4语法也不是问题。 对于新手来说，使用GMT5是必然的趋势也是最好的选择；对于老手来说，是该固守GMT4还是该学习GMT5呢？ 下面分几个情况讨论，GMT4和GMT5的选择问题： 只安装GMT4 这一类是保守派。毕竟GMT4用习惯了，以前的所有脚本都是用GMT4的语法写的，重新学习GMT5的成本太大。对于这一类，老老实实用GMT4就好，不必理会GMT5。 只安装GMT5 这一类是改革派。又分为两种情况： GMT5兼容GMT4语法 GMT5完全可以“兼容”GMT4的用法。兼容的好处在于可以帮助用户实现GMT4到GMT5的无痛过渡；不好的地方在于为了实现兼容 ...
+        <meta name="description" content="随着GMT5的发布，GMT目前存在两个大版本：GMT4和GMT5。 GMT4会继续维护更新直到GMT6的发布，但只修订bug，不会再增加新功能。GMT5在GMT4的基础上重新整理了代码，并加入了不少新功能，语法也与GMT4不兼容，因而，GMT5相对来说bug可能会更多一些。 对于GMT新手来说，建议直接学习GMT5；对于GMT老手来说，可以继续使用GMT4，也可以开始逐渐使用GMT5。 一些旧脚本可能是用GMT4的命令与语法写的，在GMT5下直接运行可能会有问题。把旧脚本从GMT4语法改成GMT5语法比较麻烦且没有必要。因而最好的方式是，在系统中同时安装GMT4和GMT5，旧脚本使用GMT4的语法，新脚本使用GMT5的语法。 GMT官方提供了两种方法，可以实现多版本GMT的切换。但这两种方法，要么需要对绘图脚本做额外修改，要么需要在每次执行脚本前做额外操作，因而比较麻烦，不推荐使用。有兴趣的可以自己看官方文档。 下面介绍的方法可以在不需要额外修改的情况下，指定脚本使用GMT4还是GMT5。 安装GMT4和GMT5 首先，当前系统需要安装GMT4和GMT5两个版本，然后，需要将两个版本的路径都添加到PATH中。 Linux用户可以向~/.bashrc中加入如下语句： 1 2 3 4 5 6 7# GMT 4 ...
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
 <meta name="keywords" content="GMT技巧, GMT4, GMT5, 版本, GMT, " />
 
-<meta property="og:title" content="GMT 5与4:如何兼得？ "/>
+<meta property="og:title" content="GMT4与GMT5双版本共存 "/>
 <meta property="og:url" content="http://seisman.info/multiple-versions-of-gmt.html" />
-<meta property="og:description" content="想要看具体的解决办法，可以直接跳转至第4部分。 2013年11月05日，GMT 4以及GMT 5同时发布了最新版本。GMT 4.5.11在经历了4系列的不断升级后，其稳定性值得信任。而5系列相对于4系列的变化非常之大，几乎重写或重整了全部代码，功能更丰富，bug“可能”会多一些。 一个是已经用习惯的老版本，一个是必须去适应的新版本，该怎么选择是个问题。官方声称GMT 4系列会继续维护更新直到GMT6出来，按照现在的速度，GMT4应该还会维护至少4-5年，即便4-5年之后GMT4不再更新，使用GMT4语法也不是问题。 对于新手来说，使用GMT5是必然的趋势也是最好的选择；对于老手来说，是该固守GMT4还是该学习GMT5呢？ 下面分几个情况讨论，GMT4和GMT5的选择问题： 只安装GMT4 这一类是保守派。毕竟GMT4用习惯了，以前的所有脚本都是用GMT4的语法写的，重新学习GMT5的成本太大。对于这一类，老老实实用GMT4就好，不必理会GMT5。 只安装GMT5 这一类是改革派。又分为两种情况： GMT5兼容GMT4语法 GMT5完全可以“兼容”GMT4的用法。兼容的好处在于可以帮助用户实现GMT4到GMT5的无痛过渡；不好的地方在于为了实现兼容 ..." />
+<meta property="og:description" content="随着GMT5的发布，GMT目前存在两个大版本：GMT4和GMT5。 GMT4会继续维护更新直到GMT6的发布，但只修订bug，不会再增加新功能。GMT5在GMT4的基础上重新整理了代码，并加入了不少新功能，语法也与GMT4不兼容，因而，GMT5相对来说bug可能会更多一些。 对于GMT新手来说，建议直接学习GMT5；对于GMT老手来说，可以继续使用GMT4，也可以开始逐渐使用GMT5。 一些旧脚本可能是用GMT4的命令与语法写的，在GMT5下直接运行可能会有问题。把旧脚本从GMT4语法改成GMT5语法比较麻烦且没有必要。因而最好的方式是，在系统中同时安装GMT4和GMT5，旧脚本使用GMT4的语法，新脚本使用GMT5的语法。 GMT官方提供了两种方法，可以实现多版本GMT的切换。但这两种方法，要么需要对绘图脚本做额外修改，要么需要在每次执行脚本前做额外操作，因而比较麻烦，不推荐使用。有兴趣的可以自己看官方文档。 下面介绍的方法可以在不需要额外修改的情况下，指定脚本使用GMT4还是GMT5。 安装GMT4和GMT5 首先，当前系统需要安装GMT4和GMT5两个版本，然后，需要将两个版本的路径都添加到PATH中。 Linux用户可以向~/.bashrc中加入如下语句： 1 2 3 4 5 6 7# GMT 4 ..." />
 <meta property="og:site_name" content="SeisMan" />
 <meta property="og:article:author" content="SeisMan" />
-<meta property="og:article:published_time" content="2013-11-09T00:13:00+08:00" />
-<meta name="twitter:title" content="GMT 5与4:如何兼得？ ">
-<meta name="twitter:description" content="想要看具体的解决办法，可以直接跳转至第4部分。 2013年11月05日，GMT 4以及GMT 5同时发布了最新版本。GMT 4.5.11在经历了4系列的不断升级后，其稳定性值得信任。而5系列相对于4系列的变化非常之大，几乎重写或重整了全部代码，功能更丰富，bug“可能”会多一些。 一个是已经用习惯的老版本，一个是必须去适应的新版本，该怎么选择是个问题。官方声称GMT 4系列会继续维护更新直到GMT6出来，按照现在的速度，GMT4应该还会维护至少4-5年，即便4-5年之后GMT4不再更新，使用GMT4语法也不是问题。 对于新手来说，使用GMT5是必然的趋势也是最好的选择；对于老手来说，是该固守GMT4还是该学习GMT5呢？ 下面分几个情况讨论，GMT4和GMT5的选择问题： 只安装GMT4 这一类是保守派。毕竟GMT4用习惯了，以前的所有脚本都是用GMT4的语法写的，重新学习GMT5的成本太大。对于这一类，老老实实用GMT4就好，不必理会GMT5。 只安装GMT5 这一类是改革派。又分为两种情况： GMT5兼容GMT4语法 GMT5完全可以“兼容”GMT4的用法。兼容的好处在于可以帮助用户实现GMT4到GMT5的无痛过渡；不好的地方在于为了实现兼容 ...">
+<meta property="og:article:published_time" content="2013-11-09T00:00:00+08:00" />
+<meta property="" content="2015-06-09T00:00:00+08:00" />
+<meta name="twitter:title" content="GMT4与GMT5双版本共存 ">
+<meta name="twitter:description" content="随着GMT5的发布，GMT目前存在两个大版本：GMT4和GMT5。 GMT4会继续维护更新直到GMT6的发布，但只修订bug，不会再增加新功能。GMT5在GMT4的基础上重新整理了代码，并加入了不少新功能，语法也与GMT4不兼容，因而，GMT5相对来说bug可能会更多一些。 对于GMT新手来说，建议直接学习GMT5；对于GMT老手来说，可以继续使用GMT4，也可以开始逐渐使用GMT5。 一些旧脚本可能是用GMT4的命令与语法写的，在GMT5下直接运行可能会有问题。把旧脚本从GMT4语法改成GMT5语法比较麻烦且没有必要。因而最好的方式是，在系统中同时安装GMT4和GMT5，旧脚本使用GMT4的语法，新脚本使用GMT5的语法。 GMT官方提供了两种方法，可以实现多版本GMT的切换。但这两种方法，要么需要对绘图脚本做额外修改，要么需要在每次执行脚本前做额外操作，因而比较麻烦，不推荐使用。有兴趣的可以自己看官方文档。 下面介绍的方法可以在不需要额外修改的情况下，指定脚本使用GMT4还是GMT5。 安装GMT4和GMT5 首先，当前系统需要安装GMT4和GMT5两个版本，然后，需要将两个版本的路径都添加到PATH中。 Linux用户可以向~/.bashrc中加入如下语句： 1 2 3 4 5 6 7# GMT 4 ...">
 <meta property="og:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" />
 <meta name="twitter:image" content="http://localhost:8000/theme/images/apple-touch-icon-152x152.png" >
 
-        <title>GMT 5与4:如何兼得？  · SeisMan
+        <title>GMT4与GMT5双版本共存  · SeisMan
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
@@ -83,7 +84,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="http://seisman.info/multiple-versions-of-gmt.html"> <span class="caps">GMT</span>&nbsp;5与4:如何兼得？  </a></h1>
+    <h1><a href="http://seisman.info/multiple-versions-of-gmt.html"> GMT4与GMT5双版本共存  </a></h1>
     </header>
 </div>
 
@@ -94,26 +95,12 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         <html><body><div class="toc" id="">
 
 <ul class="simple">
-<li><a class="reference internal" href="#gmt4" id="id10">只安装GMT4</a></li>
-<li><a class="reference internal" href="#gmt5" id="id11">只安装GMT5</a><ul>
-<li><a class="reference internal" href="#gmt5gmt4" id="id12">GMT5兼容GMT4语法</a></li>
-<li><a class="reference internal" href="#id1" id="id13">GMT5不兼容GMT4语法</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#gmt4gmt5" id="id14">同时安装GMT4和GMT5</a><ul>
-<li><a class="reference internal" href="#gmtswitchgmt" id="id15">用gmtswitch切换GMT版本</a></li>
-<li><a class="reference internal" href="#bash" id="id16">Bash脚本切换版本</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id2" id="id17">个人比较推荐的版本共存方法</a><ul>
-<li><a class="reference internal" href="#id3" id="id18">修改环境变量</a></li>
-<li><a class="reference internal" href="#gmt5bin" id="id19">删除GMT5的bin目录下的所有符号链接</a></li>
-<li><a class="reference internal" href="#id4" id="id20">修改GMT5为不兼容模式</a></li>
-<li><a class="reference internal" href="#id5" id="id21">测试一下</a></li>
-<li><a class="reference internal" href="#id6" id="id22">补充说明</a></li>
-<li><a class="reference internal" href="#id7" id="id23">原理解释</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#id1" id="id6">安装GMT4和GMT5</a></li>
+<li><a class="reference internal" href="#gmt5" id="id7">GMT5的命令格式</a></li>
+<li><a class="reference internal" href="#id2" id="id8">删除软链接</a></li>
+<li><a class="reference internal" href="#id3" id="id9">不兼容模式</a></li>
+<li><a class="reference internal" href="#id4" id="id10">测试一下</a></li>
+<li><a class="reference internal" href="#id5" id="id11">修订历史</a></li>
 </ul>
 </div></body></html>
         </nav>
@@ -122,131 +109,16 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
             
             
-<p>想要看具体的解决办法，可以直接跳转至<a class="reference external" href="http://seisman.info/multiple-versions-of-gmt.html#i">第4部分</a>。</p>
-<p>2013年11月05日，<span class="caps">GMT</span> 4以及GMT 5同时发布了最新版本。<span class="caps">GMT</span> 4.5.11在经历了4系列的不断升级后，其稳定性值得信任。而5系列相对于4系列的变化非常之大，几乎重写或重整了全部代码，功能更丰富，bug“可能”会多一些。</p>
-<p>一个是已经用习惯的老版本，一个是必须去适应的新版本，该怎么选择是个问题。官方声称GMT 4系列会继续维护更新直到GMT6出来，按照现在的速度，GMT4应该还会维护至少4-5年，即便4-5年之后GMT4不再更新，使用GMT4语法也不是问题。</p>
-<p>对于新手来说，使用GMT5是必然的趋势也是最好的选择；对于老手来说，是该固守GMT4还是该学习GMT5呢？</p>
-<p>下面分几个情况讨论，GMT4和GMT5的选择问题：</p>
-<div class="section" id="gmt4">
-<h2><a class="toc-backref" href="#id10">只安装GMT4</a></h2>
-<p>这一类是保守派。毕竟GMT4用习惯了，以前的所有脚本都是用GMT4的语法写的，重新学习GMT5的成本太大。对于这一类，老老实实用GMT4就好，不必理会GMT5。</p>
-</div>
-<div class="section" id="gmt5">
-<h2><a class="toc-backref" href="#id11">只安装GMT5</a></h2>
-<p>这一类是改革派。又分为两种情况：</p>
-<div class="section" id="gmt5gmt4">
-<h3><a class="toc-backref" href="#id12">GMT5兼容GMT4语法</a></h3>
-<p>GMT5完全可以“兼容”GMT4的用法。兼容的好处在于可以帮助用户实现GMT4到GMT5的无痛过渡；不好的地方在于为了实现兼容，需要写更多的代码，或使用不合适的特性。</p>
-<p>维基百科在<a class="reference external" href="http://zh.wikipedia.org/wiki/%E5%90%91%E4%B8%8B%E5%85%BC%E5%AE%B9">向下兼容</a>词条中举例：</p>
-<blockquote>
-<p>通常更新一个软件时，应该为向下兼容性做出一定的考虑，这往往能给用户带来方便并更好地留住用户。Microsoft
-特别强调维持软件的向下兼容性。为了实现此一目标，有时微软甚至不惜支持使用了非官方乃至误用的
-<span class="caps">API</span> 的软件。</p>
-<p>但情况并不总是这样，有时为了考虑向下兼容会带来一些累赘，尤其是进行过较多升级后。Python
-3.0 便是放弃向下兼容的一个例子。</p>
-</blockquote>
-<p>前面说过，GMT5与GMT4的一个最大区别是，GMT5中只有一个唯一的可执行文件：<tt class="docutils literal">gmt</tt>。GMT4中的所有命令在GMT5中都作为命令<tt class="docutils literal">gmt</tt>的一个模块来调用。比如GMT4的<tt class="docutils literal">pscoast</tt>命令在GMT5中应该使用<tt class="docutils literal">gmt pscoast</tt>来调用。</p>
-<p>为了兼容GMT4，GMT5除了在代码上下了很多功夫外，还有两个事情是一般用户值得注意的：</p>
-<ul class="simple">
-<li>GMT5的默认参数文件位于GMT/share/conf/gmt.conf，其中GMT_COMPATIBILITY=4代表当前的GMT5在源代码级别上兼容GMT4；</li>
-<li>GMT5的bin目录下，提供了众多指向二进制文件gmt的符号链接。因而当用户输入命令<tt class="docutils literal">pscoast</tt>，实际上是在执行<tt class="docutils literal">gmt pscoast</tt>；这保证了在兼容模式下用GMT4语法写的脚本不必修改也可直接使用；</li>
-</ul>
-</div>
+<p>随着GMT5的发布，GMT目前存在两个大版本：GMT4和GMT5。</p>
+<p>GMT4会继续维护更新直到GMT6的发布，但只修订bug，不会再增加新功能。GMT5在GMT4的基础上重新整理了代码，并加入了不少新功能，语法也与GMT4不兼容，因而，GMT5相对来说bug可能会更多一些。</p>
+<p>对于GMT新手来说，建议直接学习GMT5；对于GMT老手来说，可以继续使用GMT4，也可以开始逐渐使用GMT5。</p>
+<p>一些旧脚本可能是用GMT4的命令与语法写的，在GMT5下直接运行可能会有问题。把旧脚本从GMT4语法改成GMT5语法比较麻烦且没有必要。因而最好的方式是，在系统中同时安装GMT4和GMT5，旧脚本使用GMT4的语法，新脚本使用GMT5的语法。</p>
+<p>GMT官方提供了两种方法，可以实现多版本GMT的切换。但这两种方法，要么需要对绘图脚本做额外修改，要么需要在每次执行脚本前做额外操作，因而比较麻烦，不推荐使用。有兴趣的可以自己看官方文档。</p>
+<p>下面介绍的方法可以在不需要额外修改的情况下，指定脚本使用GMT4还是GMT5。</p>
 <div class="section" id="id1">
-<h3><a class="toc-backref" href="#id13">GMT5不兼容GMT4语法</a></h3>
-<p>对于新手来说，学习GMT4过时的语法反而是个累赘。这个时候最好不要让GMT5兼容GMT4语法。</p>
-<p>将GMT/share/conf/gmt.conf中的</p>
-<pre class="literal-block">
-GMT_COMPATIBILITY = 4
-</pre>
-<p>改成</p>
-<pre class="literal-block">
-GMT_COMPATIBILITY = 5
-</pre>
-<p>即可。</p>
-</div>
-</div>
-<div class="section" id="gmt4gmt5">
-<h2><a class="toc-backref" href="#id14">同时安装GMT4和GMT5</a></h2>
-<p>这个算是什么派呢？安装GMT5是为了顺应潮流，安装GMT4是为了其他程序的兼容性问题，比如地震学常用的pssac目前只支持GMT4，Prof. Zhu不知道有没有心思让pssac支持GMT5。两个版本同时存在，具体怎么搞？</p>
-<p><span class="caps">GMT</span> manual的第5章给出了两种解决办法，下面简要介绍，并重点给出我的第三种办法。</p>
-<div class="section" id="gmtswitchgmt">
-<h3><a class="toc-backref" href="#id15">用gmtswitch切换GMT版本</a></h3>
-<p>在安装完全部需要的GMT版本之后，运行<tt class="docutils literal">gmtswitch</tt>，该命令会搜索当前系统中所有可用GMT版本，并将搜索结果保存在文件=/.gmtversions中，该文件每行给定一个GMT版本的绝对路径（如/usr/local/<span class="caps">GMT</span>-4.5.9），如果搜索结果有误（搜索结果错误的概率好像很大），自己可以手动修改该文件。然后用户需要在.bashrc中修改环境变量:</p>
-<pre class="literal-block">
-export $PATH=${PATH}:$HOME/this_gmt/bin
-</pre>
-<p>注意，最好把原来GMT安装时加入的GMT路径删除。</p>
-<p>下次运行gmtswitch时，如果没有提供参数，gmtswitch会列出所有可能的GMT版本，供用户选择:</p>
-<pre class="literal-block">
-$ gmtswitch
-1. Version GMT-4.5.9
-2. Version GMT-4.5.11
-3. Version GMT-5.1.0
-
-Please choose a GMT version (1-3) [1]: 1
-</pre>
-<p>选择之后，该命令会在HOME下创建一个指向对应GMT版本根目录的符号链接this_gmt。</p>
-<pre class="literal-block">
-$ ll this_gmt
-lrwxrwxrwx. 1 seisman seisman 14 11月 6 18:58 this_gmt -&gt; /opt/GMT-4.5.9
-</pre>
-<p>当然，也可以使用下面的方式来切换版本:</p>
-<pre class="literal-block">
-$ gmtswitch 4.5.11
-$ gmtswitch GMT-5.1.0
-</pre>
-<p>这个方法实际上是在模拟当前十分流行的多版本切换方法，比如plenv、pyenv、perlbrew都是用类似的方法切换不同版本。这样做的缺点在于需要明确知道自己要使用哪个版本，需要不断地进行切换。</p>
-</div>
-<div class="section" id="bash">
-<h3><a class="toc-backref" href="#id16">Bash脚本切换版本</a></h3>
-<p>脚本如下:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span class="k">case</span> <span class="nv">$1</span> in
-    4<span class="o">)</span>
-    <span class="k">function</span> gmt<span class="o">()</span> <span class="o">{</span>
-        <span class="nv">module</span><span class="o">=</span><span class="nv">$1</span><span class="p">;</span> <span class="nb">shift</span><span class="p">;</span> /path/to/gmt4/bin/<span class="si">${</span><span class="nv">module</span><span class="si">}</span> <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
-    <span class="o">}</span>
-    <span class="p">;;</span>
-    5<span class="o">)</span>
-    <span class="k">function</span> gmt<span class="o">()</span> <span class="o">{</span>
-        /path/to/gmt5/bin/gmt <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
-    <span class="o">}</span>
-    <span class="p">;;</span>
-    *<span class="o">)</span>
-        <span class="k">return</span>
-    <span class="p">;;</span>
-<span class="k">esac</span>
-<span class="nb">export</span> -f gmt
-</pre></div>
-</td></tr></table><p>将该脚本命名为gmtfun，通过如下命令进行版本切换:</p>
-<pre class="literal-block">
-$ . gmtfun 4 #切换到GMT4
-$ . gmtfun 5 #切换到GMT5
-</pre>
-<p>已经无力吐嘲这个版本切换的方法了。。。</p>
-</div>
-</div>
-<div class="section" id="id2">
-<h2><a class="toc-backref" href="#id17">个人比较推荐的版本共存方法</a></h2>
-<p>先说怎么做，再解释原因。</p>
-<div class="section" id="id3">
-<h3><a class="toc-backref" href="#id18">修改环境变量</a></h3>
-<p>这里，同时添加两个GMT版本的路径，理论上这样做命令会出现多个版本的冲突。</p>
+<h2><a class="toc-backref" href="#id6">安装GMT4和GMT5</a></h2>
+<p>首先，当前系统需要安装GMT4和GMT5两个版本，然后，需要将两个版本的路径都添加到PATH中。</p>
+<p>Linux用户可以向<tt class="docutils literal"><span class="pre">~/.bashrc</span></tt>中加入如下语句：</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -261,18 +133,30 @@ $ . gmtfun 5 #切换到GMT5
 <span class="nb">export </span><span class="nv">GMT5_HOME</span><span class="o">=</span>/opt/GMT-5.1.0
 <span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">GMT5_HOME</span><span class="si">}</span>/bin:<span class="nv">$PATH</span>
 </pre></div>
-</td></tr></table></div>
-<div class="section" id="gmt5bin">
-<h3><a class="toc-backref" href="#id19">删除GMT5的bin目录下的所有符号链接</a></h3>
-<p>删除GMT5的符号链接以解决这些冲突:</p>
+</td></tr></table><p>Windows用户类似，也要把两个版本的bin目录的路径加到PATH中。</p>
+</div>
+<div class="section" id="gmt5">
+<h2><a class="toc-backref" href="#id7">GMT5的命令格式</a></h2>
+<p>严格的说，GMT5中只有一个可执行文件：<tt class="docutils literal">gmt</tt>，所有的命令都应以<tt class="docutils literal">gmt</tt>开头，命令格式如下:</p>
+<pre class="literal-block">
+gmt module -Axxx -Bxxx
+</pre>
+<p>GMT4中的所有命令在GMT5中都作为命令<tt class="docutils literal">gmt</tt>的一个模块来调用。比如GMT4的<tt class="docutils literal">pscoast</tt>命令在GMT5中应该使用<tt class="docutils literal">gmt pscoast</tt>来调用。</p>
+<p>在使用GMT5时，应严格按照<tt class="docutils literal">gmt module</tt>这样的格式调用。这样，随便打开一个脚本，看到<tt class="docutils literal">pscoast</tt>就知道是GMT4的语法，看到<tt class="docutils literal">gmt pscoast</tt>就知道是GMT5语法。</p>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id8">删除软链接</a></h2>
+<p>GMT5为了兼容GMT4的语法，在bin目录下建立了一堆指向<tt class="docutils literal">gmt</tt>的软链接。进入GMT5的bin目录，其中gmt为可执行文件，gmt-config、gmtlogo、gmt_shell_functions.sh、 gmtswitch、isogmt为Bash脚本，其余都是指向可执行文件gmt的符号链接，把这些直接删除。</p>
+<p>最简单的删除符号链接的办法是在安装GMT的时候就不生成这些符号链接。在编译GMT5之前，修改<tt class="docutils literal">cmake/ConfigUser.cmake</tt>时，其中有一行:</p>
+<pre class="literal-block">
+#set (GMT_INSTALL_MODULE_LINKS FALSE)
+</pre>
+<p>将该行前的“#”去掉，即设置GMT_INSTALL_MODULE_LINKS=<span class="caps">FALSE</span>，则在安装过程中就不会创建符号链接了。</p>
+<p>如果安装的过程中创建了符号链接，可以使用如下命令将这些符号链接删除:</p>
 <pre class="literal-block">
 $ cd /opt/GMT-5.1.0/bin/
 # 建立临时目录，需要Root权限
 $ sudo mkdir temp
-#
-</pre>
-<p>GMT5的bin目录，gmt为可执行文件，gmt-config、gmtlogo、gmt_shell_functions.sh、 gmtswitch、isogmt为Bash脚本，其余都是指向可执行文件gmt的符号链接:</p>
-<pre class="literal-block">
 $ sudo mv gmt gmt-config gmtlogo gmt_shell_functions.sh gmtswitch isogmt temp/
 $ sudo rm * # 删除除temp目录之外的全部符号链接
 rm: 无法删除"temp": 是一个目录
@@ -281,56 +165,37 @@ $ sudo mv temp/* .
 # 删除temp目录
 $ sudo rmdir temp/
 </pre>
+<p>对于Windows用户，bin目录下会有很多文件，可以将该目录下的所有文件按照大小排序，所有大小为6 KB的都是“符号链接”，直接选中删除就好。</p>
 </div>
-<div class="section" id="id4">
-<h3><a class="toc-backref" href="#id20">修改GMT5为不兼容模式</a></h3>
-<p>修改GMT5的文件share/gmt.conf，将其中的</p>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id9">不兼容模式</a></h2>
+<p>GMT5提供了兼容模式，可以部分兼容GMT4的语法，但推荐使用不兼容模式。原因如下：</p>
+<ol class="arabic simple">
+<li>通常来说，兼容模式有更多的bug；</li>
+<li>GMT5并不能完全兼容GMT4，因而有些用法在一个命令下是有效的，在另一个命令下却是无效的；</li>
+<li>使用兼容模式，可能到导致一个命令中既有GMT4语法也有GMT5语法，调试变得困难；</li>
+<li>使用不兼容模式，有助于用户熟悉GMT5语法；</li>
+</ol>
+<p>要让GMT5不再兼容GMT4，只需要将<tt class="docutils literal"><span class="caps">GMT5</span>/share/conf/gmt.conf</tt>中的:</p>
 <pre class="literal-block">
 GMT_COMPATIBILITY = 4
 </pre>
-<p>改成</p>
+<p>改成:</p>
 <pre class="literal-block">
 GMT_COMPATIBILITY = 5
 </pre>
 </div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id10">测试一下</a></h2>
+<p>终端输入<tt class="docutils literal">psxy -</tt>会看到命令的版本是GMT 4.5.xx。</p>
+<p>终端输入<tt class="docutils literal">gmt psxy -</tt>会看到命令版本为GMT 5.1.xx。</p>
+</div>
 <div class="section" id="id5">
-<h3><a class="toc-backref" href="#id21">测试一下</a></h3>
-<pre class="literal-block">
-$ psxy -
-psxy 4.5.11 [64-bit] - Plot lines, polygons, and symbols on maps
-
-usage: psxy &lt;infiles&gt; -J&lt;params&gt; -R&lt;west&gt;/&lt;east&gt;/&lt;south&gt;/&lt;north&gt;[r] [-A[m|p]] [-B&lt;params&gt;] [-C&lt;cpt&gt;] [-D&lt;dx&gt;/&lt;dy&gt;]
-    [-E[x|y|X|Y][n][cap][/[+|-]&lt;pen&gt;]] [-G&lt;fill&gt;] [-H[i][&lt;nrec&gt;]] [-I&lt;intens&gt;] [-K] [-L] [-N] [-O] [-P]
-    [-S[&lt;symbol&gt;][&lt;size&gt;]] [-T] [-U[&lt;just&gt;/&lt;dx&gt;/&lt;dy&gt;/]1] [-V] [-W[+|-][&lt;pen&gt;]] [-X[a|c|r]&lt;x_shift&gt;[u]] [-Y[a|c|r]&lt;x_shift&gt;[u]]
-    [-c&lt;ncopies&gt;] [-:[i|o]] [-bi[s|S|d|D[&lt;ncol&gt;]|c[&lt;var1&gt;/...]]] [-f[i|o]&lt;colinfo&gt;] [-g[a]x|y|d|X|Y|D|[&lt;col&gt;]z[-|+]&lt;gap&gt;[unit]] [-m[&lt;flag&gt;]]
-
-$ gmt psxy -
-psxy(core) 5.1.0 (r12452) [64-bit] - Plot lines, polygons, and symbols on maps
-
-usage: psxy [&lt;table&gt;] -J&lt;args&gt; -R&lt;west&gt;/&lt;east&gt;/&lt;south&gt;/&lt;north&gt;[/&lt;zmin&gt;/&lt;zmax&gt;][r] [-A[m|p]]
-    [-B&lt;args&gt;] [-C&lt;cpt&gt;] [-D&lt;dx&gt;/&lt;dy&gt;] [-E[x|y|X|Y][n][cap][/[+|-]&lt;pen&gt;]] [-G&lt;fill&gt;]
-    [-Jz|Z&lt;args&gt;] [-I&lt;intens&gt;] [-K] [-L] [-N] [-O] [-P] [-S[&lt;symbol&gt;][&lt;size&gt;|+s&lt;scale&gt;[unit][/&lt;origin&gt;][l]]]
-    [-T] [-U[&lt;just&gt;/&lt;dx&gt;/&lt;dy&gt;/]1] [-V[&lt;level&gt;]] [-W[+|-][&lt;pen&gt;]]
-    [-X[a|c|r]&lt;xshift&gt;[&lt;unit&gt;]] [-Y[a|c|r]&lt;yshift&gt;[&lt;unit&gt;]] [-a&lt;col&gt;=&lt;name&gt;[,...]]
-    [-bi[&lt;ncol&gt;][t][w][+L|B]] [-c&lt;ncopies&gt;] [-f[i|o]&lt;info&gt;]
-    [-g[a]x|y|d|X|Y|D|[&lt;col&gt;]z[-|+]&lt;gap&gt;[&lt;unit&gt;]]
-    [-h[i|o][&lt;nrecs&gt;][+c][+d][+r&lt;remark&gt;][+t&lt;title&gt;]] [-i&lt;cols&gt;[l][s&lt;scale&gt;][o&lt;offset&gt;][,...]]
-    [-p[x|y|z]&lt;azim&gt;/&lt;elev&gt;[/&lt;zlevel&gt;][+w&lt;lon0&gt;/&lt;lat0&gt;[/&lt;z0&gt;][+v&lt;x0&gt;/&lt;y0&gt;]] [-s[&lt;cols&gt;][a|r]]
-    [-t&lt;transp&gt;] [-:[i|o]]
-</pre>
-</div>
-<div class="section" id="id6">
-<h3><a class="toc-backref" href="#id22">补充说明</a></h3>
-<p>删除符号链接的步骤比较麻烦，其实有更简单的办法，在编译GMT5之前，修改cmake/ConfigUser.cmake时，其中有一行:</p>
-<pre class="literal-block">
-#set (GMT_INSTALL_MODULE_LINKS FALSE)
-</pre>
-<p>将该行前的“#”去掉，即设置GMT_INSTALL_MODULE_LINKS=<span class="caps">FALSE</span>，则在安装过程中就不会创建符号链接了。</p>
-</div>
-<div class="section" id="id7">
-<h3><a class="toc-backref" href="#id23">原理解释</a></h3>
-<p>主要利用的一点是“GMT5中只有gmt这一个可执行文件”。删除了GMT5下的所有符号链接并设置GMT5为不兼容模式后，所有类似<tt class="docutils literal">psxy</tt>的命令都会被认为是GMT4的语法，这样以前的GMT4脚本都不需要做任何修改。所有类似<tt class="docutils literal">gmt psxy</tt>的命令都会被认为是GMT5的语法，并严格要求必须是GMT5语法，这样有利用用户实现过渡。总之，这样做的好处就是，以前的GMT4脚本不用改，新写的脚本严格遵循GMT5语法。互不干涉，挺好的。</p>
-</div>
+<h2><a class="toc-backref" href="#id11">修订历史</a></h2>
+<ul class="simple">
+<li>2013-11-09：初稿；</li>
+<li>2015-06-07：重整文章布局；</li>
+</ul>
 </div>
 
             
@@ -374,10 +239,10 @@ usage: psxy [&lt;table&gt;] -J&lt;args&gt; -R&lt;west&gt;/&lt;east&gt;/&lt;south
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
-<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
-<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
-<li><a href="http://seisman.info/blurry-frame-in-GMT.rst.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
+<li><a href="http://seisman.info/blurry-frame-in-GMT.html" title="GMT边框发虚的原因及解决办法">GMT边框发虚的原因及解决办法</a></li>
 <li><a href="http://seisman.info/profile-from-3d-data.html" title="从3D数据中截取剖面">从3D数据中截取剖面</a></li>
+<li><a href="http://seisman.info/gmt-insert-map.html" title="GMT绘制图中图">GMT绘制图中图</a></li>
+<li><a href="http://seisman.info/plot-fault-names.html" title="GMT添加断层名">GMT添加断层名</a></li>
 </ul>
 <hr />
 </section>
@@ -393,29 +258,33 @@ usage: psxy [&lt;table&gt;] -J&lt;args&gt; -R&lt;west&gt;/&lt;east&gt;/&lt;south
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2013-11-09T00:13:00+08:00">2013-11-09</time>
+            <time pubdate="pubdate" datetime="2013-11-09T00:00:00+08:00">2013-11-09</time>
+
+<h4>Last Updated</h4>
+<time datetime="2015-06-09T00:00:00+08:00">2015-06-09</time>
+
             <h4>Category</h4>
             <a class="category-link" href="http://seisman.info/categories.html#gmt-ref">GMT</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#ban-ben-ref">版本
-                    <span>6</span>
+                    <span>5</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
-                    <span>28</span>
+                    <span>35</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/multiple-versions-of-gmt.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-11-09_multiple-versions-of-gmt.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

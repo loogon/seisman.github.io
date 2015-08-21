@@ -157,7 +157,7 @@ psbasemap: ERROR: Missing terminating colon in -B string 1ltiT:\
 2</pre></div></td><td class="code"><div class="highlight"><pre><span class="c">#!/bin/bash</span>
 psbasemap -R0/5/0/5 -JX5i -B1/1:.<span class="s2">"Title \072 eltiT"</span>: &gt; a.ps
 </pre></div>
-</td></tr></table><p>为什么用八进制表示冒号就可以呢？GMT对-B选项进行解释时，遇到了":."，代表着接下来的字符串是标题，然后往后寻找找到下一个冒号":"，并将":."和":"之间的字符串作为标题。那么对于这种情况来说这个字符串就是"Title 072 eltiT"（引号不是字符串的一部分）。由于GMT是用C语言写的，当把字符串"Title 072 eltiT"用类似printf("Title 072 eltiT")的语法写到PS文件中时，就变成了"Title : eltiT"。即字符串以"Title 072 eltiT"的形式被GMT解释，然后以"Title : eltiT"的形式被C打印出来。</p>
+</td></tr></table><p>为什么用八进制表示冒号就可以呢？GMT对-B选项进行解释时，遇到了”:.”，代表着接下来的字符串是标题，然后往后寻找找到下一个冒号”:”，并将”:.”和”:”之间的字符串作为标题。那么对于这种情况来说这个字符串就是”Title 072 eltiT”（引号不是字符串的一部分）。由于GMT是用C语言写的，当把字符串”Title 072 eltiT”用类似printf(“Title 072 eltiT”)的语法写到PS文件中时，就变成了”Title : eltiT”。即字符串以”Title 072 eltiT”的形式被GMT解释，然后以”Title : eltiT”的形式被C打印出来。</p>
 </div>
 </div>
 <div class="section" id="perl">
@@ -188,12 +188,12 @@ psbasemap -R0/5/0/5 -JX5i -B1/1:.<span class="s2">"Title \072 eltiT"</span>: &gt
 </td></tr></table></div>
 <div class="section" id="id6">
 <h3><a class="toc-backref" href="#id19">经典错误写法</a></h3>
-<p>在吸取了bash的经验教训之后，知道可以用"072"来表示冒号，脚本如下：</p>
+<p>在吸取了bash的经验教训之后，知道可以用”072”来表示冒号，脚本如下：</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span class="c1">#!/usr/bin/env perl</span>
 <span class="nb">system</span> <span class="s">"psbasemap -R0/10/0/10 -JX6i -B1/1:.'Title \072 eltiT': &gt; a.ps"</span><span class="p">;</span>
 </pre></div>
-</td></tr></table><p>这种写法为什么是错的？因为perl首先会对system的参数（即双引号内的值）进行解释，双引号内的单引号被当作普通字符来解释（而不是任何分界符），而在双引号内反斜杠是可以转义的，因而072被转义为":"，然后再调用psbasemap命令，即真正传给psbasemap并运行的命令其实是</p>
+</td></tr></table><p>这种写法为什么是错的？因为perl首先会对system的参数（即双引号内的值）进行解释，双引号内的单引号被当作普通字符来解释（而不是任何分界符），而在双引号内反斜杠是可以转义的，因而072被转义为”:”，然后再调用psbasemap命令，即真正传给psbasemap并运行的命令其实是</p>
 <pre class="literal-block">
 psbasemap -R0/10/0/10 -JX6i -B1/1:.'Title : eltiT': &gt; a.ps
 </pre>
@@ -239,7 +239,7 @@ psbasemap -R0/10/0/10 -JX6i -B1/1:."Title \072 eltiT": &gt; a.ps
 
 <span class="nb">system</span> <span class="s">"psbasemap -R$R -J$J -B1/1:.'Title \\072 eltiT': &gt; a.ps"</span><span class="p">;</span>
 </pre></div>
-</td></tr></table><p>这里的修改在于将"072"改成了"\072"，这样perl会将"\"解释为""，然后进行系统调用，因而此时传给psbasemap的参数实际上是</p>
+</td></tr></table><p>这里的修改在于将”072”改成了”\072”，这样perl会将”\”解释为”“，然后进行系统调用，因而此时传给psbasemap的参数实际上是</p>
 <pre class="literal-block">
 psbasemap -R0/10/0/10 -JX6i -B1/1:.'Title \072 eltiT': &gt; a.ps
 </pre>
@@ -256,7 +256,7 @@ awk '{print $1}' infile
 <pre class="literal-block">
 awk '{print $par,$1}' infile
 </pre>
-<p>由于单引号的存在，awk看到的是字符"$par"，而不是变量$par的值，所以$par交给了awk取解释，而awk又不认识变量$par，就会出现问题。为了解决bash向awk传递变量的问题，awk设计了-v选项，感觉问题一下子就被复杂化了。相反，perl是一个自给自足的体系，就不会存在类似的设计缺陷了。</p>
+<p>由于单引号的存在，awk看到的是字符”$par”，而不是变量$par的值，所以$par交给了awk取解释，而awk又不认识变量$par，就会出现问题。为了解决bash向awk传递变量的问题，awk设计了-v选项，感觉问题一下子就被复杂化了。相反，perl是一个自给自足的体系，就不会存在类似的设计缺陷了。</p>
 </div>
 <div class="section" id="id11">
 <h2><a class="toc-backref" href="#id24">参考来源</a></h2>
@@ -304,10 +304,10 @@ awk '{print $par,$1}' infile
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
 <li><a href="http://seisman.info/how-to-use-gmt-ko.html" title="GMT使用-K和-O的技巧">GMT使用-K和-O的技巧</a></li>
-<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
 <li><a href="http://seisman.info/abused-b-option.html" title="GMT进阶之被滥用的-B选项">GMT进阶之被滥用的-B选项</a></li>
-<li><a href="http://seisman.info/gmt-text-effect.html" title="GMT进阶之文本特效">GMT进阶之文本特效</a></li>
-<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/gmt-option-p.html" title="GMT进阶之-P选项">GMT进阶之-P选项</a></li>
+<li><a href="http://seisman.info/gmt-merge-images.html" title="GMT技巧之图像合并">GMT技巧之图像合并</a></li>
+<li><a href="http://seisman.info/profile-from-3d-data.html" title="从3D数据中截取剖面">从3D数据中截取剖面</a></li>
 </ul>
 <hr />
 </section>
@@ -329,23 +329,23 @@ awk '{print $par,$1}' infile
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt4-ref">GMT4
-                    <span>60</span>
+                    <span>58</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
-                    <span>28</span>
+                    <span>35</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtxuan-xiang-ref">GMT选项
-                    <span>8</span>
+                    <span>7</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#perl-ref">Perl
-                    <span>14</span>
+                    <span>13</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/gmt-option-b-colon.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2013-10-12_gmt-option-b-colon.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>

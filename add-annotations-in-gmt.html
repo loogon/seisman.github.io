@@ -94,7 +94,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
             <p>在日常绘图时经常会需要在已经画好的图上添加一些注释或标注，比如在某个位置加文字、箭头或者连线。一般情况下，若注释或标注出现在单个底图的内部，则可以很容易通过pstext和psxy来实现；若需要在底图外添加注释或标注，则会复杂一些。本文试图解决这个问题。</p>
 <p>下图展示了绘图时一个常见的需求：</p>
 <div class="figure">
-<img alt="final figure" src="/images/2014122801.jpg" style="width: 600px;" />
+<img alt="final figure" src="/images/2014122801.png" style="width: 600px;" />
 </div>
 <p>这里出于演示的目的，用尽可能简单的命令绘制尽可能简单的图形。图中两个底图由psbasemap绘制得到，红色矩形由psxy绘制得到。其命令如下：</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -234,7 +234,7 @@ rm -f gmt.conf gmt.history
 </ol>
 <p>最终得到的效果如下图（辅助底图的（0,0）点与纸张左下角重合，（29.7,21）点与纸张右上角重合）：</p>
 <div class="figure align-center">
-<img alt="auxiliary basemap" src="/images/2014122802.jpg" style="width: 800px;" />
+<img alt="auxiliary basemap" src="/images/2014122802.png" style="width: 800px;" />
 </div>
 <p>辅助底图的出现，给整个纸张加上了网格，因而我们可以很容易的大概确定出纸张上任意一点的坐标。比如这里需要的四个点的坐标分别为（10.5，10.5）、（14.5,11.5）、（10.5,8.5）和（14.5,3.5）。</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -323,7 +323,7 @@ rm -f gmt.conf gmt.history
 </pre></div>
 </td></tr></table><p>效果图如下：</p>
 <div class="figure align-center">
-<img alt="auxiliary basemap" src="/images/2014122803.jpg" style="width: 800px;" />
+<img alt="auxiliary basemap" src="/images/2014122803.png" style="width: 800px;" />
 </div>
 <p>实际的图件中，肯定是不能有辅助底图以及相关的网格线的，所以在添加注释和标注之后，还需要将辅助底图删除，只需要将上面的脚本中注释或删除掉如下两行即可。</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -376,11 +376,11 @@ rm -f gmt.conf gmt.history
 <section>
     <h2>Related Posts:</h2>
 <ul class="related-posts-list">
-<li><a href="http://seisman.info/gmt-chinese-under-linux.html" title="Linux下的GMT中文支持">Linux下的GMT中文支持</a></li>
-<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT 5与4:如何兼得？">GMT 5与4:如何兼得？</a></li>
-<li><a href="http://seisman.info/customized-gmt-logo.html" title="GMT进阶之自定义GMT的Logo">GMT进阶之自定义GMT的Logo</a></li>
+<li><a href="http://seisman.info/multiple-versions-of-gmt.html" title="GMT4与GMT5双版本共存">GMT4与GMT5双版本共存</a></li>
 <li><a href="http://seisman.info/usage-of-dcw-data.html" title="GMT5进阶之DCW数据的使用">GMT5进阶之DCW数据的使用</a></li>
 <li><a href="http://seisman.info/plot-multiple-lines-in-different-scales.html" title="不同比例尺曲线的画法">不同比例尺曲线的画法</a></li>
+<li><a href="http://seisman.info/profile-from-3d-data.html" title="从3D数据中截取剖面">从3D数据中截取剖面</a></li>
+<li><a href="http://seisman.info/gmt5-custom-axes.html" title="GMT5自定义坐标轴">GMT5自定义坐标轴</a></li>
 </ul>
 <hr />
 </section>
@@ -402,17 +402,17 @@ rm -f gmt.conf gmt.history
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="http://seisman.info/tags.html#gmt5-ref">GMT5
-                    <span>37</span>
+                    <span>40</span>
 </a></li>
                 <li><a href="http://seisman.info/tags.html#gmtji-qiao-ref">GMT技巧
-                    <span>28</span>
+                    <span>35</span>
 </a></li>
             </ul>
             <h4>Features</h4>
             <a href="http://seisman.qiniudn.com/pdfs/add-annotations-in-gmt.pdf" title="Export as PDF" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-file-pdf-o  sidebar-social-links"></i>
             </a>
-            <a href="http://github.com/seisman/seisman.info/commits/master/content/GMT/2014-12-28_add-annotations-in-gmt.rst" title="Read Older Version" class="sidebar-social-links" target="_blank">
+            <a href="http://github.com/seisman/seisman.info/commits/master/content/" title="Read Older Version" class="sidebar-social-links" target="_blank">
                 <i class="fa fa-history  sidebar-social-links"></i>
             </a>
 <h4>Contact Me</h4>
